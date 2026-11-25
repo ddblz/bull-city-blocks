@@ -1,0 +1,23 @@
+name: Rule variant
+description: Propose a rule change to test via simulation
+labels: [draft, variant]
+body:
+  - type: input
+    id: id
+    attributes: {label: Variant id, description: "kebab-case, becomes rulesets/<id>.json", placeholder: takeover-costs-3}
+    validations: {required: true}
+  - type: textarea
+    id: change
+    attributes: {label: Rule change, description: "Exact change vs base. Parameter override(s) or hook needed?"}
+    validations: {required: true}
+  - type: textarea
+    id: hypothesis
+    attributes: {label: Hypothesis, description: "Falsifiable, in terms of SPEC §6 metrics. e.g. 'Comeback rate drops ≥2pp; mean turns rises ≤3.'"}
+    validations: {required: true}
+  - type: textarea
+    id: setup
+    attributes: {label: Sim setup, value: "games: 10000 · players: 4 · bots: greedy,greedy,greedy,random · paired seeds vs base"}
+  - type: dropdown
+    id: size
+    attributes: {label: Size, options: ["S (params only)", "M (needs hook)"]}
+    validations: {required: true}

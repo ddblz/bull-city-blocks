@@ -1,0 +1,30 @@
+name: Feature / change
+description: A change to the game, engine, sim, or tooling
+labels: [draft]
+body:
+  - type: textarea
+    id: why
+    attributes: {label: Why, description: "The problem or goal, in 1–3 sentences."}
+    validations: {required: true}
+  - type: textarea
+    id: what
+    attributes: {label: What, description: "Behavior to build. Reference SPEC/ARCHITECTURE sections (e.g. SPEC §3.3)."}
+    validations: {required: true}
+  - type: textarea
+    id: acceptance
+    attributes: {label: Acceptance criteria, description: "Checkable bullets: '- [ ] ...'"}
+    validations: {required: true}
+  - type: textarea
+    id: tests
+    attributes: {label: Test plan, description: "Named tests to add/change."}
+    validations: {required: true}
+  - type: textarea
+    id: out
+    attributes: {label: Out of scope, description: "What NOT to do in this issue."}
+  - type: dropdown
+    id: size
+    attributes: {label: Size, options: ["S (≤150 lines)", "M (≤400 lines)"]}
+    validations: {required: true}
+  - type: input
+    id: deps
+    attributes: {label: New dependencies, description: "None, or list them (owner must add deps-approved)."}

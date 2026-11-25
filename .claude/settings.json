@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(git push origin main:*)",
+      "Bash(git push origin HEAD:main:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr review --approve:*)",
+      "Bash(gh pr review * --approve:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh api -X DELETE:*)",
+      "Bash(npm publish:*)",
+      "Bash(pnpm publish:*)"
+    ]
+  }
+}
