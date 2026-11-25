@@ -1,17 +1,26 @@
 {
   "permissions": {
     "deny": [
-      "Bash(git push origin main:*)",
-      "Bash(git push origin HEAD:main:*)",
-      "Bash(git push --force:*)",
-      "Bash(git push -f:*)",
-      "Bash(gh pr merge:*)",
-      "Bash(gh pr review --approve:*)",
-      "Bash(gh pr review * --approve:*)",
-      "Bash(gh repo delete:*)",
-      "Bash(gh api -X DELETE:*)",
-      "Bash(npm publish:*)",
-      "Bash(pnpm publish:*)"
+      "Bash(git push * main)",
+      "Bash(git push * main:*)",
+      "Bash(git push * HEAD:main*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f *)",
+      "Bash(gh pr merge*)",
+      "Bash(gh pr review * --approve*)",
+      "Bash(gh pr review --approve*)",
+      "Bash(gh api *merge*)",
+      "Bash(gh api *auto_merge*)",
+      "Bash(gh api *APPROVE*)",
+      "Bash(gh api *protection*)",
+      "Bash(gh api *rulesets*)",
+      "Bash(gh api -X DELETE*)",
+      "Bash(gh api --method DELETE*)",
+      "Bash(gh repo delete*)",
+      "Bash(npm publish*)",
+      "Bash(pnpm publish*)"
     ]
   }
 }
