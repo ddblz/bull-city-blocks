@@ -45,7 +45,7 @@ flowchart LR
 
 ```ts
 // Everything is serializable JSON, so any game can be saved, replayed or diffed.
-createGame(rules: RuleSet, content: Content, players: PlayerId[], seed: string): GameState
+createGame(rules: RuleSet, content: Content, players: PlayerId[], seed: string): Result<GameState>  // error result for a bad player count
 legalMoves(state: GameState, player: PlayerId): Move[]
 applyMove(state: GameState, move: Move): { state: GameState; events: GameEvent[] }
 viewFor(state: GameState, player: PlayerId): PlayerView   // hides other players' hands and the deck order

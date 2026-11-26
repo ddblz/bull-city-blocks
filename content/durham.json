@@ -1,0 +1,714 @@
+{
+  "id": "durham",
+  "version": 1,
+  "districts": [
+    {
+      "id": "old-west-durham",
+      "name": "Old West Durham",
+      "setSize": 2,
+      "rent": [1, 2],
+      "value": 1
+    },
+    {
+      "id": "walltown",
+      "name": "Walltown",
+      "setSize": 2,
+      "rent": [1, 2],
+      "value": 1
+    },
+    {
+      "id": "east-durham",
+      "name": "East Durham",
+      "setSize": 3,
+      "rent": [1, 2, 3],
+      "value": 1
+    },
+    {
+      "id": "hayti",
+      "name": "Hayti",
+      "setSize": 3,
+      "rent": [1, 2, 4],
+      "value": 2
+    },
+    {
+      "id": "north-durham",
+      "name": "North Durham",
+      "setSize": 3,
+      "rent": [1, 2, 4],
+      "value": 2
+    },
+    {
+      "id": "the-eno",
+      "name": "The Eno",
+      "setSize": 3,
+      "rent": [1, 2, 4],
+      "value": 2
+    },
+    {
+      "id": "trinity-park",
+      "name": "Trinity Park",
+      "setSize": 3,
+      "rent": [2, 3, 6],
+      "value": 3
+    },
+    {
+      "id": "forest-hills",
+      "name": "Forest Hills",
+      "setSize": 3,
+      "rent": [2, 3, 6],
+      "value": 3
+    },
+    {
+      "id": "brightleaf",
+      "name": "Brightleaf",
+      "setSize": 3,
+      "rent": [2, 3, 6],
+      "value": 3
+    },
+    {
+      "id": "american-tobacco",
+      "name": "American Tobacco",
+      "setSize": 3,
+      "rent": [2, 4, 6],
+      "value": 3
+    },
+    {
+      "id": "downtown",
+      "name": "Downtown",
+      "setSize": 3,
+      "rent": [2, 4, 7],
+      "value": 4
+    },
+    {
+      "id": "duke",
+      "name": "Duke",
+      "setSize": 3,
+      "rent": [3, 5, 8],
+      "value": 4
+    },
+    {
+      "id": "rtp",
+      "name": "RTP",
+      "setSize": 2,
+      "rent": [3, 8],
+      "value": 4
+    },
+    {
+      "id": "transit",
+      "name": "Transit",
+      "setSize": 4,
+      "rent": [1, 2, 3, 4],
+      "value": 2
+    }
+  ],
+  "pairs": [
+    ["old-west-durham", "walltown"],
+    ["east-durham", "hayti"],
+    ["north-durham", "the-eno"],
+    ["trinity-park", "forest-hills"],
+    ["brightleaf", "american-tobacco"],
+    ["downtown", "duke"],
+    ["rtp", "transit"]
+  ],
+  "cards": [
+    {
+      "kind": "property",
+      "id": "ninth-st",
+      "name": "Ninth St",
+      "district": "old-west-durham",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "hillsborough-rd",
+      "name": "Hillsborough Rd",
+      "district": "old-west-durham",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "onslow-st",
+      "name": "Onslow St",
+      "district": "walltown",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "berkeley-st",
+      "name": "Berkeley St",
+      "district": "walltown",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "angier-ave",
+      "name": "Angier Ave",
+      "district": "east-durham",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "driver-st",
+      "name": "Driver St",
+      "district": "east-durham",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "holloway-st",
+      "name": "Holloway St",
+      "district": "east-durham",
+      "value": 1
+    },
+    {
+      "kind": "property",
+      "id": "fayetteville-st",
+      "name": "Fayetteville St",
+      "district": "hayti",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "lawson-st",
+      "name": "Lawson St",
+      "district": "hayti",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "alston-ave",
+      "name": "Alston Ave",
+      "district": "hayti",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "roxboro-st",
+      "name": "Roxboro St",
+      "district": "north-durham",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "club-blvd",
+      "name": "Club Blvd",
+      "district": "north-durham",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "guess-rd",
+      "name": "Guess Rd",
+      "district": "north-durham",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "west-point-on-the-eno",
+      "name": "West Point on the Eno",
+      "district": "the-eno",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "fews-ford",
+      "name": "Few's Ford",
+      "district": "the-eno",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "pennys-bend",
+      "name": "Penny's Bend",
+      "district": "the-eno",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "watts-st",
+      "name": "Watts St",
+      "district": "trinity-park",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "buchanan-blvd",
+      "name": "Buchanan Blvd",
+      "district": "trinity-park",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "trinity-ave",
+      "name": "Trinity Ave",
+      "district": "trinity-park",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "university-dr",
+      "name": "University Dr",
+      "district": "forest-hills",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "beverly-dr",
+      "name": "Beverly Dr",
+      "district": "forest-hills",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "forest-hills-park",
+      "name": "Forest Hills Park",
+      "district": "forest-hills",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "gregson-st",
+      "name": "Gregson St",
+      "district": "brightleaf",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "duke-st",
+      "name": "Duke St",
+      "district": "brightleaf",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "morgan-st",
+      "name": "Morgan St",
+      "district": "brightleaf",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "blackwell-st",
+      "name": "Blackwell St",
+      "district": "american-tobacco",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "pettigrew-st",
+      "name": "Pettigrew St",
+      "district": "american-tobacco",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "mangum-st",
+      "name": "Mangum St",
+      "district": "american-tobacco",
+      "value": 3
+    },
+    {
+      "kind": "property",
+      "id": "main-st",
+      "name": "Main St",
+      "district": "downtown",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "corcoran-st",
+      "name": "Corcoran St",
+      "district": "downtown",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "chapel-hill-st",
+      "name": "Chapel Hill St",
+      "district": "downtown",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "west-campus",
+      "name": "West Campus",
+      "district": "duke",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "east-campus",
+      "name": "East Campus",
+      "district": "duke",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "erwin-rd",
+      "name": "Erwin Rd",
+      "district": "duke",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "research-triangle-park",
+      "name": "Research Triangle Park",
+      "district": "rtp",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "southpoint",
+      "name": "Southpoint",
+      "district": "rtp",
+      "value": 4
+    },
+    {
+      "kind": "property",
+      "id": "durham-station",
+      "name": "Durham Station",
+      "district": "transit",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "amtrak-station",
+      "name": "Amtrak Station",
+      "district": "transit",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "godurham",
+      "name": "GoDurham",
+      "district": "transit",
+      "value": 2
+    },
+    {
+      "kind": "property",
+      "id": "durham-freeway",
+      "name": "Durham Freeway",
+      "district": "transit",
+      "value": 2
+    },
+    {
+      "kind": "wild",
+      "id": "wild-old-west-durham-walltown",
+      "name": "Old West Durham / Walltown Wild",
+      "districts": ["old-west-durham", "walltown"],
+      "value": 1
+    },
+    {
+      "kind": "wild",
+      "id": "wild-east-durham-hayti",
+      "name": "East Durham / Hayti Wild",
+      "districts": ["east-durham", "hayti"],
+      "value": 2
+    },
+    {
+      "kind": "wild",
+      "id": "wild-north-durham-the-eno",
+      "name": "North Durham / The Eno Wild",
+      "districts": ["north-durham", "the-eno"],
+      "value": 2
+    },
+    {
+      "kind": "wild",
+      "id": "wild-trinity-park-forest-hills",
+      "name": "Trinity Park / Forest Hills Wild",
+      "districts": ["trinity-park", "forest-hills"],
+      "value": 3
+    },
+    {
+      "kind": "wild",
+      "id": "wild-brightleaf-american-tobacco",
+      "name": "Brightleaf / American Tobacco Wild",
+      "districts": ["brightleaf", "american-tobacco"],
+      "value": 3
+    },
+    {
+      "kind": "wild",
+      "id": "wild-downtown-duke",
+      "name": "Downtown / Duke Wild",
+      "districts": ["downtown", "duke"],
+      "value": 4
+    },
+    {
+      "kind": "wild",
+      "id": "wild-rtp-transit",
+      "name": "RTP / Transit Wild",
+      "districts": ["rtp", "transit"],
+      "value": 4
+    },
+    {
+      "kind": "wild",
+      "id": "bull-city-wild",
+      "name": "Bull City Wild",
+      "districts": "any",
+      "value": 0,
+      "count": 2
+    },
+    {
+      "kind": "landmark",
+      "id": "carolina-theatre",
+      "name": "Carolina Theatre",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "museum-of-life-and-science",
+      "name": "Museum of Life and Science",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "durham-central-park",
+      "name": "Durham Central Park",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "hayti-heritage-center",
+      "name": "Hayti Heritage Center",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "golden-belt",
+      "name": "Golden Belt",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "sarah-p-duke-gardens",
+      "name": "Sarah P. Duke Gardens",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "durham-farmers-market",
+      "name": "Durham Farmers' Market",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "bennett-place",
+      "name": "Bennett Place",
+      "value": 3
+    },
+    {
+      "kind": "landmark",
+      "id": "erwin-mill",
+      "name": "Erwin Mill",
+      "value": 3
+    },
+    {
+      "kind": "icon",
+      "id": "dpac",
+      "name": "DPAC",
+      "value": 4
+    },
+    {
+      "kind": "icon",
+      "id": "dbap",
+      "name": "DBAP",
+      "value": 4
+    },
+    {
+      "kind": "icon",
+      "id": "duke-chapel",
+      "name": "Duke Chapel",
+      "value": 4
+    },
+    {
+      "kind": "icon",
+      "id": "the-water-tower",
+      "name": "The Water Tower",
+      "value": 4
+    },
+    {
+      "kind": "icon",
+      "id": "major-the-bull",
+      "name": "Major the Bull",
+      "value": 4
+    },
+    {
+      "kind": "cash",
+      "id": "cash-1",
+      "name": "$1",
+      "value": 1,
+      "count": 7
+    },
+    {
+      "kind": "cash",
+      "id": "cash-2",
+      "name": "$2",
+      "value": 2,
+      "count": 6
+    },
+    {
+      "kind": "cash",
+      "id": "cash-3",
+      "name": "$3",
+      "value": 3,
+      "count": 4
+    },
+    {
+      "kind": "cash",
+      "id": "cash-4",
+      "name": "$4",
+      "value": 4,
+      "count": 3
+    },
+    {
+      "kind": "cash",
+      "id": "cash-5",
+      "name": "$5",
+      "value": 5,
+      "count": 3
+    },
+    {
+      "kind": "cash",
+      "id": "cash-10",
+      "name": "$10",
+      "value": 10,
+      "count": 1
+    },
+    {
+      "kind": "action",
+      "id": "walk-off-win",
+      "name": "Walk-Off Win",
+      "action": "walkOffWin",
+      "value": 1,
+      "count": 9
+    },
+    {
+      "kind": "action",
+      "id": "food-truck-rodeo",
+      "name": "Food Truck Rodeo",
+      "action": "foodTruckRodeo",
+      "value": 2,
+      "count": 3
+    },
+    {
+      "kind": "action",
+      "id": "assessment",
+      "name": "Assessment",
+      "action": "assessment",
+      "value": 3,
+      "count": 3
+    },
+    {
+      "kind": "action",
+      "id": "buyout",
+      "name": "Buyout",
+      "action": "buyout",
+      "value": 3,
+      "count": 4
+    },
+    {
+      "kind": "action",
+      "id": "swap-meet",
+      "name": "Swap Meet",
+      "action": "swapMeet",
+      "value": 3,
+      "count": 4
+    },
+    {
+      "kind": "action",
+      "id": "hostile-takeover",
+      "name": "Hostile Takeover",
+      "action": "hostileTakeover",
+      "value": 5,
+      "count": 2
+    },
+    {
+      "kind": "action",
+      "id": "appeal",
+      "name": "Appeal",
+      "action": "appeal",
+      "value": 4,
+      "count": 4
+    },
+    {
+      "kind": "action",
+      "id": "construction-delay",
+      "name": "Construction Delay",
+      "action": "constructionDelay",
+      "value": 2,
+      "count": 3
+    },
+    {
+      "kind": "action",
+      "id": "rent-hike",
+      "name": "Rent Hike",
+      "action": "rentHike",
+      "value": 1,
+      "count": 3
+    },
+    {
+      "kind": "rent",
+      "id": "rent-old-west-durham-walltown",
+      "name": "Old West Durham / Walltown Rent",
+      "districts": ["old-west-durham", "walltown"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "rent-east-durham-hayti",
+      "name": "East Durham / Hayti Rent",
+      "districts": ["east-durham", "hayti"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "rent-north-durham-the-eno",
+      "name": "North Durham / The Eno Rent",
+      "districts": ["north-durham", "the-eno"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "rent-trinity-park-forest-hills",
+      "name": "Trinity Park / Forest Hills Rent",
+      "districts": ["trinity-park", "forest-hills"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "rent-brightleaf-american-tobacco",
+      "name": "Brightleaf / American Tobacco Rent",
+      "districts": ["brightleaf", "american-tobacco"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "rent-downtown-duke",
+      "name": "Downtown / Duke Rent",
+      "districts": ["downtown", "duke"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "rent-rtp-transit",
+      "name": "RTP / Transit Rent",
+      "districts": ["rtp", "transit"],
+      "value": 1,
+      "count": 2
+    },
+    {
+      "kind": "rent",
+      "id": "wild-rent",
+      "name": "Wild Rent",
+      "districts": "any",
+      "value": 3,
+      "count": 3
+    }
+  ]
+}
