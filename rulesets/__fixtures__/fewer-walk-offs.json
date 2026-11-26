@@ -1,0 +1,6 @@
+{
+  "id": "fewer-walk-offs",
+  "extends": "base",
+  "description": "Six Walk-Off Wins per deck copy instead of nine",
+  "overrides": { "deck.counts.walk-off-win": 6 }
+}

@@ -1,4 +1,5 @@
 import type { Card, Content, District } from "./content";
+import { applyDeckConfig } from "./deck-config";
 import type { Result } from "./result";
 import { randomInt, seedRng, shuffle } from "./rng";
 import type { RuleSet } from "./ruleset";
@@ -22,7 +23,8 @@ export function buildDeck(content: Content, copies: number): Record<CardInstance
 
 /**
  * SPEC §3.1 setup: builds and shuffles the deck, deals `hand.starting` cards to each player
- * one at a time, and picks a random starting player. Returns an error instead of throwing.
+ * one at a time, and picks a random starting player. The ruleset's deck overrides (§5) are applied
+ * to the content first. Returns an error instead of throwing.
  */
 export function createGame(
   rules: RuleSet,
@@ -41,7 +43,9 @@ export function createGame(
   const copies = deckCopies(rules, count);
   if (copies === null) return { ok: false, error: `no deck size for ${count} players` };
 
-  const cards = buildDeck(content, copies);
+  const effective = applyDeckConfig(content, rules);
+  if (!effective.ok) return effective;
+  const cards = buildDeck(effective.value, copies);
   const shuffled = shuffle(seedRng(seed), Object.keys(cards));
   const deck = shuffled.value;
   const hands: CardInstanceId[][] = players.map(() => []);
@@ -62,7 +66,7 @@ export function createGame(
     prefs: { autoPass: rules.autoPassDefault },
   }));
   const districts: Record<District["id"], District> = {};
-  for (const d of content.districts) districts[d.id] = d;
+  for (const d of effective.value.districts) districts[d.id] = d;
 
   return {
     ok: true,

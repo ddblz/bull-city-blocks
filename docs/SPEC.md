@@ -168,6 +168,18 @@ A variant is a JSON file in `rulesets/` that `extends` another ruleset and overr
 }
 ```
 
+A variant can also change the deck through the ruleset's `deck` section, without editing `content/`:
+
+- `deck.counts.<card id>`: copies of a card per deck copy (0 removes it). Property cards can't be changed this way.
+- `deck.values.<card id>`: a card's value, for any card, including properties.
+- `deck.rent.<district id>`: a district's rent ladder. It must have one step per property in the set.
+
+```json
+{ "overrides": { "deck.counts.walk-off-win": 6, "deck.values.hostile-takeover": 4, "deck.rent.duke": [3, 5, 9] } }
+```
+
+Counts are per deck copy, so a 6–10 player game still doubles them. An unknown card or district id is an error.
+
 If a variant can't be expressed with parameters, it may add a **rule hook**: a small, pure function registered at a named extension point, such as `onRentCalculated` or `canTarget`. Hooks are allowed only in `packages/engine/src/hooks/`, and each needs its own tests.
 
 Every variant pull request **must include a simulation report** that compares the variant with `base`.

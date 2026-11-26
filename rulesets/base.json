@@ -18,5 +18,6 @@
     "hostileTakeover": { "playCost": 2 }
   },
   "rent": { "pair": { "maxTargets": null } },
-  "clock": { "onByDefault": false, "turnSeconds": 90, "responseSeconds": 20 }
+  "clock": { "onByDefault": false, "turnSeconds": 90, "responseSeconds": 20 },
+  "deck": {}
 }

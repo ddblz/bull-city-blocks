@@ -38,6 +38,14 @@ export const RuleSetSchema = z.strictObject({
     turnSeconds: positive,
     responseSeconds: positive,
   }),
+  /** §5 deck overrides, applied to the content by applyDeckConfig. Keys are card / district ids. */
+  deck: z.strictObject({
+    /** Copies per deck copy. Non-property cards only. */
+    counts: z.record(z.string(), count).default({}),
+    values: z.record(z.string(), count).default({}),
+    /** Rent ladder per district; its length must equal the set size. */
+    rent: z.record(z.string(), z.array(count)).default({}),
+  }),
 });
 
 export type RuleSet = z.infer<typeof RuleSetSchema>;
@@ -52,16 +60,21 @@ const VariantSchema = z.strictObject({
 
 const isObject = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null;
 
+/** Map-valued settings: an override may add a new key under these (checked against content later). */
+const MAP_PATHS = new Set(["deck.counts", "deck.values", "deck.rent"]);
+
 /** Sets `path` (e.g. "actions.foodTruckRodeo.maxTargets") in a copy of `target`. The path must exist. */
 function applyOverride(target: unknown, path: string, value: unknown): Result<unknown> {
   const keys = path.split(".");
   const root: unknown = JSON.parse(JSON.stringify(target));
   let node: unknown = root;
   for (const [i, key] of keys.entries()) {
-    if (!isObject(node) || !Object.hasOwn(node, key)) {
+    const last = i === keys.length - 1;
+    const isMapKey = last && MAP_PATHS.has(keys.slice(0, -1).join("."));
+    if (!isObject(node) || (!Object.hasOwn(node, key) && !isMapKey)) {
       return { ok: false, error: `unknown override path "${path}"` };
     }
-    if (i === keys.length - 1) node[key] = value;
+    if (last) node[key] = value;
     else node = node[key];
   }
   return { ok: true, value: root };
