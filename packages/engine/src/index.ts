@@ -4,5 +4,5 @@ export * from "./content";
 export * from "./create-game";
 export type { Result } from "./result";
 export * from "./rng";
-export * from "./rules";
+export * from "./ruleset";
 export type * from "./types";

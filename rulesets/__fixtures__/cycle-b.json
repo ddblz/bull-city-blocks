@@ -1,0 +1,6 @@
+{
+  "id": "cycle-b",
+  "extends": "cycle-a",
+  "description": "Half of an extends cycle",
+  "overrides": {}
+}

@@ -1,0 +1,6 @@
+{
+  "id": "unknown-path",
+  "extends": "base",
+  "description": "Overrides a path that does not exist",
+  "overrides": { "actions.foodTruck.maxTargets": 4 }
+}

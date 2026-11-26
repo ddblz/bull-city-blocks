@@ -1,0 +1,6 @@
+{
+  "id": "type-mismatch",
+  "extends": "base",
+  "description": "Overrides a number with a string",
+  "overrides": { "playsPerTurn": "three" }
+}

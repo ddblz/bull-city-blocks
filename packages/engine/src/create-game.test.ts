@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { createGame } from "./create-game";
-import { BASE_RULES } from "./rules";
-import { durhamContent } from "./test-content";
+import { baseRules, durhamContent } from "./test-content";
 import type { GameState } from "./types";
 
 const content = durhamContent();
+const rules = baseRules();
 const players = (n: number) => Array.from({ length: n }, (_, i) => `p${i + 1}`);
 const game = (n: number, seed = "seed") => {
-  const result = createGame(BASE_RULES, content, players(n), seed);
+  const result = createGame(rules, content, players(n), seed);
   if (!result.ok) throw new Error(result.error);
   return result.value;
 };
@@ -32,12 +32,12 @@ describe("createGame", () => {
   });
 
   it.each([0, 1, 11])("§3.1 returns an error result for %i players", (n) => {
-    const result = createGame(BASE_RULES, content, players(n), "seed");
+    const result = createGame(rules, content, players(n), "seed");
     expect(result.ok).toBe(false);
   });
 
   it("returns an error result for duplicate player ids", () => {
-    expect(createGame(BASE_RULES, content, ["a", "a"], "seed").ok).toBe(false);
+    expect(createGame(rules, content, ["a", "a"], "seed").ok).toBe(false);
   });
 
   it("§3.1 the same seed gives an identical state", () => {

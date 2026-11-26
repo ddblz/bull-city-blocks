@@ -4,5 +4,5 @@
     "outDir": "dist",
     "resolveJsonModule": true
   },
-  "include": ["src", "../../content/*.json"]
+  "include": ["src", "../../content/*.json", "../../rulesets/**/*.json"]
 }
