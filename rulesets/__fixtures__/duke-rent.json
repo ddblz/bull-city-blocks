@@ -1,0 +1,6 @@
+{
+  "id": "duke-rent",
+  "extends": "base",
+  "description": "Duke rent ladder 3 / 5 / 9 instead of 3 / 5 / 8",
+  "overrides": { "deck.rent.duke": [3, 5, 9] }
+}

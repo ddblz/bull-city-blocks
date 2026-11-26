@@ -62,6 +62,7 @@ describe("rulesets/base.json", () => {
     ["§4.5", "actions.buyout.payCardValue", true],
     ["§4.5", "actions.hostileTakeover.playCost", 2],
     ["§4.6", "rent.pair.maxTargets", null],
+    ["§5", "deck", { counts: {}, values: {}, rent: {} }],
   ])("%s %s = %j", (_section, path, expected) => {
     expect(get(baseRules(), path)).toEqual(expected);
   });

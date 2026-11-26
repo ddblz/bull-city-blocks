@@ -1,0 +1,6 @@
+{
+  "id": "cheap-takeover",
+  "extends": "base",
+  "description": "Hostile Takeover is worth 4 instead of 5",
+  "overrides": { "deck.values.hostile-takeover": 4 }
+}
