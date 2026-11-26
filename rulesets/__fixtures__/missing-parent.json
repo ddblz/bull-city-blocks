@@ -1,0 +1,6 @@
+{
+  "id": "missing-parent",
+  "extends": "nowhere",
+  "description": "Extends a ruleset that does not exist",
+  "overrides": {}
+}

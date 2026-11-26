@@ -1,0 +1,6 @@
+{
+  "id": "chained",
+  "extends": "rodeo-cap-4",
+  "description": "Extends a variant: rodeo cap plus a fourth play",
+  "overrides": { "playsPerTurn": 4 }
+}

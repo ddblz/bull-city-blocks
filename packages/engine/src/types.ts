@@ -1,13 +1,13 @@
 import type { Card, District } from "./content";
 import type { RngState } from "./rng";
-import type { RuleSet } from "./rules";
+import type { RuleSet } from "./ruleset";
 
 export type PlayerId = string;
 /** Unique per physical card in a game: `<card id>:<deck copy>:<n>`, e.g. `cash-1:2:7`. */
 export type CardInstanceId = string;
 
 export interface PlayerPrefs {
-  /** SPEC §3.6: on by default. */
+  /** SPEC §3.6: starts at the ruleset's `autoPassDefault` (on in base). */
   autoPass: boolean;
 }
 

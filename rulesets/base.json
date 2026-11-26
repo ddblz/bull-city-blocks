@@ -1,0 +1,22 @@
+{
+  "id": "base",
+  "description": "Baseline rules from SPEC §3–4.",
+  "players": { "min": 2, "max": 10 },
+  "deckCopies": [{ "maxPlayers": 5, "copies": 1 }, { "maxPlayers": 10, "copies": 2 }],
+  "hand": { "starting": 5, "limit": 7 },
+  "draw": { "perTurn": 2, "emptyHand": 5 },
+  "playsPerTurn": 3,
+  "districtsToWin": 3,
+  "roundLimit": 60,
+  "payments": { "giveChange": false, "autoPay": true },
+  "upgrades": { "landmarkBonus": 3, "iconBonus": 4 },
+  "autoPassDefault": true,
+  "actions": {
+    "foodTruckRodeo": { "maxTargets": null },
+    "assessment": { "cap": 5 },
+    "buyout": { "payCardValue": true },
+    "hostileTakeover": { "playCost": 2 }
+  },
+  "rent": { "pair": { "maxTargets": null } },
+  "clock": { "onByDefault": false, "turnSeconds": 90, "responseSeconds": 20 }
+}

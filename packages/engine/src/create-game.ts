@@ -1,7 +1,7 @@
 import type { Card, Content, District } from "./content";
 import type { Result } from "./result";
 import { randomInt, seedRng, shuffle } from "./rng";
-import type { RuleSet } from "./rules";
+import type { RuleSet } from "./ruleset";
 import type { CardInstanceId, GameState, PlayerId, PlayerState } from "./types";
 
 /** Number of deck copies for a player count (SPEC §3.1), or null if none covers it. */
@@ -21,7 +21,7 @@ export function buildDeck(content: Content, copies: number): Record<CardInstance
 }
 
 /**
- * SPEC §3.1 setup: builds and shuffles the deck, deals `startingHand` cards to each player
+ * SPEC §3.1 setup: builds and shuffles the deck, deals `hand.starting` cards to each player
  * one at a time, and picks a random starting player. Returns an error instead of throwing.
  */
 export function createGame(
@@ -31,10 +31,10 @@ export function createGame(
   seed: string,
 ): Result<GameState> {
   const count = players.length;
-  if (count < rules.minPlayers || count > rules.maxPlayers) {
+  if (count < rules.players.min || count > rules.players.max) {
     return {
       ok: false,
-      error: `need ${rules.minPlayers}–${rules.maxPlayers} players, got ${count}`,
+      error: `need ${rules.players.min}–${rules.players.max} players, got ${count}`,
     };
   }
   if (new Set(players).size !== count) return { ok: false, error: "player ids must be unique" };
@@ -45,7 +45,7 @@ export function createGame(
   const shuffled = shuffle(seedRng(seed), Object.keys(cards));
   const deck = shuffled.value;
   const hands: CardInstanceId[][] = players.map(() => []);
-  for (let round = 0; round < rules.startingHand; round++) {
+  for (let round = 0; round < rules.hand.starting; round++) {
     for (const hand of hands) {
       const card = deck.shift();
       if (card === undefined) return { ok: false, error: "deck too small to deal" };
@@ -59,7 +59,7 @@ export function createGame(
     hand: hands[i] ?? [],
     bank: [],
     tableau: [],
-    prefs: { autoPass: true },
+    prefs: { autoPass: rules.autoPassDefault },
   }));
   const districts: Record<District["id"], District> = {};
   for (const d of content.districts) districts[d.id] = d;
