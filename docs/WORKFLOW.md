@@ -33,9 +33,9 @@ There are two human gates, and nothing gets past them on its own:
 
 | Guardrail | How it's enforced |
 |---|---|
-| No direct pushes to `main` | GitHub branch protection: pull request required, 1 approval from the owner (CODEOWNERS) |
-| Claude can't merge or approve | `.claude/settings.json` denies `gh pr merge`, `gh pr review --approve` and pushes to `main` |
-| CI must pass | Required status checks in branch protection |
+| No direct pushes to `main` | GitHub branch protection on `main`: pull request required and force pushes blocked. Claude acts through the owner's GitHub identity, so GitHub's "required approvals" can't be used: the owner's merge **is** the approval |
+| Claude can't merge or approve | `.claude/settings.json` denies `gh pr merge`, approve and merge calls through `gh api`, pushes to `main`, and `DELETE` calls. Cloud sessions also can't change repo settings or branch protection; the GitHub proxy refuses those writes |
+| CI must pass | Required status checks in branch protection (added once #2 lands) |
 | Small pull requests | CI fails when the diff is over **400 changed lines**, excluding lockfiles, `content/`, `reports/` and test fixtures |
 | No surprise dependencies | CI fails when `package.json` dependencies change unless the issue has the `deps-approved` label |
 | No secrets in cloud sessions | The environment has no production credentials, and network access is limited to package registries and GitHub |
