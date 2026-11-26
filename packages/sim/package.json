@@ -1,0 +1,16 @@
+{
+  "name": "@bull-city-blocks/sim",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "sim": "node -e \"console.log('not implemented'); process.exit(1)\""
+  },
+  "dependencies": {
+    "@bull-city-blocks/bots": "workspace:*",
+    "@bull-city-blocks/engine": "workspace:*"
+  }
+}

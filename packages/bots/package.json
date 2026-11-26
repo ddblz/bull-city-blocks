@@ -1,0 +1,12 @@
+{
+  "name": "@bull-city-blocks/bots",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@bull-city-blocks/engine": "workspace:*"
+  }
+}
