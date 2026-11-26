@@ -3,6 +3,7 @@ import { applyDeckConfig } from "./deck-config";
 import type { Result } from "./result";
 import { randomInt, seedRng, shuffle } from "./rng";
 import type { RuleSet } from "./ruleset";
+import { startTurn } from "./turn";
 import type { CardInstanceId, GameState, PlayerId, PlayerState } from "./types";
 
 /** Number of deck copies for a player count (SPEC §3.1), or null if none covers it. */
@@ -23,7 +24,7 @@ export function buildDeck(content: Content, copies: number): Record<CardInstance
 
 /**
  * SPEC §3.1 setup: builds and shuffles the deck, deals `hand.starting` cards to each player
- * one at a time, and picks a random starting player. The ruleset's deck overrides (§5) are applied
+ * one at a time, picks a random starting player and starts their turn (they draw, §3.2). The ruleset's deck overrides (§5) are applied
  * to the content first. Returns an error instead of throwing.
  */
 export function createGame(
@@ -68,22 +69,23 @@ export function createGame(
   const districts: Record<District["id"], District> = {};
   for (const d of effective.value.districts) districts[d.id] = d;
 
-  return {
-    ok: true,
-    value: {
-      rules,
-      cards,
-      districts,
-      players: playerStates,
-      deck,
-      discard: [],
-      currentPlayer: players[start.value] as PlayerId,
-      phase: "draw",
-      playsRemaining: 0,
-      pending: [],
-      rng: start.rng,
-      turn: 1,
-      round: 1,
-    },
+  const state: GameState = {
+    rules,
+    cards,
+    districts,
+    players: playerStates,
+    deck,
+    discard: [],
+    currentPlayer: players[start.value] as PlayerId,
+    startingPlayer: players[start.value] as PlayerId,
+    phase: "play",
+    result: null,
+    playsRemaining: 0,
+    pending: [],
+    rng: start.rng,
+    turn: 1,
+    round: 1,
   };
+  startTurn(state, []);
+  return { ok: true, value: state };
 }

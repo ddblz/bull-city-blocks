@@ -6,4 +6,5 @@ export * from "./deck-config";
 export type { Result } from "./result";
 export * from "./rng";
 export * from "./ruleset";
+export * from "./turn";
 export type * from "./types";
