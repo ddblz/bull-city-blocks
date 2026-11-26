@@ -22,8 +22,17 @@ describe("createGame", () => {
     const s = game(n);
     const deckSize = n <= 5 ? 139 : 278;
     expect(Object.keys(s.cards)).toHaveLength(deckSize);
-    expect(s.players.map((p) => p.hand.length)).toEqual(Array(n).fill(5));
-    expect(s.deck).toHaveLength(deckSize - 5 * n);
+    // Everyone is dealt 5; the starting player has also drawn 2 for their first turn (§3.2).
+    expect(s.players.map((p) => p.hand.length)).toEqual(
+      s.players.map((p) => (p.id === s.currentPlayer ? 7 : 5)),
+    );
+    expect(s.deck).toHaveLength(deckSize - 5 * n - 2);
+    expect(s).toMatchObject({
+      phase: "play",
+      playsRemaining: 3,
+      startingPlayer: s.currentPlayer,
+      result: null,
+    });
     // Conservation: every instance is in exactly one place.
     const placed = allCards(s);
     expect(placed).toHaveLength(deckSize);

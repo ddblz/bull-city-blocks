@@ -25,10 +25,27 @@ export interface PlayerState {
   prefs: PlayerPrefs;
 }
 
-/** Placeholders: the unions get their members as turns, actions and payments land (#5–#10). */
-export type Move = never;
-export type GameEvent = never;
+/** Moves a player can make (ARCHITECTURE §3). Actions, payments and wilds arrive in #6–#9. */
+export type Move =
+  | { type: "playProperty"; player: PlayerId; card: CardInstanceId }
+  | { type: "bank"; player: PlayerId; card: CardInstanceId }
+  | { type: "endTurn"; player: PlayerId }
+  | { type: "discard"; player: PlayerId; card: CardInstanceId };
+
+export type GameEvent =
+  | { type: "turnStarted"; player: PlayerId; turn: number; round: number }
+  | { type: "cardsDrawn"; player: PlayerId; count: number }
+  | { type: "deckReshuffled"; cards: number }
+  | { type: "propertyPlayed"; player: PlayerId; card: CardInstanceId }
+  | { type: "banked"; player: PlayerId; card: CardInstanceId }
+  | { type: "discarded"; player: PlayerId; card: CardInstanceId }
+  | { type: "gameOver"; result: PlayerId | "stall" };
+
+/** Placeholder: debts and Appeal chains arrive in #6 and #8. */
 export type PendingStep = never;
+
+/** ARCHITECTURE §4.1. Draw is automatic at the start of each turn, so it is never a resting phase. */
+export type Phase = "play" | "discard" | "gameOver";
 
 /** Everything is plain JSON, so a game can be saved, replayed or diffed (ARCHITECTURE §3). */
 export interface GameState {
@@ -41,7 +58,11 @@ export interface GameState {
   deck: CardInstanceId[];
   discard: CardInstanceId[];
   currentPlayer: PlayerId;
-  phase: "draw";
+  /** The first player; a round ends when the turn comes back to them (SPEC §3.8). */
+  startingPlayer: PlayerId;
+  phase: Phase;
+  /** Set when the game ends: the winner, or "stall" at the round limit. */
+  result: PlayerId | "stall" | null;
   playsRemaining: number;
   pending: PendingStep[];
   rng: RngState;

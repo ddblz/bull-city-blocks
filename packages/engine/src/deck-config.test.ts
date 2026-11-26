@@ -30,8 +30,10 @@ describe("§5 deck overrides", () => {
   it("base produces exactly today's SPEC §4 deck: same instance ids and same shuffle", () => {
     const four = game(createGame(baseRules(), content, players(4), "golden"));
     expect(Object.keys(four.cards)).toEqual(Object.keys(buildDeck(content, 1)));
-    // Recorded from main before this change (PR #19).
-    expect(four.deck.slice(0, 3)).toEqual(["golden-belt:1:1", "assessment:1:2", "ninth-st:1:1"]);
+    // Recorded from main before this change (PR #19): the shuffled deck began golden-belt,
+    // assessment, ninth-st. Since #5 the starting player (p3) draws those first two.
+    expect(four.deck[0]).toBe("ninth-st:1:1");
+    expect(four.players[2]?.hand.slice(-2)).toEqual(["golden-belt:1:1", "assessment:1:2"]);
     expect(four.players[0]?.hand).toEqual([
       "hostile-takeover:1:2",
       "food-truck-rodeo:1:1",
@@ -42,7 +44,8 @@ describe("§5 deck overrides", () => {
     expect(four.currentPlayer).toBe("p3");
     const eight = game(createGame(baseRules(), content, players(8), "golden"));
     expect(Object.keys(eight.cards)).toHaveLength(278);
-    expect(eight.deck.slice(0, 3)).toEqual(["dbap:1:1", "berkeley-st:1:1", "cash-1:1:4"]);
+    expect(eight.deck[0]).toBe("cash-1:1:4"); // p6 drew dbap and berkeley-st
+    expect(eight.players[5]?.hand.slice(-2)).toEqual(["dbap:1:1", "berkeley-st:1:1"]);
     expect(eight.currentPlayer).toBe("p6");
   });
 
