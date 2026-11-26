@@ -3,6 +3,7 @@
   "references": [
     { "path": "packages/engine" },
     { "path": "packages/bots" },
-    { "path": "packages/sim" }
+    { "path": "packages/sim" },
+    { "path": "scripts" }
   ]
 }
