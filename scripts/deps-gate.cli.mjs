@@ -28,9 +28,9 @@ async function issueLabels(issue) {
     GITHUB_TOKEN,
   } = process.env;
   const url = `${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${issue}/labels?per_page=100`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: "application/vnd.github+json" },
-  });
+  const headers = { Accept: "application/vnd.github+json" };
+  if (GITHUB_TOKEN) headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+  const res = await fetch(url, { headers });
   if (!res.ok) throw new Error(`GET ${url} failed: ${res.status}`);
   return (await res.json()).map((label) => label.name);
 }
