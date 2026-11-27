@@ -42,7 +42,7 @@ class FakeObject {
   };
 
   /** A fresh host, as after hibernation or eviction: everything it knows comes from storage. */
-  async host() {
+  async host(debug = false) {
     let n = 0;
     const host = new RoomHost(this.state, {
       rulesets: RULESETS,
@@ -50,6 +50,7 @@ class FakeObject {
       now: () => this.now,
       random: () => 0.5,
       makeId: () => `id-${++n}-${this.now}`,
+      debug,
     });
     await host.load();
     return host;
@@ -118,6 +119,18 @@ async function setUp() {
     await obj.fire(host); // bots, Ben's clock, held deliveries
   };
   return { obj, ana, ben, step, rehost: async () => (host = await obj.host()) };
+}
+
+/** Starts a 1-human + 1-bot game and has Ana play until the bot is the one awaited. */
+async function startUntilBotAwaited(obj: FakeObject, host: RoomHost) {
+  await host.create();
+  const ana = await open(obj, host, "Ana");
+  await send(host, ana, { type: "addBot", bot: "greedy" });
+  await send(host, ana, { type: "start" });
+  for (let i = 0; i < 20 && ana.last("state")?.awaiting?.seat === 0; i++)
+    await send(host, ana, { type: "intent", move: ana.last("state")?.legal.at(-1) as Move });
+  expect(ana.last("state")?.awaiting?.seat).toBe(1);
+  return ana;
 }
 
 describe("room Durable Object (#40)", () => {
@@ -202,5 +215,44 @@ describe("room Durable Object (#40)", () => {
     host.opened(ws);
     expect(ws.received).toEqual([{ type: "error", reason: "no such room" }]);
     expect(ws.closed).toEqual({ code: 4004 });
+  });
+
+  it("records no trace unless debug is on, so it costs no storage writes", async () => {
+    const quiet = new FakeObject();
+    const host = await quiet.host();
+    await host.create();
+    expect(quiet.data.has("debug")).toBe(false);
+    expect(host.debugLog().trace).toEqual([]);
+  });
+
+  it("with debug on, traces messages, alarms and set alarms, and keeps the trace across eviction (#40)", async () => {
+    const obj = new FakeObject();
+    const host = await obj.host(true);
+    await startUntilBotAwaited(obj, host);
+    await obj.fire(host); // the awaited bot's alarm
+    const kinds = host.debugLog().trace.map((e) => e.ev);
+    expect(kinds).toContain("message");
+    expect(kinds).toContain("setAlarm");
+    const alarm = host.debugLog().trace.find((e) => e.ev === "alarm");
+    expect(alarm?.scheduled).toEqual(expect.any(Number));
+    expect(alarm?.due?.bot).toBeLessThanOrEqual(0); // the bot was due when the alarm fired
+    const evicted = await obj.host(true);
+    expect(evicted.debugLog().trace).toEqual(host.debugLog().trace);
+  });
+
+  it("with debug on, an alarm that throws is recorded and still rethrown, so Cloudflare retries it (#40)", async () => {
+    const obj = new FakeObject();
+    const host = await obj.host(true);
+    await startUntilBotAwaited(obj, host);
+    const room = (host as unknown as { room: { stepBot: () => never } }).room;
+    room.stepBot = () => {
+      throw new Error("boom");
+    };
+    await expect(obj.fire(host)).rejects.toThrow("boom");
+    expect(host.debugLog().trace.at(-1)).toMatchObject({
+      ev: "error",
+      note: expect.stringContaining("boom"),
+    });
+    expect(JSON.parse(obj.data.get("debug") as string).at(-1).ev).toBe("error");
   });
 });
