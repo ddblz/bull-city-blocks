@@ -54,6 +54,7 @@ export function tableauMoves(s: GameState, player: PlayerId): Move[] {
   }
   for (const set of p.tableau) {
     for (const card of set.cards) {
+      if (s.wildsMoved.includes(card)) continue; // each wild moves at most once per turn (§3.2)
       for (const district of wildDistricts(s, card)) {
         if (district !== set.district) moves.push({ type: "moveWild", player, card, district });
       }
@@ -86,5 +87,6 @@ export function moveWild(
   const p = playerOf(s, move.player);
   removeOwned(s, p, move.card);
   addToTableau(s, p, move.card, move.district);
+  s.wildsMoved.push(move.card);
   events.push({ type: "wildMoved", player: p.id, card: move.card, district: move.district });
 }

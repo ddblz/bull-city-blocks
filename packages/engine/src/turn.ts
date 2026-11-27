@@ -18,6 +18,7 @@ function draft(s: GameState): GameState {
     deck: [...s.deck],
     discard: [...s.discard],
     pending: [...s.pending],
+    wildsMoved: [...s.wildsMoved],
     players: s.players.map((p) => ({
       ...p,
       hand: [...p.hand],
@@ -37,6 +38,7 @@ export function startTurn(s: GameState, events: GameEvent[]): void {
   p.delayed = false;
   s.phase = "play";
   s.playsRemaining = s.rules.playsPerTurn;
+  s.wildsMoved = [];
 }
 
 /** §3.5: districts where the player holds at least one complete set. */

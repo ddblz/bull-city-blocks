@@ -61,6 +61,34 @@ describe("wild properties (§4.2)", () => {
     ).toBe(false);
   });
 
+  it("§3.2 each wild can be moved once per turn, and every wild gets its own move", () => {
+    const { s, me } = arena(2, []);
+    giveSet(s, me, "old-west-durham", ["ninth-st:1:1", OWD_WILD]);
+    giveSet(s, me, "duke", ["erwin-rd:1:1", DUKE_WILD]);
+    let t = apply(s, {
+      type: "moveWild",
+      player: me.id,
+      card: OWD_WILD,
+      district: "walltown",
+    }).state;
+    const back: Move = {
+      type: "moveWild",
+      player: me.id,
+      card: OWD_WILD,
+      district: "old-west-durham",
+    };
+    expect(legalMoves(t, me.id)).not.toContainEqual(back);
+    expect(applyMove(t, back).ok).toBe(false);
+    t = apply(t, { type: "moveWild", player: me.id, card: DUKE_WILD, district: "downtown" }).state; // a different wild
+    // On their next turn, the same wild can move again.
+    const them = t.players.find((p) => p.id !== me.id)?.id as string;
+    t = apply(t, { type: "endTurn", player: me.id }).state;
+    t = apply(t, { type: "endTurn", player: them }).state;
+    while (t.phase === "discard") t = apply(t, legalMoves(t, t.currentPlayer)[0] as Move).state;
+    expect(t.currentPlayer).toBe(me.id);
+    expect(legalMoves(t, me.id)).toContainEqual(back);
+  });
+
   it("§3.4 a wild received as payment goes to the creditor's tableau, in the district it was in", () => {
     const { s, me, them } = arena(
       2,

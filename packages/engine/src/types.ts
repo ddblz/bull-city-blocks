@@ -148,6 +148,8 @@ export interface GameState {
   result: PlayerId | "stall" | null;
   playsRemaining: number;
   pending: PendingStep[];
+  /** Wilds moved this turn: each wild can be moved once per turn (§3.2). */
+  wildsMoved: CardInstanceId[];
   rng: RngState;
   turn: number;
   round: number;

@@ -85,6 +85,7 @@ export function createGame(
       result: null,
       playsRemaining: 0,
       pending: [],
+      wildsMoved: [],
       rng: start.rng,
       turn: 1,
       round: 1,
