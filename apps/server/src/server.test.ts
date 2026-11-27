@@ -170,6 +170,12 @@ describe("local game server (#35)", () => {
     await mover.next((m) => m.type === "state", from);
   });
 
+  it("lists the available rulesets for the lobby", async () => {
+    const s = await start();
+    const res = await fetch(`http://localhost:${s.port}/rulesets`);
+    expect(await res.json()).toEqual([{ id: "base", description: base.description }]);
+  });
+
   it("a room with no activity past the expiry is removed", async () => {
     const s = await start({ idleExpiryMs: 60 });
     const id = await newRoom(s);

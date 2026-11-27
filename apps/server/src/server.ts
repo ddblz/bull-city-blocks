@@ -73,8 +73,17 @@ export async function startServer(options: ServerOptions) {
 
   const http = createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     if (req.method === "OPTIONS") return void res.writeHead(204).end();
+    if (req.method === "GET" && req.url === "/rulesets") {
+      const list = options.rulesets.map((r) => {
+        const { id, description } = r as { id: string; description?: string };
+        return { id, description: description ?? "" };
+      });
+      return void res
+        .writeHead(200, { "Content-Type": "application/json" })
+        .end(JSON.stringify(list));
+    }
     if (req.method === "POST" && req.url === "/rooms") {
       const id = randomUUID().slice(0, 8);
       const live: LiveRoom = {

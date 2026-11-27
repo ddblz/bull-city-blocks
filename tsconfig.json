@@ -6,6 +6,7 @@
     { "path": "packages/sim" },
     { "path": "packages/room" },
     { "path": "apps/server" },
+    { "path": "apps/web" },
     { "path": "scripts" }
   ]
 }

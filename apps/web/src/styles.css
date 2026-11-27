@@ -1,0 +1,71 @@
+:root {
+  --bg: #fbfaf7;
+  --fg: #1f2328;
+  --muted: #5d6470;
+  --accent: #0d5c63;
+  --error: #b42318;
+  --card: #fff;
+  --line: #d9d6cf;
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15181c;
+    --fg: #e8e6e1;
+    --muted: #a3a9b3;
+    --accent: #6cc4cc;
+    --error: #ff8a80;
+    --card: #1e2227;
+    --line: #333a42;
+  }
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+.page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+button {
+  font: inherit;
+  padding: 0.4rem 0.8rem;
+  margin: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  background: var(--card);
+  color: var(--fg);
+}
+button.primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+.seats {
+  list-style: none;
+  padding: 0;
+}
+.seats li {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.tag {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.share code {
+  word-break: break-all;
+}
+.controls label {
+  display: block;
+  margin: 0.4rem 0;
+}
+.error {
+  color: var(--error);
+}
+.status {
+  color: var(--muted);
+}
