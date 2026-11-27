@@ -220,7 +220,24 @@ A variant "changes the game" for a metric when the 95% confidence intervals don'
 | Fallback | Render free web service. It sleeps when idle, with a cold start of about a minute |
 | CI | GitHub Actions: keep the pipeline fast, because private repos have a monthly free-minutes quota |
 
-Free-tier limits change, so they'll be re-checked when M4 starts. The engine is pure, so it can be moved between hosts.
+The engine is pure, so it can be moved between hosts.
+
+**Free-tier limits** (Workers Free plan, checked 2026-11-27 against Cloudflare's docs; they change, so re-check them before relying on them):
+
+| Limit | Free plan | What it means here |
+|---|---|---|
+| Worker requests | 100,000 / day, reset 00:00 UTC | Room creation and the lobby's `/rulesets` and `/content` fetches. Gameplay is on WebSockets, not requests |
+| Worker CPU time | 10 ms per request | Fine: the Worker only routes; the game runs in the Durable Object |
+| Durable Objects | SQLite-backed only | The room class uses `new_sqlite_classes` |
+| Durable Object requests | 100,000 / day | WebSocket connects and alarms count; incoming WebSocket messages are billed at 20:1 |
+| Durable Object duration | 13,000 GB-s / day | Hibernating WebSockets don't accrue duration while a room waits |
+| SQLite rows written | 100,000 / day; each `setAlarm` counts as one | A room saves once per change and moves its alarm only when the next timer changes: about 2 writes per move. A 4-player game in `do.test.ts` (183 moves) took 350, so roughly 280 such games a day |
+| SQLite rows read | 5,000,000 / day | One read when a room wakes |
+| Storage | 5 GB per account, 1 GB per object; a key and value together up to 8 MB | A saved room is one value: about 70 KB at the end of that game |
+| WebSocket message size | 32 MiB | Far above any state message |
+| Pages builds | 500 / month | The deploy uploads a prebuilt `apps/web/dist` with `wrangler pages deploy` |
+
+Not re-checked: Pages limits on files per site and file size, which the build is far below.
 
 ## 8. Milestones
 

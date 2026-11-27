@@ -1,0 +1,74 @@
+name: Deploy
+
+# Deploys the game server (a Worker with one Durable Object per room) and the web client
+# (Cloudflare Pages) from main (#40, SPEC §7). Never runs on pull requests.
+# Needs the repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID; skips until they're set.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  secrets:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - id: check
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID to deploy."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    needs: secrets
+    if: github.ref == 'refs/heads/main' && needs.secrets.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Deploy the game server
+        id: worker
+        working-directory: apps/worker
+        run: |
+          pnpm exec wrangler deploy | tee deploy.log
+          url=$(grep -o 'https://[^ ]*\.workers\.dev' deploy.log | head -1)
+          test -n "$url" || { echo "::error::no workers.dev URL in the deploy output"; exit 1; }
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Build the web client against it
+        run: pnpm --filter @bull-city-blocks/web build
+        env:
+          VITE_SERVER: ${{ steps.worker.outputs.url }}
+
+      - name: Deploy the web client to Pages
+        working-directory: apps/worker
+        run: |
+          pnpm exec wrangler pages project create bull-city-blocks --production-branch main || true
+          pnpm exec wrangler pages deploy ../web/dist --project-name bull-city-blocks --branch main

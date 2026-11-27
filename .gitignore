@@ -3,3 +3,4 @@ dist/
 *.tsbuildinfo
 coverage/
 sim-smoke.json
+.wrangler/

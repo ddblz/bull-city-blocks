@@ -1,2 +1,3 @@
 export type * from "./messages";
-export { Room, type RoomOptions } from "./room";
+export { revealsAutoPass } from "./reveal";
+export { Room, type RoomOptions, type RoomSnapshot } from "./room";

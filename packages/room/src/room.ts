@@ -22,6 +22,21 @@ const MAX_SEATS = 10;
 /** The inline variant that carries a room's overrides on top of its chosen ruleset. */
 const ROOM_RULESET = "__room__";
 
+/** A saved room: plain JSON (seat tokens included, so it stays on the server). */
+export interface RoomSnapshot {
+  seats: Seat[];
+  ruleset: string;
+  overrides: Record<string, unknown>;
+  clock: boolean;
+  game: GameState | null;
+  seed: string;
+  moves: Move[];
+  botRng: ReturnType<Rng["save"]> | null;
+  log: HistoryEntry[];
+  sent: number[];
+  lastActed: number[];
+}
+
 interface Seat {
   name: string;
   /** Reconnect token; null for bots. */
@@ -70,6 +85,21 @@ export class Room {
     const rules = this.rules();
     if (!rules.ok) throw new Error(rules.error);
     this.clock = rules.value.clock.onByDefault;
+  }
+
+  /** Everything the room holds, as plain JSON, so a host can save it after every change (#40). */
+  snapshot(): RoomSnapshot {
+    const { seats, ruleset, overrides, clock, game, seed, moves, log, sent, lastActed } = this;
+    const botRng = this.botRng?.save() ?? null;
+    return { seats, ruleset, overrides, clock, game, seed, moves, botRng, log, sent, lastActed };
+  }
+
+  /** A room as it was saved, e.g. after its Durable Object was evicted (#40). */
+  static restore(options: RoomOptions, saved: RoomSnapshot): Room {
+    const room = new Room(options);
+    const { botRng, ...rest } = JSON.parse(JSON.stringify(saved)) as RoomSnapshot;
+    Object.assign(room, rest, { botRng: botRng && Rng.load(botRng) });
+    return room;
   }
 
   /** The room's ruleset with its overrides applied, validated by the engine's loader. */

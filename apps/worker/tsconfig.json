@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": ["src", "../../content/*.json", "../../rulesets/*.json"],
+  "references": [{ "path": "../../packages/room" }]
+}

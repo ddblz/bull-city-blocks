@@ -1,7 +1,8 @@
 import type { Move } from "@bull-city-blocks/engine";
 import { describe, expect, it } from "vitest";
 import type { Outgoing } from "./messages";
-import { join, last, newRoom, to } from "./test-setup";
+import { Room } from "./room";
+import { join, last, newRoom, options, to } from "./test-setup";
 
 describe("Room lobby", () => {
   it("the first player to join is host, and seats are limited to 10", () => {
@@ -187,5 +188,33 @@ describe("Room event filter (SPEC §3.6)", () => {
     expect(types(0)).toEqual([]);
     expect(room.historyFor(0, 0).some((e) => e.event.type === "prefSet")).toBe(false);
     expect(room.historyFor(1, 0).some((e) => e.event.type === "prefSet")).toBe(true);
+  });
+});
+
+describe("Room snapshots (#40)", () => {
+  /** Ana and three bots play to the end; `cut` is when (if ever) the room is saved and rebuilt. */
+  function play(cut: number | null) {
+    let room = newRoom();
+    join(room, "Ana");
+    for (const bot of ["greedy", "random", "greedy"] as const)
+      room.handle(0, { type: "addBot", bot });
+    let out = room.handle(0, { type: "start" });
+    for (let i = 0; i < 5000; i++) {
+      if (i === cut) {
+        const saved = JSON.parse(JSON.stringify(room.snapshot()));
+        let n = 2; // newRoom's ids so far: the token and the seed
+        room = Room.restore({ ...options, makeId: () => `id-${++n}` }, saved);
+      }
+      out = [...out, ...room.runBots()];
+      const over = last(out, 0, "gameOver");
+      if (over) return { over, history: room.historyFor(0, 0) };
+      out = playFirst(room, 0, out);
+    }
+    throw new Error("no game over");
+  }
+
+  it("a room saved and restored mid-game plays on exactly as if it never stopped", () => {
+    const straight = play(null);
+    for (const cut of [1, 7, 20]) expect(play(cut)).toEqual(straight);
   });
 });
