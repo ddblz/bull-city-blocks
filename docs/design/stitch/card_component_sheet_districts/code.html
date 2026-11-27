@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed-variant": "#614000", "tertiary": "#00694c", "on-surface": "#1c1c18", "background": "#fcf9f3", "on-tertiary": "#ffffff", "primary-fixed-dim": "#ffb4a4", "inverse-on-surface": "#f3f0ea", "on-tertiary-container": "#f6fff8", "outline-variant": "#e0bfb9", "error": "#ba1a1a", "tertiary-fixed-dim": "#7bd8b1", "surface-container": "#f0eee8", "tertiary-container": "#1e8462", "primary-container": "#c84b31", "secondary-fixed": "#ffddb0", "surface": "#fcf9f3", "on-surface-variant": "#58413c", "on-primary": "#ffffff", "primary": "#a6331b", "surface-container-low": "#f6f3ed", "outline": "#8c716b", "secondary-fixed-dim": "#ffba46", "inverse-surface": "#31312d", "on-secondary-fixed": "#281800", "secondary-container": "#feb63c", "on-error": "#ffffff", "on-tertiary-fixed": "#002115", "on-primary-container": "#fffbff", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "inverse-primary": "#ffb4a4", "secondary": "#805600", "on-background": "#1c1c18", "primary-fixed": "#ffdad3", "surface-tint": "#aa361e", "on-primary-fixed": "#3e0500", "surface-dim": "#dcdad4", "on-secondary": "#ffffff", "surface-bright": "#fcf9f3", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#00513a", "tertiary-fixed": "#97f5cc", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#891e07" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.5rem", "space-xl": "2rem", "space-md": "1rem", "margin-desktop": "2.5rem", "margin": "1.5rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "label-md": ["JetBrains Mono"], "headline-sm": ["Epilogue"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Epilogue"], "headline-md": ["Epilogue"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Epilogue"] }, "fontSize": { "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md shrink-0"><img alt="Bull City Blocks Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBp7OiuPKW1uYkfsJc_mN40690bOIOfHX8WlWgByK_16HCF4fDZOJmmt_QFySTwIqfm87vgeHVIsHHVSIgdpPP4kNPQDZOKHx5glH2nrmqSkdRN8c1pdwSgjlWK0TH6C0BbxdVKUPp2518wjzreV_YQA6C9PvsCrxcgtlWC5SIzPQmDexqmsLtm5prVXH_tXyoF2O3b_rZHFKgvT37O0IQfeX-xgLA0s9K7gj8FltIi"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Durham Social Tabletop</span></div></div><div class="hidden lg:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(30,27,24,0.06)]"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span></span><span class="font-label-md text-label-md text-on-surface tracking-wide">Room #BCB-DURHAM</span><span class="text-outline-variant font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary font-semibold">4/6 Players</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm"><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="game-table" href="#">Table</a><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm" data-path="neighborhood-atlas" href="#">Neighborhoods</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="house-rules" href="#">Rules</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="lobby" href="#">Lobby</a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Quick Reference Rules" type="button"><span class="material-symbols-outlined text-[20px]">menu_book</span></button><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Tabletop Sound and Vibes" type="button"><span class="material-symbols-outlined text-[20px]">volume_up</span></button><div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div><div class="flex items-center gap-space-xs pl-space-xs bg-surface-container-low rounded-full py-1 pr-space-md"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdvu5Zcsx7DwoyCd0k0k9RLqLbp6PATSVWiDW6qkUC6fA-uLEQKul94AmUa7Nb7kDZbhmlsQRqEbXmgm5T8y26rUQA3VM5yYfAxcKmFhuAqoW0j5X1aUrX-saEtaLnJdVaGefpQmShepUW1dM4EM_v31DtfQA3sjLxni0CPx1iHPAVbCCaWuhq19-u4LpZ3QW6FyAAcgee-5e5_Et_Ej56zrV0kJGpdMxIS_Pnmcs"/><span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div><span class="hidden sm:inline font-label-md text-label-md text-on-surface font-semibold">You (Turn 2)</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Interactive Navigation / Filter Bar -->
+<section class="w-full bg-surface-container-low py-space-lg shadow-sm">
+<div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-xs text-primary font-label-md text-label-md uppercase tracking-wider">
+<span class="material-symbols-outlined text-[18px]">style</span>
+<span>Spec Document BCB-DS-2025</span>
+<span class="text-outline-variant">•</span>
+<span class="text-tertiary">Production Ready v1.4</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          Bull City Blocks · Official Card Component Library &amp; District Guide
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Complete structural specification for all 7 physical card archetypes, tactile micro-states, and 14 authentic Durham municipal district colorways. Lithograph-inspired paper craft engineered for high table legibility.
+        </p>
+</div>
+<!-- Quick Jump Pill Filters -->
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container p-1 rounded-xl shrink-0">
+<a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg bg-primary-container text-on-primary-container shadow-sm transition-all hover:opacity-95" href="#card-archetypes">7 Archetypes</a>
+<a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#card-states">4 States</a>
+<a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#district-atlas">14 Districts</a>
+<a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#tokens-spec">Accessibility</a>
+</div>
+</div>
+</section>
+<!-- SECTION 1: THE 7 CARD ARCHETYPES -->
+<section class="w-full py-space-xl bg-surface" id="card-archetypes">
+<div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-space-xl">
+<!-- Section Title with Monospace Callout -->
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-sm pb-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Module 01 // Anatomy</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">The 7 Fundamental Card Archetypes</h2>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Standard Ratio: 5:7 Tactile Parchment Backing • Minimum 44px Interaction Area</p>
+</div>
+<!-- Grid of 7 Archetypes (Bento / Gallery Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg">
+<!-- 1. PROPERTY CARD: Ninth Street -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-wider uppercase">01 • Property Card</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">Standard Issue</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5 transition-transform group-hover:-translate-y-1">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $2
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $2
+            </div>
+<!-- District Header Band (Old West Durham - Amber) -->
+<div class="w-full bg-[#c27803] text-on-primary-container p-space-sm rounded-md flex items-center justify-between shadow-sm">
+<div class="pl-7">
+<span class="block font-label-sm text-[9px] uppercase tracking-widest text-[#ffddb0]/90">Old West Durham</span>
+<span class="font-headline-sm text-headline-sm leading-tight text-white">Ninth Street</span>
+</div>
+<span class="material-symbols-outlined text-white text-[24px]">storefront</span>
+</div>
+<!-- Card Illustration Body -->
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 relative overflow-hidden">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed/40 flex items-center justify-center mb-1 text-secondary">
+<span class="material-symbols-outlined text-[32px]">local_cafe</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold text-center">Ninth Street Promenade</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center">3 Cards Required For Full Block</span>
+</div>
+<!-- Rent Matrix Table -->
+<div class="bg-surface-container-low rounded p-2 mb-6">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant font-medium pb-1">
+<span>1 Property Block</span>
+<span class="font-label-md font-bold text-on-surface">$1M</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant font-medium py-0.5">
+<span>2 Property Blocks</span>
+<span class="font-label-md font-bold text-on-surface">$2M</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-primary font-bold pt-1 bg-primary-fixed/30 px-1 rounded">
+<span>Complete Set (3)</span>
+<span class="font-label-md font-bold text-primary">$4M</span>
+</div>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Property Card Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Core territorial asset. 28% top container fill colored by district token. Features progressive rent ladder matrix.</p>
+</div>
+</div>
+<!-- 2. WILD CARD: East Durham / Hayti -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-tertiary font-bold tracking-wider uppercase">02 • Wild Property</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">Dual Pivot</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5 transition-transform group-hover:-translate-y-1">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $3
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $3
+            </div>
+<!-- Split Diagonal Header Band -->
+<div class="w-full h-14 rounded-md relative overflow-hidden flex shadow-sm">
+<div class="w-1/2 h-full bg-[#1b6d4b] text-white p-space-xs pl-7 flex flex-col justify-center">
+<span class="font-label-sm text-[8px] uppercase tracking-wider text-[#97f5cc]">East Durham</span>
+<span class="font-headline-sm text-[13px] leading-tight">Mill Works</span>
+</div>
+<div class="w-1/2 h-full bg-[#5b2b82] text-white p-space-xs pr-2 flex flex-col justify-center items-end">
+<span class="font-label-sm text-[8px] uppercase tracking-wider text-[#e6baff]">Hayti District</span>
+<span class="font-headline-sm text-[13px] leading-tight">Pettigrew St</span>
+</div>
+<!-- Diagonal Cut Center Accent -->
+<div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+<div class="w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</div>
+</div>
+</div>
+<!-- Graphic Pivot Wheel -->
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 text-center">
+<div class="flex items-center gap-space-sm mb-2">
+<div class="w-10 h-10 rounded-lg bg-[#1b6d4b]/20 flex items-center justify-center text-[#1b6d4b]">
+<span class="material-symbols-outlined text-[20px]">cottage</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">swap_horiz</span>
+<div class="w-10 h-10 rounded-lg bg-[#5b2b82]/20 flex items-center justify-center text-[#5b2b82]">
+<span class="material-symbols-outlined text-[20px]">music_note</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">Dual-District Wildcard</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant mt-1">Can swap between East Durham or Hayti at turn start.</span>
+</div>
+<!-- Wildcard Instructions -->
+<div class="bg-surface-container-low rounded p-2 mb-6 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Counts toward full set rent calculation for either active colorway.</span>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Wild Card Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dual diagonal container fill. Swappable orientation marker with two distinct district icon sockets.</p>
+</div>
+</div>
+<!-- 3. LANDMARK CARD: Lucky Strike Tower -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-secondary font-bold tracking-wider uppercase">03 • Landmark Asset</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed bg-secondary-fixed px-space-xs py-0.5 rounded font-bold">Upgrade</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5 transition-transform group-hover:-translate-y-1">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $3
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $3
+            </div>
+<!-- Filigree Gold Landmark Header -->
+<div class="w-full bg-gradient-to-r from-[#805600] via-[#c27803] to-[#805600] text-white p-space-sm rounded-md flex items-center justify-between shadow-sm">
+<div class="pl-7">
+<span class="block font-label-sm text-[9px] uppercase tracking-widest text-[#ffddb0]">Durm Landmark</span>
+<span class="font-headline-sm text-headline-sm leading-tight">Lucky Strike</span>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed text-[26px]">apartment</span>
+</div>
+<!-- Landmark Visual Art -->
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 text-center relative">
+<div class="w-14 h-14 rounded-full bg-secondary-fixed/30 flex items-center justify-center mb-1 text-secondary">
+<span class="material-symbols-outlined text-[32px]">factory</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Lucky Strike Tower</span>
+<div class="mt-1 bg-secondary-fixed/50 px-2 py-0.5 rounded-full">
+<span class="font-label-sm text-[10px] text-on-secondary-fixed font-bold tracking-wide">+ $3M Rent To Complete Set</span>
+</div>
+</div>
+<!-- Effect Box -->
+<div class="bg-secondary-fixed/20 rounded p-2 mb-6 text-center">
+<span class="font-label-sm text-label-sm text-on-secondary-fixed font-semibold">Requirement: Must attach to any 1 completed property set. Only 1 landmark per set.</span>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Landmark Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gold foil filigree header effect. Serves as secondary booster on completed sets to escalate table stakes.</p>
+</div>
+</div>
+<!-- 4. ICON CARD: Bull City Bronze Bull -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-wider uppercase">04 • Apex Icon</span>
+<span class="font-label-sm text-label-sm text-on-primary-container bg-primary-container px-space-xs py-0.5 rounded font-bold">Crest Tier</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5 transition-transform group-hover:-translate-y-1">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-primary-container text-on-primary-container font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $4
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-primary-container text-on-primary-container font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $4
+            </div>
+<!-- Diamond Crest Header Band -->
+<div class="w-full bg-primary-container text-on-primary-container p-space-sm rounded-md flex items-center justify-between shadow-sm">
+<div class="pl-7">
+<span class="block font-label-sm text-[9px] uppercase tracking-widest text-[#ffdad3]">City Heritage</span>
+<span class="font-headline-sm text-headline-sm leading-tight text-white">Bronze Bull</span>
+</div>
+<span class="material-symbols-outlined text-[#ffdad3] text-[24px]">verified</span>
+</div>
+<!-- Center Artwork -->
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 text-center">
+<div class="w-16 h-16 rounded-full bg-primary-fixed/40 flex items-center justify-center mb-1 text-primary">
+<span class="material-symbols-outlined text-[36px]">shield_with_heart</span>
+</div>
+<span class="font-headline-sm text-[15px] text-on-surface">The Bull of CCB Plaza</span>
+<div class="mt-1 bg-primary-fixed/60 px-2 py-0.5 rounded-full">
+<span class="font-label-sm text-[10px] text-on-primary-fixed-variant font-bold tracking-wide">+ $4M Rent (Total +$7M)</span>
+</div>
+</div>
+<!-- Effect Box -->
+<div class="bg-primary-fixed/20 rounded p-2 mb-6 text-center">
+<span class="font-label-sm text-label-sm text-primary font-bold">Attaches only to sets that already possess a Landmark. Immunity from Steal actions.</span>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Apex Icon Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Diamond crest geometry with Bull City hallmark. Grants full theft immunity and maximum rent multiplier.</p>
+</div>
+</div>
+<!-- 5. CASH CARD: $5 Durham Bucks -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-tertiary font-bold tracking-wider uppercase">05 • Cash Banknote</span>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-fixed px-space-xs py-0.5 rounded font-bold">Currency</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-3 transition-transform group-hover:-translate-y-1">
+<!-- Banknote Engraved Border Layout -->
+<div class="w-full h-full bg-[#f4f7f2] rounded p-2 flex flex-col justify-between items-center relative overflow-hidden">
+<!-- Subtle Guilloche Pattern Grid Overlay -->
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#00694c_1px,transparent_1px)] [background-size:8px_8px]"></div>
+<!-- Top Banknote Bar -->
+<div class="w-full flex items-center justify-between z-10">
+<span class="font-label-md text-label-md font-bold text-tertiary">BULL CITY BANK</span>
+<span class="font-label-sm text-label-sm text-tertiary-container font-mono">SERIES 2025</span>
+</div>
+<!-- Large Central Value Vignette -->
+<div class="flex flex-col items-center justify-center my-auto z-10">
+<div class="w-20 h-20 rounded-full bg-tertiary-fixed flex items-center justify-center shadow-inner mb-1">
+<span class="font-headline-lg text-[40px] text-tertiary font-black leading-none">$5</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-wider">Five Durham Bucks</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono mt-0.5">LEGAL TENDER FOR ALL RENT DEBTS</span>
+</div>
+<!-- Denomination Family Micro-Chips Footer -->
+<div class="w-full z-10 pt-2 bg-surface-container-lowest/80 rounded px-2 py-1 flex items-center justify-between">
+<span class="font-label-sm text-[10px] text-on-surface-variant">Denominations:</span>
+<div class="flex items-center gap-1 font-label-sm text-[10px] font-bold">
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface">$1</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface">$2</span>
+<span class="px-1.5 py-0.5 rounded bg-tertiary text-white">$5</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface">$10</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Cash Currency Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Engraved banknote aesthetic. Plays directly into the player's personal bank. Never vulnerable to Rent attacks.</p>
+</div>
+</div>
+<!-- 6. ACTION CARD: Food Truck Rodeo -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-wider uppercase">06 • Action Card</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">Tactical</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5 transition-transform group-hover:-translate-y-1">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $2
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $2
+            </div>
+<!-- Action Ribbon Header -->
+<div class="w-full bg-primary text-on-primary p-space-sm rounded-md flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="pl-7">
+<span class="block font-label-sm text-[9px] uppercase tracking-widest text-[#ffdad3]">Table Action</span>
+<span class="font-headline-sm text-headline-sm leading-tight">Food Truck Rodeo</span>
+</div>
+<span class="material-symbols-outlined text-white text-[24px]">local_shipping</span>
+<!-- Ribbon Badge -->
+<div class="absolute top-1 right-8 rotate-12 bg-secondary-container text-on-secondary-container font-label-sm text-[8px] font-bold px-1.5 py-0.2 rounded">
+                COLLECT
+              </div>
+</div>
+<!-- Action Visual -->
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 text-center">
+<div class="w-14 h-14 rounded-full bg-primary-fixed/30 flex items-center justify-center mb-1 text-primary">
+<span class="material-symbols-outlined text-[32px]">dinner_dining</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">Durham Central Park</span>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1 leading-snug">
+                "All players must pay you <strong class="text-primary font-bold">$2M</strong> for lunch at Durham Central Park."
+              </p>
+</div>
+<!-- Dual Use Tip -->
+<div class="bg-surface-container-low rounded p-2 mb-6 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dual-Purpose: Can be banked as cash value ($2M) instead of played.</span>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Action Card Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">45-degree ribbon taxonomy. Dual-purpose mechanic allowing strategic spend vs bank hoarding.</p>
+</div>
+</div>
+<!-- 7. RENT CARD: Tobacco Heritage -->
+<div class="group relative flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-secondary font-bold tracking-wider uppercase">07 • Rent Claim</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">Rent Surge</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5 transition-transform group-hover:-translate-y-1">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $1
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-secondary text-on-secondary font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $1
+            </div>
+<!-- Multi-District Header -->
+<div class="w-full h-14 rounded-md relative overflow-hidden flex shadow-sm">
+<div class="w-1/2 h-full bg-[#805600] text-white p-space-xs pl-7 flex flex-col justify-center">
+<span class="font-label-sm text-[8px] uppercase tracking-wider text-[#ffddb0]">Brightleaf</span>
+<span class="font-headline-sm text-[13px] leading-tight">Square</span>
+</div>
+<div class="w-1/2 h-full bg-[#a6331b] text-white p-space-xs pr-2 flex flex-col justify-center items-end">
+<span class="font-label-sm text-[8px] uppercase tracking-wider text-[#ffdad3]">Am. Tobacco</span>
+<span class="font-headline-sm text-[13px] leading-tight">Campus</span>
+</div>
+</div>
+<!-- Rent Claim Callout -->
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 text-center">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed/30 flex items-center justify-center mb-1 text-secondary">
+<span class="material-symbols-outlined text-[28px]">payments</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface font-bold">Demand Rent</span>
+<p class="font-body-sm text-[11px] text-on-surface-variant mt-1 leading-snug">
+                All opponents pay rent matching the current highest district count you own.
+              </p>
+</div>
+<!-- Dynamic Rent Formula Indicator -->
+<div class="bg-surface-container-low rounded p-2 mb-6 flex items-center justify-around font-label-sm text-label-sm">
+<span class="text-on-surface-variant">1 Block = <strong>$1M</strong></span>
+<span class="text-on-surface-variant">•</span>
+<span class="text-on-surface-variant">Full Set = <strong>$4M</strong></span>
+</div>
+</div>
+<!-- Spec Metadata -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Rent Claim Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dual-tone diagonal banner allowing rent claims against either district group from every opponent.</p>
+</div>
+</div>
+<!-- SPECIAL 8TH SLOT: Hostile Takeover (Apex Action Highlight) -->
+<div class="group relative flex flex-col bg-surface-container rounded-xl p-space-md shadow-md">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-error font-bold tracking-wider uppercase">Action • Steal Tier</span>
+<span class="font-label-sm text-label-sm text-on-error bg-error px-space-xs py-0.5 rounded font-bold">Game Changer</span>
+</div>
+<!-- Physical Card Graphic -->
+<div class="w-full aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col overflow-hidden relative p-2.5">
+<!-- Corner Value Pills -->
+<div class="absolute top-3 left-3 w-7 h-7 rounded-full bg-error text-on-error font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $5
+            </div>
+<div class="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-error text-on-error font-headline-sm text-[13px] flex items-center justify-center font-bold shadow-sm z-10">
+              $5
+            </div>
+<div class="w-full bg-[#93000a] text-white p-space-sm rounded-md flex items-center justify-between shadow-sm">
+<div class="pl-7">
+<span class="block font-label-sm text-[9px] uppercase tracking-widest text-[#ffdad6]">Major Disruption</span>
+<span class="font-headline-sm text-headline-sm leading-tight">Hostile Takeover</span>
+</div>
+<span class="material-symbols-outlined text-white text-[24px]">gavel</span>
+</div>
+<div class="flex-1 my-2 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-3 text-center">
+<div class="w-14 h-14 rounded-full bg-error-container/60 flex items-center justify-center mb-1 text-error">
+<span class="material-symbols-outlined text-[32px]">front_hand</span>
+</div>
+<span class="font-label-md text-label-md text-error font-bold">Deal Breaker</span>
+<p class="font-body-sm text-[11px] text-on-surface-variant mt-1 leading-snug">
+                "Steal any complete district set from any player. (Cannot steal sets protected by an Apex Icon)."
+              </p>
+</div>
+<div class="bg-error-container/30 rounded p-2 mb-6 text-center">
+<span class="font-label-sm text-label-sm text-error font-bold">Counters: Blocked by 'Just Say No'</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">Hostile Takeover Spec</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The single most feared card at the table. Handled with distinctive crimson border-fill and instant warning typography.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: THE 4 CARD STATES (SIDE-BY-SIDE INTERACTION LAB) -->
+<section class="w-full py-space-xl bg-surface-container-low" id="card-states">
+<div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-space-xl">
+<div>
+<div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm uppercase font-semibold">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+<span>Module 02 // Physics &amp; States</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">The 4 Key Interactive Card States</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Cards adapt dynamically according to physical tactile contexts—from resting in hand with quick-tap action chips to fanning out in a completed set.
+        </p>
+</div>
+<!-- 4 States Showcase Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg items-end">
+<!-- STATE A: IN HAND (RESTING / HOVERABLE) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">State A: In Hand</span>
+<span class="font-label-sm text-label-sm text-tertiary font-mono bg-tertiary-fixed/40 px-2 py-0.5 rounded">Resting Level 2</span>
+</div>
+<div class="relative bg-surface rounded-xl p-space-md shadow-md flex flex-col items-center">
+<!-- The Card -->
+<div class="w-full max-w-[220px] aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col p-2.5 relative transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer">
+<!-- Corner Value -->
+<div class="absolute top-3 left-3 w-6 h-6 rounded-full bg-secondary text-on-secondary font-label-sm text-[11px] flex items-center justify-center font-bold">
+                $2
+              </div>
+<!-- District Band -->
+<div class="w-full bg-[#1e8462] text-white p-1.5 pl-6 rounded flex items-center justify-between">
+<span class="font-label-md text-[11px] font-bold">Trinity Park</span>
+<span class="material-symbols-outlined text-[16px]">park</span>
+</div>
+<div class="flex-1 my-1.5 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-2 text-center">
+<span class="font-headline-sm text-[13px] text-on-surface">Watts St Craftsman</span>
+<span class="font-label-sm text-[9px] text-on-surface-variant">Set requirement: 3</span>
+</div>
+<div class="bg-surface-container-low rounded p-1.5 text-center mb-1">
+<span class="font-label-sm text-[10px] text-on-surface font-mono">Rent: $1 / $2 / $4</span>
+</div>
+</div>
+<!-- Hand Action Trigger Pills (Always 44px+ Accessible Target) -->
+<div class="flex items-center gap-2 mt-4 w-full">
+<button class="flex-1 h-11 bg-primary text-on-primary rounded-lg font-label-md text-label-md font-bold shadow-sm hover:opacity-95 transition-opacity flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                Play (1/3)
+              </button>
+<button class="flex-1 h-11 bg-surface-container text-on-surface rounded-lg font-label-md text-label-md font-semibold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+                Bank
+              </button>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant px-1">Fanned horizontally with negative overlap. Quick action triggers appear on tap or focus.</span>
+</div>
+<!-- STATE B: SELECTED / STAGED (ACTIVE TRANSACTION) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">State B: Selected / Staged</span>
+<span class="font-label-sm text-label-sm text-primary font-mono bg-primary-fixed px-2 py-0.5 rounded">Level 3 Lift</span>
+</div>
+<div class="relative bg-surface rounded-xl p-space-md shadow-md flex flex-col items-center">
+<!-- Staged Visual Indicator Card with Terracotta Glow -->
+<div class="w-full max-w-[220px] aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-2xl flex flex-col p-2.5 relative scale-105 -rotate-1 ring-4 ring-primary ring-offset-2 ring-offset-surface">
+<!-- Selection Checkmark Badge -->
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center z-20">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<!-- Corner Value -->
+<div class="absolute top-3 left-3 w-6 h-6 rounded-full bg-secondary text-on-secondary font-label-sm text-[11px] flex items-center justify-center font-bold">
+                $3
+              </div>
+<!-- District Band -->
+<div class="w-full bg-[#00694c] text-white p-1.5 pl-6 rounded flex items-center justify-between">
+<span class="font-label-md text-[11px] font-bold">The Eno River</span>
+<span class="material-symbols-outlined text-[16px]">water</span>
+</div>
+<div class="flex-1 my-1.5 bg-surface-container-lowest rounded flex flex-col items-center justify-center p-2 text-center">
+<span class="font-headline-sm text-[13px] text-on-surface">Sennett Hole Sanctuary</span>
+<span class="font-label-sm text-[9px] text-tertiary font-bold">Ready to Stage Trade</span>
+</div>
+<div class="bg-primary-fixed/30 rounded p-1.5 text-center mb-1">
+<span class="font-label-sm text-[10px] text-primary font-bold">Selected For Settlement</span>
+</div>
+</div>
+<!-- Staged Controls -->
+<div class="flex items-center gap-2 mt-4 w-full">
+<button class="w-full h-11 bg-primary-container text-on-primary-container rounded-lg font-label-md text-label-md font-bold shadow-sm hover:opacity-95 transition-opacity flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+                Confirm Staged (1)
+              </button>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant px-1">Accompanied by 1.04x scale transform, 2-degree tilt, and dark terracotta ring indicator.</span>
+</div>
+<!-- STATE C: FACE-DOWN BANK / DECK -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">State C: Face-Down Bank</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono bg-secondary-fixed px-2 py-0.5 rounded">Security Backing</span>
+</div>
+<div class="relative bg-surface rounded-xl p-space-md shadow-md flex flex-col items-center">
+<!-- Physical Card Back Graphic -->
+<div class="w-full max-w-[220px] aspect-[5/7] bg-[#a6331b] rounded-lg shadow-md flex flex-col p-3 relative overflow-hidden text-white">
+<!-- Subtle Intricate Paper Pattern Background -->
+<div class="absolute inset-2 rounded border border-white/20 pointer-events-none flex flex-col items-center justify-between p-2">
+<div class="w-full flex items-center justify-between">
+<span class="font-label-sm text-[9px] text-[#ffdad3]">BCB</span>
+<span class="font-label-sm text-[9px] text-[#ffdad3]">DURHAM</span>
+</div>
+<div class="w-full flex items-center justify-between">
+<span class="font-label-sm text-[9px] text-[#ffdad3]">TABLETOP</span>
+<span class="font-label-sm text-[9px] text-[#ffdad3]">BCB</span>
+</div>
+</div>
+<!-- Bull City Blocks Watermark Crest -->
+<div class="flex-1 flex flex-col items-center justify-center z-10">
+<div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[36px] text-[#ffddb0]">shield</span>
+</div>
+<span class="font-headline-sm text-[14px] text-[#ffdad3] uppercase tracking-wider font-extrabold text-center">BULL CITY BLOCKS</span>
+<span class="font-label-sm text-[8px] text-[#ffdad3]/70 uppercase tracking-widest mt-0.5">EST. 1869 • NC</span>
+</div>
+<!-- Corner Value Quick Index (Visible only to cardholder) -->
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/40 text-white font-mono text-[10px] font-bold">
+                $3M
+              </div>
+</div>
+<!-- Bank Status Meta -->
+<div class="flex items-center justify-between w-full h-11 px-3 mt-4 bg-surface-container rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Vault Status:</span>
+<span class="font-label-md text-label-md font-bold text-tertiary">Protected $14M</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant px-1">Warm patterned terracotta card back concealing private bank cards from tabletop adversaries.</span>
+</div>
+<!-- STATE D: IN COMPLETE SET (STACKED COMBO) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">State D: Complete Set</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant font-mono bg-secondary-fixed-dim px-2 py-0.5 rounded">Set Complete</span>
+</div>
+<div class="relative bg-surface rounded-xl p-space-md shadow-md flex flex-col items-center">
+<!-- Staggered Card Fan Graphic (Representing 3 cards in set) -->
+<div class="relative w-full max-w-[220px] h-[270px]">
+<!-- Card 1 (Base Bottom Layer) -->
+<div class="absolute top-8 left-1 w-[90%] aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-sm flex flex-col p-2 border-t-4 border-[#c84b31] opacity-60">
+<span class="font-label-sm text-[9px] text-on-surface-variant">Brightleaf #1</span>
+</div>
+<!-- Card 2 (Middle Layer) -->
+<div class="absolute top-4 left-3 w-[94%] aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-md flex flex-col p-2 border-t-4 border-[#c84b31] opacity-85">
+<span class="font-label-sm text-[9px] text-on-surface-variant">Brightleaf #2</span>
+</div>
+<!-- Card 3 (Top Master Card with Sockets) -->
+<div class="absolute top-0 left-5 w-[96%] aspect-[5/7] bg-[#fbf8f2] rounded-lg shadow-xl flex flex-col p-2 border-t-4 border-[#c84b31] z-10">
+<!-- Complete Laurel Leaf Crown Badge -->
+<div class="w-full bg-[#805600] text-white p-1 rounded flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">workspace_premium</span>
+<span class="font-label-md text-[10px] font-bold uppercase tracking-wider">FULL DISTRICT</span>
+</div>
+<span class="font-mono text-[9px] bg-black/30 px-1 py-0.2 rounded font-bold">3/3</span>
+</div>
+<!-- Set Content Preview -->
+<div class="flex-1 my-1.5 bg-surface-container-lowest rounded p-1.5 flex flex-col justify-between">
+<div>
+<span class="block font-label-md text-[11px] font-bold text-on-surface">American Tobacco Set</span>
+<span class="font-label-sm text-[9px] text-tertiary font-semibold">Base Rent: $7M / Turn</span>
+</div>
+<!-- Landmark & Icon Sockets -->
+<div class="flex items-center gap-1 pt-1">
+<div class="flex-1 bg-secondary-fixed/30 rounded p-1 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[14px]">apartment</span>
+<span class="font-label-sm text-[8px] font-bold ml-0.5">Tower (+3)</span>
+</div>
+<div class="flex-1 bg-surface-container rounded p-1 flex items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined text-[14px]">add_circle</span>
+<span class="font-label-sm text-[8px] ml-0.5">Icon Slot</span>
+</div>
+</div>
+</div>
+<div class="bg-secondary-fixed/40 rounded p-1 text-center">
+<span class="font-label-sm text-[9px] text-on-secondary-fixed font-bold">Payout: $10M on demand</span>
+</div>
+</div>
+</div>
+<!-- Set Metric Footer -->
+<div class="flex items-center justify-between w-full h-11 px-3 mt-4 bg-secondary-fixed/20 rounded-lg">
+<span class="font-label-sm text-label-sm text-secondary font-bold">Win Condition:</span>
+<span class="font-label-md text-label-md font-extrabold text-secondary">2 of 3 Completed</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant px-1">Modular card stack showing attached Landmark upgrade and open Apex Icon expansion socket.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: THE 14 DISTRICTS OF DURHAM ATLAS -->
+<section class="w-full py-space-xl bg-surface" id="district-atlas">
+<div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-tertiary uppercase font-semibold">Module 03 // Municipal Atlas</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">14 Durham Neighborhood Palettes &amp; Rent Scales</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Each district holds a strict card count and dedicated rent progression calibrated for tactical card distribution across 2 to 10 players.
+          </p>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-xs rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Total District Cards in Deck:</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">52</span>
+</div>
+</div>
+<!-- District Grid: 14 Durham Municipalities -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-space-md">
+<!-- 1. Old West Durham -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#c27803] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Old West Durham</span>
+</div>
+<span class="font-mono text-label-sm text-on-secondary-fixed bg-secondary-fixed px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Historic mill houses and eclectic Ninth Street dining corridors.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $2M</span>
+<span class="text-secondary font-bold">Set (3): $4M</span>
+</div>
+</div>
+</div>
+<!-- 2. Walltown -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#2b5c8f] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">foundation</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Walltown</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">2 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Vibrant community heart established adjacent to Northgate Park.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span class="text-[#2b5c8f] font-bold">Set (2): $3M</span>
+</div>
+</div>
+</div>
+<!-- 3. East Durham -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#1b6d4b] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">cottage</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">East Durham</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Artisan revitalization, historic textile plants, and neighborhood bakeries.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $3M</span>
+<span class="text-tertiary font-bold">Set (3): $6M</span>
+</div>
+</div>
+</div>
+<!-- 4. Hayti District -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#5b2b82] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">music_note</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Hayti District</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Historical Black Wall Street cultural hub &amp; renowned jazz heritage.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $2M</span>
+<span>2: $4M</span>
+<span class="text-[#5b2b82] font-bold">Set (3): $7M</span>
+</div>
+</div>
+</div>
+<!-- 5. North Durham -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#84532b] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">forest</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">North Durham</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Sprawling river corridors and rolling canopy homesteads.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $2M</span>
+<span class="text-on-surface font-bold">Set (3): $4M</span>
+</div>
+</div>
+</div>
+<!-- 6. The Eno River -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#00694c] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">water</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">The Eno River</span>
+</div>
+<span class="font-mono text-label-sm text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded font-bold">2 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Pristine river basin sanctuary, mill ruins, and hiking ridge trails.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $2M</span>
+<span class="text-tertiary font-bold">Set (2): $5M</span>
+</div>
+</div>
+</div>
+<!-- 7. Trinity Park -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#1e8462] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">park</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Trinity Park</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Tree-lined avenues and early 20th-century architectural grandeur.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $3M</span>
+<span class="text-tertiary font-bold">Set (3): $6M</span>
+</div>
+</div>
+</div>
+<!-- 8. Forest Hills -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#425d3b] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">nature</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Forest Hills</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Lush winding parkways, historic manor residences, and public courts.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $3M</span>
+<span class="text-on-surface font-bold">Set (3): $5M</span>
+</div>
+</div>
+</div>
+<!-- 9. Brightleaf -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#805600] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">history_edu</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Brightleaf</span>
+</div>
+<span class="font-mono text-label-sm text-on-secondary-fixed bg-secondary-fixed px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Repurposed red-brick tobacco warehouses &amp; cobblestone dining squares.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $2M</span>
+<span>2: $4M</span>
+<span class="text-secondary font-bold">Set (3): $7M</span>
+</div>
+</div>
+</div>
+<!-- 10. American Tobacco -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#a6331b] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">factory</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">American Tobacco</span>
+</div>
+<span class="font-mono text-label-sm text-on-primary-fixed bg-primary-fixed px-2 py-0.5 rounded font-bold">3 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">The urban core campus with Lucky Strike water tower &amp; man-made river rapids.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $2M</span>
+<span>2: $4M</span>
+<span class="text-primary font-bold">Set (3): $8M</span>
+</div>
+</div>
+</div>
+<!-- 11. Downtown Durham -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#c84b31] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">location_city</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Downtown City Core</span>
+</div>
+<span class="font-mono text-label-sm text-on-primary-container bg-primary-container px-2 py-0.5 rounded font-bold">2 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">High-density epicenter featuring the DPAC, hotels, and CCB Plaza.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $3M</span>
+<span class="text-primary font-bold">Set (2): $8M</span>
+</div>
+</div>
+</div>
+<!-- 12. Duke University Campus -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#003366] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">school</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Duke Campus</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">4 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Gothic stone arches, Duke Chapel, Cameron Indoor, and sarah Duke gardens.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $2M</span>
+<span>3: $4M</span>
+<span class="text-[#003366] font-bold">Set (4): $9M</span>
+</div>
+</div>
+</div>
+<!-- 13. Research Triangle Park (RTP) -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#2d6a4f] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">biotech</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Research Triangle</span>
+</div>
+<span class="font-mono text-label-sm text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded font-bold">2 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Global biotech institutes and pine-cloaked enterprise complexes.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $2M</span>
+<span class="text-tertiary font-bold">Set (2): $6M</span>
+</div>
+</div>
+</div>
+<!-- 14. Durham Transit & Rails -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-[#4a4e69] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">train</span>
+</div>
+<span class="font-headline-sm text-[16px] text-on-surface">Durham Transit / Rail</span>
+</div>
+<span class="font-mono text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded font-bold">4 Cards</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Historic Norfolk Southern railway lines connecting the Carolinas.</p>
+</div>
+<div class="bg-surface-container rounded-lg p-space-sm">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Rent Ladder</span>
+<div class="flex items-center justify-between font-label-md text-label-md mt-1">
+<span>1: $1M</span>
+<span>2: $2M</span>
+<span>3: $4M</span>
+<span class="text-[#4a4e69] font-bold">Set (4): $8M</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: DESIGN SYSTEM TOKEN ARCHITECTURE & ACCESSIBILITY AUDIT -->
+<section class="w-full py-space-xl bg-surface-container-low" id="tokens-spec">
+<div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-space-lg">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-semibold">Module 04 // Token Rigor &amp; Contrast Ratings</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">Color Tokens &amp; WCAG 2.1 AA Compliance Matrix</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Strictly validated against physical print reflectance and mobile screen glare for seamless social play.
+        </p>
+</div>
+<!-- Color Swatch & Contrast Table -->
+<div class="w-full bg-surface rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container text-on-surface font-label-md text-label-md uppercase">
+<tr>
+<th class="py-space-md px-space-md">Token Key</th>
+<th class="py-space-md px-space-md">Hex Code</th>
+<th class="py-space-md px-space-md">Usage Context</th>
+<th class="py-space-md px-space-md">Paired Text Token</th>
+<th class="py-space-md px-space-md text-right">Contrast Ratio</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1: Primary Terracotta -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-space-sm px-space-md flex items-center gap-space-xs font-mono font-bold text-on-surface">
+<span class="w-4 h-4 rounded-full bg-primary inline-block"></span>
+                  primary
+                </td>
+<td class="py-space-sm px-space-md font-mono text-on-surface-variant">#a6331b</td>
+<td class="py-space-sm px-space-md text-on-surface">Brand Header, Turn Indicators, Takeover Cards</td>
+<td class="py-space-sm px-space-md font-mono text-primary font-semibold">on-primary (#ffffff)</td>
+<td class="py-space-sm px-space-md text-right">
+<span class="font-mono text-label-sm font-bold text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded">6.4:1 (AAA)</span>
+</td>
+</tr>
+<!-- Row 2: Secondary Golden Tobacco -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-space-sm px-space-md flex items-center gap-space-xs font-mono font-bold text-on-surface">
+<span class="w-4 h-4 rounded-full bg-secondary inline-block"></span>
+                  secondary
+                </td>
+<td class="py-space-sm px-space-md font-mono text-on-surface-variant">#805600</td>
+<td class="py-space-sm px-space-md text-on-surface">Card Corner Cash Badges, Landmark Foil Elements</td>
+<td class="py-space-sm px-space-md font-mono text-secondary font-semibold">on-secondary (#ffffff)</td>
+<td class="py-space-sm px-space-md text-right">
+<span class="font-mono text-label-sm font-bold text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded">5.8:1 (AA)</span>
+</td>
+</tr>
+<!-- Row 3: Tertiary Pine -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-space-sm px-space-md flex items-center gap-space-xs font-mono font-bold text-on-surface">
+<span class="w-4 h-4 rounded-full bg-tertiary inline-block"></span>
+                  tertiary
+                </td>
+<td class="py-space-sm px-space-md font-mono text-on-surface-variant">#00694c</td>
+<td class="py-space-sm px-space-md text-on-surface">Banknote Vignette, Cash Reserves, Success Status</td>
+<td class="py-space-sm px-space-md font-mono text-tertiary font-semibold">on-tertiary (#ffffff)</td>
+<td class="py-space-sm px-space-md text-right">
+<span class="font-mono text-label-sm font-bold text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded">7.2:1 (AAA)</span>
+</td>
+</tr>
+<!-- Row 4: Surface Parchment -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-space-sm px-space-md flex items-center gap-space-xs font-mono font-bold text-on-surface">
+<span class="w-4 h-4 rounded-full bg-surface-container inline-block"></span>
+                  surface
+                </td>
+<td class="py-space-sm px-space-md font-mono text-on-surface-variant">#fcf9f3</td>
+<td class="py-space-sm px-space-md text-on-surface">Tactile Mat Table Canvas, Card Parchment Base</td>
+<td class="py-space-sm px-space-md font-mono text-on-surface font-semibold">on-surface (#1c1c18)</td>
+<td class="py-space-sm px-space-md text-right">
+<span class="font-mono text-label-sm font-bold text-tertiary bg-tertiary-fixed/40 px-2 py-0.5 rounded">14.8:1 (AAA)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Action Footer Banner -->
+<div class="bg-surface-container rounded-xl p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">download</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Export Print-Ready Vector Deck (.PDF)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Download CMYK high-res sheets pre-formatted with 3mm bleed markers for local Durham print shops.</p>
+</div>
+</div>
+<button class="h-12 px-space-lg bg-primary text-on-primary rounded-lg font-label-lg text-label-lg font-bold shadow hover:opacity-95 transition-opacity shrink-0 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">print</span>
+          Download 110-Card Print Spec
+        </button>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] py-space-lg mt-auto"><div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-primary">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant">Handcrafted for 2-10 Tabletop Players • Durham, NC</span></div><div class="flex items-center gap-space-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Bull City Gaming Co.</span><span class="font-label-sm text-label-sm text-tertiary font-semibold">v1.4 Tobacco Green Edition</span></div></div></footer></body></html>

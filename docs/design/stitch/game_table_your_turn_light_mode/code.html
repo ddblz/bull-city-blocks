@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed-variant": "#614000", "tertiary": "#00694c", "on-surface": "#1c1c18", "background": "#fcf9f3", "on-tertiary": "#ffffff", "primary-fixed-dim": "#ffb4a4", "inverse-on-surface": "#f3f0ea", "on-tertiary-container": "#f6fff8", "outline-variant": "#e0bfb9", "error": "#ba1a1a", "tertiary-fixed-dim": "#7bd8b1", "surface-container": "#f0eee8", "tertiary-container": "#1e8462", "primary-container": "#c84b31", "secondary-fixed": "#ffddb0", "surface": "#fcf9f3", "on-surface-variant": "#58413c", "on-primary": "#ffffff", "primary": "#a6331b", "surface-container-low": "#f6f3ed", "outline": "#8c716b", "secondary-fixed-dim": "#ffba46", "inverse-surface": "#31312d", "on-secondary-fixed": "#281800", "secondary-container": "#feb63c", "on-error": "#ffffff", "on-tertiary-fixed": "#002115", "on-primary-container": "#fffbff", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "inverse-primary": "#ffb4a4", "secondary": "#805600", "on-background": "#1c1c18", "primary-fixed": "#ffdad3", "surface-tint": "#aa361e", "on-primary-fixed": "#3e0500", "surface-dim": "#dcdad4", "on-secondary": "#ffffff", "surface-bright": "#fcf9f3", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#00513a", "tertiary-fixed": "#97f5cc", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#891e07" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.5rem", "space-xl": "2rem", "space-md": "1rem", "margin-desktop": "2.5rem", "margin": "1.5rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "label-md": ["JetBrains Mono"], "headline-sm": ["Epilogue"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Epilogue"], "headline-md": ["Epilogue"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Epilogue"] }, "fontSize": { "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md shrink-0"><img alt="Bull City Blocks Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBp7OiuPKW1uYkfsJc_mN40690bOIOfHX8WlWgByK_16HCF4fDZOJmmt_QFySTwIqfm87vgeHVIsHHVSIgdpPP4kNPQDZOKHx5glH2nrmqSkdRN8c1pdwSgjlWK0TH6C0BbxdVKUPp2518wjzreV_YQA6C9PvsCrxcgtlWC5SIzPQmDexqmsLtm5prVXH_tXyoF2O3b_rZHFKgvT37O0IQfeX-xgLA0s9K7gj8FltIi"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Durham Social Tabletop</span></div></div><div class="hidden lg:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(30,27,24,0.06)]"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span></span><span class="font-label-md text-label-md text-on-surface tracking-wide">Room #BCB-DURHAM</span><span class="text-outline-variant font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary font-semibold">4/6 Players</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm"><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm" data-path="game-table" href="#">Table</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="neighborhood-atlas" href="#">Neighborhoods</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="house-rules" href="#">Rules</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="lobby" href="#">Lobby</a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Quick Reference Rules" type="button"><span class="material-symbols-outlined text-[20px]">menu_book</span></button><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Tabletop Sound and Vibes" type="button"><span class="material-symbols-outlined text-[20px]">volume_up</span></button><div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div><div class="flex items-center gap-space-xs pl-space-xs bg-surface-container-low rounded-full py-1 pr-space-md"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdvu5Zcsx7DwoyCd0k0k9RLqLbp6PATSVWiDW6qkUC6fA-uLEQKul94AmUa7Nb7kDZbhmlsQRqEbXmgm5T8y26rUQA3VM5yYfAxcKmFhuAqoW0j5X1aUrX-saEtaLnJdVaGefpQmShepUW1dM4EM_v31DtfQA3sjLxni0CPx1iHPAVbCCaWuhq19-u4LpZ3QW6FyAAcgee-5e5_Et_Ej56zrV0kJGpdMxIS_Pnmcs"/><span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div><span class="hidden sm:inline font-label-md text-label-md text-on-surface font-semibold">You (Turn 2)</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full relative select-none">
+<!-- Subtle tabletop ambient aura -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden opacity-40">
+<div class="absolute -top-32 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-secondary-fixed-dim/20 to-transparent blur-3xl"></div>
+<div class="absolute top-1/3 -right-24 w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-primary-fixed/25 to-transparent blur-3xl"></div>
+</div>
+<div class="w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-space-md flex flex-col gap-space-md relative z-10">
+<!-- 1. TOP MATCH STATUS & TABLE ARENA HEADER -->
+<section class="w-full bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col lg:flex-row items-center justify-between gap-space-md">
+<!-- Left: Round / Play Status -->
+<div class="flex flex-wrap items-center gap-space-md w-full lg:w-auto justify-between sm:justify-start">
+<div class="flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-1.5 rounded-lg shadow-sm">
+<span class="font-label-md text-label-md text-secondary font-bold tracking-wider">TURN 11</span>
+<span class="text-outline-variant font-label-sm text-label-sm">•</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">ROUND 4</span>
+</div>
+<div class="flex items-center gap-space-sm bg-primary/10 px-space-md py-1.5 rounded-lg">
+<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-lg text-label-lg text-primary font-bold">Your Turn:</span>
+<div class="flex items-center gap-1">
+<span class="h-5 w-5 rounded bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center font-bold">1</span>
+<span class="h-5 w-5 rounded bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center font-bold">2</span>
+<span class="h-5 w-5 rounded bg-surface-container-highest text-on-surface-variant font-label-md text-label-md flex items-center justify-center font-medium opacity-60">3</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">(2 of 3 plays remaining)</span>
+</div>
+</div>
+<!-- Center: Tactical Center Decks (Draw + Discard) -->
+<div class="flex items-center gap-space-lg">
+<!-- Deck Stack -->
+<div class="relative group cursor-pointer" title="Durham Deck (48 cards remain)">
+<div class="absolute -top-1 -left-1 w-20 h-14 bg-surface-container-highest rounded-lg shadow-sm"></div>
+<div class="absolute -top-0.5 -left-0.5 w-20 h-14 bg-surface-container-high rounded-lg shadow-sm"></div>
+<div class="relative w-20 h-14 bg-surface-container-lowest rounded-lg shadow-md flex flex-col items-center justify-center p-1 transition-transform group-hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">layers</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold leading-none mt-0.5">48 CARDS</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant scale-90">Draw Deck</span>
+</div>
+</div>
+<!-- Discard Pile -->
+<div class="relative group cursor-pointer" title="Discard Pile - Top Card: Food Truck Rodeo">
+<div class="w-24 h-14 bg-surface-container-lowest rounded-lg shadow-md p-1.5 flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase truncate">Food Truck</span>
+<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-fixed font-bold px-1 rounded">$2</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase">Action Discard</span>
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Calm Timer & Drawer Trigger -->
+<div class="flex items-center gap-space-md w-full lg:w-auto justify-end">
+<div class="flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-1.5 rounded-full shadow-sm">
+<svg class="w-5 h-5 -rotate-90" viewbox="0 0 36 36">
+<circle class="text-surface-container-high" cx="18" cy="18" fill="none" r="14" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-tertiary" cx="18" cy="18" fill="none" r="14" stroke="currentColor" stroke-dasharray="88" stroke-dashoffset="30" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<span class="font-label-md text-label-md text-tertiary font-bold tracking-tight">34s</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden xl:inline">remaining</span>
+</div>
+<!-- Recap Trigger -->
+<button class="flex items-center gap-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm transition-all" id="recapToggleBtn" title="View Turn Recap Log">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span class="font-label-md text-label-md font-semibold hidden sm:inline">3 Updates</span>
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+</button>
+</div>
+</section>
+<!-- 2. OPPONENTS RADAR STRIP (UP TO 5 COMPACT PLAYERS) -->
+<section class="w-full">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Opponent Tableaux &amp; Reserves</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">groups</span> 4 Players Active
+        </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+<!-- Player 1: Maya (Threat - 2 Sets) -->
+<div class="bg-surface-container-low rounded-xl p-space-sm shadow-sm flex flex-col gap-1.5 transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-md text-label-md font-bold">M</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface leading-none font-bold">Maya P.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Seat 2</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-on-surface font-semibold flex items-center gap-1 shadow-sm" title="Cards in hand">
+<span class="material-symbols-outlined text-[12px] text-outline">playing_cards</span> 5
+              </span>
+<span class="font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed font-bold px-1.5 py-0.5 rounded" title="Bank Vault">
+                $6M
+              </span>
+</div>
+</div>
+<!-- Completed / In-progress sets -->
+<div class="flex items-center gap-1 flex-wrap pt-1">
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded text-[11px] font-label-sm text-on-surface shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#1e40af]"></span>
+<span class="font-semibold">Walltown</span>
+<span class="text-tertiary font-bold">2/2 ★</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded text-[11px] font-label-sm text-on-surface shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#b45309]"></span>
+<span class="font-semibold">Am. Tobacco</span>
+<span class="text-on-surface-variant">1/3</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold ml-auto">1 Set from Win</span>
+</div>
+</div>
+<!-- Player 2: Devon (Bank Heavy) -->
+<div class="bg-surface-container-low rounded-xl p-space-sm shadow-sm flex flex-col gap-1.5 transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-md text-label-md font-bold">D</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface leading-none font-bold">Devon S.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Seat 3</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-on-surface font-semibold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px] text-outline">playing_cards</span> 6
+              </span>
+<span class="font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed font-bold px-1.5 py-0.5 rounded">
+                $11M
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-1 flex-wrap pt-1">
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded text-[11px] font-label-sm text-on-surface shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#4d7c0f]"></span>
+<span class="font-semibold">Duke Forest</span>
+<span class="text-on-surface-variant">1/2</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded text-[11px] font-label-sm text-on-surface shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#047857]"></span>
+<span class="font-semibold">The Eno</span>
+<span class="text-on-surface-variant">2/3</span>
+</div>
+</div>
+</div>
+<!-- Player 3: Chen (Disrupted) -->
+<div class="bg-surface-container-low rounded-xl p-space-sm shadow-sm flex flex-col gap-1.5 transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-label-md text-label-md font-bold">C</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface leading-none font-bold">Chen L.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Seat 4</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-on-surface font-semibold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px] text-outline">playing_cards</span> 3
+              </span>
+<span class="font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed font-bold px-1.5 py-0.5 rounded">
+                $3M
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-1 flex-wrap pt-1">
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-0.5 rounded text-[11px] font-label-sm text-on-surface shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#e11d48]"></span>
+<span class="font-semibold">Golden Belt</span>
+<span class="text-on-surface-variant">1/3</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline ml-auto italic">Tapped by Rent</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. MAIN ARENA: YOUR TABLEAU & LIQUID BANK VAULT -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md items-start">
+<!-- LEFT 9 COLS: YOUR DISTRICT TABLEAU -->
+<section class="xl:col-span-9 bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[24px] text-primary">domain</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">Your Durham District Tableaux</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Objective: Complete 3 Full Neighborhood Sets to Win the City</span>
+</div>
+</div>
+<!-- Completion tracker badge -->
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-md py-1 rounded-full">
+<span class="font-label-md text-label-md text-on-surface font-bold">2 of 3 Sets</span>
+<span class="material-symbols-outlined text-[16px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-outline-variant">star</span>
+</div>
+</div>
+<!-- DISTRICT SETS DISPLAY -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- SET 1: DOWNTOWN (COMPLETE 3/3 + BULL STATUE UPGRADE) -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm relative shadow-sm hover:shadow-md transition-shadow">
+<!-- Header Banner -->
+<div class="bg-[#581c87] text-white p-space-xs px-space-sm rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">location_city</span>
+<span class="font-label-lg text-label-lg font-bold">Downtown</span>
+</div>
+<span class="font-label-sm text-label-sm bg-white/20 px-1.5 py-0.5 rounded font-bold">3/3 FULL</span>
+</div>
+<!-- Overlapping District Property Cards -->
+<div class="flex flex-col gap-1.5">
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-[#7e22ce] rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">City Center Walk</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Property #1</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary">$3M</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-[#7e22ce] rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Corcoran High-Rise</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Property #2</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary">$3M</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-[#7e22ce] rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Five Points Hub</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Property #3</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary">$4M</span>
+</div>
+</div>
+<!-- UPGRADE SLOTS: Landmark & Icon -->
+<div class="pt-space-xs flex flex-col gap-1.5 bg-surface-container-high/60 p-2 rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-bold tracking-wider">Neighborhood Enhancements</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold leading-none">+3 Rent</span>
+</div>
+<!-- Equipped Landmark -->
+<div class="bg-secondary-fixed/40 p-2 rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-secondary-fixed font-bold leading-none">Durham Bull Statue</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">Landmark Perk (+3 Rent Boost)</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-secondary text-on-secondary px-1.5 py-0.5 rounded font-bold">ACTIVE</span>
+</div>
+<!-- Open Icon Slot -->
+<div class="p-2 rounded-lg flex items-center justify-between bg-surface-container-lowest/80 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">add_circle</span>
+<span class="font-label-md text-label-md font-medium">Icon Upgrade Slot Open</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase font-semibold">Available</span>
+</div>
+</div>
+<!-- District Rent Matrix -->
+<div class="mt-auto bg-surface-container-highest/40 p-1.5 rounded flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Rent: 1:$1M</span>
+<span>2:$3M</span>
+<span class="font-bold text-primary">Full+Bull: $9M</span>
+</div>
+</div>
+<!-- SET 2: WALLTOWN (COMPLETE 2/2 - READY FOR LANDMARK) -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm relative shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-[#1e40af] text-white p-space-xs px-space-sm rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">apartment</span>
+<span class="font-label-lg text-label-lg font-bold">Walltown</span>
+</div>
+<span class="font-label-sm text-label-sm bg-white/20 px-1.5 py-0.5 rounded font-bold">2/2 FULL</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-[#2563eb] rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Club Blvd Commons</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Property #1</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary">$2M</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-[#2563eb] rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Lancaster Row</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Property #2</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary">$2M</span>
+</div>
+</div>
+<!-- Ready for Upgrade Slot -->
+<div class="pt-space-xs flex flex-col gap-1 bg-surface-container-high/60 p-2 rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-bold tracking-wider">Neighborhood Slot</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Eligible</span>
+</div>
+<div class="p-2.5 rounded-lg flex items-center justify-between bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">hotel_class</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Play Landmark (+2 Rent)</span>
+</div>
+<span class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed px-1.5 py-0.5 rounded font-bold">UNLOCKED</span>
+</div>
+</div>
+<div class="mt-auto bg-surface-container-highest/40 p-1.5 rounded flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Rent: 1:$1M</span>
+<span class="font-bold text-primary">Full: $4M</span>
+</div>
+</div>
+<!-- SET 3: THE ENO (INCOMPLETE 1/3 - NEEDS 2 MORE) -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm relative shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-[#0f766e] text-white p-space-xs px-space-sm rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">water</span>
+<span class="font-label-lg text-label-lg font-bold">The Eno River</span>
+</div>
+<span class="font-label-sm text-label-sm bg-white/20 px-1.5 py-0.5 rounded font-bold">1/3 NEED 2</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<!-- Owned Card -->
+<div class="bg-surface-container-lowest rounded-lg p-2 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-[#0d9488] rounded-full"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Penny's Bend Nature</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Property #1</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary">$3M</span>
+</div>
+<!-- Empty Slot 2 -->
+<div class="p-2 rounded-lg bg-surface-container-high/40 flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-surface-container-highest rounded-full"></div>
+<span class="font-label-md text-label-md italic">Few's Ford (Unowned)</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Open</span>
+</div>
+<!-- Empty Slot 3 -->
+<div class="p-2 rounded-lg bg-surface-container-high/40 flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-2">
+<div class="w-2 h-6 bg-surface-container-highest rounded-full"></div>
+<span class="font-label-md text-label-md italic">Coley Mountain (Unowned)</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Open</span>
+</div>
+</div>
+<div class="mt-auto bg-surface-container-highest/40 p-1.5 rounded flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-bold text-primary">Current Rent: $1M</span>
+<span>Full: $7M</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT 3 COLS: BANK VAULT & CASH TRAY -->
+<section class="xl:col-span-3 bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-sm h-full">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">payments</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Bank Vault</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-fixed font-label-lg text-label-lg font-bold px-space-sm py-0.5 rounded-full shadow-sm">
+            Total: $9M
+          </div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Cash &amp; Action cards safeguarded against opponent rent claims.
+        </p>
+<!-- Staggered Cash Bills & Banked Cards Tray -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-2 shadow-inner">
+<!-- $5 Durham Dollar Bill -->
+<div class="bg-tertiary text-on-tertiary p-2 rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold bg-white/20 px-1.5 py-0.5 rounded">$5</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold leading-tight">Durham Dollar</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container text-[10px]">Currency Note</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">verified</span>
+</div>
+<!-- $2 Durham Dollar Bill -->
+<div class="bg-tertiary-container text-on-tertiary-container p-2 rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold bg-white/20 px-1.5 py-0.5 rounded">$2</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold leading-tight">Durham Dollar</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container text-[10px]">Currency Note</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">verified</span>
+</div>
+<!-- $1 Durham Dollar Bill -->
+<div class="bg-tertiary-container text-on-tertiary-container p-2 rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold bg-white/20 px-1.5 py-0.5 rounded">$1</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold leading-tight">Durham Dollar</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container text-[10px]">Currency Note</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">verified</span>
+</div>
+<!-- Banked Action Card: City Tax Assessment ($1 value tucked) -->
+<div class="bg-surface-container-highest p-2 rounded-lg shadow-sm flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold bg-primary/20 text-primary px-1.5 py-0.5 rounded">$1</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold leading-tight">Assessment</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant text-[10px]">Action Tucked as Cash</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">lock</span>
+</div>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Safe from Rent: <strong class="text-tertiary">$9M</strong></span>
+<span>Max Bank: Uncapped</span>
+</div>
+</section>
+</div>
+<!-- 4. YOUR HAND: INTERACTIVE CARD TRAY -->
+<section class="w-full bg-surface-container-low rounded-2xl p-space-md shadow-lg flex flex-col gap-space-md">
+<!-- Hand Header & Controls Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pb-space-xs">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[24px] text-primary">playing_cards</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Your Hand</span>
+<span class="font-label-md text-label-md bg-surface-container-highest px-2 py-0.5 rounded-full text-on-surface-variant font-semibold">6 of 7 Cards</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary hidden md:inline font-bold">● Select a card to play or bank</span>
+</div>
+<div class="flex items-center gap-space-md ml-auto">
+<!-- Auto-pass Toggle Switch -->
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Auto-Pass on 0 Plays</span>
+<div class="relative">
+<input class="sr-only peer" id="autoPassToggle" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-tertiary"></div>
+</div>
+</label>
+<!-- Primary End Turn Button -->
+<button class="h-11 px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold shadow-md hover:shadow-lg active:translate-y-0.5 transition-all flex items-center gap-space-xs" type="button">
+<span>End Turn</span>
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</button>
+</div>
+</div>
+<!-- Hand Cards Display Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-space-md items-stretch">
+<!-- CARD 1: PROPERTY 'NINTH STREET' -->
+<div class="group bg-surface-container-lowest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all p-space-sm flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+<!-- Top Corner Value Pill -->
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md font-bold bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded">$2M</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Property</span>
+</div>
+<!-- District Header Band -->
+<div class="bg-[#d97706] text-white p-1.5 rounded-lg mb-2 text-center shadow-sm">
+<span class="font-label-md text-label-md font-bold block truncate">Old West Durham</span>
+<span class="font-label-sm text-label-sm text-amber-100 block truncate text-[10px]">District Set (2)</span>
+</div>
+<!-- Card Content / Illustration representation -->
+<div class="flex-1 flex flex-col items-center justify-center p-2 text-center bg-surface-container-low/50 rounded-lg">
+<span class="material-symbols-outlined text-[32px] text-[#d97706]">storefront</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1 text-[17px] leading-tight">Ninth Street</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-[11px]">Rent: 1:$1 · Full:$3</span>
+</div>
+<!-- Dual Hover/Tap Action Hitboxes -->
+<div class="pt-space-xs grid grid-cols-1 gap-1 mt-2">
+<button class="w-full py-1.5 px-2 bg-primary text-on-primary rounded font-label-sm text-label-sm font-bold shadow-sm hover:bg-primary-container transition-colors">
+              Play to Tableau
+            </button>
+<button class="w-full py-1 px-2 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-medium hover:bg-surface-container-high transition-colors">
+              Bank as $2M
+            </button>
+</div>
+</div>
+<!-- CARD 2: WILD PROPERTY 'TRINITY / BRIGHTLEAF' -->
+<div class="group bg-surface-container-lowest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all p-space-sm flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md font-bold bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded">$3M</span>
+<span class="font-label-sm text-label-sm text-tertiary uppercase font-bold">Wild Card</span>
+</div>
+<!-- Split Rose / Gold Header -->
+<div class="rounded-lg overflow-hidden mb-2 shadow-sm flex h-8">
+<div class="w-1/2 bg-[#e11d48] text-white flex items-center justify-center font-label-sm text-label-sm font-bold truncate px-1">
+              Trinity
+            </div>
+<div class="w-1/2 bg-[#ca8a04] text-white flex items-center justify-center font-label-sm text-label-sm font-bold truncate px-1">
+              Brightleaf
+            </div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-2 text-center bg-surface-container-low/50 rounded-lg">
+<span class="material-symbols-outlined text-[32px] text-secondary">alt_route</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1 text-[15px] leading-tight">Wild District</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-[11px]">Toggle between 2 areas</span>
+</div>
+<div class="pt-space-xs grid grid-cols-1 gap-1 mt-2">
+<button class="w-full py-1.5 px-2 bg-primary text-on-primary rounded font-label-sm text-label-sm font-bold shadow-sm hover:bg-primary-container transition-colors">
+              Play Wild Set
+            </button>
+<button class="w-full py-1 px-2 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-medium hover:bg-surface-container-high transition-colors">
+              Bank as $3M
+            </button>
+</div>
+</div>
+<!-- CARD 3: ACTION 'WALK-OFF WIN' (STEAL) -->
+<div class="group bg-surface-container-lowest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all p-space-sm flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md font-bold bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded">$3M</span>
+<span class="font-label-sm text-label-sm bg-primary/10 text-primary font-bold px-1 rounded uppercase">Action</span>
+</div>
+<!-- Terracotta Action Header -->
+<div class="bg-primary text-on-primary p-1.5 rounded-lg mb-2 text-center shadow-sm">
+<span class="font-label-md text-label-md font-bold block truncate">Action Play</span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim block truncate text-[10px]">Property Theft</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-2 text-center bg-surface-container-low/50 rounded-lg">
+<span class="material-symbols-outlined text-[32px] text-primary">sports_baseball</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1 text-[16px] leading-tight">Walk-Off Win</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-[11px] leading-tight">Steal any 1 incomplete property card!</span>
+</div>
+<div class="pt-space-xs grid grid-cols-1 gap-1 mt-2">
+<button class="w-full py-1.5 px-2 bg-primary text-on-primary rounded font-label-sm text-label-sm font-bold shadow-sm hover:bg-primary-container transition-colors">
+              Steal Property
+            </button>
+<button class="w-full py-1 px-2 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-medium hover:bg-surface-container-high transition-colors">
+              Bank as $3M
+            </button>
+</div>
+</div>
+<!-- CARD 4: RENT CARD 'DURHAM CENTRAL RENT' -->
+<div class="group bg-surface-container-lowest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all p-space-sm flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md font-bold bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded">$1M</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase">Rent Claim</span>
+</div>
+<!-- Dual Split District Header -->
+<div class="rounded-lg overflow-hidden mb-2 shadow-sm flex h-8">
+<div class="w-1/2 bg-[#581c87] text-white flex items-center justify-center font-label-sm text-label-sm font-bold truncate px-1">
+              Downtown
+            </div>
+<div class="w-1/2 bg-[#0284c7] text-white flex items-center justify-center font-label-sm text-label-sm font-bold truncate px-1">
+              East Durham
+            </div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-2 text-center bg-surface-container-low/50 rounded-lg">
+<span class="material-symbols-outlined text-[32px] text-secondary">request_quote</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1 text-[15px] leading-tight">Central Rent</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-[11px] leading-tight">Charge all players for your Downtown set ($9M)!</span>
+</div>
+<div class="pt-space-xs grid grid-cols-1 gap-1 mt-2">
+<button class="w-full py-1.5 px-2 bg-secondary text-on-secondary rounded font-label-sm text-label-sm font-bold shadow-sm hover:opacity-90 transition-opacity">
+              Charge Rent ($9M)
+            </button>
+<button class="w-full py-1 px-2 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-medium hover:bg-surface-container-high transition-colors">
+              Bank as $1M
+            </button>
+</div>
+</div>
+<!-- CARD 5: CASH '$4 DURHAM DOLLARS' -->
+<div class="group bg-surface-container-lowest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all p-space-sm flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md font-bold bg-tertiary-fixed text-on-tertiary-fixed px-1.5 py-0.5 rounded">$4M</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold uppercase">Currency</span>
+</div>
+<div class="bg-tertiary text-on-tertiary p-1.5 rounded-lg mb-2 text-center shadow-sm">
+<span class="font-label-md text-label-md font-bold block truncate">Durham Cash</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed block truncate text-[10px]">Legal Tender Note</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-2 text-center bg-surface-container-low/50 rounded-lg">
+<span class="material-symbols-outlined text-[36px] text-tertiary">attach_money</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1 text-[17px] leading-tight">$4 Durham M</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-[11px]">Cannot be stolen by Rent</span>
+</div>
+<div class="pt-space-xs grid grid-cols-1 gap-1 mt-2">
+<button class="w-full py-2 px-2 bg-tertiary text-on-tertiary rounded font-label-sm text-label-sm font-bold shadow-sm hover:bg-tertiary-container transition-colors">
+              Deposit to Vault
+            </button>
+</div>
+</div>
+<!-- CARD 6: ACTION 'APPEAL' (DEFENSIVE SHIELD) -->
+<div class="group bg-surface-container-lowest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all p-space-sm flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md font-bold bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded">$4M</span>
+<span class="font-label-sm text-label-sm bg-tertiary/10 text-tertiary font-bold px-1 rounded uppercase">Reaction</span>
+</div>
+<div class="bg-[#1e293b] text-white p-1.5 rounded-lg mb-2 text-center shadow-sm">
+<span class="font-label-md text-label-md font-bold block truncate">Just Say No</span>
+<span class="font-label-sm text-label-sm text-slate-300 block truncate text-[10px]">Instant Counter</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-2 text-center bg-surface-container-low/50 rounded-lg">
+<span class="material-symbols-outlined text-[32px] text-on-surface">shield</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1 text-[16px] leading-tight">Appeal Ruling</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-[11px] leading-tight">Cancel any action against you at any time.</span>
+</div>
+<div class="pt-space-xs grid grid-cols-1 gap-1 mt-2">
+<button class="w-full py-1.5 px-2 bg-surface-container-highest text-on-surface rounded font-label-sm text-label-sm font-bold shadow-sm hover:bg-surface-container transition-colors" title="Keep in hand to defend during other players turns">
+              Hold for Defense
+            </button>
+<button class="w-full py-1 px-2 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-medium hover:bg-surface-container-high transition-colors">
+              Bank as $4M
+            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- 5. FLOATING / SLIDE-OVER RECAP DRAWER (INTERACTIVE) -->
+<aside class="fixed right-0 top-16 bottom-0 w-80 max-w-[85vw] bg-surface shadow-2xl z-40 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" id="recapDrawer">
+<!-- Header -->
+<div class="p-space-md bg-surface-container flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">history</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold text-[18px]">Match Activity</span>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-high text-on-surface hover:bg-surface-container-highest" id="closeRecapBtn">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Feed List -->
+<div class="p-space-md flex-1 overflow-y-auto flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">3 Events Since Your Move</span>
+<!-- Event 1 -->
+<div class="p- space-sm p-3 rounded-lg bg-surface-container-low flex flex-col gap-1 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Maya P.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">42s ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Completed <strong class="text-[#1e40af]">Walltown</strong> set (2/2) with <span class="text-on-surface font-semibold">Lancaster Row</span>.
+        </p>
+</div>
+<!-- Event 2 -->
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col gap-1 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Devon S.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Charged rent for <strong class="text-[#047857]">The Eno</strong>. Chen paid <span class="font-bold text-secondary">$2M</span> from bank.
+        </p>
+</div>
+<!-- Event 3 -->
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col gap-1 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Chen L.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Discarded <span class="text-primary font-semibold">Food Truck Rodeo</span> due to hand limit.
+        </p>
+</div>
+<div class="mt-4 p-3 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed">
+<span class="font-label-md text-label-md font-bold block mb-1">Table Strategy Tip:</span>
+<span class="font-body-sm text-body-sm text-on-secondary-fixed-variant">
+          Maya is only 1 set away from winning! Your 'Walk-Off Win' card can steal her uncompleted American Tobacco property.
+        </span>
+</div>
+</div>
+</aside>
+<!-- Backdrop for drawer -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-300" id="recapBackdrop"></div>
+</div>
+<!-- Vanilla Micro-interaction Script -->
+<script>
+  (function() {
+    const recapBtn = document.getElementById('recapToggleBtn');
+    const closeBtn = document.getElementById('closeRecapBtn');
+    const drawer = document.getElementById('recapDrawer');
+    const backdrop = document.getElementById('recapBackdrop');
+
+    function openDrawer() {
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeDrawer() {
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    if (recapBtn && closeBtn && drawer && backdrop) {
+      recapBtn.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+    }
+  })();
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] py-space-lg mt-auto"><div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-primary">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant">Handcrafted for 2-10 Tabletop Players • Durham, NC</span></div><div class="flex items-center gap-space-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Bull City Gaming Co.</span><span class="font-label-sm text-label-sm text-tertiary font-semibold">v1.4 Tobacco Green Edition</span></div></div></footer></body></html>

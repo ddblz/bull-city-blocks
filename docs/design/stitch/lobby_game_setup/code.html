@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed-variant": "#614000", "tertiary": "#00694c", "on-surface": "#1c1c18", "background": "#fcf9f3", "on-tertiary": "#ffffff", "primary-fixed-dim": "#ffb4a4", "inverse-on-surface": "#f3f0ea", "on-tertiary-container": "#f6fff8", "outline-variant": "#e0bfb9", "error": "#ba1a1a", "tertiary-fixed-dim": "#7bd8b1", "surface-container": "#f0eee8", "tertiary-container": "#1e8462", "primary-container": "#c84b31", "secondary-fixed": "#ffddb0", "surface": "#fcf9f3", "on-surface-variant": "#58413c", "on-primary": "#ffffff", "primary": "#a6331b", "surface-container-low": "#f6f3ed", "outline": "#8c716b", "secondary-fixed-dim": "#ffba46", "inverse-surface": "#31312d", "on-secondary-fixed": "#281800", "secondary-container": "#feb63c", "on-error": "#ffffff", "on-tertiary-fixed": "#002115", "on-primary-container": "#fffbff", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "inverse-primary": "#ffb4a4", "secondary": "#805600", "on-background": "#1c1c18", "primary-fixed": "#ffdad3", "surface-tint": "#aa361e", "on-primary-fixed": "#3e0500", "surface-dim": "#dcdad4", "on-secondary": "#ffffff", "surface-bright": "#fcf9f3", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#00513a", "tertiary-fixed": "#97f5cc", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#891e07" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.5rem", "space-xl": "2rem", "space-md": "1rem", "margin-desktop": "2.5rem", "margin": "1.5rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "label-md": ["JetBrains Mono"], "headline-sm": ["Epilogue"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Epilogue"], "headline-md": ["Epilogue"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Epilogue"] }, "fontSize": { "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md shrink-0"><img alt="Bull City Blocks Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBp7OiuPKW1uYkfsJc_mN40690bOIOfHX8WlWgByK_16HCF4fDZOJmmt_QFySTwIqfm87vgeHVIsHHVSIgdpPP4kNPQDZOKHx5glH2nrmqSkdRN8c1pdwSgjlWK0TH6C0BbxdVKUPp2518wjzreV_YQA6C9PvsCrxcgtlWC5SIzPQmDexqmsLtm5prVXH_tXyoF2O3b_rZHFKgvT37O0IQfeX-xgLA0s9K7gj8FltIi"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Durham Social Tabletop</span></div></div><div class="hidden lg:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(30,27,24,0.06)]"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span></span><span class="font-label-md text-label-md text-on-surface tracking-wide">Room #BCB-DURHAM</span><span class="text-outline-variant font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary font-semibold">4/6 Players</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm"><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="game-table" href="#">Table</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="neighborhood-atlas" href="#">Neighborhoods</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="house-rules" href="#">Rules</a><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm" data-path="lobby" href="#">Lobby</a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Quick Reference Rules" type="button"><span class="material-symbols-outlined text-[20px]">menu_book</span></button><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Tabletop Sound and Vibes" type="button"><span class="material-symbols-outlined text-[20px]">volume_up</span></button><div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div><div class="flex items-center gap-space-xs pl-space-xs bg-surface-container-low rounded-full py-1 pr-space-md"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdvu5Zcsx7DwoyCd0k0k9RLqLbp6PATSVWiDW6qkUC6fA-uLEQKul94AmUa7Nb7kDZbhmlsQRqEbXmgm5T8y26rUQA3VM5yYfAxcKmFhuAqoW0j5X1aUrX-saEtaLnJdVaGefpQmShepUW1dM4EM_v31DtfQA3sjLxni0CPx1iHPAVbCCaWuhq19-u4LpZ3QW6FyAAcgee-5e5_Et_Ej56zrV0kJGpdMxIS_Pnmcs"/><span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div><span class="hidden sm:inline font-label-md text-label-md text-on-surface font-semibold">You (Turn 2)</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Interactive Tabletop Lobby Viewport -->
+<div class="w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-space-lg flex flex-col gap-space-xl">
+<!-- Top Bar: Room Invitation & Host Status Card -->
+<section class="bg-surface-container-low rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md relative overflow-hidden">
+<!-- Decorative Organic Backdrop Vignette -->
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-primary-fixed opacity-20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-64 h-64 bg-secondary-fixed opacity-30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs z-10">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[16px] text-secondary">military_tech</span>
+            Room Host
+          </span>
+<span class="font-label-md text-label-md text-on-surface-variant">•</span>
+<span class="font-label-md text-label-md text-tertiary font-medium flex items-center gap-1">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary"></span>
+            Tabletop Live (6 / 10 Seated)
+          </span>
+</div>
+<div class="flex flex-wrap items-baseline gap-space-sm">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight">The 919 Gathering</span>
+<span class="font-label-sm text-label-sm text-outline px-space-xs py-0.5 bg-surface-container rounded font-mono">CODE: DURHAM-919</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">
+          Bring your friends or challenge Bull City AI bots. Gather 3 full Durham neighborhood property sets to claim block victory.
+        </p>
+</div>
+<!-- Share Box & QR Interactive Hub -->
+<div class="flex flex-wrap items-center gap-space-sm w-full lg:w-auto z-10">
+<div class="flex items-center bg-surface-container-lowest px-space-md py-2.5 rounded-lg shadow-sm flex-1 sm:flex-initial">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2">link</span>
+<span class="font-label-md text-label-md text-on-surface select-all mr-space-md truncate max-w-[220px]" id="roomLinkText">bullcityblocks.local/room/durham-919</span>
+<button class="px-space-sm py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-sm text-label-sm flex items-center gap-1 transition-all" id="copyBtn" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span id="copyText">Copy Link</span>
+</button>
+</div>
+<button class="h-11 px-space-md bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-md text-label-md flex items-center gap-1.5 transition-colors shadow-sm" id="qrToggleBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+<span>QR Pass</span>
+</button>
+<button class="h-11 px-space-md bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary rounded-lg font-label-lg text-label-lg flex items-center gap-1.5 transition-colors shadow-sm" id="inviteModalBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>Invite Friend</span>
+</button>
+</div>
+<!-- QR Overlay Dropdown (Toggleable) -->
+<div class="hidden absolute top-20 right-8 z-30 bg-surface-container-lowest p-space-md rounded-xl shadow-xl flex flex-col items-center gap-space-sm" id="qrDropdown">
+<div class="w-36 h-36 bg-surface-container flex items-center justify-center rounded-lg p-2">
+<!-- Tactile Mock QR Code Graphic -->
+<svg class="w-full h-full text-on-surface" fill="currentColor" viewbox="0 0 100 100">
+<rect fill="none" height="25" rx="3" stroke="currentColor" stroke-width="5" width="25" x="5" y="5"></rect>
+<rect fill="currentColor" height="11" width="11" x="12" y="12"></rect>
+<rect fill="none" height="25" rx="3" stroke="currentColor" stroke-width="5" width="25" x="70" y="5"></rect>
+<rect fill="currentColor" height="11" width="11" x="77" y="12"></rect>
+<rect fill="none" height="25" rx="3" stroke="currentColor" stroke-width="5" width="25" x="5" y="70"></rect>
+<rect fill="currentColor" height="11" width="11" x="12" y="77"></rect>
+<rect fill="currentColor" height="6" width="16" x="42" y="12"></rect>
+<rect fill="currentColor" height="12" width="8" x="45" y="24"></rect>
+<rect fill="currentColor" height="12" width="24" x="38" y="44"></rect>
+<rect fill="currentColor" height="8" width="14" x="72" y="44"></rect>
+<rect fill="currentColor" height="18" width="12" x="40" y="72"></rect>
+<rect fill="currentColor" height="20" width="22" x="68" y="72"></rect>
+</svg>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono text-center">Scan with phone camera<br/>to take seat</span>
+</div>
+</section>
+<!-- Main Workspace: Split Bento with Seats Table & Live Configuration -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Seat Allocation & Table Mat Layout (7 cols on lg) -->
+<section class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Table Seats Header with Quick Bot Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm px-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">The Card Table</span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface font-label-sm text-label-sm rounded-full font-mono">6 of 10 Seats</span>
+</div>
+<!-- Bot Controls Toolbar -->
+<div class="flex items-center gap-space-xs">
+<button class="h-9 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-sm text-label-sm flex items-center gap-1 transition-colors" id="addGreedyBotBtn" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">smart_toy</span>
+<span>+ Greedy Bot</span>
+</button>
+<button class="h-9 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-sm text-label-sm flex items-center gap-1 transition-colors" id="addRandomBotBtn" type="button">
+<span class="material-symbols-outlined text-[16px] text-tertiary">casino</span>
+<span>+ Random Bot</span>
+</button>
+</div>
+</div>
+<!-- Seats Deck List Grid -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<!-- Seat 1: Host (You) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="Warm illustrative tabletop avatar portrait of Maya smiling, wearing a warm rust-colored knit beanie with spectacles, set against a soft pine green background with cozy board game lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHlZJx3-O0V62J79A0SNxZk1ALeFiAEzTzGjghR_aLvYKokBlIbwW7FwUsfY_NIjH7Zk72GhQrPESPcG3Si1fS_2yXBVPY9XjEQauIgrp2DkYNeN2vjEvXPCOCm5VhAIJAwettwqz8EhqlTkXWLtRTzTylySsQq2erd6fWJbLIJMzoYwR9gmqWCKGJZBZjVKCDefEGaqLoNakQxDXC4EibTWAb2kwCGqhMQt-n3eA"/>
+<span class="absolute -top-1 -right-1 bg-secondary-fixed text-on-secondary-fixed p-0.5 rounded-full shadow-sm" title="Room Host">
+<span class="material-symbols-outlined text-[14px] block">crown</span>
+</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-tertiary ring-2 ring-surface-container-lowest" title="Connected"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Maya Lin</span>
+<span class="bg-primary-fixed text-on-primary-fixed px-1.5 py-0.2 rounded font-label-sm text-label-sm font-semibold">You</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-1.5 py-0.2 rounded font-label-sm text-label-sm font-bold">Host</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-tertiary">wifi</span> Seat #1 • Ping: 18ms
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-md py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Ready
+              </span>
+</div>
+</div>
+<!-- Seat 2: Devon K. -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="Warm candid portrait avatar of Devon K., an African American male game designer with a trimmed beard and mustard yellow hoodie, sitting in an urban Durham cafe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtg-don9fLAGmvsLPJMzKgTA7PdxFENGkLs_OP9ddqNNTsH0w21plIT1S6xG_IiBb5eqk7A1kLMRsoGDl6Gb0LGIVUA8nzg4iEGBcgciFkmlY4FQDBRVY3OVGhZvlssb8wfB9kIbq41jRa7z0Fucgj_xvZHbqfp472llfQ8MnQcCN8drzOq9IExcOZiHBOckYKBRnp3Tv9rWtOfy8XvZeK1zqmnNfloXrl5axbGIY"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-tertiary ring-2 ring-surface-container-lowest" title="Connected"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Devon K.</span>
+<span class="font-label-sm text-label-sm text-outline px-1 rounded bg-surface-container">Player</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-tertiary">wifi</span> Seat #2 • Ping: 32ms
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-md py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Ready
+              </span>
+</div>
+</div>
+<!-- Seat 3: Marcus T. -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="Playful stylized avatar portrait of Marcus T., looking thoughtful with a denim jacket and brick warehouse studio background, warm morning sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXyzHaV5zKpDbPI0jNDTZTlTg162i6cz6ZYQjDuPHiDaEvfZeDNIxqA-sigMevMSue77ngxpRT1jNHOL-9ROskagvLfAY_X86kK-GzbSJ4yrykiZreBPldhwG8vco2l-_eAo7i2RauPBxyPECd0kx11U0Wv732U8tD0t6ozLBqumPRWADGoTtpUhtlNcrsTaNs9MC3QuQXua5z3wKB6WMJjJblNaxGsbUdP0W0P1c"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-tertiary ring-2 ring-surface-container-lowest" title="Connected"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Marcus T.</span>
+<span class="font-label-sm text-label-sm text-outline px-1 rounded bg-surface-container">Player</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-tertiary">wifi</span> Seat #3 • Ping: 41ms
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-md py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Ready
+              </span>
+</div>
+</div>
+<!-- Seat 4: Aisha P. (Waiting) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm opacity-80" data-alt="Illustrated profile badge of Aisha P., smiling softly in deep forest green shirt with ceramic mugs on a rustic wooden coffee table in background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgat13S1o8DDTpTRRfVDJFoZB5x0KDkBSpmdwcTkfxaq_6REO8zkLf_N00QTjqG0JGuP0EZOzQSJyLpJkkEiP0hAbls15EPr7THrCOYDDPNHMCC-KfOmN7Ee2-tsFjykpI69JIs51t3Wa44s_Lcq11LGYYMIWcFmbmrJFRlf9Bc-s_ybUS4j6ugFUZsLJGqrPph5JCXKnWosleeUGGfu5UrVrP4pq1tOebvg0StHs"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface-container-lowest animate-pulse" title="Selecting deck"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Aisha P.</span>
+<span class="font-label-sm text-label-sm text-outline px-1 rounded bg-surface-container">Player</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">hourglass_empty</span> Inspecting deck rules...
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-md py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+                Waiting...
+              </span>
+</div>
+</div>
+<!-- Seat 5: Greedy Bot #1 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between shadow-sm border-l-4 border-l-primary-container">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">smart_toy</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Greedy Bot #1</span>
+<span class="bg-primary-container text-on-primary-container px-1.5 py-0.2 rounded font-label-sm text-label-sm font-bold">Bot AI</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">attach_money</span> Strategy: Rapid Set Monopolizer &amp; High Rent Drain
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-sm py-1 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-semibold">Auto-Ready</span>
+<button class="remove-bot-btn h-8 w-8 rounded-lg bg-surface-container-low hover:bg-error hover:text-on-error text-on-surface-variant flex items-center justify-center transition-colors" title="Remove Bot" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Seat 6: Random Bot #2 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between shadow-sm border-l-4 border-l-secondary-container">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">casino</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Random Bot #2</span>
+<span class="bg-secondary text-on-secondary px-1.5 py-0.2 rounded font-label-sm text-label-sm font-bold">Bot AI</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">shuffle</span> Strategy: Unpredictable Wildcard Playmaker
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-sm py-1 bg-surface-container text-on-surface rounded font-label-sm text-label-sm font-semibold">Auto-Ready</span>
+<button class="remove-bot-btn h-8 w-8 rounded-lg bg-surface-container-low hover:bg-error hover:text-on-error text-on-surface-variant flex items-center justify-center transition-colors" title="Remove Bot" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Open Seats 7 through 10 Slot Indicator -->
+<div class="bg-surface-container/60 rounded-lg p-space-md flex items-center justify-between shadow-inner">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">event_seat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface-variant font-medium">4 Open Seats Available</span>
+<span class="font-label-sm text-label-sm text-outline">Supports up to 10 players simultaneously for community block parties</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 bg-surface-container-highest hover:bg-surface-container text-on-surface rounded-lg font-label-sm text-label-sm flex items-center gap-1 transition-colors" onclick="document.getElementById('inviteModalBtn').click()" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Fill Seat
+              </button>
+</div>
+</div>
+</div>
+<!-- Neighborhood District Atlas Preview Banner -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">location_city</span>
+              District Set Victory Preview
+            </span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">14 Durham Neighborhoods</span>
+</div>
+<!-- Micro Pills for Districts in Current Deck -->
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-space-xs pt-1">
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-primary font-bold">Walltown</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">2 Cards</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-tertiary font-bold">Brightleaf</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">3 Cards</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-secondary font-bold">Hayti</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">3 Cards</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-primary font-bold">Trinity Park</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">3 Cards</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-tertiary font-bold">Ninth Street</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">3 Cards</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-secondary font-bold">Golden Belt</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">4 Cards</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest text-center shadow-xs">
+<span class="block font-label-sm text-label-sm text-primary font-bold">Eno River</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">2 Cards</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: Rules Preset, Advanced Editor & Launch CTA (5 cols on lg) -->
+<section class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Active Preset Card (Collapsible Overview) -->
+<div class="bg-surface-container-low rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">gavel</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Active Match Rules</span>
+</div>
+<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm rounded font-bold uppercase">Standard Bull City</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-xs flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Victory Condition</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">3 Complete Neighborhoods</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Turn Cadence</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Draw 2 • Up to 3 Action Plays</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">End Turn Hand Limit</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">7 Cards max (Excess discarded)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Turn Countdown Timer</span>
+<span class="font-label-md text-label-md text-primary font-bold">45 Seconds / turn</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Debt Policy</span>
+<span class="font-label-md text-label-md text-secondary font-bold">Bank &amp; Tableau only (No Change)</span>
+</div>
+</div>
+<!-- Variant Tags Micro-Row -->
+<div class="flex flex-wrap gap-space-xs">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check</span> Double Rent Multipliers
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check</span> Just Say No Counter-claims
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check</span> Fast Landmark Upgrades
+            </span>
+</div>
+<!-- Host Editor Toggle -->
+<button class="w-full py-2.5 px-space-md bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-md text-label-md flex items-center justify-center gap-space-xs transition-colors" id="toggleEditorBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span id="editorToggleLabel">Customize Advanced Table Rules</span>
+<span class="material-symbols-outlined text-[18px]" id="editorArrow">expand_more</span>
+</button>
+</div>
+<!-- COLLAPSIBLE ADVANCED RULES EDITOR DRAWER -->
+<div class="hidden bg-surface-container-low rounded-xl p-space-md md:p-space-lg shadow-sm flex-col gap-space-md" id="advancedEditorPanel">
+<div class="flex items-center justify-between border-b pb-space-sm border-outline-variant/30">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">instant_mix</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Rulebook Modifiers</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline" id="resetDefaultsBtn" type="button">Reset Defaults</button>
+</div>
+<!-- Rule Category Tabs -->
+<div class="flex items-center gap-space-xs bg-surface-container p-1 rounded-lg">
+<button class="rule-tab-btn flex-1 py-1.5 px-2 rounded-md font-label-sm text-label-sm font-bold bg-surface-container-lowest text-on-surface shadow-xs transition-all" data-tab="tab-core" type="button">Match Flow</button>
+<button class="rule-tab-btn flex-1 py-1.5 px-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" data-tab="tab-payments" type="button">Payments &amp; Rent</button>
+<button class="rule-tab-btn flex-1 py-1.5 px-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" data-tab="tab-deck" type="button">Deck Ratios</button>
+</div>
+<!-- Tab Content 1: Core Flow -->
+<div class="rule-tab-content flex flex-col gap-space-md" id="tab-core">
+<!-- Winning Sets Count -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Victory Condition</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Completed Durham neighborhood sets</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-2 py-1 rounded-lg shadow-xs">
+<button class="w-7 h-7 rounded bg-surface-container flex items-center justify-center font-bold text-on-surface hover:bg-surface-container-high" id="decSets" type="button">-</button>
+<span class="font-label-md text-label-md text-primary font-bold w-6 text-center" id="winSetsVal">3</span>
+<button class="w-7 h-7 rounded bg-surface-container flex items-center justify-center font-bold text-on-surface hover:bg-surface-container-high" id="incSets" type="button">+</button>
+</div>
+</div>
+<!-- Turn Plays Allowed -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Plays Allowed / Turn</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cards a player may drop onto mat</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-2 py-1 rounded-lg shadow-xs">
+<button class="w-7 h-7 rounded bg-surface-container flex items-center justify-center font-bold text-on-surface hover:bg-surface-container-high" id="decPlays" type="button">-</button>
+<span class="font-label-md text-label-md text-primary font-bold w-6 text-center" id="playsVal">3</span>
+<button class="w-7 h-7 rounded bg-surface-container flex items-center justify-center font-bold text-on-surface hover:bg-surface-container-high" id="incPlays" type="button">+</button>
+</div>
+</div>
+<!-- Turn Timer Slider -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Turn Clock Limit</span>
+<span class="font-label-md text-label-md text-secondary font-bold font-mono" id="clockValDisplay">45 Seconds</span>
+</div>
+<input class="w-full accent-primary h-2 bg-surface-container rounded-lg cursor-pointer" id="turnClockRange" max="90" min="15" step="5" type="range" value="45"/>
+<div class="flex justify-between font-label-sm text-label-sm text-outline">
+<span>15s (Blitz)</span>
+<span>45s (Casual)</span>
+<span>90s (Strategic)</span>
+</div>
+</div>
+<!-- Sound Alert Toggle -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-body-sm text-body-sm text-on-surface">Table Warning Chimes</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-surface-dim after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+</div>
+<!-- Tab Content 2: Payments & Upgrades (Hidden by default) -->
+<div class="rule-tab-content hidden flex-col gap-space-md" id="tab-payments">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">No Change on Rent</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Overpaying forfeits excess cash</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Landmark Upgrades</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Adds +$3M rent to complete district</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Iconic Durham Spire</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Adds +$4M rent (Requires Landmark)</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+<div class="p-space-sm bg-surface-container rounded-lg text-body-sm font-body-sm text-on-surface-variant">
+              💡 <span class="font-bold text-on-surface">Pro Rule:</span> Rent demands can only target active properties and bank caches on the table. Cards in hand are completely immune to debts.
+            </div>
+</div>
+<!-- Tab Content 3: Deck Composition (Hidden by default) -->
+<div class="rule-tab-content hidden flex-col gap-space-sm" id="tab-deck">
+<span class="font-label-md text-label-md text-on-surface font-bold">110-Card Deck Allocation</span>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-label-sm text-label-sm">
+<thead>
+<tr class="text-on-surface-variant border-b border-surface-container-highest">
+<th class="py-1">Card Type</th>
+<th class="py-1">Copies</th>
+<th class="py-1">Face Value</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr>
+<td class="py-1 text-on-surface font-medium">District Properties</td>
+<td class="py-1 font-mono">42</td>
+<td class="py-1">$1M - $4M</td>
+</tr>
+<tr>
+<td class="py-1 text-on-surface font-medium">Neighborhood Wildcards</td>
+<td class="py-1 font-mono">11</td>
+<td class="py-1">$0M - $4M</td>
+</tr>
+<tr>
+<td class="py-1 text-on-surface font-medium">Rent Demands &amp; Duals</td>
+<td class="py-1 font-mono">13</td>
+<td class="py-1">$1M</td>
+</tr>
+<tr>
+<td class="py-1 text-on-surface font-medium">Bull City Actions</td>
+<td class="py-1 font-mono">24</td>
+<td class="py-1">$1M - $5M</td>
+</tr>
+<tr>
+<td class="py-1 text-on-surface font-medium">Cash Reserve Notes</td>
+<td class="py-1 font-mono">20</td>
+<td class="py-1">$1M - $10M</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Prominent Friendly Action Launch CTA -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<button class="w-full py-4 px-space-lg bg-primary-container hover:bg-primary active:scale-[0.99] text-on-primary font-headline-sm text-headline-sm rounded-lg shadow-md hover:shadow-lg flex items-center justify-center gap-space-sm transition-all relative overflow-hidden group" id="startGameBtn" type="button">
+<span class="material-symbols-outlined text-[26px]">play_arrow</span>
+<span>Deal &amp; Start Match</span>
+<!-- Ambient Sheen Effect -->
+<span class="absolute inset-0 w-1/3 bg-white/10 skew-x-12 -translate-x-full group-hover:translate-x-[400%] transition-transform duration-1000 ease-in-out pointer-events-none"></span>
+</button>
+<div class="flex items-center justify-between px-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">lock</span> Host Authorized
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Ready to Deal: 6 Players</span>
+</div>
+</div>
+<!-- Durham Community Tabletop Notice -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-xs flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[20px]">local_cafe</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Weekend Community Session</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Playing with Durham house rules? Customize rent sets anytime in settings.</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Interactive Client Side Behavior Script -->
+<script>
+    // Copy Room Link Action
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById('copyText');
+    const roomLinkText = document.getElementById('roomLinkText');
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(roomLinkText.textContent);
+        }
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyText.textContent = 'Copy Link';
+        }, 2200);
+      });
+    }
+
+    // Toggle QR Code Display
+    const qrToggleBtn = document.getElementById('qrToggleBtn');
+    const qrDropdown = document.getElementById('qrDropdown');
+    if (qrToggleBtn && qrDropdown) {
+      qrToggleBtn.addEventListener('click', () => {
+        qrDropdown.classList.toggle('hidden');
+      });
+    }
+
+    // Advanced Rules Drawer Accordion
+    const toggleEditorBtn = document.getElementById('toggleEditorBtn');
+    const advancedEditorPanel = document.getElementById('advancedEditorPanel');
+    const editorArrow = document.getElementById('editorArrow');
+    const editorToggleLabel = document.getElementById('editorToggleLabel');
+
+    if (toggleEditorBtn && advancedEditorPanel) {
+      toggleEditorBtn.addEventListener('click', () => {
+        const isHidden = advancedEditorPanel.classList.contains('hidden');
+        if (isHidden) {
+          advancedEditorPanel.classList.remove('hidden');
+          advancedEditorPanel.classList.add('flex');
+          editorArrow.textContent = 'expand_less';
+          editorToggleLabel.textContent = 'Collapse Advanced Rules Editor';
+        } else {
+          advancedEditorPanel.classList.add('hidden');
+          advancedEditorPanel.classList.remove('flex');
+          editorArrow.textContent = 'expand_more';
+          editorToggleLabel.textContent = 'Customize Advanced Table Rules';
+        }
+      });
+    }
+
+    // Rule Tabs Switching
+    const tabButtons = document.querySelectorAll('.rule-tab-btn');
+    const tabContents = document.querySelectorAll('.rule-tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab');
+
+        // Reset styles
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-xs', 'font-bold');
+          b.classList.add('text-on-surface-variant');
+        });
+        tabContents.forEach(c => {
+          c.classList.add('hidden');
+          c.classList.remove('flex');
+        });
+
+        // Set Active
+        btn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-xs', 'font-bold');
+        btn.classList.remove('text-on-surface-variant');
+
+        const activeContent = document.getElementById(targetId);
+        if (activeContent) {
+          activeContent.classList.remove('hidden');
+          activeContent.classList.add('flex');
+        }
+      });
+    });
+
+    // Clock Range Slider Update
+    const turnClockRange = document.getElementById('turnClockRange');
+    const clockValDisplay = document.getElementById('clockValDisplay');
+    if (turnClockRange && clockValDisplay) {
+      turnClockRange.addEventListener('input', (e) => {
+        clockValDisplay.textContent = e.target.value + ' Seconds';
+      });
+    }
+
+    // Steppers for Rules
+    const decSets = document.getElementById('decSets');
+    const incSets = document.getElementById('incSets');
+    const winSetsVal = document.getElementById('winSetsVal');
+
+    if (decSets && incSets && winSetsVal) {
+      decSets.addEventListener('click', () => {
+        let val = parseInt(winSetsVal.textContent, 10);
+        if (val > 2) winSetsVal.textContent = (val - 1).toString();
+      });
+      incSets.addEventListener('click', () => {
+        let val = parseInt(winSetsVal.textContent, 10);
+        if (val < 5) winSetsVal.textContent = (val + 1).toString();
+      });
+    }
+
+    const decPlays = document.getElementById('decPlays');
+    const incPlays = document.getElementById('incPlays');
+    const playsVal = document.getElementById('playsVal');
+
+    if (decPlays && incPlays && playsVal) {
+      decPlays.addEventListener('click', () => {
+        let val = parseInt(playsVal.textContent, 10);
+        if (val > 2) playsVal.textContent = (val - 1).toString();
+      });
+      incPlays.addEventListener('click', () => {
+        let val = parseInt(playsVal.textContent, 10);
+        if (val < 5) playsVal.textContent = (val + 1).toString();
+      });
+    }
+
+    // Start Game Trigger
+    const startGameBtn = document.getElementById('startGameBtn');
+    if (startGameBtn) {
+      startGameBtn.addEventListener('click', () => {
+        startGameBtn.innerHTML = '<span class="material-symbols-outlined text-[24px] animate-spin">refresh</span><span>Shuffling Deck & Seating Players...</span>';
+        setTimeout(() => {
+          window.location.hash = '#game-table';
+        }, 1200);
+      });
+    }
+
+    // Bot removal interactivity
+    document.querySelectorAll('.remove-bot-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const botCard = e.target.closest('.border-l-4');
+        if (botCard) {
+          botCard.style.opacity = '0';
+          botCard.style.transform = 'scale(0.95)';
+          botCard.style.transition = 'all 0.25s ease';
+          setTimeout(() => {
+            botCard.remove();
+          }, 250);
+        }
+      });
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] py-space-lg mt-auto"><div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-primary">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant">Handcrafted for 2-10 Tabletop Players • Durham, NC</span></div><div class="flex items-center gap-space-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Bull City Gaming Co.</span><span class="font-label-sm text-label-sm text-tertiary font-semibold">v1.4 Tobacco Green Edition</span></div></div></footer></body></html>
