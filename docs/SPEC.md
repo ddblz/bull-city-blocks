@@ -58,7 +58,7 @@ When the draw pile is empty, shuffle the discard pile to form a new draw pile. I
 
 ### 3.5 Districts, rent and upgrades
 - A district is **complete** when you hold its set size of properties in it.
-- **Rent** for a district is set by how many of its properties you hold, using the district's rent ladder.
+- **Rent** for a district is set by how many of its properties you hold, using the district's rent ladder. If you hold two sets of the same district, rent uses the larger set.
 - **Landmark** (like a house): played on one of your complete districts, it adds **+3** rent. One per district.
 - **Icon** (like a hotel): played on a complete district that already has a Landmark, it adds **+4** rent. One per district.
 - Transit can't take upgrades.
