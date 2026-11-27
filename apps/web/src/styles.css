@@ -147,3 +147,43 @@ button.primary {
   font-weight: 600;
   color: var(--accent);
 }
+.editor fieldset {
+  margin: 0.6rem 0;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+}
+.editor legend {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.editor label,
+.editor .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.3rem 0;
+}
+.editor .row > span {
+  flex: 1 1 12rem;
+}
+.editor .changed > span {
+  color: var(--accent);
+  font-weight: 600;
+}
+.editor input[type="number"] {
+  width: 4.5rem;
+}
+.editor table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.editor td {
+  padding: 0.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.editor textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: monospace;
+}

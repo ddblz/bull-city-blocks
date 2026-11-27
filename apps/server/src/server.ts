@@ -75,14 +75,12 @@ export async function startServer(options: ServerOptions) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     if (req.method === "OPTIONS") return void res.writeHead(204).end();
-    if (req.method === "GET" && req.url === "/rulesets") {
-      const list = options.rulesets.map((r) => {
-        const { id, description } = r as { id: string; description?: string };
-        return { id, description: description ?? "" };
-      });
+    // The full ruleset files and card content, so the lobby's rules editor (#39) can show them.
+    const data = { "/rulesets": options.rulesets, "/content": options.content };
+    if (req.method === "GET" && (req.url === "/rulesets" || req.url === "/content")) {
       return void res
         .writeHead(200, { "Content-Type": "application/json" })
-        .end(JSON.stringify(list));
+        .end(JSON.stringify(data[req.url]));
     }
     if (req.method === "POST" && req.url === "/rooms") {
       const id = randomUUID().slice(0, 8);

@@ -1,3 +1,4 @@
+import { type Content, parseContent } from "@bull-city-blocks/engine";
 import type { ClientMessage, ServerMessage } from "@bull-city-blocks/room";
 import type { ClientEvent } from "./lobby-state";
 
@@ -27,9 +28,18 @@ export async function createRoom(): Promise<string> {
   return ((await res.json()) as { id: string }).id;
 }
 
-export async function listRulesets(): Promise<{ id: string; description: string }[]> {
+/** The server's ruleset files (base and every variant), for the picker and the rules editor. */
+export async function listRulesets(): Promise<({ id: string; description: string } & object)[]> {
   const res = await fetch(`${serverUrl}/rulesets`);
   return res.ok ? res.json() : [];
+}
+
+/** The card content, for the deck table and the "differs from base" summary. */
+export async function getContent(): Promise<Content | null> {
+  const res = await fetch(`${serverUrl}/content`);
+  if (!res.ok) return null;
+  const parsed = parseContent(await res.json());
+  return parsed.ok ? parsed.value : null;
 }
 
 /**
