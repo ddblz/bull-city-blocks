@@ -1,6 +1,6 @@
 import type { LobbyView, ServerMessage } from "@bull-city-blocks/room";
 import { describe, expect, it } from "vitest";
-import { canConfigure, initialState, reduce } from "./lobby-state";
+import { canConfigure, initialState, LOG_LENGTH, reduce } from "./lobby-state";
 
 const lobby = (over: Partial<LobbyView> = {}): LobbyView => ({
   seats: [
@@ -56,7 +56,7 @@ describe("lobby reducer (#36)", () => {
     );
   });
 
-  it("keeps the latest game state and ignores history and game-over (later issues)", () => {
+  it("keeps the latest game state and the game-over message", () => {
     const state = {
       type: "state",
       view: {},
@@ -65,11 +65,38 @@ describe("lobby reducer (#36)", () => {
       awaiting: { seat: 0, kind: "play" },
       clockSeconds: null,
     } as unknown as ServerMessage;
-    const s = run(
-      state,
-      { type: "history", entries: [] },
-      { type: "gameOver", winner: 0, seed: "s", moves: [] },
-    );
+    const over: ServerMessage = { type: "gameOver", winner: 0, seed: "s", moves: [] };
+    const s = run(state, over);
     expect(s.game).toBe(state);
+    expect(s.over).toBe(over);
+  });
+
+  it("builds the log from history and state entries, without repeats, keeping the tail", () => {
+    const entry = (seq: number) => ({
+      seq,
+      turn: 1,
+      round: 1,
+      seat: 0,
+      event: { type: "cardsDrawn" as const, player: "p0", count: 2 },
+    });
+    const state = (entries: ReturnType<typeof entry>[]) =>
+      ({
+        type: "state",
+        view: {},
+        legal: [],
+        entries,
+        awaiting: null,
+        clockSeconds: null,
+      }) as never;
+    const s = run(
+      { type: "history", entries: [entry(1), entry(2)] },
+      state([entry(3)]),
+      // a reconnect resends history the client already holds
+      { type: "history", entries: [entry(2), entry(3), entry(4)] },
+    );
+    expect(s.log.map((e) => e.seq)).toEqual([1, 2, 3, 4]);
+    const long = run(state(Array.from({ length: LOG_LENGTH + 5 }, (_, i) => entry(i))));
+    expect(long.log).toHaveLength(LOG_LENGTH);
+    expect(long.log[0]?.seq).toBe(5);
   });
 });

@@ -55,7 +55,7 @@ try {
     await ben.screenshot({ path: `${shots}/guest-lobby.png`, fullPage: true });
   }
   await ana.getByRole("button", { name: "Start game" }).click();
-  await ben.getByText("The game has started.").waitFor();
+  await ben.locator(".table").waitFor();
   check(true, "the host started the game and the other player saw it");
 } finally {
   await browser.close();
