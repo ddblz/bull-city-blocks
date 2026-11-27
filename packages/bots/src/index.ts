@@ -1,4 +1,7 @@
-import { ENGINE_VERSION } from "@bull-city-blocks/engine";
+export { greedy } from "./greedy";
+export { type GameRecord, playGame } from "./play";
+export { type Policy, Rng, random } from "./policy";
 
-/** Placeholder until bots land. Imports the engine to prove workspace wiring. */
+import { ENGINE_VERSION } from "@bull-city-blocks/engine";
+/** Kept for the sim placeholder until #12 replaces it. */
 export const BOTS_ENGINE_VERSION: string = ENGINE_VERSION;
