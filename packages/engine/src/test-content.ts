@@ -63,8 +63,9 @@ export function place(s: GameState, cards: CardInstanceId[], to: CardInstanceId[
 }
 export const ofCard = (s: GameState, cardId: string) =>
   Object.keys(s.cards).filter((k) => s.cards[k]?.id === cardId);
+/** Freezes recursively, skipping objects that are already frozen (shared card data, unchanged parts). */
 export function deepFreeze<T>(o: T): T {
-  if (typeof o === "object" && o !== null)
+  if (typeof o === "object" && o !== null && !Object.isFrozen(o))
     for (const v of Object.values(Object.freeze(o))) deepFreeze(v);
   return o;
 }
