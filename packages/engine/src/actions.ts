@@ -10,8 +10,6 @@ const RODEO_AMOUNT = 2;
 /** Construction Delay: the target's next draw is at most this many cards. */
 export const DELAYED_DRAW = 1;
 
-type PlayAction = Extract<Move, { type: "playAction" }>;
-
 const actionOf = (s: GameState, card: string): ActionType | null => {
   const def = s.cards[card];
   return def?.kind === "action" ? def.action : null;
@@ -60,7 +58,11 @@ export function actionMoves(s: GameState, player: PlayerId): Move[] {
 const propertyCount = (s: GameState, player: PlayerId) =>
   playerOf(s, player).tableau.reduce((n, set) => n + set.cards.length, 0);
 
-export function playAction(s: GameState, move: PlayAction, events: GameEvent[]): void {
+export function playAction(
+  s: GameState,
+  move: Extract<Move, { type: "playAction" }>,
+  events: GameEvent[],
+): void {
   const p = playerOf(s, move.player);
   const action = actionOf(s, move.card);
   p.hand.splice(p.hand.indexOf(move.card), 1);
