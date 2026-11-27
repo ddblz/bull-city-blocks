@@ -66,7 +66,7 @@ When the draw pile is empty, shuffle the discard pile to form a new draw pile. I
 - Extra properties beyond the set size start a second, separate set of that district.
 
 ### 3.6 Responding to actions (Appeal and auto-pass)
-- When an action card targets you, you may play **Appeal** from your hand to cancel it. This does not use one of your plays.
+- When an action card targets you, you may play **Appeal** from your hand to cancel it. Rent cards count as actions here. This does not use one of your plays.
 - The attacker may Appeal your Appeal, and so on. Whoever played the last unanswered Appeal wins the exchange.
 - **Auto-pass is a per-player preference, and you can change it at any time.**
   - **On (the default):** if you have no Appeal in hand, the engine accepts the action for you immediately.
@@ -142,7 +142,7 @@ The names are flavor only. Any Landmark works on any eligible district, and so d
 | Food Truck Rodeo | 3 | 2 | Every other player pays you 2. At most **∞** players are charged. |
 | Assessment | 3 | 3 | One player pays you 1 per property they own, up to **5**. |
 | Buyout | 4 | 3 | Take one property from a player's *incomplete* set. **You pay them its card value.** |
-| Swap Meet | 4 | 3 | Swap one of your properties with one from another player's incomplete set. |
+| Swap Meet | 4 | 3 | Swap one of your properties with one from another player's set. Both must come from *incomplete* sets. |
 | Hostile Takeover | 2 | 5 | Take a complete district, along with its upgrades, from one player. **Costs 2 plays.** |
 | Appeal | 4 | 4 | Cancel an action that targets you (§3.6). |
 | Construction Delay | 3 | 2 | The target player draws only 1 card on their next turn. |

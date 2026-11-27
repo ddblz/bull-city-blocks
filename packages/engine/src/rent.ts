@@ -1,3 +1,4 @@
+import { queueResponses } from "./respond";
 import type { CardInstanceId, GameEvent, GameState, Move, PlayerId } from "./types";
 import { othersAfter, playerOf } from "./util";
 
@@ -74,6 +75,5 @@ export function playRent(
     amount,
     debtors,
   });
-  for (const debtor of debtors) s.pending.push({ type: "debt", debtor, creditor: p.id, amount });
-  s.phase = "pay";
+  queueResponses(s, p.id, move.card, debtors, { kind: "debt", amount });
 }

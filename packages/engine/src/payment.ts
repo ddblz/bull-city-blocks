@@ -22,7 +22,7 @@ export function checkPay(
   cards: readonly CardInstanceId[],
 ): string | null {
   const debt = s.pending[0];
-  if (s.phase !== "pay" || debt === undefined || debt.debtor !== player) return "no debt to pay";
+  if (s.phase !== "pay" || debt?.type !== "debt" || debt.debtor !== player) return "no debt to pay";
   if (cards.length === 0 || new Set(cards).size !== cards.length)
     return "pay one or more distinct cards";
   const payable = payableCards(s, playerOf(s, player));
@@ -32,7 +32,7 @@ export function checkPay(
 
 function settle(s: GameState, forgiven: number, events: GameEvent[]): void {
   const debt = s.pending.shift();
-  if (debt)
+  if (debt?.type === "debt")
     events.push({ type: "debtSettled", debtor: debt.debtor, creditor: debt.creditor, forgiven });
 }
 
@@ -42,7 +42,7 @@ function settle(s: GameState, forgiven: number, events: GameEvent[]): void {
  */
 export function pay(s: GameState, cards: readonly CardInstanceId[], events: GameEvent[]): void {
   const debt = s.pending[0];
-  if (debt === undefined) return;
+  if (debt?.type !== "debt") return;
   const debtor = playerOf(s, debt.debtor);
   const creditor = playerOf(s, debt.creditor);
   for (const card of cards) {
@@ -58,24 +58,20 @@ export function pay(s: GameState, cards: readonly CardInstanceId[], events: Game
 }
 
 /**
- * §3.4 auto-pay: while the awaited debtor owes at least everything payable they own, the engine
- * pays it all for them (or forgives the debt if they own nothing). Returns to Play when done.
+ * §3.4 auto-pay for the debt at the head of the queue: if the debtor owes at least everything
+ * payable they own, the engine pays it all (or forgives it if they own nothing). Returns whether
+ * the debt was settled.
  */
-export function autoResolvePayments(s: GameState, events: GameEvent[]): void {
-  while (s.phase === "pay") {
-    const debt = s.pending[0];
-    if (debt === undefined) {
-      s.phase = "play";
-      return;
-    }
-    const payable = payableCards(s, playerOf(s, debt.debtor));
-    if (payable.length === 0) {
-      settle(s, debt.amount, events);
-    } else if (s.rules.payments.autoPay && debt.amount >= totalValue(s, payable)) {
-      events.push({ type: "autoResolved", player: debt.debtor, kind: "pay" });
-      pay(s, payable, events);
-    } else {
-      return;
-    }
+export function autoPayHead(s: GameState, events: GameEvent[]): boolean {
+  const debt = s.pending[0];
+  if (debt?.type !== "debt") return false;
+  const payable = payableCards(s, playerOf(s, debt.debtor));
+  if (payable.length === 0) {
+    settle(s, debt.amount, events);
+    return true;
   }
+  if (!s.rules.payments.autoPay || debt.amount < totalValue(s, payable)) return false;
+  events.push({ type: "autoResolved", player: debt.debtor, kind: "pay" });
+  pay(s, payable, events);
+  return true;
 }

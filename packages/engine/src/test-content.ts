@@ -67,3 +67,25 @@ export function deepFreeze<T>(o: T): T {
     for (const v of Object.values(Object.freeze(o))) deepFreeze(v);
   return o;
 }
+
+/**
+ * A clean table: every hand, bank and tableau emptied into the deck, then the current player
+ * ("me") and the next player ("them") are given `mine` and `theirs` in hand.
+ */
+export function arena(n: number, mine: string[], theirs: string[] = [], s: GameState = game(n)) {
+  for (const p of s.players)
+    place(s, [...p.hand, ...p.bank, ...p.tableau.flatMap((t) => t.cards)], s.deck);
+  for (const p of s.players) p.tableau = [];
+  const me = current(s);
+  const them = next(s);
+  place(s, mine, me.hand);
+  place(s, theirs, them.hand);
+  return { s, me, them };
+}
+
+/** Gives a player a tableau set of `district` holding `cards`. */
+export function giveSet(s: GameState, p: PlayerState, district: string, cards: string[]) {
+  const set = { district, cards: [] as string[] };
+  p.tableau.push(set);
+  place(s, cards, set.cards);
+}

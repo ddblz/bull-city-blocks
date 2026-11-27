@@ -1,6 +1,7 @@
 import { actionMoves, DELAYED_DRAW, playAction } from "./actions";
-import { autoResolvePayments, checkPay, pay, payableCards } from "./payment";
+import { checkPay, pay, payableCards } from "./payment";
 import { playRent, rentMoves } from "./rent";
+import { appealIn, resolvePending, respond } from "./respond";
 import type { Result } from "./result";
 import type { CardInstanceId, GameEvent, GameState, Move, PlayerId, PlayerState } from "./types";
 import { addToTableau, draw, playerOf } from "./util";
@@ -74,10 +75,13 @@ function endPlay(s: GameState, events: GameEvent[]): void {
   else nextTurn(s, events);
 }
 
-/** Who the game is waiting on: the first debtor while debts are pending, else the current player. */
+/** Who the game is waiting on: the head of the pending queue (a debtor or a responder), else the current player. */
 export function awaitedPlayer(state: GameState): PlayerId | null {
   if (state.phase === "gameOver") return null;
-  return state.phase === "pay" ? (state.pending[0]?.debtor ?? null) : state.currentPlayer;
+  const step = state.pending[0];
+  if (state.phase === "pay" && step?.type === "debt") return step.debtor;
+  if (state.phase === "respond" && step?.type === "response") return step.awaiting;
+  return state.currentPlayer;
 }
 
 /**
@@ -87,6 +91,13 @@ export function awaitedPlayer(state: GameState): PlayerId | null {
 export function legalMoves(state: GameState, player: PlayerId): Move[] {
   if (player !== awaitedPlayer(state)) return [];
   const p = playerOf(state, player);
+  if (state.phase === "respond") {
+    const appeal = appealIn(state, p);
+    return [
+      { type: "respond", player },
+      ...(appeal ? [{ type: "respond" as const, player, appeal }] : []),
+    ];
+  }
   if (state.phase === "pay")
     return payableCards(state, p).map((card) => ({ type: "pay", player, cards: [card] }));
   if (state.phase === "discard") return p.hand.map((card) => ({ type: "discard", player, card }));
@@ -113,11 +124,15 @@ export function applyMove(
   move: Move,
 ): Result<{ state: GameState; events: GameEvent[] }> {
   const problem =
-    move.type === "pay"
-      ? checkPay(state, move.player, move.cards)
-      : legalMoves(state, move.player).some((m) => moveKey(m) === moveKey(move))
+    move.type === "setPref"
+      ? state.players.some((x) => x.id === move.player)
         ? null
-        : "not a legal move";
+        : "unknown player"
+      : move.type === "pay"
+        ? checkPay(state, move.player, move.cards)
+        : legalMoves(state, move.player).some((m) => moveKey(m) === moveKey(move))
+          ? null
+          : "not a legal move";
   if (problem !== null)
     return { ok: false, error: `illegal move ${JSON.stringify(move)}: ${problem}` };
   const s = draft(state);
@@ -157,8 +172,15 @@ export function applyMove(
     case "pay":
       pay(s, move.cards, events);
       break;
+    case "respond":
+      respond(s, move.appeal, events);
+      break;
+    case "setPref":
+      p.prefs.autoPass = move.autoPass;
+      events.push({ type: "prefSet", player: p.id, autoPass: move.autoPass });
+      break;
   }
-  autoResolvePayments(s, events);
+  resolvePending(s, events);
 
   // §3.2 step 4: the win check runs after every move, for every player.
   if (s.phase !== "gameOver") {
