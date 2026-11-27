@@ -59,7 +59,10 @@ export class Room {
   /** Per seat: the log length just after that seat's latest own move. */
   private lastActed: number[] = [];
 
-  constructor(private readonly options: RoomOptions) {
+  private readonly options: RoomOptions;
+
+  constructor(options: RoomOptions) {
+    this.options = options;
     const content = parseContent(options.content);
     if (!content.ok) throw new Error(content.error);
     this.content = content.value;

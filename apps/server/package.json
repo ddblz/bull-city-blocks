@@ -1,0 +1,17 @@
+{
+  "name": "@bull-city-blocks/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/server.ts"
+  },
+  "dependencies": {
+    "@bull-city-blocks/room": "workspace:*",
+    "ws": "8.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.7",
+    "@types/ws": "8.18.2"
+  }
+}
