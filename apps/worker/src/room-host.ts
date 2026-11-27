@@ -76,6 +76,14 @@ interface Saved {
 
 const KEY = "room";
 
+/**
+ * An alarm can fire a hair before a timer that was set for it looks due: `Date.now()` is whole
+ * milliseconds and the alarm is scheduled to the same time. Anything due within this many ms
+ * counts as due, so the handler never re-arms an alarm a fraction of a millisecond ahead (on the
+ * live server such an alarm went unanswered for ~37 s, #40).
+ */
+const ALARM_SLACK_MS = 25;
+
 export class RoomHost {
   private room: Room | null = null;
   private timers: Timers = { bot: null, clock: null, clockKey: "", expiry: 0 };
@@ -186,7 +194,7 @@ export class RoomHost {
   private async runAlarm(): Promise<void> {
     const room = this.room;
     if (!room) return;
-    const now = this.options.now();
+    const now = this.options.now() + ALARM_SLACK_MS;
     this.alarmAt = null;
     while (this.outbox[0] && this.outbox[0].at <= now)
       this.deliver((this.outbox.shift() as Saved["outbox"][number]).batch);
@@ -207,7 +215,9 @@ export class RoomHost {
   private async after(out: readonly Outgoing[]): Promise<void> {
     const room = this.room as Room;
     const now = this.options.now();
-    const between = ([min, max]: [number, number]) => min + this.options.random() * (max - min);
+    // Whole milliseconds, so the alarm and its timer are exactly the same instant.
+    const between = ([min, max]: [number, number]) =>
+      Math.round(min + this.options.random() * (max - min));
     if (out.length > 0) {
       const delay = revealsAutoPass(out) ? between(this.options.revealDelayMs ?? [800, 2500]) : 0;
       const at = Math.max(now + delay, this.outbox.at(-1)?.at ?? 0);
@@ -249,9 +259,11 @@ export class RoomHost {
     const saved: Saved = { room: room.snapshot(), timers: this.timers, outbox: this.outbox };
     await this.state.storage.put(KEY, saved);
     const { bot, clock, expiry } = this.timers;
-    const next = Math.min(
+    const due = Math.min(
       ...[this.outbox[0]?.at, bot, clock, expiry].filter((t): t is number => typeof t === "number"),
     );
+    // Whole milliseconds, and never right on top of now (see ALARM_SLACK_MS).
+    const next = Math.max(Math.ceil(due), this.options.now() + 10);
     // Each setAlarm is billed as a row written, so only move it when it changes.
     if (next !== this.alarmAt) {
       this.alarmAt = next;

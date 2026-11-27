@@ -56,10 +56,10 @@ class FakeObject {
     return host;
   }
 
-  /** Moves the clock to the alarm and fires it. */
-  async fire(host: RoomHost) {
+  /** Moves the clock to the alarm (or `early` ms before it) and fires it. */
+  async fire(host: RoomHost, early = 0) {
     if (this.alarm === null) throw new Error("no alarm set");
-    this.now = Math.max(this.now, this.alarm);
+    this.now = Math.max(this.now, this.alarm - early);
     this.alarm = null;
     await host.alarm();
   }
@@ -254,5 +254,22 @@ describe("room Durable Object (#40)", () => {
       note: expect.stringContaining("boom"),
     });
     expect(JSON.parse(obj.data.get("debug") as string).at(-1).ev).toBe("error");
+  });
+
+  it("an alarm that fires a hair before its timer still runs it, and never re-arms right on top of now (#40)", async () => {
+    // On the live server `Date.now()` was 0.7 ms short of a fractional bot timer, the handler found
+    // nothing due and re-armed 0.7 ms ahead, and that alarm went unanswered for ~37 s.
+    const obj = new FakeObject();
+    const host = await obj.host(true);
+    const ana = await startUntilBotAwaited(obj, host);
+    const before = ana.received.length;
+    await obj.fire(host, 1); // 1 ms early
+    expect(ana.received.length).toBeGreaterThan(before); // the bot moved
+    for (const e of host.debugLog().trace) {
+      if (e.ev === "setAlarm") expect(e.note).toBeGreaterThanOrEqual(10);
+    }
+    const timers = host.debugLog().timers;
+    for (const t of [timers.bot, timers.clock, timers.expiry])
+      if (t !== null) expect(Number.isInteger(t)).toBe(true);
   });
 });
