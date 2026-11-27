@@ -19,7 +19,8 @@ flowchart LR
     engine["packages/engine<br/>pure rules engine"]
     bots["packages/bots<br/>random / greedy / heuristic"]
     sim["packages/sim<br/>simulation CLI + stats"]
-    server["apps/server<br/>Worker + Durable Object per room<br/>(rooms, turn clock)"]
+    room["packages/room<br/>pure room logic<br/>(lobby, rules, bots, history)"]
+    server["apps/server<br/>Node + WebSocket (local)<br/>or Worker + Durable Object per room<br/>(sockets, timers)"]
     web["apps/web<br/>React UI (Cloudflare Pages)"]
   end
   content --> engine
@@ -27,8 +28,9 @@ flowchart LR
   engine --> bots
   engine --> sim
   bots --> sim
-  engine --> server
-  bots --> server
+  engine --> room
+  bots --> room
+  room --> server
   server <-->|"intents / player views"| web
   sim --> report[["sim report<br/>(Markdown + JSON)"]]
 ```
@@ -38,7 +40,8 @@ flowchart LR
 | `packages/engine` | Game state, legal moves, applying moves, per-player views, ruleset loading and validation, hooks | nothing at runtime except `zod` |
 | `packages/bots` | `Policy` implementations that pick a move from `legalMoves` | engine |
 | `packages/sim` | Runs N games across seeds, collects metrics, compares rulesets, writes reports | engine, bots |
-| `apps/server` | Rooms, seats and reconnects. Runs the engine, broadcasts views and owns turn-clock timers (M4). Deployed as a Cloudflare Worker with one Durable Object per room | engine, bots (for filling empty seats) |
+| `packages/room` | One game room, with no I/O: the lobby (seats, host, bots), the ruleset plus in-room overrides, the authoritative game, per-player messages (`viewFor` + `legalMoves`), timeouts and the per-player event history. Every input returns the messages to deliver | engine, bots |
+| `apps/server` | Transports for `packages/room`: sockets, reconnect tokens, turn-clock timers and bot pacing (M4). A Node + WebSocket server locally, then a Cloudflare Worker with one Durable Object per room | room |
 | `apps/web` | Renders the player view and sends intents (M4) | engine types only |
 
 ## 3. Engine API

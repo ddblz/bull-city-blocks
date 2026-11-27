@@ -186,6 +186,8 @@ A variant can also change the deck through the ruleset's `deck` section, without
 
 Counts are per deck copy, so a 6–10 player game still doubles them. An unknown card or district id is an error.
 
+For online play, a room's host can also apply overrides to the chosen ruleset for that room only. They use the same paths and checks as a variant's `overrides`, and they aren't simulated. To make a room's rules permanent, export them as a variant and open a pull request with its simulation report.
+
 If a variant can't be expressed with parameters, it may add a **rule hook**: a small, pure function registered at a named extension point, such as `onRentCalculated` or `canTarget`. Hooks are allowed only in `packages/engine/src/hooks/`, and each needs its own tests.
 
 Every variant pull request **must include a simulation report** that compares the variant with `base`.
