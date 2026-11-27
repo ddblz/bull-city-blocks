@@ -1,0 +1,12 @@
+{
+  "id": "rodeo-cap-4",
+  "extends": "base",
+  "description": "Food Truck Rodeo and pair rent cards charge at most 4 players",
+  "hypothesis": "At 8–10 players: fewer single-turn blowouts and lower comeback rate; no change at 2–4 players",
+  "predictions": [
+    { "metric": "comebackRate", "players": [8, 10], "expect": "lower" },
+    { "metric": "comebackRate", "players": [2, 4], "expect": "same" },
+    { "metric": "roundsToWin", "players": [2, 4], "expect": "same" }
+  ],
+  "overrides": { "actions.foodTruckRodeo.maxTargets": 4, "rent.pair.maxTargets": 4 }
+}

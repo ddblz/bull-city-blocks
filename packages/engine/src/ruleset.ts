@@ -7,6 +7,26 @@ import type { Result } from "./result";
  */
 
 const count = z.number().int().min(0);
+
+/** Simulation metrics a variant's predictions can name (they match the sim's scalar metrics). */
+export const PREDICTION_METRICS = [
+  "stallRate",
+  "comebackRate",
+  "turnsToWin",
+  "roundsToWin",
+  "reshuffles",
+] as const;
+
+/**
+ * A machine-checkable part of a variant's hypothesis (SPEC §5): over the given player counts,
+ * the metric should come out lower, higher or the same as in the base ruleset.
+ */
+const PredictionSchema = z.strictObject({
+  metric: z.enum(PREDICTION_METRICS),
+  players: z.tuple([z.number().int().min(2), z.number().int().max(10)]),
+  expect: z.enum(["lower", "higher", "same"]),
+});
+export type Prediction = z.infer<typeof PredictionSchema>;
 const positive = z.number().int().positive();
 /** `null` means unlimited (the SPEC's ∞). */
 const maxTargets = positive.nullable();
@@ -15,6 +35,7 @@ export const RuleSetSchema = z.strictObject({
   id: z.string().min(1),
   description: z.string(),
   hypothesis: z.string().optional(),
+  predictions: z.array(PredictionSchema).optional(),
   players: z.strictObject({ min: positive, max: positive }),
   /** §3.1 deck copies by player count: the first tier whose `maxPlayers` covers the count. */
   deckCopies: z.array(z.strictObject({ maxPlayers: positive, copies: positive })).min(1),
@@ -55,6 +76,7 @@ const VariantSchema = z.strictObject({
   extends: z.string().min(1),
   description: z.string(),
   hypothesis: z.string().optional(),
+  predictions: z.array(PredictionSchema).optional(),
   overrides: z.record(z.string(), z.unknown()).default({}),
 });
 
@@ -111,8 +133,8 @@ export function loadRuleset(id: string, files: readonly unknown[]): Result<RuleS
     }
     const parent = resolve(variant.data.extends, [...chain, current]);
     if (!parent.ok) return parent;
-    const { id, description, hypothesis, overrides } = variant.data;
-    let merged: unknown = { ...parent.value, id, description, hypothesis };
+    const { id, description, hypothesis, predictions, overrides } = variant.data;
+    let merged: unknown = { ...parent.value, id, description, hypothesis, predictions };
     for (const [path, value] of Object.entries(overrides)) {
       const next = applyOverride(merged, path, value);
       if (!next.ok) return { ok: false, error: `ruleset "${current}": ${next.error}` };

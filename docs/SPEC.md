@@ -164,9 +164,15 @@ A variant is a JSON file in `rulesets/` that `extends` another ruleset and overr
   "extends": "base",
   "description": "Food Truck Rodeo and pair rent cards charge at most 4 players",
   "hypothesis": "At 8–10 players: fewer single-turn blowouts and lower comeback rate; no change at 2–4 players",
+  "predictions": [
+    { "metric": "comebackRate", "players": [8, 10], "expect": "lower" },
+    { "metric": "comebackRate", "players": [2, 4], "expect": "same" }
+  ],
   "overrides": { "actions.foodTruckRodeo.maxTargets": 4, "rent.pair.maxTargets": 4 }
 }
 ```
+
+`predictions` makes the hypothesis checkable. Each prediction names a simulation metric (`stallRate`, `comebackRate`, `turnsToWin`, `roundsToWin` or `reshuffles`), a range of player counts, and whether the variant should come out `lower`, `higher` or the `same` as base. `pnpm sim --base base --variant <id>` runs both rulesets on the same seeds and writes `reports/<id>.md`, which gives each prediction a verdict computed from the data. A prediction is **supported** when the 95% confidence intervals show the predicted change at every player count it covers (or overlap, for `same`). It is **not supported** when they show the opposite at any of them. Otherwise it is **inconclusive**.
 
 A variant can also change the deck through the ruleset's `deck` section, without editing `content/`:
 
