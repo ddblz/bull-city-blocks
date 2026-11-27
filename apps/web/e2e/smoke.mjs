@@ -32,8 +32,14 @@ try {
   await ana.getByText("Seats (2/10)").waitFor();
   check(true, "a second player joined by link, and both see two seats");
 
-  check(await ana.getByRole("button", { name: "Start game" }).isVisible(), "the host sees the settings");
-  check((await ben.getByRole("button", { name: "Start game" }).count()) === 0, "the other player doesn't");
+  check(
+    await ana.getByRole("button", { name: "Start game" }).isVisible(),
+    "the host sees the settings",
+  );
+  check(
+    (await ben.getByRole("button", { name: "Start game" }).count()) === 0,
+    "the other player doesn't",
+  );
 
   await ana.getByRole("button", { name: "Add greedy bot" }).click();
   await ben.getByText("Seats (3/10)").waitFor();
@@ -41,7 +47,7 @@ try {
 
   await ben.reload();
   await ben.getByText("Seats (3/10)").waitFor();
-  const benSeat = await ben.locator(".seats li", { hasText: "Ben" }).innerText();
+  const benSeat = (await ben.locator(".seats li", { hasText: "Ben" }).textContent()) ?? "";
   check(benSeat.includes("you"), "reloading reconnects to the same seat");
 
   if (shots) {
