@@ -42,7 +42,7 @@ Every number in **bold** is a ruleset parameter and can be changed by a variant.
    - Put a cash card, or an action or rent card face-down as cash at its value, into your **bank**.
    - Play an action or rent card for its effect. It then goes to the discard pile.
    - Play a Landmark or Icon onto one of your complete districts (§3.5).
-   You may also **rearrange your wild properties** at any time during your turn. This is free and does not count as a play.
+   You may also **rearrange your wild properties** during your turn. This is free and does not count as a play. Each wild can be moved once per turn.
 3. **Discard:** if you have more than **7** cards in hand, discard down to **7**.
 4. **Win check:** if you have **3** complete districts at any moment, you win immediately, even during another player's turn. They must be 3 *different* districts: two complete sets of the same district count once.
 
@@ -58,11 +58,11 @@ When the draw pile is empty, shuffle the discard pile to form a new draw pile. I
 
 ### 3.5 Districts, rent and upgrades
 - A district is **complete** when you hold its set size of properties in it.
-- **Rent** for a district is set by how many of its properties you hold, using the district's rent ladder. If you hold two sets of the same district, rent uses the larger set.
+- **Rent** for a district is set by how many of its properties you hold, using the district's rent ladder. If you hold two sets of the same district, rent uses the set that charges more, counting its upgrades.
 - **Landmark** (like a house): played on one of your complete districts, it adds **+3** rent. One per district.
 - **Icon** (like a hotel): played on a complete district that already has a Landmark, it adds **+4** rent. One per district.
 - Transit can't take upgrades.
-- If a district stops being complete, for example because you paid a debt with one of its properties, its upgrades go to your bank as cash at their card value.
+- If a district stops being complete, for example because you paid a debt with one of its properties, its upgrades go to your bank as cash at their card value. An Icon whose Landmark leaves the district goes to your bank too.
 - Extra properties beyond the set size start a second, separate set of that district.
 
 ### 3.6 Responding to actions (Appeal and auto-pass)

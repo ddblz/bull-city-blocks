@@ -1,7 +1,7 @@
 import type { ActionType } from "./content";
 import { queueResponses } from "./respond";
-import type { GameEvent, GameState, Move, PlayerId, PlayerState, PropertySet } from "./types";
-import { draw, othersAfter, playerOf } from "./util";
+import type { GameEvent, GameState, Move, PlayerId, PlayerState } from "./types";
+import { draw, isComplete, othersAfter, playerOf } from "./util";
 
 /** SPEC §4.5 actions. Each goes to the discard pile; targeted ones wait for a response (§3.6). */
 
@@ -15,8 +15,6 @@ const actionOf = (s: GameState, card: string): ActionType | null => {
   return def?.kind === "action" ? def.action : null;
 };
 
-const isComplete = (s: GameState, set: PropertySet) =>
-  set.cards.length >= (s.districts[set.district]?.setSize ?? Number.POSITIVE_INFINITY);
 const incompleteProps = (s: GameState, p: PlayerState) =>
   p.tableau.filter((set) => !isComplete(s, set)).flatMap((set) => set.cards);
 const completeDistricts = (s: GameState, p: PlayerState) => [

@@ -4,12 +4,19 @@ import { othersAfter, playerOf } from "./util";
 
 /** SPEC §3.5 rent and §4.6 rent cards, with Rent Hike (§4.5). */
 
-/** Rent for one of a player's districts: the ladder step for their largest set there (0 if none). */
+/**
+ * Rent for one of a player's districts (§3.5): the ladder step for the number of cards in a set,
+ * plus the ruleset's bonuses for its Landmark and Icon. With two sets, the higher rent counts.
+ */
 export function rentFor(s: GameState, player: PlayerId, district: string): number {
   const ladder = s.districts[district]?.rent ?? [];
-  const held = playerOf(s, player).tableau.filter((set) => set.district === district);
-  const most = Math.min(Math.max(0, ...held.map((set) => set.cards.length)), ladder.length);
-  return most === 0 ? 0 : (ladder[most - 1] ?? 0);
+  const { landmarkBonus, iconBonus } = s.rules.upgrades;
+  let best = 0;
+  for (const set of playerOf(s, player).tableau.filter((t) => t.district === district)) {
+    const step = ladder[Math.min(set.cards.length, ladder.length) - 1] ?? 0;
+    best = Math.max(best, step + (set.landmark ? landmarkBonus : 0) + (set.icon ? iconBonus : 0));
+  }
+  return best;
 }
 
 /** playRent moves: each rent card × each district it can charge × (Wild Rent) each target × with or without a Rent Hike. */

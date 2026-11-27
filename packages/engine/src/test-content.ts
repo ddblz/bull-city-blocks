@@ -5,6 +5,7 @@ import { createGame } from "./create-game";
 import { loadRuleset, type RuleSet } from "./ruleset";
 import { applyMove } from "./turn";
 import type { CardInstanceId, GameState, Move, PlayerState } from "./types";
+import { setCards } from "./util";
 
 /** The validated Durham content. */
 export function durhamContent(): Content {
@@ -47,7 +48,7 @@ export const next = (s: GameState) =>
 export const cardsIn = (s: GameState) => [
   ...s.deck,
   ...s.discard,
-  ...s.players.flatMap((p) => [...p.hand, ...p.bank, ...p.tableau.flatMap((t) => t.cards)]),
+  ...s.players.flatMap((p) => [...p.hand, ...p.bank, ...p.tableau.flatMap(setCards)]),
 ];
 /** Moves `cards` out of wherever they are and into `to` (keeps the card count conserved). */
 export function place(s: GameState, cards: CardInstanceId[], to: CardInstanceId[]) {
@@ -74,7 +75,7 @@ export function deepFreeze<T>(o: T): T {
  */
 export function arena(n: number, mine: string[], theirs: string[] = [], s: GameState = game(n)) {
   for (const p of s.players)
-    place(s, [...p.hand, ...p.bank, ...p.tableau.flatMap((t) => t.cards)], s.deck);
+    place(s, [...p.hand, ...p.bank, ...p.tableau.flatMap(setCards)], s.deck);
   for (const p of s.players) p.tableau = [];
   const me = current(s);
   const them = next(s);

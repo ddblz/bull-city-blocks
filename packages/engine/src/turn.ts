@@ -3,8 +3,9 @@ import { checkPay, pay, payableCards } from "./payment";
 import { playRent, rentMoves } from "./rent";
 import { appealIn, resolvePending, respond } from "./respond";
 import type { Result } from "./result";
+import { moveWild, playUpgrade, tableauMoves } from "./tableau";
 import type { CardInstanceId, GameEvent, GameState, Move, PlayerId, PlayerState } from "./types";
-import { addToTableau, draw, playerOf } from "./util";
+import { addToTableau, draw, isComplete, playerOf } from "./util";
 
 /**
  * The turn loop (SPEC §3.2–3.3, §3.5 completion, §3.8; ARCHITECTURE §4.1). applyMove copies
@@ -17,6 +18,7 @@ function draft(s: GameState): GameState {
     deck: [...s.deck],
     discard: [...s.discard],
     pending: [...s.pending],
+    wildsMoved: [...s.wildsMoved],
     players: s.players.map((p) => ({
       ...p,
       hand: [...p.hand],
@@ -36,16 +38,16 @@ export function startTurn(s: GameState, events: GameEvent[]): void {
   p.delayed = false;
   s.phase = "play";
   s.playsRemaining = s.rules.playsPerTurn;
+  s.wildsMoved = [];
 }
 
 /** §3.5: districts where the player holds at least one complete set. */
 export function completeDistricts(s: GameState, player: PlayerId): Set<string> {
-  const done = new Set<string>();
-  for (const set of playerOf(s, player).tableau) {
-    const district = s.districts[set.district];
-    if (district !== undefined && set.cards.length >= district.setSize) done.add(set.district);
-  }
-  return done;
+  return new Set(
+    playerOf(s, player)
+      .tableau.filter((set) => isComplete(s, set))
+      .map((set) => set.district),
+  );
 }
 
 function endGame(s: GameState, result: PlayerId | "stall", events: GameEvent[]): void {
@@ -111,6 +113,7 @@ export function legalMoves(state: GameState, player: PlayerId): Move[] {
     }
     moves.push(...rentMoves(state, player), ...actionMoves(state, player));
   }
+  moves.push(...tableauMoves(state, player));
   moves.push({ type: "endTurn", player });
   return moves;
 }
@@ -143,7 +146,7 @@ export function applyMove(
   switch (move.type) {
     case "playProperty": {
       take(move.card);
-      addToTableau(s, p, move.card);
+      addToTableau(s, p, move.card, move.district);
       s.playsRemaining -= 1;
       events.push({ type: "propertyPlayed", player: p.id, card: move.card });
       break;
@@ -171,6 +174,12 @@ export function applyMove(
       break;
     case "pay":
       pay(s, move.cards, events);
+      break;
+    case "playUpgrade":
+      playUpgrade(s, move, events);
+      break;
+    case "moveWild":
+      moveWild(s, move, events);
       break;
     case "respond":
       respond(s, move.appeal, events);
