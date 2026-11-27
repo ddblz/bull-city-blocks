@@ -11,6 +11,7 @@ export function isExcluded(path: string): boolean {
   return (
     file === "pnpm-lock.yaml" ||
     file.endsWith(".test.ts") ||
+    file.endsWith(".css") ||
     top === "content" ||
     top === "reports" ||
     top === "docs" ||
