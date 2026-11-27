@@ -42,20 +42,6 @@ export interface HostOptions {
   botDelayMs?: [number, number];
   revealDelayMs?: [number, number];
   idleExpiryMs?: number;
-  /** Record a trace of alarms, messages and errors, readable through `debugLog()` (see #40). */
-  debug?: boolean;
-}
-
-/** One line of the debug trace. `at` is `Date.now()` as the handler saw it. */
-export interface TraceEntry {
-  at: number;
-  ev: "message" | "alarm" | "setAlarm" | "error";
-  /** message: its type. setAlarm: what it was set to, relative to `at`. error: the message. */
-  note?: string | number;
-  /** alarm: how far each timer is from due (negative = overdue), and the set alarm time. */
-  due?: { bot: number | null; clock: number | null; outbox: number | null; expiry: number };
-  /** alarm: when the previous setAlarm said it should fire. */
-  scheduled?: number | null;
 }
 
 /** When each timer is due (epoch ms), or null. All of them share the object's one alarm. */
@@ -89,7 +75,6 @@ export class RoomHost {
   private timers: Timers = { bot: null, clock: null, clockKey: "", expiry: 0 };
   private outbox: Saved["outbox"] = [];
   private alarmAt: number | null = null;
-  private trace: TraceEntry[] = [];
   private readonly state: HostState;
   private readonly options: HostOptions;
 
@@ -103,26 +88,8 @@ export class RoomHost {
     return { rulesets, content, makeId };
   }
 
-  /** The recent trace (newest last), for `GET /rooms/<id>/debug`. Empty unless `debug` is on. */
-  debugLog() {
-    return { now: this.options.now(), exists: this.exists, timers: this.timers, trace: this.trace };
-  }
-
-  private record(entry: Omit<TraceEntry, "at">) {
-    if (!this.options.debug) return;
-    this.trace.push({ at: this.options.now(), ...entry });
-    if (this.trace.length > 60) this.trace.shift();
-  }
-
-  /** Persists the trace, so it survives the object being evicted (only when `debug` is on). */
-  private async flushTrace() {
-    if (this.options.debug) await this.state.storage.put("debug", this.trace);
-  }
-
   /** Loads the saved room, if any: on every start, including after hibernation or eviction. */
   async load(): Promise<void> {
-    if (this.options.debug)
-      this.trace = (await this.state.storage.get<TraceEntry[]>("debug")) ?? [];
     const saved = await this.state.storage.get<Saved>(KEY);
     if (!saved) return;
     this.room = Room.restore(this.roomOptions, saved.room);
@@ -157,7 +124,6 @@ export class RoomHost {
     } catch {
       return reply("messages must be JSON");
     }
-    this.record({ ev: "message", note: msg.type });
     const seat = (ws.deserializeAttachment() as { seat: number | null } | null)?.seat ?? null;
     if (seat !== null) return this.after(room.handle(seat, msg));
     if (msg.type !== "join") return reply("join first");
@@ -169,29 +135,6 @@ export class RoomHost {
 
   /** The alarm: deliver held batches, then run whichever of expiry, bot or clock is due. */
   async alarm(): Promise<void> {
-    const scheduled = this.alarmAt;
-    const now = this.options.now();
-    const left = (t: number | null | undefined) => (typeof t === "number" ? t - now : null);
-    this.record({
-      ev: "alarm",
-      scheduled,
-      due: {
-        bot: left(this.timers.bot),
-        clock: left(this.timers.clock),
-        outbox: left(this.outbox[0]?.at),
-        expiry: this.timers.expiry - now,
-      },
-    });
-    try {
-      await this.runAlarm();
-    } catch (error) {
-      this.record({ ev: "error", note: String((error as Error)?.stack ?? error).slice(0, 400) });
-      await this.flushTrace();
-      throw error; // keep Cloudflare's own retry behaviour
-    }
-  }
-
-  private async runAlarm(): Promise<void> {
     const room = this.room;
     if (!room) return;
     const now = this.options.now() + ALARM_SLACK_MS;
@@ -267,10 +210,8 @@ export class RoomHost {
     // Each setAlarm is billed as a row written, so only move it when it changes.
     if (next !== this.alarmAt) {
       this.alarmAt = next;
-      this.record({ ev: "setAlarm", note: next - this.options.now() });
       await this.state.storage.setAlarm(next);
     }
-    await this.flushTrace();
   }
 
   /** 72 hours idle: close every socket and forget the room. */
