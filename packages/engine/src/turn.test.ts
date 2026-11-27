@@ -35,6 +35,13 @@ describe("turn loop", () => {
       { type: "bank", player: p, card: action },
       { type: "bank", player: p, card: rent },
       { type: "playAction", player: p, card: action }, // Walk-Off Win (§4.5, since #7)
+      // A Bull City Wild can join any district (§4.2, since #9); the Landmark has no complete set.
+      ...Object.keys(s.districts).map((district) => ({
+        type: "playProperty",
+        player: p,
+        card: wild,
+        district,
+      })),
       { type: "endTurn", player: p },
     ]);
     expect(legalMoves(s, next(s).id)).toEqual([]);

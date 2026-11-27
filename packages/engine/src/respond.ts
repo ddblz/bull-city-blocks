@@ -90,8 +90,7 @@ function applyEffect(s: GameState, step: Response): void {
       target.delayed = true;
       break;
     case "buyout": {
-      removeOwned(target, effect.take);
-      addToTableau(s, attacker, effect.take);
+      addToTableau(s, attacker, effect.take, removeOwned(s, target, effect.take));
       const value = s.cards[effect.take]?.value ?? 0;
       if (s.rules.actions.buyout.payCardValue && value > 0) {
         s.pending.unshift({
@@ -104,10 +103,8 @@ function applyEffect(s: GameState, step: Response): void {
       break;
     }
     case "swap":
-      removeOwned(target, effect.take);
-      removeOwned(attacker, effect.give);
-      addToTableau(s, attacker, effect.take);
-      addToTableau(s, target, effect.give);
+      addToTableau(s, attacker, effect.take, removeOwned(s, target, effect.take));
+      addToTableau(s, target, effect.give, removeOwned(s, attacker, effect.give));
       break;
     case "takeover": {
       const size = s.districts[effect.district]?.setSize ?? 0;

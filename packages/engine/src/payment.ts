@@ -1,11 +1,11 @@
 import type { CardInstanceId, GameEvent, GameState, PlayerId, PlayerState } from "./types";
-import { addToTableau, playerOf, removeOwned } from "./util";
+import { addToTableau, playerOf, removeOwned, setCards } from "./util";
 
 /** SPEC §3.4 paying debts. Debts wait in `state.pending`, in seat order after the creditor. */
 
 /** Bank and tableau cards a player may pay with. Bull City Wilds can't be used (§4.2). */
 export function payableCards(s: GameState, p: PlayerState): CardInstanceId[] {
-  const owned = [...p.bank, ...p.tableau.flatMap((set) => set.cards)];
+  const owned = [...p.bank, ...p.tableau.flatMap(setCards)];
   return owned.filter((card) => {
     const def = s.cards[card];
     return !(def?.kind === "wild" && def.districts === "any");
@@ -46,8 +46,9 @@ export function pay(s: GameState, cards: readonly CardInstanceId[], events: Game
   const debtor = playerOf(s, debt.debtor);
   const creditor = playerOf(s, debt.creditor);
   for (const card of cards) {
-    removeOwned(debtor, card);
-    if (s.cards[card]?.kind === "property") addToTableau(s, creditor, card);
+    const from = removeOwned(s, debtor, card);
+    const kind = s.cards[card]?.kind;
+    if (kind === "property" || kind === "wild") addToTableau(s, creditor, card, from);
     else creditor.bank.push(card);
   }
   const remaining = debt.amount - totalValue(s, cards);

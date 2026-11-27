@@ -27,6 +27,8 @@ const DistrictSchema = z.object({
   setSize: z.number().int().positive(),
   rent: z.array(value).min(1),
   value,
+  /** §3.5: false for districts that can't take Landmarks or Icons (Transit). */
+  upgradable: z.boolean().default(true),
 });
 
 const base = { id, name: z.string().min(1), value, count };

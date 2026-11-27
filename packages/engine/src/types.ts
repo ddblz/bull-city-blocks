@@ -15,6 +15,9 @@ export interface PlayerPrefs {
 export interface PropertySet {
   district: District["id"];
   cards: CardInstanceId[];
+  /** §4.3 upgrades, only on a complete set; an Icon needs a Landmark. */
+  landmark?: CardInstanceId;
+  icon?: CardInstanceId;
 }
 
 export interface PlayerState {
@@ -27,9 +30,14 @@ export interface PlayerState {
   delayed: boolean;
 }
 
-/** Moves a player can make (ARCHITECTURE §3). Actions, payments and wilds arrive in #6–#9. */
+/** Moves a player can make (ARCHITECTURE §3). */
 export type Move =
-  | { type: "playProperty"; player: PlayerId; card: CardInstanceId }
+  /** `district` only for a wild (§4.2): which district it joins. */
+  | { type: "playProperty"; player: PlayerId; card: CardInstanceId; district?: District["id"] }
+  /** §4.3: a Landmark or Icon onto one of your complete districts. */
+  | { type: "playUpgrade"; player: PlayerId; card: CardInstanceId; district: District["id"] }
+  /** §3.2: move one of your wilds to another district. Free, during your own turn. */
+  | { type: "moveWild"; player: PlayerId; card: CardInstanceId; district: District["id"] }
   | { type: "bank"; player: PlayerId; card: CardInstanceId }
   | { type: "endTurn"; player: PlayerId }
   | { type: "discard"; player: PlayerId; card: CardInstanceId }
@@ -68,6 +76,8 @@ export type GameEvent =
   | { type: "deckReshuffled"; cards: number }
   | { type: "propertyPlayed"; player: PlayerId; card: CardInstanceId }
   | { type: "banked"; player: PlayerId; card: CardInstanceId }
+  | { type: "upgradePlayed"; player: PlayerId; card: CardInstanceId; district: District["id"] }
+  | { type: "wildMoved"; player: PlayerId; card: CardInstanceId; district: District["id"] }
   | { type: "discarded"; player: PlayerId; card: CardInstanceId }
   | {
       type: "rentCharged";

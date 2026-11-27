@@ -98,7 +98,8 @@
       "name": "Transit",
       "setSize": 4,
       "rent": [1, 2, 3, 4],
-      "value": 2
+      "value": 2,
+      "upgradable": false
     }
   ],
   "pairs": [
