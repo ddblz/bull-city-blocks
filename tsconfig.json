@@ -5,6 +5,7 @@
     { "path": "packages/bots" },
     { "path": "packages/sim" },
     { "path": "packages/room" },
+    { "path": "apps/server" },
     { "path": "scripts" }
   ]
 }
