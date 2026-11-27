@@ -99,4 +99,31 @@ describe("lobby reducer (#36)", () => {
     expect(long.log).toHaveLength(LOG_LENGTH);
     expect(long.log[0]?.seq).toBe(5);
   });
+
+  it("keeps the reconnect history as the recap, and remembers every card it has seen (#41)", () => {
+    const entry = {
+      seq: 4,
+      turn: 2,
+      round: 1,
+      seat: 1,
+      event: { type: "deckReshuffled", cards: 9 },
+    };
+    const state = (cards: Record<string, unknown>) =>
+      ({
+        type: "state",
+        view: { cards },
+        legal: [],
+        entries: [],
+        awaiting: null,
+        clockSeconds: null,
+      }) as never;
+    const s = run(
+      { type: "history", entries: [entry] } as never,
+      state({ a: { name: "A" } }),
+      state({ b: { name: "B" } }), // a has left view, e.g. reshuffled into the deck
+    );
+    expect(s.recap).toEqual([entry]);
+    expect(Object.keys(s.cards)).toEqual(["a", "b"]);
+    expect(run({ type: "history", entries: [] }).recap).toEqual([]);
+  });
 });

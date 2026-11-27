@@ -98,6 +98,8 @@ export type GameEvent =
       target: PlayerId;
       card: CardInstanceId;
       cancelled: boolean;
+      /** What the action does (or would have done), so logs can name what was taken. */
+      effect: Effect;
     }
   | { type: "prefSet"; player: PlayerId; autoPass: boolean }
   | { type: "gameOver"; result: PlayerId | "stall" };
