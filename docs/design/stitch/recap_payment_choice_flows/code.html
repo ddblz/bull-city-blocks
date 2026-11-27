@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed-variant": "#614000", "tertiary": "#00694c", "on-surface": "#1c1c18", "background": "#fcf9f3", "on-tertiary": "#ffffff", "primary-fixed-dim": "#ffb4a4", "inverse-on-surface": "#f3f0ea", "on-tertiary-container": "#f6fff8", "outline-variant": "#e0bfb9", "error": "#ba1a1a", "tertiary-fixed-dim": "#7bd8b1", "surface-container": "#f0eee8", "tertiary-container": "#1e8462", "primary-container": "#c84b31", "secondary-fixed": "#ffddb0", "surface": "#fcf9f3", "on-surface-variant": "#58413c", "on-primary": "#ffffff", "primary": "#a6331b", "surface-container-low": "#f6f3ed", "outline": "#8c716b", "secondary-fixed-dim": "#ffba46", "inverse-surface": "#31312d", "on-secondary-fixed": "#281800", "secondary-container": "#feb63c", "on-error": "#ffffff", "on-tertiary-fixed": "#002115", "on-primary-container": "#fffbff", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "inverse-primary": "#ffb4a4", "secondary": "#805600", "on-background": "#1c1c18", "primary-fixed": "#ffdad3", "surface-tint": "#aa361e", "on-primary-fixed": "#3e0500", "surface-dim": "#dcdad4", "on-secondary": "#ffffff", "surface-bright": "#fcf9f3", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#00513a", "tertiary-fixed": "#97f5cc", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#891e07" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.5rem", "space-xl": "2rem", "space-md": "1rem", "margin-desktop": "2.5rem", "margin": "1.5rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "label-md": ["JetBrains Mono"], "headline-sm": ["Epilogue"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Epilogue"], "headline-md": ["Epilogue"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Epilogue"] }, "fontSize": { "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md shrink-0"><img alt="Bull City Blocks Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBp7OiuPKW1uYkfsJc_mN40690bOIOfHX8WlWgByK_16HCF4fDZOJmmt_QFySTwIqfm87vgeHVIsHHVSIgdpPP4kNPQDZOKHx5glH2nrmqSkdRN8c1pdwSgjlWK0TH6C0BbxdVKUPp2518wjzreV_YQA6C9PvsCrxcgtlWC5SIzPQmDexqmsLtm5prVXH_tXyoF2O3b_rZHFKgvT37O0IQfeX-xgLA0s9K7gj8FltIi"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Durham Social Tabletop</span></div></div><div class="hidden lg:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(30,27,24,0.06)]"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span></span><span class="font-label-md text-label-md text-on-surface tracking-wide">Room #BCB-DURHAM</span><span class="text-outline-variant font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary font-semibold">4/6 Players</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm"><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="game-table" href="#">Table</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="neighborhood-atlas" href="#">Neighborhoods</a><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm" data-path="house-rules" href="#">Rules</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="lobby" href="#">Lobby</a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Quick Reference Rules" type="button"><span class="material-symbols-outlined text-[20px]">menu_book</span></button><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Tabletop Sound and Vibes" type="button"><span class="material-symbols-outlined text-[20px]">volume_up</span></button><div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div><div class="flex items-center gap-space-xs pl-space-xs bg-surface-container-low rounded-full py-1 pr-space-md"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdvu5Zcsx7DwoyCd0k0k9RLqLbp6PATSVWiDW6qkUC6fA-uLEQKul94AmUa7Nb7kDZbhmlsQRqEbXmgm5T8y26rUQA3VM5yYfAxcKmFhuAqoW0j5X1aUrX-saEtaLnJdVaGefpQmShepUW1dM4EM_v31DtfQA3sjLxni0CPx1iHPAVbCCaWuhq19-u4LpZ3QW6FyAAcgee-5e5_Et_Ej56zrV0kJGpdMxIS_Pnmcs"/><span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div><span class="hidden sm:inline font-label-md text-label-md text-on-surface font-semibold">You (Turn 2)</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Game Session Ambience & Live Notification Header Strip -->
+<section class="w-full bg-surface-container-low py-space-sm px-margin-mobile md:px-margin-desktop shadow-sm">
+<div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container/10 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">gavel</span>
+<span>Decision State: Awaiting Your Input</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant hidden md:inline">Round 4 • Hand #18 • Live Tabletop</span>
+</div>
+<!-- Quick Interactive Tab Switcher to inspect any modal state -->
+<div class="flex items-center gap-space-xs bg-surface-container p-1 rounded-lg" id="modal-tab-nav">
+<button class="px-3 py-1.5 rounded-md font-label-md text-label-md text-on-surface bg-surface-container-lowest shadow-sm transition-all flex items-center gap-1.5" id="tab-recap" onclick="switchTab('recap')">
+<span class="material-symbols-outlined text-[16px] text-primary">history_edu</span>
+<span>1. Turn Recap</span>
+</button>
+<button class="px-3 py-1.5 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5" id="tab-payment" onclick="switchTab('payment')">
+<span class="material-symbols-outlined text-[16px] text-secondary">payments</span>
+<span>2. Pay Rent ($4)</span>
+</button>
+<button class="px-3 py-1.5 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5" id="tab-appeal" onclick="switchTab('appeal')">
+<span class="material-symbols-outlined text-[16px] text-error">shield</span>
+<span>3. Appeal Chain</span>
+</button>
+<button class="px-3 py-1.5 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1.5" id="tab-target" onclick="switchTab('target')">
+<span class="material-symbols-outlined text-[16px] text-tertiary">my_location</span>
+<span>4. Target Action</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive Sandbox Workspace: Multi-Panel Table Stage -->
+<section class="w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-space-lg">
+<!-- Active Modal Showcase Viewport -->
+<div class="relative w-full rounded-xl bg-surface-container-lowest p-space-md md:p-space-xl shadow-xl overflow-hidden min-h-[640px] flex items-center justify-center">
+<!-- Backdrop Dimmer Overlay -->
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm transition-opacity"></div>
+<!-- ========================================================================= -->
+<!-- PANEL 1: 'Since Your Last Move' Recap Drawer / Dialog -->
+<!-- ========================================================================= -->
+<div class="relative z-10 w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-2xl p-space-lg md:p-space-xl flex flex-col gap-space-lg animate-in fade-in zoom-in-95 duration-200" id="panel-recap">
+<!-- Header & Condensed Summary Banner -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="h-9 w-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">update</span>
+</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Since Your Last Move</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">3 opposing turns processed</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-on-secondary-fixed-variant font-label-md text-label-md font-semibold">
+              Live Feed
+            </span>
+</div>
+<!-- Highlight Pill Banner -->
+<div class="mt-2 bg-surface-container p-space-md rounded-lg flex items-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">notifications_active</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="font-semibold text-primary">Summary:</span> 3 turns since you played • you lost <span class="font-semibold text-error">West Point on the Eno</span> • you received <span class="font-semibold text-tertiary">+$3 Cash</span>.
+            </p>
+</div>
+</div>
+<!-- Chronological Turn Event Stream -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Turn Event Log</span>
+<!-- Turn 10 Event -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-surface-container-low transition-colors hover:bg-surface-container">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center shrink-0 font-label-lg text-label-lg text-on-secondary-fixed">
+              DK
+            </div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Devon K.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Turn 10 • Just now</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                Played <span class="font-semibold text-primary">Rent Hike</span> on Walltown. Collected <span class="font-semibold text-on-surface">$4</span> from Marcus T.
+              </p>
+</div>
+</div>
+<!-- Turn 9 Event: Highlighted in Alert Terracotta -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-error-container/20 transition-colors">
+<div class="w-10 h-10 rounded-full bg-error-container text-on-error-container flex items-center justify-center shrink-0 font-label-lg text-label-lg font-bold">
+              AP
+            </div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg text-error font-bold">Aisha P.</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm bg-error text-on-error uppercase font-bold tracking-wider">Property Seized</span>
+</div>
+<span class="font-label-sm text-label-sm text-error">Turn 9</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                Played <span class="font-semibold text-error">Hostile Takeover</span> on your <span class="font-bold underline decoration-error/50">West Point on the Eno</span> property!
+              </p>
+</div>
+<span class="material-symbols-outlined text-error text-[22px] shrink-0 self-center">report</span>
+</div>
+<!-- Turn 8 Event: Highlighted in Positive Green -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-tertiary-container/15 transition-colors">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0 font-label-lg text-label-lg font-bold">
+              MT
+            </div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg text-tertiary font-bold">Marcus T.</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm bg-tertiary text-on-tertiary uppercase font-bold tracking-wider">Payment Received</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary">Turn 8</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                Paid you <span class="font-bold text-tertiary">+$3 Rent</span> for your Brightleaf district holdings.
+              </p>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[22px] shrink-0 self-center">paid</span>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="pt-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<button class="w-full sm:w-auto px-4 py-2 rounded-md font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">list_alt</span>
+<span>View Full Move Log (24)</span>
+</button>
+<button class="w-full sm:w-auto px-6 py-3 rounded-md bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-md hover:bg-primary transition-all flex items-center justify-center gap-2" onclick="switchTab('payment')" type="button">
+<span>Dismiss &amp; Resume Turn</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- PANEL 2: Interactive Payment Panel (Rent Resolution) -->
+<!-- ========================================================================= -->
+<div class="hidden relative z-10 w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-2xl p-space-lg md:p-space-xl flex-col gap-space-lg animate-in fade-in zoom-in-95 duration-200" id="panel-payment">
+<!-- Header -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold uppercase">Demand Notice</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Due this phase</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">You owe $4 to Devon K.</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Reason: Full set rent on Walltown district</p>
+</div>
+<div class="h-12 w-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-headline-sm">
+            $4
+          </div>
+</div>
+<!-- Dynamic Status Meter -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-error font-semibold flex items-center gap-1.5" id="payment-status-label">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span>Selected $3 of $4 • Short by $1</span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface" id="payment-status-ratio">3 / 4 $M</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary transition-all duration-300 rounded-full" id="payment-progress-bar" style="width: 75%;"></div>
+</div>
+</div>
+<!-- Payment Selection Grid -->
+<div class="flex flex-col gap-space-md">
+<!-- Section A: Bank Vault -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">From Your Bank Vault</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Liquid funds</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm">
+<!-- Item 1: $2 Cash (Ticked) -->
+<div class="payment-card selected cursor-pointer p-space-sm rounded-lg bg-primary-container text-on-primary-container shadow-sm flex flex-col justify-between h-24 transition-all" data-val="2" onclick="togglePaymentItem(this, 2)">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold">$2M Cash</span>
+<span class="material-symbols-outlined text-[18px] check-icon">check_circle</span>
+</div>
+<div class="font-headline-sm text-headline-sm">$2M</div>
+<span class="font-label-sm text-label-sm opacity-80">Bank Asset</span>
+</div>
+<!-- Item 2: $1 Assessment (Ticked) -->
+<div class="payment-card selected cursor-pointer p-space-sm rounded-lg bg-primary-container text-on-primary-container shadow-sm flex flex-col justify-between h-24 transition-all" data-val="1" onclick="togglePaymentItem(this, 1)">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold">$1M Bill</span>
+<span class="material-symbols-outlined text-[18px] check-icon">check_circle</span>
+</div>
+<div class="font-headline-sm text-headline-sm">$1M</div>
+<span class="font-label-sm text-label-sm opacity-80">Bank Asset</span>
+</div>
+<!-- Item 3: $5 Cash (Unticked) -->
+<div class="payment-card cursor-pointer p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface shadow-sm flex flex-col justify-between h-24 transition-all" data-val="5" onclick="togglePaymentItem(this, 5)">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold">$5M Cash</span>
+<span class="material-symbols-outlined text-[18px] text-outline check-icon">radio_button_unchecked</span>
+</div>
+<div class="font-headline-sm text-headline-sm">$5M</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bank Asset</span>
+</div>
+</div>
+</div>
+<!-- Section B: Board Properties (Tableau) -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">From Your Board (Tableau)</span>
+<span class="font-label-sm text-label-sm text-error">Surrendering breaks district set</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Tableau 1 -->
+<div class="payment-card cursor-pointer p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface shadow-sm flex items-center justify-between transition-all" data-val="2" onclick="togglePaymentItem(this, 2)">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-md">
+                    $2
+                  </div>
+<div>
+<div class="font-label-lg text-label-lg font-semibold leading-tight">Old West Durham</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Property Card • Valued $2M</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-outline check-icon">radio_button_unchecked</span>
+</div>
+<!-- Tableau 2 -->
+<div class="payment-card cursor-pointer p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface shadow-sm flex items-center justify-between transition-all" data-val="1" onclick="togglePaymentItem(this, 1)">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-md">
+                    $1
+                  </div>
+<div>
+<div class="font-label-lg text-label-lg font-semibold leading-tight">The Eno Preserve</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Property Card • Valued $1M</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-outline check-icon">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+<!-- Note Banner -->
+<div class="flex items-center gap-2 p-2.5 rounded-md bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span>Rules Mandate: You cannot pay from cards in Hand. No change is given for overpayment.</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-space-xs flex items-center justify-end gap-space-md">
+<button class="px-4 py-2.5 rounded-md font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface" onclick="switchTab('recap')" type="button">
+            Back
+          </button>
+<button class="px-6 py-3 rounded-md bg-surface-container-highest text-on-surface-variant font-label-lg text-label-lg transition-all cursor-not-allowed flex items-center gap-2 shadow-sm" disabled="" id="pay-submit-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span id="pay-submit-text">Pay $4 (Select $1 more)</span>
+</button>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- PANEL 3: Action & Appeal Chain Panel (Reaction Modal) -->
+<!-- ========================================================================= -->
+<div class="hidden relative z-10 w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-2xl p-space-lg md:p-space-xl flex-col gap-space-lg animate-in fade-in zoom-in-95 duration-200" id="panel-appeal">
+<!-- Header -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="h-10 w-10 rounded-full bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm text-error uppercase font-bold tracking-wider">Appeal Escalation</span>
+<h2 class="font-headline-md text-headline-md text-on-surface leading-tight">Devon K. initiated Hostile Takeover!</h2>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-error text-on-error font-label-sm text-label-sm font-bold uppercase tracking-wider animate-pulse">
+            Chain Open
+          </span>
+</div>
+<!-- Target Notification Pill -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">location_city</span>
+<span class="font-body-sm text-body-sm text-on-surface">Target Asset: <strong class="font-semibold text-primary">Downtown Complete District (3 Properties)</strong></span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Value: $8M</span>
+</div>
+<!-- Appeal Chain Timeline Visualizer -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Resolution History Chain</span>
+<div class="relative pl-6 space-y-4 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-highest">
+<!-- Step 1 -->
+<div class="relative flex items-center justify-between">
+<span class="absolute -left-6 top-1 h-3 w-3 rounded-full bg-primary ring-4 ring-surface-container-lowest"></span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Step 1: Devon K.</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Played <strong>"Hostile Takeover"</strong> targeting your Downtown set</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Action Card</span>
+</div>
+<!-- Step 2 -->
+<div class="relative flex items-center justify-between">
+<span class="absolute -left-6 top-1 h-3 w-3 rounded-full bg-tertiary ring-4 ring-surface-container-lowest"></span>
+<div>
+<span class="font-label-md text-label-md text-tertiary font-semibold">Step 2: You (Defense)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Played <strong>"Appeal"</strong> (First Shield deployed)</p>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Blocked 🛡️</span>
+</div>
+<!-- Step 3 -->
+<div class="relative flex items-center justify-between">
+<span class="absolute -left-6 top-1 h-3 w-3 rounded-full bg-error ring-4 ring-surface-container-lowest"></span>
+<div>
+<span class="font-label-md text-label-md text-error font-semibold">Step 3: Devon K. (Counter)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Played <strong>"Counter Appeal!"</strong> (Pierces Shield 1)</p>
+</div>
+<span class="font-label-sm text-label-sm text-error font-semibold">Breached ⚔️</span>
+</div>
+</div>
+</div>
+<!-- Choice Prompt Box -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Your Response Required:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Do you want to play a second <span class="font-semibold text-primary">"Appeal"</span> card from your hand to cancel Devon's Counter Appeal and retain your property?
+          </p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">1x Appeal Card available in your active hand</span>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="pt-space-xs grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<button class="w-full px-4 py-3 rounded-md bg-surface-container-high hover:bg-surface-container-highest text-error font-label-lg text-label-lg transition-colors flex items-center justify-center gap-2" onclick="alert('Set surrendered. Downtown transferred to Devon K.')" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Accept Consequence (Lose Set)</span>
+</button>
+<button class="w-full px-5 py-3 rounded-md bg-primary-container hover:bg-primary text-on-primary-container font-label-lg text-label-lg shadow-md transition-all flex items-center justify-center gap-2" onclick="alert('2nd Appeal Played! Devon\'s takeover is officially blocked.')" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Play 2nd Appeal (Hand)</span>
+</button>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- PANEL 4: Action Target Selector (Bottom Sheet / Modal) -->
+<!-- ========================================================================= -->
+<div class="hidden relative z-10 w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-2xl p-space-lg md:p-space-xl flex-col gap-space-lg animate-in fade-in zoom-in-95 duration-200" id="panel-target">
+<!-- Header -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold uppercase">Action Setup</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Step 1 of 2</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">Select Action Target</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Playing: <strong class="font-semibold text-primary">District Rent Demand</strong></p>
+</div>
+<span class="h-10 w-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+</span>
+</div>
+<!-- 1. Player Selection Grid (6 Players) -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">1. Choose Target Opponent</span>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-xs" id="player-grid">
+<!-- Devon (Selected) -->
+<button class="opponent-chip selected p-space-sm rounded-lg bg-primary-container text-on-primary-container text-left flex items-center gap-space-sm shadow-sm transition-all" onclick="selectOpponent(this)" type="button">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center font-label-md font-bold">DK</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">Devon K.</span>
+<span class="font-label-sm text-label-sm opacity-90">2 Sets • $9M</span>
+</div>
+</button>
+<!-- Marcus -->
+<button class="opponent-chip p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-left flex items-center gap-space-sm transition-all" onclick="selectOpponent(this)" type="button">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-md font-bold">MT</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">Marcus T.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 Set • $4M</span>
+</div>
+</button>
+<!-- Aisha -->
+<button class="opponent-chip p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-left flex items-center gap-space-sm transition-all" onclick="selectOpponent(this)" type="button">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-md font-bold">AP</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">Aisha P.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 Sets • $12M</span>
+</div>
+</button>
+<!-- Carlos -->
+<button class="opponent-chip p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-left flex items-center gap-space-sm transition-all" onclick="selectOpponent(this)" type="button">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-label-md font-bold">CR</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">Carlos R.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">0 Sets • $2M</span>
+</div>
+</button>
+<!-- Sarah -->
+<button class="opponent-chip p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-left flex items-center gap-space-sm transition-all" onclick="selectOpponent(this)" type="button">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-label-md font-bold">SL</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">Sarah L.</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 Set • $5M</span>
+</div>
+</button>
+<!-- All Players option -->
+<button class="opponent-chip p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-left flex items-center gap-space-sm transition-all" onclick="selectOpponent(this)" type="button">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-label-md font-bold">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">All Players</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Demand table</span>
+</div>
+</button>
+</div>
+</div>
+<!-- 2. Target District Selector -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">2. Choose Eligible District</span>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="district-btn selected p-space-sm rounded-lg bg-surface-container-high text-on-surface flex items-center justify-between shadow-sm" onclick="selectDistrict(this)" type="button">
+<div class="flex items-center gap-2">
+<span class="h-3 w-3 rounded-full bg-primary"></span>
+<span class="font-label-lg text-label-lg font-semibold">Brightleaf District</span>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-primary">$3 Rent</span>
+</button>
+<button class="district-btn p-space-sm rounded-lg bg-surface-container text-on-surface flex items-center justify-between opacity-80 hover:opacity-100" onclick="selectDistrict(this)" type="button">
+<div class="flex items-center gap-2">
+<span class="h-3 w-3 rounded-full bg-tertiary"></span>
+<span class="font-label-lg text-label-lg font-semibold">Walltown District</span>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-tertiary">$2 Rent</span>
+</button>
+</div>
+</div>
+<!-- 3. Add-on Modifier Checkbox -->
+<div class="p-space-md rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<input class="h-5 w-5 rounded text-primary focus:ring-primary accent-primary cursor-pointer" id="rent-hike-cb" onchange="toggleRentHike(this)" type="checkbox"/>
+<label class="cursor-pointer flex flex-col" for="rent-hike-cb">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Attach "Rent Hike" Action (+ $3M)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Available in hand (uses 1 additional card play)</span>
+</label>
+</div>
+<span class="px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-bold">
+            +$3M Bonus
+          </span>
+</div>
+<!-- Footer Submission -->
+<div class="pt-space-xs flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Claim</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold leading-none" id="target-total-display">$3,000,000</span>
+</div>
+<button class="px-6 py-3 rounded-md bg-primary-container hover:bg-primary text-on-primary-container font-label-lg text-label-lg shadow-md transition-all flex items-center gap-2" onclick="alert('Action Deployed! Targeted player has 30s to respond.')" type="button">
+<span>Execute Action</span>
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript Engine for State Switcher & Modals -->
+<script>
+    // Tab Switching Logic between the 4 Modal Designs
+    function switchTab(targetTab) {
+      const tabs = ['recap', 'payment', 'appeal', 'target'];
+      tabs.forEach(tab => {
+        const panel = document.getElementById('panel-' + tab);
+        const btn = document.getElementById('tab-' + tab);
+        
+        if (tab === targetTab) {
+          panel.classList.remove('hidden');
+          panel.classList.add('flex');
+          btn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+          btn.classList.remove('text-on-surface-variant');
+        } else {
+          panel.classList.add('hidden');
+          panel.classList.remove('flex');
+          btn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+          btn.classList.add('text-on-surface-variant');
+        }
+      });
+    }
+
+    // Payment Logic Calculator
+    let currentSelectedTotal = 3;
+    const requiredRentTotal = 4;
+
+    function togglePaymentItem(element, val) {
+      const isSelected = element.classList.contains('selected');
+      const checkIcon = element.querySelector('.check-icon');
+
+      if (isSelected) {
+        element.classList.remove('selected', 'bg-primary-container', 'text-on-primary-container');
+        element.classList.add('bg-surface-container', 'text-on-surface');
+        if (checkIcon) {
+          checkIcon.textContent = 'radio_button_unchecked';
+          checkIcon.classList.add('text-outline');
+        }
+        currentSelectedTotal -= val;
+      } else {
+        element.classList.add('selected', 'bg-primary-container', 'text-on-primary-container');
+        element.classList.remove('bg-surface-container', 'text-on-surface', 'hover:bg-surface-container-high');
+        if (checkIcon) {
+          checkIcon.textContent = 'check_circle';
+          checkIcon.classList.remove('text-outline');
+        }
+        currentSelectedTotal += val;
+      }
+
+      updatePaymentMeter();
+    }
+
+    function updatePaymentMeter() {
+      const label = document.getElementById('payment-status-label');
+      const ratio = document.getElementById('payment-status-ratio');
+      const bar = document.getElementById('payment-progress-bar');
+      const btn = document.getElementById('pay-submit-btn');
+      const btnText = document.getElementById('pay-submit-text');
+
+      ratio.textContent = currentSelectedTotal + ' / ' + requiredRentTotal + ' $M';
+      const pct = Math.min(100, Math.round((currentSelectedTotal / requiredRentTotal) * 100));
+      bar.style.width = pct + '%';
+
+      if (currentSelectedTotal >= requiredRentTotal) {
+        label.className = 'font-label-lg text-label-lg text-tertiary font-semibold flex items-center gap-1.5';
+        label.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span><span>Selected $' + currentSelectedTotal + ' of $4 • Rent Satisfied ✓</span>';
+        bar.className = 'h-full bg-tertiary transition-all duration-300 rounded-full';
+        
+        btn.disabled = false;
+        btn.className = 'px-6 py-3 rounded-md bg-primary-container text-on-primary-container hover:bg-primary font-label-lg text-label-lg transition-all cursor-pointer flex items-center gap-2 shadow-md';
+        btnText.textContent = 'Confirm Pay $' + currentSelectedTotal;
+        btn.onclick = function() {
+          alert('Paid $' + currentSelectedTotal + ' to Devon K.! Rent fulfilled.');
+          switchTab('recap');
+        };
+      } else {
+        const short = requiredRentTotal - currentSelectedTotal;
+        label.className = 'font-label-lg text-label-lg text-error font-semibold flex items-center gap-1.5';
+        label.innerHTML = '<span class="material-symbols-outlined text-[18px]">warning</span><span>Selected $' + currentSelectedTotal + ' of $4 • Short by $' + short + ' ⚠️</span>';
+        bar.className = 'h-full bg-secondary transition-all duration-300 rounded-full';
+        
+        btn.disabled = true;
+        btn.className = 'px-6 py-3 rounded-md bg-surface-container-highest text-on-surface-variant font-label-lg text-label-lg transition-all cursor-not-allowed flex items-center gap-2 shadow-sm';
+        btnText.textContent = 'Pay $4 (Select $' + short + ' more)';
+        btn.onclick = null;
+      }
+    }
+
+    // Target Selection Interaction
+    function selectOpponent(btn) {
+      document.querySelectorAll('#player-grid .opponent-chip').forEach(el => {
+        el.classList.remove('selected', 'bg-primary-container', 'text-on-primary-container');
+        el.classList.add('bg-surface-container', 'text-on-surface');
+      });
+      btn.classList.add('selected', 'bg-primary-container', 'text-on-primary-container');
+      btn.classList.remove('bg-surface-container', 'text-on-surface');
+    }
+
+    let baseRent = 3;
+    let rentHike = 0;
+
+    function selectDistrict(btn) {
+      document.querySelectorAll('.district-btn').forEach(el => {
+        el.classList.remove('selected', 'bg-surface-container-high');
+        el.classList.add('bg-surface-container', 'opacity-80');
+      });
+      btn.classList.add('selected', 'bg-surface-container-high');
+      btn.classList.remove('opacity-80');
+      
+      baseRent = btn.textContent.includes('Brightleaf') ? 3 : 2;
+      updateTargetDisplay();
+    }
+
+    function toggleRentHike(cb) {
+      rentHike = cb.checked ? 3 : 0;
+      updateTargetDisplay();
+    }
+
+    function updateTargetDisplay() {
+      const total = baseRent + rentHike;
+      document.getElementById('target-total-display').textContent = '$' + total + ',000,000';
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] py-space-lg mt-auto"><div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-primary">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant">Handcrafted for 2-10 Tabletop Players • Durham, NC</span></div><div class="flex items-center gap-space-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Bull City Gaming Co.</span><span class="font-label-sm text-label-sm text-tertiary font-semibold">v1.4 Tobacco Green Edition</span></div></div></footer></body></html>

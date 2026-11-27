@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed-variant": "#614000", "tertiary": "#00694c", "on-surface": "#1c1c18", "background": "#fcf9f3", "on-tertiary": "#ffffff", "primary-fixed-dim": "#ffb4a4", "inverse-on-surface": "#f3f0ea", "on-tertiary-container": "#f6fff8", "outline-variant": "#e0bfb9", "error": "#ba1a1a", "tertiary-fixed-dim": "#7bd8b1", "surface-container": "#f0eee8", "tertiary-container": "#1e8462", "primary-container": "#c84b31", "secondary-fixed": "#ffddb0", "surface": "#fcf9f3", "on-surface-variant": "#58413c", "on-primary": "#ffffff", "primary": "#a6331b", "surface-container-low": "#f6f3ed", "outline": "#8c716b", "secondary-fixed-dim": "#ffba46", "inverse-surface": "#31312d", "on-secondary-fixed": "#281800", "secondary-container": "#feb63c", "on-error": "#ffffff", "on-tertiary-fixed": "#002115", "on-primary-container": "#fffbff", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "inverse-primary": "#ffb4a4", "secondary": "#805600", "on-background": "#1c1c18", "primary-fixed": "#ffdad3", "surface-tint": "#aa361e", "on-primary-fixed": "#3e0500", "surface-dim": "#dcdad4", "on-secondary": "#ffffff", "surface-bright": "#fcf9f3", "error-container": "#ffdad6", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#00513a", "tertiary-fixed": "#97f5cc", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#891e07" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.5rem", "space-xl": "2rem", "space-md": "1rem", "margin-desktop": "2.5rem", "margin": "1.5rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "label-md": ["JetBrains Mono"], "headline-sm": ["Epilogue"], "label-lg": ["Plus Jakarta Sans"], "display-lg": ["Epilogue"], "headline-md": ["Epilogue"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["JetBrains Mono"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Epilogue"] }, "fontSize": { "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md shrink-0"><img alt="Bull City Blocks Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBp7OiuPKW1uYkfsJc_mN40690bOIOfHX8WlWgByK_16HCF4fDZOJmmt_QFySTwIqfm87vgeHVIsHHVSIgdpPP4kNPQDZOKHx5glH2nrmqSkdRN8c1pdwSgjlWK0TH6C0BbxdVKUPp2518wjzreV_YQA6C9PvsCrxcgtlWC5SIzPQmDexqmsLtm5prVXH_tXyoF2O3b_rZHFKgvT37O0IQfeX-xgLA0s9K7gj8FltIi"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Durham Social Tabletop</span></div></div><div class="hidden lg:flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(30,27,24,0.06)]"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span></span><span class="font-label-md text-label-md text-on-surface tracking-wide">Room #BCB-DURHAM</span><span class="text-outline-variant font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary font-semibold">4/6 Players</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm"><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-lg shadow-sm" data-path="game-table" href="#">Table</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="neighborhood-atlas" href="#">Neighborhoods</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="house-rules" href="#">Rules</a><a class="px-space-md py-space-xs rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="lobby" href="#">Lobby</a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Quick Reference Rules" type="button"><span class="material-symbols-outlined text-[20px]">menu_book</span></button><button class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Tabletop Sound and Vibes" type="button"><span class="material-symbols-outlined text-[20px]">volume_up</span></button><div class="h-6 w-px bg-surface-container-highest hidden sm:block"></div><div class="flex items-center gap-space-xs pl-space-xs bg-surface-container-low rounded-full py-1 pr-space-md"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdvu5Zcsx7DwoyCd0k0k9RLqLbp6PATSVWiDW6qkUC6fA-uLEQKul94AmUa7Nb7kDZbhmlsQRqEbXmgm5T8y26rUQA3VM5yYfAxcKmFhuAqoW0j5X1aUrX-saEtaLnJdVaGefpQmShepUW1dM4EM_v31DtfQA3sjLxni0CPx1iHPAVbCCaWuhq19-u4LpZ3QW6FyAAcgee-5e5_Et_Ej56zrV0kJGpdMxIS_Pnmcs"/><span class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div><span class="hidden sm:inline font-label-md text-label-md text-on-surface font-semibold">You (Turn 2)</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full">
+<div class="w-full bg-[#1c1a18] text-[#fcf9f3] min-h-[calc(100vh-4rem)] flex flex-col relative select-none overflow-hidden font-body-md">
+<!-- Atmospheric Ambient Table Glows -->
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[780px] h-[380px] bg-secondary-container/10 blur-[130px] rounded-full pointer-events-none"></div>
+<div class="absolute bottom-10 left-1/4 w-[420px] h-[260px] bg-primary-container/10 blur-[110px] rounded-full pointer-events-none"></div>
+<div class="absolute bottom-12 right-1/4 w-[380px] h-[240px] bg-tertiary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+<!-- Match Context Banner & Turn Ticker -->
+<div class="w-full bg-[#262320]/90 backdrop-blur-md px-margin-mobile md:px-margin-desktop py- space-sm shadow-[0_2px_12px_rgba(0,0,0,0.4)] relative z-20">
+<div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-gutter">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs bg-[#171513] px-space-md py-1 rounded-full shadow-inner">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_#feb63c]"></span>
+<span class="font-label-md text-label-md text-secondary-fixed tracking-wider uppercase">Turn 11</span>
+<span class="text-outline-variant font-label-md text-label-md">•</span>
+<span class="font-label-md text-label-md text-[#dcdad4]">Round 4</span>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs">
+<span class="font-body-md text-body-md text-[#fcf9f3] font-semibold">You: Playing</span>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold shadow-[0_0_8px_rgba(200,75,49,0.45)]">2 Plays Left</span>
+</div>
+</div>
+<!-- Center Notification Ticker -->
+<div class="hidden lg:flex items-center gap-space-sm bg-[#1e1b18] px-space-lg py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary-container">casino</span>
+<span class="font-body-sm text-body-sm text-[#e5e2dc]">Marcus just banked <strong class="text-secondary-fixed">$4M</strong> and targeted Ninth Street with Rent!</span>
+</div>
+<!-- Amber Turn Countdown & Table Controls -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-sm bg-[#171513] px-space-md py-1 rounded-full shadow-inner">
+<div class="relative w-6 h-6 flex items-center justify-center">
+<svg class="w-6 h-6 -rotate-90" viewbox="0 0 36 36">
+<path class="text-[#3a3530]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-secondary-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="72, 100" stroke-linecap="round" stroke-width="3.5" style="filter: drop-shadow(0 0 4px #feb63c);"></path>
+</svg>
+<span class="material-symbols-outlined text-[13px] text-secondary-fixed absolute">timer</span>
+</div>
+<span class="font-label-md text-label-md text-secondary-container font-bold tracking-tight">34s</span>
+</div>
+<label class="hidden md:flex items-center gap-space-xs cursor-pointer bg-[#1e1b18] px-space-sm py-1 rounded-md hover:bg-[#2d2925] transition-colors">
+<input class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-[#dcdad4]">Auto-pass</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Active Tabletop Surface -->
+<div class="max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-space-md flex-1 flex flex-col justify-between gap-space-md relative z-10">
+<!-- Opponents Ribbon (Compact 5-Player Rail) -->
+<section aria-label="Opponent Tableaus" class="w-full">
+<div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-space-sm">
+<!-- Opponent 1: Marcus T. -->
+<div class="bg-[#24211e] rounded-xl p-space-sm shadow-[0_2px_8px_rgba(0,0,0,0.35)] flex flex-col gap-1.5 transition-all hover:bg-[#2b2723]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="relative w-7 h-7 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of young man smiling at evening board game table with soft amber lamp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUy6HlDJ-Q-RlgYDKago9Z-o1yX9YTlflXu9fx1qS0xwuUB_Y2-FBARXpKxh-Lv3c6KagsYb8hwZPdFucGOGniU0J6O4HfiDa_tLBe6Hls4mj6zor6muZdDAJG3mlaw1OB2fMJMNJGhXuxMHgyEpH0PSonnaLPediE3VjkfCigCGDYyJaZa23j2IKwnmCRn8oxeNoJB-sI7K_IJOHyXCnBiH3CAKIiwy5jI6JBALw"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-[#fcf9f3] truncate font-bold">Marcus T.</span>
+<span class="font-label-sm text-label-sm text-[#ffb4a4]">1/3 Sets</span>
+</div>
+</div>
+<span class="bg-[#181614] text-secondary-fixed font-label-md text-label-md px-1.5 py-0.5 rounded font-bold shadow-inner">$4M</span>
+</div>
+<div class="flex items-center justify-between text-[#dcdad4] pt-0.5">
+<div class="flex items-center gap-1 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">style</span>
+<span>5 Cards</span>
+</div>
+<!-- District Mini Icons -->
+<div class="flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold" title="Downtown Set (Incomplete)">D</span>
+<span class="w-4 h-4 rounded-full bg-[#3a3530] text-[#716960] flex items-center justify-center text-[10px]">•</span>
+<span class="w-4 h-4 rounded-full bg-secondary text-white flex items-center justify-center text-[10px] font-bold" title="Golden Belt">G</span>
+</div>
+</div>
+</div>
+<!-- Opponent 2: Elena Chen (Leading with 2/3 Sets) -->
+<div class="bg-[#24211e] rounded-xl p-space-sm shadow-[0_2px_8px_rgba(0,0,0,0.35)] flex flex-col gap-1.5 bg-gradient-to-b from-[#2b2723] to-[#24211e] transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="relative w-7 h-7 rounded-full overflow-hidden shrink-0 shadow-sm ring-1 ring-secondary-container">
+<img class="w-full h-full object-cover" data-alt="Young East Asian woman laughing joyfully under warm Edison light pendant playing social tabletop games" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCihtSQqlL39shChewx8Ja_I06hvvlZyFSzjRlAhiY2zxZzDf8efmlteaU4l5nTkihtZz4Ox8TaOHL_fDOSvX07IGWD0JqvzPKfeGu9by4g6jn5pP_34FMfMNT2yRsTC6IefdnDiCeCOQdmFWkh-_myxLdQXkK5v3BT60s7oIMk3GwqcaEF_JhjtxojliuxpVz3Z9WowloqNRNY53uP8OUWNaEkayq8hXxe5hBCezg"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-[#fcf9f3] truncate font-bold flex items-center gap-1">Elena C. <span class="material-symbols-outlined text-secondary-container text-[12px]" title="Leader">crown</span></span>
+<span class="font-label-sm text-label-sm text-secondary-fixed">2/3 Sets</span>
+</div>
+</div>
+<span class="bg-[#181614] text-secondary-fixed font-label-md text-label-md px-1.5 py-0.5 rounded font-bold shadow-inner">$8M</span>
+</div>
+<div class="flex items-center justify-between text-[#dcdad4] pt-0.5">
+<div class="flex items-center gap-1 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">style</span>
+<span>6 Cards</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-tertiary text-white flex items-center justify-center text-[10px] font-bold shadow-[0_0_6px_#00694c]" title="West Durham (Complete)">W</span>
+<span class="w-4 h-4 rounded-full bg-[#805600] text-white flex items-center justify-center text-[10px] font-bold shadow-[0_0_6px_#805600]" title="Hayti Heritage (Complete)">H</span>
+<span class="w-4 h-4 rounded-full bg-primary text-white flex items-center justify-center text-[10px]" title="Downtown (1/3)">D</span>
+</div>
+</div>
+</div>
+<!-- Opponent 3: Dave & Pip -->
+<div class="bg-[#24211e] rounded-xl p-space-sm shadow-[0_2px_8px_rgba(0,0,0,0.35)] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="relative w-7 h-7 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Middle aged bearded man wearing glasses leaning over board game table in warm atmospheric room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFVOj6ZLhv5Tr4_gzIRcgsvrbFAKhR_yP2hUqFRHYdNBouAT8ogXSfVIPFkcmBb7CWm21GfGwW1BnT8y_FG-Vmqc3klyHUetofaSxZCJb_HZ8tqZDgSW6T5S8jqxftli6JzByu1x9gRrVybwFzchobfOinjeqvUKuwFOVlL6SawYsRkRRh025LTKhw7lzLnzfb5FXwMJSzS_dNQFfj9j22x0IOKeQJLrptl6Zqpn0"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-[#fcf9f3] truncate font-bold">Dave &amp; Pip</span>
+<span class="font-label-sm text-label-sm text-[#dcdad4]">0/3 Sets</span>
+</div>
+</div>
+<span class="bg-[#181614] text-secondary-fixed font-label-md text-label-md px-1.5 py-0.5 rounded font-bold shadow-inner">$2M</span>
+</div>
+<div class="flex items-center justify-between text-[#dcdad4] pt-0.5">
+<div class="flex items-center gap-1 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">style</span>
+<span>3 Cards</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-tertiary-container text-white flex items-center justify-center text-[10px]">E</span>
+<span class="w-4 h-4 rounded-full bg-[#3a3530] text-[#716960] flex items-center justify-center text-[10px]">•</span>
+<span class="w-4 h-4 rounded-full bg-[#3a3530] text-[#716960] flex items-center justify-center text-[10px]">•</span>
+</div>
+</div>
+</div>
+<!-- Opponent 4: Maya Vance -->
+<div class="bg-[#24211e] rounded-xl p-space-sm shadow-[0_2px_8px_rgba(0,0,0,0.35)] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="relative w-7 h-7 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Cool stylish African American woman with natural curls focused intensely on tabletop strategy cards" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYoXAaU-R7HGPEghkenZ5vA_lcsz9s3T40SHsPP6l8EKarCnHtLOkCdihOzTzvaBppMBBJBHAaDRhWkgg9kfB1caSRHrVlegl-qOca9XqzmqNPro-yi4wXbbLvN3VPuMZRwJsTd6AskOHLodkNorLyuMjTcDN47JjlHJo6jRzsQyGWJyMFR-a1a-4653dWOej3X3JaDHlem-U2fGzx3VGEhtm0Ox8kU2E-RflQfr4"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-[#fcf9f3] truncate font-bold">Maya Vance</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed">1/3 Sets</span>
+</div>
+</div>
+<span class="bg-[#181614] text-secondary-fixed font-label-md text-label-md px-1.5 py-0.5 rounded font-bold shadow-inner">$11M</span>
+</div>
+<div class="flex items-center justify-between text-[#dcdad4] pt-0.5">
+<div class="flex items-center gap-1 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">style</span>
+<span>7 Cards</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-primary text-white flex items-center justify-center text-[10px] font-bold shadow-[0_0_6px_#a6331b]">B</span>
+<span class="w-4 h-4 rounded-full bg-tertiary text-white flex items-center justify-center text-[10px]">T</span>
+<span class="w-4 h-4 rounded-full bg-[#3a3530] text-[#716960] flex items-center justify-center text-[10px]">•</span>
+</div>
+</div>
+</div>
+<!-- Opponent 5: Jackson B. -->
+<div class="hidden xl:flex bg-[#24211e] rounded-xl p-space-sm shadow-[0_2px_8px_rgba(0,0,0,0.35)] flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="relative w-7 h-7 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Caucasian man with warm smile holding a hand of collectible cards during casual evening board game session" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmmF5b6MyollTMS_EqeOu8pO0RxamjM2-ROWoLLPQI_hlPiQP_4CkB4lYCp1-b6Baz1IqPYEu0C-Q6TjFRkf4qqJKCQ-O6nSV9PoR7tr0pWy9SnO6iZQ1jaVqDgo5GH95CauKaunScBiRf5VmgsC9PIfPa8rviXRrYIinNe1w7CFK7ICU9tyHuRNbXjCf-wLoQCwy27TpJy-_KpZ7pUPmuytTpR7uwrO4DPLhOeJw"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-[#fcf9f3] truncate font-bold">Jackson B.</span>
+<span class="font-label-sm text-label-sm text-[#dcdad4]">1/3 Sets</span>
+</div>
+</div>
+<span class="bg-[#181614] text-secondary-fixed font-label-md text-label-md px-1.5 py-0.5 rounded font-bold shadow-inner">$5M</span>
+</div>
+<div class="flex items-center justify-between text-[#dcdad4] pt-0.5">
+<div class="flex items-center gap-1 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">style</span>
+<span>4 Cards</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-[#a6331b] text-white flex items-center justify-center text-[10px]">D</span>
+<span class="w-4 h-4 rounded-full bg-[#3a3530] text-[#716960] flex items-center justify-center text-[10px]">•</span>
+<span class="w-4 h-4 rounded-full bg-[#3a3530] text-[#716960] flex items-center justify-center text-[10px]">•</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Center Table Arena: Draw Deck, Discard Stack & Player Completed Tableau -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center py-space-xs">
+<!-- Discard Pile & Draw Deck Isometric Stacks -->
+<div class="lg:col-span-4 flex items-center justify-center lg:justify-start gap-space-lg">
+<!-- Draw Stack (Isometric depth) -->
+<div class="flex flex-col items-center gap-1.5 group cursor-pointer">
+<div class="relative w-28 h-40 transition-transform group-hover:-translate-y-1">
+<!-- Stack Layer 3 -->
+<div class="absolute inset-0 translate-y-3 translate-x-2 bg-[#12100f] rounded-lg shadow-2xl"></div>
+<!-- Stack Layer 2 -->
+<div class="absolute inset-0 translate-y-1.5 translate-x-1 bg-[#221e1a] rounded-lg shadow-xl"></div>
+<!-- Top Card Front -->
+<div class="absolute inset-0 bg-[#2d2823] rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.55)] p-2 flex flex-col justify-between overflow-hidden">
+<div class="flex justify-between items-center text-[#ffba46]">
+<span class="material-symbols-outlined text-[16px]">all_inclusive</span>
+<span class="font-label-sm text-label-sm font-bold">BCB</span>
+</div>
+<div class="flex flex-col items-center justify-center py-2 text-center">
+<div class="w-10 h-10 rounded-full bg-[#1b1916] flex items-center justify-center shadow-inner mb-1 text-secondary-container">
+<span class="material-symbols-outlined text-[22px]">style</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-[#fcf9f3] tracking-tighter leading-none">48</span>
+<span class="font-label-sm text-label-sm text-[#ffddb0] uppercase tracking-wider">In Deck</span>
+</div>
+<div class="w-full bg-[#1e1b18] py-0.5 rounded text-center font-label-sm text-label-sm text-[#dcdad4]">
+                  Tap Draw
+                </div>
+</div>
+</div>
+<span class="font-label-md text-label-md text-[#dcdad4] font-semibold tracking-wider">DRAW PILE</span>
+</div>
+<!-- Discard Stack with active glow -->
+<div class="flex flex-col items-center gap-1.5 group cursor-pointer">
+<div class="relative w-28 h-40 transition-transform group-hover:-translate-y-1">
+<div class="absolute inset-0 translate-y-2 -translate-x-1.5 rotate-[-4deg] bg-[#1a1715] rounded-lg shadow-xl"></div>
+<div class="absolute inset-0 translate-y-1 translate-x-1 rotate-[2deg] bg-[#2a241f] rounded-lg shadow-lg"></div>
+<!-- Top Discard Card: "Just Say No" or Rent -->
+<div class="absolute inset-0 bg-[#2e2621] rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.45)] p-2 flex flex-col justify-between overflow-hidden shadow-[0_0_15px_rgba(200,75,49,0.3)]">
+<div class="bg-primary px-1.5 py-0.5 rounded flex items-center justify-between text-white">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">ACTION</span>
+<span class="font-label-sm text-label-sm">$3M</span>
+</div>
+<div class="text-center py-1">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[26px]">gavel</span>
+<p class="font-headline-sm text-[13px] leading-tight text-[#fcf9f3] font-bold mt-1">Bull City Deal Breaker</p>
+<p class="font-label-sm text-[9px] text-[#ffdad3] leading-snug">Steal completed set</p>
+</div>
+<div class="bg-[#1b1714] text-center py-0.5 rounded font-label-sm text-label-sm text-[#dcdad4]">
+                  16 Discarded
+                </div>
+</div>
+</div>
+<span class="font-label-md text-label-md text-[#dcdad4] font-semibold tracking-wider">DISCARD</span>
+</div>
+</div>
+<!-- Center Player Tableau (Completed Sets & Glowing Bank) -->
+<div class="lg:col-span-8 flex flex-col gap-space-sm bg-[#221f1b]/90 backdrop-blur-sm rounded-2xl p-space-md shadow-[0_4px_24px_rgba(0,0,0,0.45)]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">apartment</span>
+<h2 class="font-headline-sm text-headline-sm text-[#fcf9f3] leading-none">Your Durham Blocks</h2>
+<span class="bg-[#161412] text-secondary-fixed font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold">2 of 3 Sets to Win!</span>
+</div>
+<!-- Glowing Bank Vault Pill -->
+<div class="flex items-center gap-space-xs bg-[#191715] px-space-md py-1 rounded-full shadow-[0_0_16px_rgba(254,182,60,0.25)]">
+<span class="material-symbols-outlined text-secondary-container text-[18px]">account_balance</span>
+<span class="font-label-md text-label-md text-[#ffba46] font-bold">Bank: $9M</span>
+</div>
+</div>
+<!-- District Groups Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<!-- Group 1: Downtown Durham (Complete 3/3 + Landmark) -->
+<div class="bg-[#1a1715] rounded-xl p-space-sm shadow-[0_0_14px_rgba(166,51,27,0.35)] flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 transform translate-x-2 -translate-y-2 w-16 h-16 bg-primary/20 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_#a6331b]"></span>
+<span class="font-label-sm text-label-sm text-[#fcf9f3] font-bold uppercase tracking-wider">Downtown</span>
+</div>
+<span class="bg-primary text-white font-label-sm text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">3/3 FULL</span>
+</div>
+<!-- Mini stacked cards in district -->
+<div class="flex flex-col gap-1">
+<div class="bg-[#26201d] px-2 py-1 rounded flex items-center justify-between text-[#fcf9f3] text-body-sm font-body-sm shadow-sm">
+<span class="truncate">CCB Tower / Plaza</span>
+<span class="font-label-sm text-label-sm text-[#ffb4a4]">$3M</span>
+</div>
+<div class="bg-[#26201d] px-2 py-1 rounded flex items-center justify-between text-[#fcf9f3] text-body-sm font-body-sm shadow-sm">
+<span class="truncate">Durham Arts Council</span>
+<span class="font-label-sm text-label-sm text-[#ffb4a4]">$3M</span>
+</div>
+<div class="bg-[#26201d] px-2 py-1 rounded flex items-center justify-between text-[#fcf9f3] text-body-sm font-body-sm shadow-sm">
+<span class="truncate">Carolina Theatre</span>
+<span class="font-label-sm text-label-sm text-[#ffb4a4]">$4M</span>
+</div>
+</div>
+<!-- Landmark Badge Installed -->
+<div class="mt-2 bg-[#2d1b17] py-1 px-2 rounded-lg flex items-center justify-between text-[#ffdad3]">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary-container">hotel_class</span>
+<span class="font-label-sm text-label-sm font-semibold">Major Bull Landmark</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary-fixed">+ $3M Rent</span>
+</div>
+</div>
+<!-- Group 2: Walltown (Complete 2/2) -->
+<div class="bg-[#1a1715] rounded-xl p-space-sm shadow-[0_0_14px_rgba(0,105,76,0.35)] flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 transform translate-x-2 -translate-y-2 w-16 h-16 bg-tertiary/20 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-tertiary shadow-[0_0_8px_#00694c]"></span>
+<span class="font-label-sm text-label-sm text-[#fcf9f3] font-bold uppercase tracking-wider">Walltown</span>
+</div>
+<span class="bg-tertiary text-white font-label-sm text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">2/2 FULL</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="bg-[#19241f] px-2 py-1 rounded flex items-center justify-between text-[#fcf9f3] text-body-sm font-body-sm shadow-sm">
+<span class="truncate">Club Blvd Historic</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim">$2M</span>
+</div>
+<div class="bg-[#19241f] px-2 py-1 rounded flex items-center justify-between text-[#fcf9f3] text-body-sm font-body-sm shadow-sm">
+<span class="truncate">Walltown Rec Center</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim">$2M</span>
+</div>
+</div>
+<!-- Landmark Badge Installed -->
+<div class="mt-2 bg-[#12231b] py-1 px-2 rounded-lg flex items-center justify-between text-[#7bd8b1]">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">verified</span>
+<span class="font-label-sm text-label-sm font-semibold">Community Landmark</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-tertiary-fixed">+ $2M Rent</span>
+</div>
+</div>
+<!-- Group 3: The Eno River (Incomplete 1/3) -->
+<div class="bg-[#1a1715] rounded-xl p-space-sm shadow-sm flex flex-col justify-between opacity-95">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-[#1e8462]"></span>
+<span class="font-label-sm text-label-sm text-[#fcf9f3] font-bold uppercase tracking-wider">The Eno</span>
+</div>
+<span class="bg-[#2d2824] text-[#dcdad4] font-label-sm text-[10px] px-1.5 py-0.5 rounded-full">1/3 Active</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="bg-[#1c211e] px-2 py-1 rounded flex items-center justify-between text-[#fcf9f3] text-body-sm font-body-sm">
+<span class="truncate">West Point Mill</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim">$1M</span>
+</div>
+<div class="border-dashed bg-transparent p-2 rounded flex items-center justify-center text-[#8c716b] text-label-sm font-label-sm">
+<span>Empty Lot #2</span>
+</div>
+</div>
+</div>
+<div class="mt-2 bg-[#1b1917] py-1 px-2 rounded text-center text-[#8c716b] font-label-sm text-[11px]">
+                Rent Matrix: 1 card = $1M • 3 = $4M
+              </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Player Hand (Dark-Mode Card Stack with High Readability & Action Bar) -->
+<section aria-label="Player Hand" class="w-full flex flex-col gap-space-sm pt-space-xs">
+<!-- Controls & Selected Card Hint -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm px-1">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-[#fcf9f3] flex items-center gap-1.5">
+<span>Your Hand</span>
+<span class="text-secondary-container font-label-md text-label-md">(6 Cards)</span>
+</span>
+<span class="text-outline font-label-sm text-label-sm hidden sm:inline">Tap card to inspect or stage play</span>
+</div>
+<!-- Immediate Card Action Buttons (Play / Bank / Discard / End Turn) -->
+<div class="flex items-center gap-space-sm">
+<button class="bg-primary hover:bg-[#891e07] text-white px-space-md py-2 rounded-lg font-label-lg text-label-lg flex items-center gap-1.5 shadow-[0_4px_12px_rgba(166,51,27,0.4)] transition-transform active:scale-95" id="btn-play-card" type="button">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+<span>Play Card</span>
+</button>
+<button class="bg-[#2d2823] hover:bg-[#3d362f] text-secondary-fixed px-space-md py-2 rounded-lg font-label-lg text-label-lg flex items-center gap-1.5 shadow-md transition-transform active:scale-95" id="btn-bank-card" type="button">
+<span class="material-symbols-outlined text-[18px]">savings</span>
+<span>Bank</span>
+</button>
+<button class="bg-[#24211e] hover:bg-[#2d2824] text-[#dcdad4] px-space-sm py-2 rounded-lg font-label-lg text-label-lg flex items-center gap-1 transition-colors" id="btn-discard-card" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span class="hidden sm:inline">Discard</span>
+</button>
+<button class="bg-secondary-container hover:bg-[#e5a02f] text-on-secondary-fixed font-label-lg text-label-lg px-space-lg py-2 rounded-lg font-bold shadow-[0_0_16px_rgba(254,182,60,0.45)] transition-transform active:scale-95 flex items-center gap-1.5" id="btn-end-turn" type="button">
+<span>End Turn</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 6 Hand Cards Fanned Horizontally with Hover Expansion -->
+<div class="w-full overflow-x-auto pb-space-sm pt-2">
+<div class="flex items-end justify-start xl:justify-center min-w-[760px] px-2" id="hand-container">
+<!-- Card 1: Ninth Street Property ($2) -->
+<div class="game-hand-card relative w-40 sm:w-44 h-60 bg-[#25221e] rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.55)] p-2.5 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-4 hover:shadow-[0_16px_28px_rgba(254,182,60,0.25)] hover:z-30 ring-1 ring-[#3d3731] -mr-4 sm:-mr-6 first:ml-0" data-card-id="card-ninth-st">
+<div class="bg-[#00694c] -mx-2.5 -mt-2.5 p-2 rounded-t-xl text-white flex items-center justify-between shadow-sm">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider truncate">Ninth Street</span>
+<span class="material-symbols-outlined text-[16px]">storefront</span>
+</div>
+<div class="flex justify-between items-center my-1 text-secondary-fixed">
+<span class="font-headline-sm text-headline-sm">$2M</span>
+<span class="font-label-sm text-label-sm text-[#dcdad4]">Property</span>
+</div>
+<div class="w-full h-16 rounded overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Ninth Street Durham storefronts illuminated at dusk with string lights and lively cozy atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwcHFzEPXhRVVYSYuzSgiM_mAqqxjcTUx5OftiGsU75I0DvPj4jppH2zTWh-u7OYkHbjXZCGvYbIrBACN-JiyXrLESOCTmsSjs2N5-ySdeEUlIKqUOp4Ybeh8rGwkFa1qHeHe00-fyU-ffO2Wg3TGFiNd9RYXfpmwVMg9HNBlSxxJz3ZLp5rmNLjwcvxyuFeyfnoYM7pcEVZ6GrDF2w9G6y92VIExMHqbUzmPuUHw"/>
+</div>
+<div class="bg-[#1b1815] p-1.5 rounded text-[10px] font-label-sm text-[#dcdad4] leading-tight">
+<div>1 card = $1M</div>
+<div>2 cards = $2M</div>
+<div class="text-tertiary-fixed-dim font-bold">Set of 3 = $4M</div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-[#8c716b] font-label-sm">
+<span>District #04</span>
+<span class="font-bold text-secondary-fixed">$2M Val</span>
+</div>
+</div>
+<!-- Card 2: Wild Property (Trinity / Brightleaf) -->
+<div class="game-hand-card relative w-40 sm:w-44 h-60 bg-[#25221e] rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.55)] p-2.5 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-4 hover:shadow-[0_16px_28px_rgba(200,75,49,0.25)] hover:z-30 ring-1 ring-[#3d3731] -mr-4 sm:-mr-6" data-card-id="card-wild-trinity">
+<!-- Dual Split Header -->
+<div class="relative -mx-2.5 -mt-2.5 h-8 rounded-t-xl overflow-hidden flex items-center shadow-sm">
+<div class="w-1/2 h-full bg-[#805600] flex items-center justify-start pl-2 text-white font-label-sm text-[11px] font-bold">TRINITY</div>
+<div class="w-1/2 h-full bg-[#a6331b] flex items-center justify-end pr-2 text-white font-label-sm text-[11px] font-bold">BRIGHTLEAF</div>
+</div>
+<div class="flex justify-between items-center my-1 text-secondary-container">
+<span class="font-headline-sm text-headline-sm">$3M</span>
+<span class="bg-[#1e1a17] text-secondary-fixed font-label-sm text-[10px] px-1.5 py-0.5 rounded uppercase">Dual Wild</span>
+</div>
+<div class="bg-[#1c1815] p-2 rounded text-center flex-1 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-[26px] text-secondary-fixed-dim">swap_horiz</span>
+<span class="font-body-sm text-[12px] text-[#fcf9f3] font-semibold mt-1">District Switcher</span>
+<span class="font-label-sm text-[10px] text-[#dcdad4]">Toggle set anytime</span>
+</div>
+<div class="flex justify-between items-center text-[10px] text-[#8c716b] font-label-sm">
+<span>Wild Card</span>
+<span class="font-bold text-secondary-fixed">$3M Val</span>
+</div>
+</div>
+<!-- Card 3: Action "Walk-Off Win at DBAP" ($3) -->
+<div class="game-hand-card relative w-40 sm:w-44 h-60 bg-[#25221e] rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.55)] p-2.5 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-4 hover:shadow-[0_16px_28px_rgba(254,182,60,0.25)] hover:z-30 ring-1 ring-[#3d3731] -mr-4 sm:-mr-6" data-card-id="card-walkoff-win">
+<div class="bg-primary -mx-2.5 -mt-2.5 p-2 rounded-t-xl text-white flex items-center justify-between shadow-sm">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider truncate">Walk-Off Win</span>
+<span class="material-symbols-outlined text-[16px]">sports_baseball</span>
+</div>
+<div class="flex justify-between items-center my-1 text-secondary-fixed">
+<span class="font-headline-sm text-headline-sm">$3M</span>
+<span class="bg-primary/30 text-white font-label-sm text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Action</span>
+</div>
+<div class="w-full h-16 rounded overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Evening baseball game stadium lights at Durham Bulls Athletic Park with cheering fans and twilight blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6-DeO5LAPVdL0b0jH8d4XJQNZumKxGbCOga5K2uxai_C5bkGfexK6Zem34YOJgqiVPGKHUhLjzWEAYmdP_UseUV7fiW9DucTlUzKnPe0lg5fttx-MopblZXpnfgZ9jmyTJhOS0Sfd3_NBRCnb6yNQxapjCpj7X0MeNnFVH1xVV4Oev2VbKqo4aMlrDpKz23OXJNBGRTpM8EsD70PRzLaV2z9smZKX6tJ8zUXUdvI"/>
+</div>
+<p class="font-body-sm text-[11px] text-[#fcf9f3] leading-tight bg-[#1c1815] p-1.5 rounded">
+                Draw <strong>2 extra cards</strong> immediately, or force any 1 opponent to re-shuffle their bank.
+              </p>
+<div class="flex justify-between items-center text-[10px] text-[#8c716b] font-label-sm">
+<span>Action Play</span>
+<span class="font-bold text-secondary-fixed">$3M Val</span>
+</div>
+</div>
+<!-- Card 4: Durham Rent Card ($1) -->
+<div class="game-hand-card relative w-40 sm:w-44 h-60 bg-[#25221e] rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.55)] p-2.5 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-4 hover:shadow-[0_16px_28px_rgba(0,105,76,0.25)] hover:z-30 ring-1 ring-[#3d3731] -mr-4 sm:-mr-6" data-card-id="card-rent">
+<div class="bg-[#1e8462] -mx-2.5 -mt-2.5 p-2 rounded-t-xl text-white flex items-center justify-between shadow-sm">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider truncate">Durham Rent</span>
+<span class="material-symbols-outlined text-[16px]">payments</span>
+</div>
+<div class="flex justify-between items-center my-1 text-secondary-fixed">
+<span class="font-headline-sm text-headline-sm">$1M</span>
+<span class="bg-[#00694c]/40 text-tertiary-fixed font-label-sm text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Rent Claim</span>
+</div>
+<div class="bg-[#17211b] p-2 rounded text-center flex-1 flex flex-col justify-center">
+<span class="material-symbols-outlined text-[24px] text-tertiary-fixed-dim">toll</span>
+<span class="font-body-sm text-[12px] text-[#fcf9f3] font-bold mt-1">All Opponents Pay</span>
+<span class="font-label-sm text-[10px] text-[#dcdad4]">For any 1 Walltown or Downtown property set owned</span>
+</div>
+<div class="flex justify-between items-center text-[10px] text-[#8c716b] font-label-sm">
+<span>District Rent</span>
+<span class="font-bold text-secondary-fixed">$1M Val</span>
+</div>
+</div>
+<!-- Card 5: Bank Cash $4M -->
+<div class="game-hand-card relative w-40 sm:w-44 h-60 bg-[#25221e] rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.55)] p-2.5 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-4 hover:shadow-[0_16px_28px_rgba(254,182,60,0.3)] hover:z-30 ring-1 ring-[#3d3731] -mr-4 sm:-mr-6" data-card-id="card-cash-4m">
+<div class="bg-[#805600] -mx-2.5 -mt-2.5 p-2 rounded-t-xl text-white flex items-center justify-between shadow-sm">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider truncate">Durham Bullion</span>
+<span class="material-symbols-outlined text-[16px]">account_balance_wallet</span>
+</div>
+<div class="flex justify-between items-center my-1 text-secondary-container">
+<span class="font-headline-sm text-headline-sm">$4M</span>
+<span class="bg-[#35250c] text-secondary-fixed font-label-sm text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Cash</span>
+</div>
+<div class="bg-[#1c1813] p-2 rounded flex-1 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[36px] text-secondary-fixed">paid</span>
+<span class="font-headline-md text-headline-md text-secondary-fixed leading-none mt-1">$4,000,000</span>
+<span class="font-label-sm text-[10px] text-[#ffddb0] mt-1">Bankable Asset</span>
+</div>
+<div class="flex justify-between items-center text-[10px] text-[#8c716b] font-label-sm">
+<span>Legal Tender</span>
+<span class="font-bold text-secondary-fixed">$4M Face</span>
+</div>
+</div>
+<!-- Card 6: Appeal Action ($4) -->
+<div class="game-hand-card relative w-40 sm:w-44 h-60 bg-[#25221e] rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.55)] p-2.5 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-4 hover:shadow-[0_16px_28px_rgba(186,26,26,0.25)] hover:z-30 ring-1 ring-[#3d3731]" data-card-id="card-appeal">
+<div class="bg-primary-container -mx-2.5 -mt-2.5 p-2 rounded-t-xl text-white flex items-center justify-between shadow-sm">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider truncate">Historic Appeal</span>
+<span class="material-symbols-outlined text-[16px]">balance</span>
+</div>
+<div class="flex justify-between items-center my-1 text-secondary-fixed">
+<span class="font-headline-sm text-headline-sm">$4M</span>
+<span class="bg-primary/30 text-white font-label-sm text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Counter</span>
+</div>
+<div class="bg-[#1e1715] p-2 rounded flex-1 flex flex-col justify-center text-center">
+<span class="material-symbols-outlined text-[26px] text-primary-fixed-dim">shield</span>
+<span class="font-body-sm text-[12px] text-[#fcf9f3] font-bold mt-1">Just Say No!</span>
+<span class="font-label-sm text-[10px] text-[#dcdad4]">Cancel any rent claim or hostile set-takeover</span>
+</div>
+<div class="flex justify-between items-center text-[10px] text-[#8c716b] font-label-sm">
+<span>Defense Action</span>
+<span class="font-bold text-secondary-fixed">$4M Val</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<script>
+  (function initTabletopInteractions() {
+    const cards = document.querySelectorAll('.game-hand-card');
+    const playBtn = document.getElementById('btn-play-card');
+    const bankBtn = document.getElementById('btn-bank-card');
+    const discardBtn = document.getElementById('btn-discard-card');
+    const endTurnBtn = document.getElementById('btn-end-turn');
+    let selectedCard = null;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (selectedCard === card) {
+          card.classList.remove('-translate-y-6', 'ring-2', 'ring-secondary-container', 'shadow-[0_20px_35px_rgba(254,182,60,0.35)]');
+          selectedCard = null;
+        } else {
+          cards.forEach(c => c.classList.remove('-translate-y-6', 'ring-2', 'ring-secondary-container', 'shadow-[0_20px_35px_rgba(254,182,60,0.35)]'));
+          card.classList.add('-translate-y-6', 'ring-2', 'ring-secondary-container', 'shadow-[0_20px_35px_rgba(254,182,60,0.35)]');
+          selectedCard = card;
+        }
+      });
+    });
+
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        if (!selectedCard) {
+          alert('Please click on a card in your hand first to stage it for play!');
+          return;
+        }
+        selectedCard.style.transition = 'all 0.4s ease-out';
+        selectedCard.style.transform = 'translateY(-120px) scale(0.85)';
+        selectedCard.style.opacity = '0';
+        setTimeout(() => {
+          selectedCard.remove();
+          selectedCard = null;
+        }, 350);
+      });
+    }
+
+    if (bankBtn) {
+      bankBtn.addEventListener('click', () => {
+        if (!selectedCard) {
+          alert('Select a Cash or Action card to deposit into your Vault Bank!');
+          return;
+        }
+        selectedCard.style.transition = 'all 0.35s ease';
+        selectedCard.style.transform = 'translateY(-80px) scale(0.5)';
+        selectedCard.style.opacity = '0';
+        setTimeout(() => {
+          selectedCard.remove();
+          selectedCard = null;
+        }, 300);
+      });
+    }
+
+    if (discardBtn) {
+      discardBtn.addEventListener('click', () => {
+        if (!selectedCard) return;
+        selectedCard.style.transition = 'all 0.3s ease';
+        selectedCard.style.opacity = '0';
+        setTimeout(() => {
+          selectedCard.remove();
+          selectedCard = null;
+        }, 250);
+      });
+    }
+
+    if (endTurnBtn) {
+      endTurnBtn.addEventListener('click', () => {
+        endTurnBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Passing Turn...</span>';
+        setTimeout(() => {
+          endTurnBtn.innerHTML = '<span>Turn Passed</span><span class="material-symbols-outlined text-[18px]">check_circle</span>';
+          endTurnBtn.classList.replace('bg-secondary-container', 'bg-[#332e29]');
+          endTurnBtn.classList.replace('text-on-secondary-fixed', 'text-[#a8a199]');
+        }, 600);
+      });
+    }
+  })();
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] py-space-lg mt-auto"><div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-primary">Bull City Blocks</span><span class="font-label-sm text-label-sm text-on-surface-variant">Handcrafted for 2-10 Tabletop Players • Durham, NC</span></div><div class="flex items-center gap-space-lg"><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 Bull City Gaming Co.</span><span class="font-label-sm text-label-sm text-tertiary font-semibold">v1.4 Tobacco Green Edition</span></div></div></footer></body></html>
