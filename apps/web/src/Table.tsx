@@ -1,8 +1,10 @@
 import type { ClientMessage, LobbyView } from "@bull-city-blocks/room";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
+import { Chooser, PaymentPanel, ResponsePanel } from "./Choices";
 import { cardLabel, districtName, instanceLabel, isComplete, totalValue } from "./card";
+import { nextStep } from "./choice-flows";
 import type { ClientState } from "./lobby-state";
-import { groupMoves } from "./move-groups";
+import { FLOW_LABEL, groupMoves } from "./move-groups";
 import type { HistoryEntry, Move, PropertySet, StateMessage, View } from "./types";
 
 interface Props {
@@ -10,8 +12,9 @@ interface Props {
   send: (msg: ClientMessage) => void;
 }
 
-/** The game table (#37): the player's view, the simple moves, the clock, the log and game over. */
+/** The game table (#37, #38): the player's view, every move, the clock, the log and game over. */
 export function Table({ state, send }: Props) {
+  const [open, setOpen] = useState<string | null>(null);
   const { game, lobby, over } = state;
   const { view } = game;
   const nameOf = (player: string) => lobby.seats.find((s) => s.player === player)?.name ?? player;
@@ -21,6 +24,28 @@ export function Table({ state, send }: Props) {
   const me = view.players.find((p) => p.id === view.viewer);
   const others = view.players.filter((p) => p.id !== view.viewer);
   const top = view.discard.at(-1);
+  const debt = view.pending[0]?.type === "debt" ? view.pending[0] : null;
+  const chooser = open === null ? undefined : groups.flows[open];
+  // Close the chooser once its card has no legal moves left (the turn moved on).
+  useEffect(() => {
+    if (open !== null && !chooser) setOpen(null);
+  }, [open, chooser]);
+  /** Starts a card's multi-step move; one with nothing to choose is sent straight away. */
+  const flowButton = (id: string) => {
+    const moves = groups.flows[id];
+    const first = moves?.[0];
+    if (!moves || !first) return null;
+    const start = () => {
+      const step = nextStep(moves, {});
+      if (step.kind === "done") play(step.move);
+      else setOpen(id);
+    };
+    return (
+      <button type="button" onClick={start}>
+        {FLOW_LABEL[first.type]}
+      </button>
+    );
+  };
 
   if (over) {
     const winner = over.winner === "stall" ? null : seatName(over.winner);
@@ -72,18 +97,45 @@ export function Table({ state, send }: Props) {
                 <li key={id} className="card">
                   {instanceLabel(id, view)}
                   {moves?.play && <MoveButton move={moves.play} label="Play" onPlay={play} />}
+                  {flowButton(id)}
                   {moves?.bank && <MoveButton move={moves.bank} label="Bank" onPlay={play} />}
                   {discard && <MoveButton move={discard} label="Discard" onPlay={play} />}
                 </li>
               );
             })}
           </ul>
+          {open && chooser && (
+            <Chooser
+              key={open}
+              card={open}
+              candidates={chooser}
+              view={view}
+              nameOf={nameOf}
+              onPlay={play}
+              onClose={() => setOpen(null)}
+            />
+          )}
+          {groups.accept && (
+            <ResponsePanel
+              view={view}
+              accept={groups.accept}
+              appeal={groups.appeal}
+              nameOf={nameOf}
+              onPlay={play}
+            />
+          )}
+          {debt && groups.payable.length > 0 && (
+            <PaymentPanel
+              key={`${debt.creditor}:${debt.amount}`}
+              payable={groups.payable}
+              view={view}
+              nameOf={nameOf}
+              onPlay={play}
+            />
+          )}
           <section className="controls">
             {groups.endTurn && (
               <MoveButton move={groups.endTurn} label="End turn" onPlay={play} primary />
-            )}
-            {groups.accept && (
-              <MoveButton move={groups.accept} label="Accept" onPlay={play} primary />
             )}
             <label>
               <input
@@ -96,7 +148,7 @@ export function Table({ state, send }: Props) {
               Auto-pass (accept actions automatically when you can't Appeal)
             </label>
           </section>
-          <Holdings player={me} view={view} pay={groups.pay} onPlay={play} title="Your" />
+          <Holdings player={me} view={view} extra={flowButton} title="Your" />
         </div>
       )}
 
@@ -106,7 +158,7 @@ export function Table({ state, send }: Props) {
             {nameOf(p.id)} <span className="tag">{p.handCount} cards in hand</span>
             {p.delayed && <span className="tag">delayed</span>}
           </h2>
-          <Holdings player={p} view={view} pay={{}} onPlay={play} title={`${nameOf(p.id)}'s`} />
+          <Holdings player={p} view={view} title={`${nameOf(p.id)}'s`} />
         </div>
       ))}
 
@@ -132,19 +184,15 @@ function MoveButton(props: {
   );
 }
 
-/** A player's bank and tableau; when paying, each payable card gets a Pay button. */
+/** A player's bank and tableau; `extra` adds buttons to a card (moving your own wilds). */
 function Holdings(props: {
   player: View["players"][number];
   view: View;
-  pay: Record<string, Move>;
-  onPlay: (m: Move) => void;
+  extra?: (card: string) => ReactNode;
   title: string;
 }) {
-  const { player, view, pay } = props;
-  const payButton = (id: string) => {
-    const move = pay[id];
-    return move && <MoveButton move={move} label="Pay with this" onPlay={props.onPlay} />;
-  };
+  const { player, view } = props;
+  const extraFor = (id: string) => props.extra?.(id);
   return (
     <>
       <h3>
@@ -154,7 +202,7 @@ function Holdings(props: {
         {player.bank.map((id) => (
           <li key={id} className="card">
             {instanceLabel(id, view)}
-            {payButton(id)}
+            {extraFor(id)}
           </li>
         ))}
       </ul>
@@ -172,7 +220,7 @@ function Holdings(props: {
                   ? [
                       <li key={id} className="card">
                         {instanceLabel(id, view)}
-                        {payButton(id)}
+                        {extraFor(id)}
                       </li>,
                     ]
                   : [],

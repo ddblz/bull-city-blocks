@@ -4,7 +4,7 @@ import type { Move } from "./types";
 
 const player = "p0";
 
-describe("groupMoves (#37 simple moves)", () => {
+describe("groupMoves (#37, #38)", () => {
   it("groups play and bank per hand card, plus end turn", () => {
     const legal: Move[] = [
       { type: "playProperty", player, card: "a" },
@@ -24,18 +24,27 @@ describe("groupMoves (#37 simple moves)", () => {
 
   it("offers only moves from legalMoves: nothing is added", () => {
     const g = groupMoves([]);
-    expect(g).toEqual({ hand: {}, discard: {}, pay: {} });
+    expect(g).toEqual({ hand: {}, flows: {}, discard: {}, payable: [] });
   });
 
-  it("leaves #38's moves out: wilds, upgrades, moving wilds, rent and actions", () => {
-    const g = groupMoves([
+  it("groups the moves that need choices per card: wilds, upgrades, moving wilds, rent, actions", () => {
+    const legal: Move[] = [
       { type: "playProperty", player, card: "w", district: "owd" },
+      { type: "playProperty", player, card: "w", district: "walltown" },
       { type: "playUpgrade", player, card: "u", district: "owd" },
       { type: "moveWild", player, card: "w2", district: "walltown" },
       { type: "playRent", player, card: "r", district: "owd" },
       { type: "playAction", player, card: "x", target: "p1" },
-    ]);
-    expect(g).toEqual({ hand: {}, discard: {}, pay: {} });
+    ];
+    const g = groupMoves(legal);
+    expect(g.flows).toEqual({
+      w: [legal[0], legal[1]],
+      u: [legal[2]],
+      w2: [legal[3]],
+      r: [legal[4]],
+      x: [legal[5]],
+    });
+    expect(g.hand).toEqual({});
   });
 
   it("groups discards per hand card", () => {
@@ -46,19 +55,19 @@ describe("groupMoves (#37 simple moves)", () => {
     expect(groupMoves(legal).discard).toEqual({ a: legal[0], b: legal[1] });
   });
 
-  it("§3.4 offers paying with one card at a time", () => {
+  it("§3.4 collects the payable cards once each, for a multi-card payment", () => {
     const legal: Move[] = [
       { type: "pay", player, cards: ["a"] },
       { type: "pay", player, cards: ["b"] },
       { type: "pay", player, cards: ["a", "b"] },
     ];
-    expect(groupMoves(legal).pay).toEqual({ a: legal[0], b: legal[1] });
+    expect(groupMoves(legal).payable).toEqual(["a", "b"]);
   });
 
-  it("§3.6 offers accepting, but not an Appeal", () => {
+  it("§3.6 offers accepting and, when legal, an Appeal", () => {
     const accept: Move = { type: "respond", player };
-    const g = groupMoves([accept, { type: "respond", player, appeal: "ap" }]);
-    expect(g.accept).toBe(accept);
-    expect(g.hand).toEqual({});
+    const appeal: Move = { type: "respond", player, appeal: "ap" };
+    expect(groupMoves([accept, appeal])).toMatchObject({ accept, appeal });
+    expect(groupMoves([accept]).appeal).toBeUndefined();
   });
 });
