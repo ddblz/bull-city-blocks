@@ -1,20 +1,10 @@
 {
   "files": [],
   "references": [
-    {
-      "path": "packages/engine"
-    },
-    {
-      "path": "packages/bots"
-    },
-    {
-      "path": "packages/sim"
-    },
-    {
-      "path": "packages/room"
-    },
-    {
-      "path": "scripts"
-    }
+    { "path": "packages/engine" },
+    { "path": "packages/bots" },
+    { "path": "packages/sim" },
+    { "path": "packages/room" },
+    { "path": "scripts" }
   ]
 }
