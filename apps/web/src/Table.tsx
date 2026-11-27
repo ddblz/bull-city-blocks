@@ -3,8 +3,10 @@ import { type ReactNode, useEffect, useState } from "react";
 import { Chooser, PaymentPanel, ResponsePanel } from "./Choices";
 import { cardLabel, districtName, instanceLabel, isComplete, totalValue } from "./card";
 import { nextStep } from "./choice-flows";
+import { type Context, describeEvent } from "./describe-event";
 import type { ClientState } from "./lobby-state";
 import { FLOW_LABEL, groupMoves } from "./move-groups";
+import { RecapPanel } from "./Recap";
 import type { HistoryEntry, Move, PropertySet, StateMessage, View } from "./types";
 
 interface Props {
@@ -12,9 +14,12 @@ interface Props {
   send: (msg: ClientMessage) => void;
 }
 
-/** The game table (#37, #38): the player's view, every move, the clock, the log and game over. */
+/** The game table (#37, #38, #41): the view, every move, the clock, the recap, the log and game over. */
 export function Table({ state, send }: Props) {
   const [open, setOpen] = useState<string | null>(null);
+  const [recapOpen, setRecapOpen] = useState(true);
+  // Each (re)connect brings a fresh recap, shown until it's closed.
+  useEffect(() => setRecapOpen(state.recap.length > 0), [state.recap]);
   const { game, lobby, over } = state;
   const { view } = game;
   const nameOf = (player: string) => lobby.seats.find((s) => s.player === player)?.name ?? player;
@@ -24,6 +29,12 @@ export function Table({ state, send }: Props) {
   const me = view.players.find((p) => p.id === view.viewer);
   const others = view.players.filter((p) => p.id !== view.viewer);
   const top = view.discard.at(-1);
+  const ctx: Context = {
+    viewer: view.viewer,
+    playerName: nameOf,
+    card: (id) => view.cards[id] ?? state.cards[id],
+    districtName: (id) => districtName(id, view),
+  };
   const debt = view.pending[0]?.type === "debt" ? view.pending[0] : null;
   const chooser = open === null ? undefined : groups.flows[open];
   // Close the chooser once its card has no legal moves left (the turn moved on).
@@ -70,7 +81,7 @@ export function Table({ state, send }: Props) {
             ))}
           </ol>
         </details>
-        <Log entries={state.log} nameOf={nameOf} seatName={seatName} />
+        <Log entries={state.log} ctx={ctx} />
       </section>
     );
   }
@@ -85,6 +96,14 @@ export function Table({ state, send }: Props) {
       <p className="status">
         Deck {view.deckCount} · Discard {top ? instanceLabel(top, view) : "empty"}
       </p>
+      {recapOpen && state.recap.length > 0 && (
+        <RecapPanel
+          entries={state.recap}
+          ctx={ctx}
+          view={view}
+          onClose={() => setRecapOpen(false)}
+        />
+      )}
 
       {me && (
         <div className="mine">
@@ -162,7 +181,11 @@ export function Table({ state, send }: Props) {
         </div>
       ))}
 
-      <Log entries={state.log} nameOf={nameOf} seatName={seatName} />
+      <Log
+        entries={state.log}
+        ctx={ctx}
+        onRecap={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
+      />
     </section>
   );
 }
@@ -285,26 +308,20 @@ function Clock({ seconds, game }: { seconds: number | null; game: StateMessage }
   return <span className="clock">⏱ {left}s</span>;
 }
 
-/** The player an event is about: its own player, debtor or attacker, else the seat that moved. */
-const actor = (e: HistoryEntry, nameOf: (p: string) => string, seatName: (s: number) => string) => {
-  const ev = e.event as { player?: string; debtor?: string; attacker?: string };
-  const id = ev.player ?? ev.debtor ?? ev.attacker;
-  return id === undefined ? seatName(e.seat) : nameOf(id);
-};
-
-/** The latest events, newest first. Plain text until #41's descriptions land. */
-function Log(props: {
-  entries: HistoryEntry[];
-  nameOf: (p: string) => string;
-  seatName: (s: number) => string;
-}) {
+/** The latest events, newest first, in the recap's words. */
+function Log(props: { entries: HistoryEntry[]; ctx: Context; onRecap?: (() => void) | undefined }) {
   return (
     <section className="log">
       <h2>Log</h2>
+      {props.onRecap && (
+        <button type="button" onClick={props.onRecap}>
+          Show what happened since your last move
+        </button>
+      )}
       <ol reversed>
         {[...props.entries].reverse().map((e) => (
           <li key={e.seq}>
-            T{e.turn} {actor(e, props.nameOf, props.seatName)}: {e.event.type}
+            T{e.turn} · {describeEvent(e.event, props.ctx)}
           </li>
         ))}
       </ol>

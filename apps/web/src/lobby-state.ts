@@ -1,5 +1,7 @@
 import type { HistoryEntry, LobbyView, ServerMessage } from "@bull-city-blocks/room";
 
+type CardDef = Extract<ServerMessage, { type: "state" }>["view"]["cards"][string];
+
 /** What the client knows about its room, built purely from server messages (#36). */
 export interface ClientState {
   status: "connecting" | "open" | "reconnecting" | "closed";
@@ -11,6 +13,13 @@ export interface ClientState {
   game: Extract<ServerMessage, { type: "state" }> | null;
   /** The most recent log entries, oldest first, for the table's event log. */
   log: HistoryEntry[];
+  /** Everything since this player's last move, sent on (re)connect: the recap (#41). */
+  recap: HistoryEntry[];
+  /**
+   * Every card definition seen in a view, kept after the card leaves sight (e.g. a reshuffled
+   * discard), so old log entries can still name it. Only ever holds cards that were public.
+   */
+  cards: Record<string, CardDef>;
   /** Set when the game ends. */
   over: Extract<ServerMessage, { type: "gameOver" }> | null;
   /** The latest error from the server, cleared by the next successful update. */
@@ -27,6 +36,8 @@ export const initialState: ClientState = {
   lobby: null,
   game: null,
   log: [],
+  recap: [],
+  cards: {},
   over: null,
   error: null,
 };
@@ -48,11 +59,17 @@ export function reduce(state: ClientState, event: ClientEvent): ClientState {
     case "lobby":
       return { ...state, lobby: event.lobby, error: null };
     case "state":
-      return { ...state, game: event, log: appendLog(state.log, event.entries), error: null };
+      return {
+        ...state,
+        game: event,
+        log: appendLog(state.log, event.entries),
+        cards: { ...state.cards, ...event.view.cards },
+        error: null,
+      };
     case "error":
       return { ...state, error: event.reason };
     case "history":
-      return { ...state, log: appendLog(state.log, event.entries) }; // the recap arrives in #41
+      return { ...state, log: appendLog(state.log, event.entries), recap: event.entries };
     case "gameOver":
       return { ...state, over: event };
   }

@@ -69,6 +69,7 @@ export function respond(
     target: step.target,
     card: step.card,
     cancelled,
+    effect: step.effect,
   });
   if (!cancelled) applyEffect(s, step);
 }
