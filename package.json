@@ -11,6 +11,7 @@
     "format": "biome check --write .",
     "typecheck": "tsc -b",
     "test": "vitest run",
+    "dev:web": "pnpm --filter @bull-city-blocks/web dev",
     "play": "node --disable-warning=ExperimentalWarning --import ./scripts/ts-register.mjs apps/server/src/main.ts",
     "sim": "node --disable-warning=ExperimentalWarning --import ./scripts/ts-register.mjs packages/sim/bin/sim.mjs"
   },
