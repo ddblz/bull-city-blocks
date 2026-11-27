@@ -10,6 +10,8 @@ import { RULESETS } from "./rulesets";
 
 interface Env {
   ROOMS: DurableObjectNamespace<RoomObject>;
+  /** "1" records a trace of alarms and errors per room, readable at /rooms/<id>/debug (#40). */
+  DEBUG?: string;
 }
 
 const CORS = {
@@ -34,6 +36,14 @@ export default {
       await room(id).fetch("https://room/create", { method: "POST" });
       return json({ id }, 201);
     }
+    const debugId = /^\/rooms\/([\w-]+)\/debug$/.exec(pathname)?.[1];
+    if (req.method === "GET" && debugId) {
+      const res = await room(debugId).fetch("https://room/debug");
+      return new Response(res.body, {
+        status: res.status,
+        headers: { ...CORS, "Content-Type": "application/json" },
+      });
+    }
     const id = /^\/rooms\/([\w-]+)$/.exec(pathname)?.[1];
     if (id && req.headers.get("Upgrade") === "websocket") return room(id).fetch(req);
     return new Response("not found", { status: 404, headers: CORS });
@@ -54,12 +64,17 @@ export class RoomObject extends DurableObject<Env> {
         now: () => Date.now(),
         random: Math.random,
         makeId: () => crypto.randomUUID(),
+        debug: env.DEBUG === "1",
       },
     );
     void ctx.blockConcurrencyWhile(() => this.host.load());
   }
 
   override async fetch(req: Request): Promise<Response> {
+    if (req.method === "GET" && new URL(req.url).pathname === "/debug")
+      return new Response(JSON.stringify(this.host.debugLog()), {
+        status: this.host.exists ? 200 : 404,
+      });
     if (req.method === "POST") {
       await this.host.create();
       return new Response(null, { status: 201 });
