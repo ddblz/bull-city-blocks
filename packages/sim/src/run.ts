@@ -30,6 +30,9 @@ export interface BatchSpec {
   to: number;
 }
 
+/** The seed for one game. It depends only on the player count and index, so rulesets are paired. */
+export const seedFor = (players: number, game: number) => `sim:${players}:${game}`;
+
 /** Runs games `from`..`to` at one player count. Bots rotate seats so each plays every seat. */
 export function runBatch(spec: BatchSpec): GameSummary[] {
   const rules = loadRuleset(spec.ruleset, spec.rulesetFiles);
@@ -49,7 +52,7 @@ export function runBatch(spec: BatchSpec): GameSummary[] {
       rules.value,
       content.value,
       bots.map((b) => BOTS[b] as Policy),
-      `sim:${spec.players}:${game}`,
+      seedFor(spec.players, game),
       (move, events, state) => {
         const seat = state.players.findIndex((p) => p.id === move.player);
         const cardOf = (instance: string) => state.cards[instance]?.id ?? instance;
