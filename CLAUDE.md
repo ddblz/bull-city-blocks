@@ -12,7 +12,7 @@ Bull City Blocks is an original, Durham-themed set-collection card game with a r
 2. Never push to `main`, merge a PR or approve a PR.
 3. The engine (`packages/engine`) stays pure: no I/O, no `Date`, no `Math.random`. Use the seeded RNG in state.
 4. Don't add or upgrade dependencies unless the issue has the `deps-approved` label.
-5. Keep PRs under 400 changed lines, excluding lockfiles, `content/`, `reports/` and fixtures. If an issue won't fit, stop and comment asking to split it.
+5. Keep PRs under 400 changed lines, excluding lockfiles, `content/`, `reports/`, `docs/`, test files (`*.test.ts`) and fixtures (`fixtures/`, `__fixtures__/`). If an issue won't fit, stop and comment asking to split it.
 6. A behavior change to the rules requires a matching update to `docs/SPEC.md` in the same PR.
 7. A `variant` issue requires `reports/<variant-id>.md`, produced by `pnpm sim` with 10,000 games against `base`.
 8. If CI fails twice after your fixes, stop. Comment `blocked:` with your diagnosis.

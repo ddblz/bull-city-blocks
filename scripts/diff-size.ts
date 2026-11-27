@@ -6,12 +6,16 @@ export const MAX_CHANGED_LINES = 400;
 export function isExcluded(path: string): boolean {
   const segments = path.split("/");
   const top = segments[0];
+  const file = segments[segments.length - 1] ?? "";
+  const dirs = segments.slice(0, -1);
   return (
-    segments[segments.length - 1] === "pnpm-lock.yaml" ||
+    file === "pnpm-lock.yaml" ||
+    file.endsWith(".test.ts") ||
     top === "content" ||
     top === "reports" ||
     top === "docs" ||
-    segments.slice(0, -1).includes("fixtures")
+    dirs.includes("fixtures") ||
+    dirs.includes("__fixtures__")
   );
 }
 

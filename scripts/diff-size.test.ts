@@ -15,6 +15,15 @@ describe("isExcluded", () => {
     ["packages/docs/index.ts", false],
     ["packages/engine/src/fixtures.ts", false],
     ["rulesets/base.json", false],
+    ["rulesets/__fixtures__/x.json", true],
+    ["packages/engine/src/__fixtures__/a.json", true],
+    ["packages/engine/src/turn.test.ts", true],
+    ["scripts/diff-size.test.ts", true],
+    ["packages/engine/src/turn.ts", false],
+    ["packages/engine/src/__fixtures__.ts", false],
+    ["packages/my__fixtures__/a.json", false],
+    ["packages/engine/src/test.ts", false],
+    ["packages/engine/src/test-content.ts", false],
   ])("%s → %s", (path, expected) => {
     expect(isExcluded(path)).toBe(expected);
   });
@@ -31,6 +40,7 @@ describe("measureDiff", () => {
       1050,
       true,
     ],
+    ["test files are excluded", "5\t0\tsrc/a.ts\n90\t10\tsrc/a.test.ts", 5, 100, true],
     ["binary files count as 0", "-\t-\tassets/logo.png\n2\t0\tsrc/a.ts", 2, 0, true],
     ["exactly 400 passes", "400\t0\tsrc/a.ts", 400, 0, true],
     ["401 fails", "200\t201\tsrc/a.ts", 401, 0, false],
