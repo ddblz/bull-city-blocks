@@ -107,11 +107,11 @@ function play(n: number, seed: number, choices: Iterable<number>): GameState {
   return s;
 }
 
-// 8. All of the above, for every player count from 2 to 10.
-describe("ARCHITECTURE §7 invariants (property-based)", () => {
-  it.each([2, 3, 4, 5, 6, 7, 8, 9, 10])(
-    "hold over %i-player random games",
-    (n) => {
+// 8. All of the above, for every player count from 2 to 10: one test file per count
+// (invariants-<n>p.property.test.ts) so Vitest runs them in parallel.
+export function checkInvariants(n: number): void {
+  describe(`ARCHITECTURE §7 invariants (property-based), ${n} players`, () => {
+    it(`hold over ${RUNS} random ${n}-player games capped at ${MAX_MOVES} moves`, () => {
       fc.assert(
         fc.property(
           fc.nat(),
@@ -122,13 +122,9 @@ describe("ARCHITECTURE §7 invariants (property-based)", () => {
         ),
         { numRuns: RUNS },
       );
-    },
-    30_000,
-  );
+    }, 30_000);
 
-  it.each([2, 3, 4, 5, 6, 7, 8, 9, 10])(
-    "hold over %i-player games played to the end (a win or the round-limit stall)",
-    (n) => {
+    it(`hold over ${FULL_GAMES} ${n}-player games played to the end (a win or the round-limit stall)`, () => {
       fc.assert(
         fc.property(fc.nat(), (seed) => {
           const end = play(n, seed, endlessChoices(seed));
@@ -137,7 +133,6 @@ describe("ARCHITECTURE §7 invariants (property-based)", () => {
         }),
         { numRuns: FULL_GAMES },
       );
-    },
-    60_000,
-  );
-});
+    }, 60_000);
+  });
+}
