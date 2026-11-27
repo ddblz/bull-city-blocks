@@ -55,3 +55,17 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sim-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # 500 games of base at 4 players; fails on any engine error or a stall rate above 20%.
+      - run: pnpm sim --ruleset base --players 4 --games 500 --out sim-smoke.json --max-stall-rate 0.2
