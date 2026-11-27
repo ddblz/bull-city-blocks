@@ -10,9 +10,13 @@ export interface ManifestChange {
   after: Record<string, unknown> | null;
 }
 
+/** Sorted entries, leaving out internal `workspace:` links: they add nothing from the registry. */
 function normalize(deps: unknown): string {
-  if (typeof deps !== "object" || deps === null) return "{}";
-  return JSON.stringify(Object.entries(deps).sort(([a], [b]) => a.localeCompare(b)));
+  if (typeof deps !== "object" || deps === null) return "[]"; // missing = empty
+  const external = Object.entries(deps).filter(
+    ([, v]) => !(typeof v === "string" && v.startsWith("workspace:")),
+  );
+  return JSON.stringify(external.sort(([a], [b]) => a.localeCompare(b)));
 }
 
 /** Paths whose `dependencies` or `devDependencies` differ. */
