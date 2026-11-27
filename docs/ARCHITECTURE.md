@@ -20,7 +20,8 @@ flowchart LR
     bots["packages/bots<br/>random / greedy / heuristic"]
     sim["packages/sim<br/>simulation CLI + stats"]
     room["packages/room<br/>pure room logic<br/>(lobby, rules, bots, history)"]
-    server["apps/server<br/>Node + WebSocket (local)<br/>or Worker + Durable Object per room<br/>(sockets, timers)"]
+    server["apps/server<br/>Node + WebSocket (local)<br/>(sockets, timers)"]
+    worker["apps/worker<br/>Worker + Durable Object per room<br/>(hibernating sockets, alarms, storage)"]
     web["apps/web<br/>React UI (Cloudflare Pages)"]
   end
   content --> engine
@@ -31,7 +32,9 @@ flowchart LR
   engine --> room
   bots --> room
   room --> server
+  room --> worker
   server <-->|"intents / player views"| web
+  worker <-->|"intents / player views"| web
   sim --> report[["sim report<br/>(Markdown + JSON)"]]
 ```
 
@@ -41,8 +44,9 @@ flowchart LR
 | `packages/bots` | `Policy` implementations that pick a move from `legalMoves` | engine |
 | `packages/sim` | Runs N games across seeds, collects metrics, compares rulesets, writes reports | engine, bots |
 | `packages/room` | One game room, with no I/O: the lobby (seats, host, bots), the ruleset plus in-room overrides, the authoritative game, per-player messages (`viewFor` + `legalMoves`), timeouts and the per-player event history. Every input returns the messages to deliver | engine, bots |
-| `apps/server` | Transports for `packages/room`: sockets, reconnect tokens, turn-clock timers and bot pacing (M4). A Node + WebSocket server locally, then a Cloudflare Worker with one Durable Object per room | room |
-| `apps/web` | Renders the player view and sends intents (M4) | engine types only |
+| `apps/server` | The local transport for `packages/room` (`pnpm play`): sockets, reconnect tokens, turn-clock timers and bot pacing (M4) | room |
+| `apps/worker` | The online transport (#40): a Cloudflare Worker with one Durable Object per room. Timers run on the object's alarm, and the room is saved to storage after every change (`Room.snapshot` / `Room.restore`), so it survives hibernation and eviction. `pnpm dev:worker` runs it locally | room |
+| `apps/web` | Renders the player view and sends intents (M4); resolves and diffs rulesets for the rules editor (#39) | engine, room types |
 
 ## 3. Engine API
 

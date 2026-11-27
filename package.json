@@ -12,6 +12,7 @@
     "typecheck": "tsc -b",
     "test": "vitest run",
     "dev:web": "pnpm --filter @bull-city-blocks/web dev",
+    "dev:worker": "pnpm --filter @bull-city-blocks/worker dev",
     "play": "node --disable-warning=ExperimentalWarning --import ./scripts/ts-register.mjs apps/server/src/main.ts",
     "sim": "node --disable-warning=ExperimentalWarning --import ./scripts/ts-register.mjs packages/sim/bin/sim.mjs"
   },

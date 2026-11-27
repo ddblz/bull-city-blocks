@@ -1,0 +1,13 @@
+// The online game server (SPEC §7, #40): a Worker, plus one Durable Object per room.
+// `pnpm dev:worker` runs it locally; .github/workflows/deploy.yml deploys it from main.
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "bull-city-blocks",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-11-01",
+  "durable_objects": {
+    "bindings": [{ "name": "ROOMS", "class_name": "RoomObject" }]
+  },
+  // The free plan only offers SQLite-backed Durable Objects.
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RoomObject"] }]
+}

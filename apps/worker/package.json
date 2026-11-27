@@ -1,0 +1,17 @@
+{
+  "name": "@bull-city-blocks/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@bull-city-blocks/room": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261113.1",
+    "wrangler": "4.162.0"
+  }
+}

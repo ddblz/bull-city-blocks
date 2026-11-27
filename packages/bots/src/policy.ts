@@ -7,6 +7,15 @@ export class Rng {
   constructor(seed: string) {
     this.state = seedRng(seed);
   }
+  /** The generator's state, so a saved room (#40) can carry on where it left off. */
+  save(): RngState {
+    return this.state;
+  }
+  static load(state: RngState): Rng {
+    const rng = new Rng("");
+    rng.state = state;
+    return rng;
+  }
   /** Uniform integer in [0, n). */
   int(n: number): number {
     const next = nextUint32(this.state);
