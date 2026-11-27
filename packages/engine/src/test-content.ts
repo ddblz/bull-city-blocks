@@ -1,7 +1,10 @@
 import durham from "../../../content/durham.json" with { type: "json" };
 import base from "../../../rulesets/base.json" with { type: "json" };
 import { type Content, parseContent } from "./content";
+import { createGame } from "./create-game";
 import { loadRuleset, type RuleSet } from "./ruleset";
+import { applyMove } from "./turn";
+import type { CardInstanceId, GameState, Move, PlayerState } from "./types";
 
 /** The validated Durham content. */
 export function durhamContent(): Content {
@@ -18,3 +21,49 @@ export function baseRules(): RuleSet {
 }
 
 export { base as baseJson, durham as durhamJson };
+
+/** Game-state helpers shared by the turn, payment and rent tests. */
+
+const ids = (n: number) => Array.from({ length: n }, (_, i) => `p${i + 1}`);
+export function rules(overrides: Record<string, unknown> = {}): RuleSet {
+  const r = loadRuleset("v", [base, { id: "v", extends: "base", description: "", overrides }]);
+  if (!r.ok) throw new Error(r.error);
+  return r.value;
+}
+export function game(n = 3, r: RuleSet = baseRules(), seed = "turn"): GameState {
+  const g = createGame(r, durhamContent(), ids(n), seed);
+  if (!g.ok) throw new Error(g.error);
+  return JSON.parse(JSON.stringify(g.value)); // a private copy tests may edit
+}
+export function apply(s: GameState, move: Move) {
+  const r = applyMove(s, move);
+  if (!r.ok) throw new Error(r.error);
+  return r.value;
+}
+export const current = (s: GameState) =>
+  s.players.find((p) => p.id === s.currentPlayer) as PlayerState;
+export const next = (s: GameState) =>
+  s.players[(s.players.indexOf(current(s)) + 1) % s.players.length] as PlayerState;
+export const cardsIn = (s: GameState) => [
+  ...s.deck,
+  ...s.discard,
+  ...s.players.flatMap((p) => [...p.hand, ...p.bank, ...p.tableau.flatMap((t) => t.cards)]),
+];
+/** Moves `cards` out of wherever they are and into `to` (keeps the card count conserved). */
+export function place(s: GameState, cards: CardInstanceId[], to: CardInstanceId[]) {
+  const lists = [
+    s.deck,
+    s.discard,
+    ...s.players.flatMap((p) => [p.hand, p.bank, ...p.tableau.map((t) => t.cards)]),
+  ];
+  for (const card of cards)
+    for (const list of lists) if (list.includes(card)) list.splice(list.indexOf(card), 1);
+  to.push(...cards);
+}
+export const ofCard = (s: GameState, cardId: string) =>
+  Object.keys(s.cards).filter((k) => s.cards[k]?.id === cardId);
+export function deepFreeze<T>(o: T): T {
+  if (typeof o === "object" && o !== null)
+    for (const v of Object.values(Object.freeze(o))) deepFreeze(v);
+  return o;
+}

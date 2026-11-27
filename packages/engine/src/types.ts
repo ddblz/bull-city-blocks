@@ -30,7 +30,18 @@ export type Move =
   | { type: "playProperty"; player: PlayerId; card: CardInstanceId }
   | { type: "bank"; player: PlayerId; card: CardInstanceId }
   | { type: "endTurn"; player: PlayerId }
-  | { type: "discard"; player: PlayerId; card: CardInstanceId };
+  | { type: "discard"; player: PlayerId; card: CardInstanceId }
+  /** §4.6: `target` only for Wild Rent; `hike` is a Rent Hike played with it (§4.5). */
+  | {
+      type: "playRent";
+      player: PlayerId;
+      card: CardInstanceId;
+      district: District["id"];
+      target?: PlayerId;
+      hike?: CardInstanceId;
+    }
+  /** §3.4: any mix of bank and tableau cards toward the awaited debt. */
+  | { type: "pay"; player: PlayerId; cards: CardInstanceId[] };
 
 export type GameEvent =
   | { type: "turnStarted"; player: PlayerId; turn: number; round: number }
@@ -39,13 +50,24 @@ export type GameEvent =
   | { type: "propertyPlayed"; player: PlayerId; card: CardInstanceId }
   | { type: "banked"; player: PlayerId; card: CardInstanceId }
   | { type: "discarded"; player: PlayerId; card: CardInstanceId }
+  | {
+      type: "rentCharged";
+      player: PlayerId;
+      card: CardInstanceId;
+      district: District["id"];
+      amount: number;
+      debtors: PlayerId[];
+    }
+  | { type: "paid"; debtor: PlayerId; creditor: PlayerId; cards: CardInstanceId[] }
+  | { type: "debtSettled"; debtor: PlayerId; creditor: PlayerId; forgiven: number }
+  | { type: "autoResolved"; player: PlayerId; kind: "pay" }
   | { type: "gameOver"; result: PlayerId | "stall" };
 
-/** Placeholder: debts and Appeal chains arrive in #6 and #8. */
-export type PendingStep = never;
+/** A debt waiting to be paid (§3.4). Appeal chains arrive in #8. */
+export type PendingStep = { type: "debt"; debtor: PlayerId; creditor: PlayerId; amount: number };
 
 /** ARCHITECTURE §4.1. Draw is automatic at the start of each turn, so it is never a resting phase. */
-export type Phase = "play" | "discard" | "gameOver";
+export type Phase = "play" | "pay" | "discard" | "gameOver";
 
 /** Everything is plain JSON, so a game can be saved, replayed or diffed (ARCHITECTURE §3). */
 export interface GameState {

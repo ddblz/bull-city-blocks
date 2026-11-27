@@ -1,6 +1,9 @@
+import { autoResolvePayments, checkPay, pay, payableCards } from "./payment";
+import { playRent, rentMoves } from "./rent";
 import type { Result } from "./result";
 import { shuffle } from "./rng";
 import type { CardInstanceId, GameEvent, GameState, Move, PlayerId, PlayerState } from "./types";
+import { addToTableau, playerOf } from "./util";
 
 /**
  * The turn loop (SPEC §3.2–3.3, §3.5 completion, §3.8; ARCHITECTURE §4.1). applyMove copies
@@ -21,12 +24,6 @@ function draft(s: GameState): GameState {
       prefs: { ...p.prefs },
     })),
   };
-}
-
-function playerOf(s: GameState, id: PlayerId): PlayerState {
-  const p = s.players.find((x) => x.id === id);
-  if (p === undefined) throw new Error(`unknown player ${id}`); // unreachable: moves are validated
-  return p;
 }
 
 /** §3.3: draws up to `n`, reshuffling the discard pile when the draw pile runs out. */
@@ -92,36 +89,52 @@ function endPlay(s: GameState, events: GameEvent[]): void {
   else nextTurn(s, events);
 }
 
+/** Who the game is waiting on: the first debtor while debts are pending, else the current player. */
+export function awaitedPlayer(state: GameState): PlayerId | null {
+  if (state.phase === "gameOver") return null;
+  return state.phase === "pay" ? (state.pending[0]?.debtor ?? null) : state.currentPlayer;
+}
+
+/**
+ * Every legal move for `player`. While paying, it lists one single-card `pay` per payable card;
+ * a `pay` with several cards is legal too (checkPay) but not listed, to keep the list small.
+ */
 export function legalMoves(state: GameState, player: PlayerId): Move[] {
-  if (state.phase === "gameOver" || player !== state.currentPlayer) return [];
-  const hand = playerOf(state, player).hand;
-  if (state.phase === "discard") return hand.map((card) => ({ type: "discard", player, card }));
+  if (player !== awaitedPlayer(state)) return [];
+  const p = playerOf(state, player);
+  if (state.phase === "pay")
+    return payableCards(state, p).map((card) => ({ type: "pay", player, cards: [card] }));
+  if (state.phase === "discard") return p.hand.map((card) => ({ type: "discard", player, card }));
   const moves: Move[] = [];
   if (state.playsRemaining > 0) {
-    for (const card of hand) {
+    for (const card of p.hand) {
       const kind = state.cards[card]?.kind;
       if (kind === "property") moves.push({ type: "playProperty", player, card });
       if (kind === "cash" || kind === "action" || kind === "rent")
         moves.push({ type: "bank", player, card });
     }
+    moves.push(...rentMoves(state, player));
   }
   moves.push({ type: "endTurn", player });
   return moves;
 }
 
-const sameMove = (a: Move, b: Move) =>
-  a.type === b.type &&
-  a.player === b.player &&
-  ("card" in a ? a.card : null) === ("card" in b ? b.card : null);
+const moveKey = (m: Move) =>
+  JSON.stringify(Object.entries(m).sort(([a], [b]) => a.localeCompare(b)));
 
 /** Applies a legal move. Illegal moves return an error and leave the input untouched. */
 export function applyMove(
   state: GameState,
   move: Move,
 ): Result<{ state: GameState; events: GameEvent[] }> {
-  if (!legalMoves(state, move.player).some((m) => sameMove(m, move))) {
-    return { ok: false, error: `illegal move: ${JSON.stringify(move)}` };
-  }
+  const problem =
+    move.type === "pay"
+      ? checkPay(state, move.player, move.cards)
+      : legalMoves(state, move.player).some((m) => moveKey(m) === moveKey(move))
+        ? null
+        : "not a legal move";
+  if (problem !== null)
+    return { ok: false, error: `illegal move ${JSON.stringify(move)}: ${problem}` };
   const s = draft(state);
   const events: GameEvent[] = [];
   const p = playerOf(s, move.player);
@@ -130,12 +143,7 @@ export function applyMove(
   switch (move.type) {
     case "playProperty": {
       take(move.card);
-      const district = s.cards[move.card];
-      const id = district?.kind === "property" ? district.district : "";
-      const setSize = s.districts[id]?.setSize ?? 0;
-      const open = p.tableau.find((set) => set.district === id && set.cards.length < setSize);
-      if (open) open.cards.push(move.card);
-      else p.tableau.push({ district: id, cards: [move.card] }); // §3.5: extras start a new set
+      addToTableau(s, p, move.card);
       s.playsRemaining -= 1;
       events.push({ type: "propertyPlayed", player: p.id, card: move.card });
       break;
@@ -155,7 +163,14 @@ export function applyMove(
       events.push({ type: "discarded", player: p.id, card: move.card });
       if (p.hand.length <= s.rules.hand.limit) nextTurn(s, events);
       break;
+    case "playRent":
+      playRent(s, move, events);
+      break;
+    case "pay":
+      pay(s, move.cards, events);
+      break;
   }
+  autoResolvePayments(s, events);
 
   // §3.2 step 4: the win check runs after every move, for every player.
   if (s.phase !== "gameOver") {
