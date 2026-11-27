@@ -3,6 +3,8 @@ name: Deploy
 # Deploys the game server (a Worker with one Durable Object per room) and the web client
 # (Cloudflare Pages) from main (#40, SPEC §7). Never runs on pull requests.
 # Needs the repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID; skips until they're set.
+# Optional repo variables WEB_DOMAIN and API_DOMAIN (both or neither) put the site and the game
+# server on a custom domain (#51, SPEC §7); without them it uses workers.dev and pages.dev.
 
 on:
   push:
@@ -53,14 +55,27 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
+      # Checks the custom domains (both or neither) before anything is deployed.
+      - name: Check the custom domains
+        id: targets
+        run: node scripts/deploy-targets.cli.mjs
+        env:
+          WEB_DOMAIN: ${{ vars.WEB_DOMAIN }}
+          API_DOMAIN: ${{ vars.API_DOMAIN }}
+
       - name: Deploy the game server
         id: worker
         working-directory: apps/worker
         run: |
-          pnpm exec wrangler deploy | tee deploy.log
-          url=$(grep -o 'https://[^ ]*\.workers\.dev' deploy.log | head -1)
-          test -n "$url" || { echo "::error::no workers.dev URL in the deploy output"; exit 1; }
+          # WORKER_ARGS is "--domain <API_DOMAIN>" or empty, and was validated above.
+          pnpm exec wrangler deploy $WORKER_ARGS | tee deploy.log
+          url="$API_URL"
+          [ -n "$url" ] || url=$(grep -o 'https://[^ ]*\.workers\.dev' deploy.log | head -1)
+          test -n "$url" || { echo "::error::no server URL in the deploy output"; exit 1; }
           echo "url=$url" >> "$GITHUB_OUTPUT"
+        env:
+          WORKER_ARGS: ${{ steps.targets.outputs.worker_args }}
+          API_URL: ${{ steps.targets.outputs.api_url }}
 
       - name: Build the web client against it
         run: pnpm --filter @bull-city-blocks/web build
@@ -72,3 +87,10 @@ jobs:
         run: |
           pnpm exec wrangler pages project create bull-city-blocks --production-branch main || true
           pnpm exec wrangler pages deploy ../web/dist --project-name bull-city-blocks --branch main
+
+      - name: Attach the custom domain to Pages
+        if: steps.targets.outputs.pages_domain != ''
+        run: node scripts/pages-domain.cli.mjs
+        env:
+          PAGES_DOMAIN: ${{ steps.targets.outputs.pages_domain }}
+          PROJECT: bull-city-blocks

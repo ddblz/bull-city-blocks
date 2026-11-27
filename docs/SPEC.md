@@ -239,6 +239,15 @@ The engine is pure, so it can be moved between hosts.
 
 Not re-checked: Pages limits on files per site and file size, which the build is far below.
 
+**Custom domain** (optional, #51). Without one, the site is at `bull-city-blocks.pages.dev` and the server at its `workers.dev` address. To use your own domain, which costs the yearly registration fee (about $10–15) and nothing else:
+
+1. Register the domain with Cloudflare (Domain Registration), or move its nameservers to Cloudflare, so it is a zone in the same account.
+2. Add two GitHub repo **variables** (Settings → Secrets and variables → Actions → Variables), for example `WEB_DOMAIN` = `play.example.com` and `API_DOMAIN` = `api.example.com`. Set both or neither. They are not secrets, and the domain name is not committed to the repo.
+3. Add these zone permissions to the deploy API token, limited to that zone: **Zone → DNS → Edit**, **Zone → Workers Routes → Edit** and **Zone → Zone → Read**. Keep the account permissions it already has (Workers Scripts: Edit, Cloudflare Pages: Edit).
+4. Run the Deploy workflow. It deploys the Worker with `wrangler deploy --domain "$API_DOMAIN"`, builds the web client against `https://$API_DOMAIN`, and attaches `$WEB_DOMAIN` to the Pages project through Cloudflare's API (`wrangler` can't), including its CNAME record.
+
+A value that isn't a plain hostname, or only one of the two variables, fails the workflow before anything is deployed. The `workers.dev` and `pages.dev` addresses keep working alongside the custom ones.
+
 ## 8. Milestones
 
 | # | Milestone | Done when |
