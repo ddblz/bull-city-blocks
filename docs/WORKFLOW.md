@@ -36,7 +36,7 @@ There are two human gates, and nothing gets past them on its own:
 | No direct pushes to `main` | GitHub branch protection on `main`: pull request required and force pushes blocked. Claude acts through the owner's GitHub identity, so GitHub's "required approvals" can't be used: the owner's merge **is** the approval |
 | Claude can't merge or approve | `.claude/settings.json` denies `gh pr merge`, approve and merge calls through `gh api`, pushes to `main`, and `DELETE` calls. Cloud sessions also can't change repo settings or branch protection; the GitHub proxy refuses those writes |
 | CI must pass | Required status checks in branch protection (added once #2 lands) |
-| Small pull requests | CI fails when the diff is over **400 changed lines**, excluding lockfiles, `content/`, `reports/` and test fixtures |
+| Small pull requests | CI fails when the diff is over **400 changed lines**, excluding lockfiles, `content/`, `reports/`, `docs/`, test files (`*.test.ts`) and fixtures (`fixtures/`, `__fixtures__/`) |
 | No surprise dependencies | CI fails when `package.json` dependencies change unless the issue has the `deps-approved` label |
 | No secrets in cloud sessions | The environment has no production credentials, and network access is limited to package registries and GitHub |
 | Simulation runs are bounded | CI runs 500 games, and the CLI refuses to run more than 50,000 games without `--i-mean-it` |
