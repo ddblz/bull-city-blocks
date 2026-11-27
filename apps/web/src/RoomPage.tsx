@@ -2,6 +2,7 @@ import type { BotName, ClientMessage } from "@bull-city-blocks/room";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { connect, listRulesets, savedToken } from "./connection";
 import { canConfigure, initialState, reduce } from "./lobby-state";
+import { Table } from "./Table";
 
 /** A room: ask for a name (unless we already hold a seat token), then show the lobby. */
 export function RoomPage({ room }: { room: string }) {
@@ -126,13 +127,7 @@ function Lobby({ room, name }: { room: string; name: string }) {
           )}
           {!host && !lobby.started && <p>Waiting for the host to start the game…</p>}
           {lobby.started && state.game && (
-            <p className="status">
-              The game has started.{" "}
-              {state.game.awaiting?.seat === state.seat
-                ? "It's your move."
-                : `Waiting for ${lobby.seats[state.game.awaiting?.seat ?? 0]?.name}.`}{" "}
-              (The table arrives in #37.)
-            </p>
+            <Table state={{ ...state, game: state.game, lobby }} send={send} />
           )}
         </>
       )}
