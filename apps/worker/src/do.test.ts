@@ -19,6 +19,8 @@ class FakeObject {
   sockets: FakeSocket[] = [];
   now = 1_000_000;
   writes = 0;
+  /** Every setAlarm call: the time it was set to, and the clock when it was set. */
+  alarmsSet: { at: number; setAt: number }[] = [];
   readonly state: HostState = {
     storage: {
       get: async <T>(key: string) => {
@@ -33,6 +35,7 @@ class FakeObject {
       setAlarm: async (at) => {
         this.writes += 1;
         this.alarm = at;
+        this.alarmsSet.push({ at, setAt: this.now });
       },
       deleteAlarm: async () => {
         this.alarm = null;
@@ -42,7 +45,7 @@ class FakeObject {
   };
 
   /** A fresh host, as after hibernation or eviction: everything it knows comes from storage. */
-  async host(debug = false) {
+  async host() {
     let n = 0;
     const host = new RoomHost(this.state, {
       rulesets: RULESETS,
@@ -50,7 +53,6 @@ class FakeObject {
       now: () => this.now,
       random: () => 0.5,
       makeId: () => `id-${++n}-${this.now}`,
-      debug,
     });
     await host.load();
     return host;
@@ -217,58 +219,24 @@ describe("room Durable Object (#40)", () => {
     expect(ws.closed).toEqual({ code: 4004 });
   });
 
-  it("records no trace unless debug is on, so it costs no storage writes", async () => {
-    const quiet = new FakeObject();
-    const host = await quiet.host();
-    await host.create();
-    expect(quiet.data.has("debug")).toBe(false);
-    expect(host.debugLog().trace).toEqual([]);
-  });
-
-  it("with debug on, traces messages, alarms and set alarms, and keeps the trace across eviction (#40)", async () => {
+  it("stores only the room, so a move costs about two storage writes (SPEC §7)", async () => {
     const obj = new FakeObject();
-    const host = await obj.host(true);
+    const host = await obj.host();
     await startUntilBotAwaited(obj, host);
-    await obj.fire(host); // the awaited bot's alarm
-    const kinds = host.debugLog().trace.map((e) => e.ev);
-    expect(kinds).toContain("message");
-    expect(kinds).toContain("setAlarm");
-    const alarm = host.debugLog().trace.find((e) => e.ev === "alarm");
-    expect(alarm?.scheduled).toEqual(expect.any(Number));
-    expect(alarm?.due?.bot).toBeLessThanOrEqual(0); // the bot was due when the alarm fired
-    const evicted = await obj.host(true);
-    expect(evicted.debugLog().trace).toEqual(host.debugLog().trace);
-  });
-
-  it("with debug on, an alarm that throws is recorded and still rethrown, so Cloudflare retries it (#40)", async () => {
-    const obj = new FakeObject();
-    const host = await obj.host(true);
-    await startUntilBotAwaited(obj, host);
-    const room = (host as unknown as { room: { stepBot: () => never } }).room;
-    room.stepBot = () => {
-      throw new Error("boom");
-    };
-    await expect(obj.fire(host)).rejects.toThrow("boom");
-    expect(host.debugLog().trace.at(-1)).toMatchObject({
-      ev: "error",
-      note: expect.stringContaining("boom"),
-    });
-    expect(JSON.parse(obj.data.get("debug") as string).at(-1).ev).toBe("error");
+    expect([...obj.data.keys()]).toEqual(["room"]);
   });
 
   it("an alarm that fires a hair before its timer still runs it, and never re-arms right on top of now (#40)", async () => {
     // On the live server `Date.now()` was 0.7 ms short of a fractional bot timer, the handler found
     // nothing due and re-armed 0.7 ms ahead, and that alarm went unanswered for ~37 s.
     const obj = new FakeObject();
-    const host = await obj.host(true);
+    const host = await obj.host();
     const ana = await startUntilBotAwaited(obj, host);
     const before = ana.received.length;
     await obj.fire(host, 1); // 1 ms early
     expect(ana.received.length).toBeGreaterThan(before); // the bot moved
-    for (const e of host.debugLog().trace) {
-      if (e.ev === "setAlarm") expect(e.note).toBeGreaterThanOrEqual(10);
-    }
-    const timers = host.debugLog().timers;
+    for (const { at, setAt } of obj.alarmsSet) expect(at - setAt).toBeGreaterThanOrEqual(10);
+    const { timers } = JSON.parse(obj.data.get("room") as string);
     for (const t of [timers.bot, timers.clock, timers.expiry])
       if (t !== null) expect(Number.isInteger(t)).toBe(true);
   });
