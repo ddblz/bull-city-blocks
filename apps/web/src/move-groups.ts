@@ -1,29 +1,42 @@
 import type { Move } from "./types";
 
-/** The simple moves the table offers, grouped by what the player clicks. */
+/** The table's moves, grouped by what the player clicks. */
 export interface MoveGroups {
   /** Per hand card: put a property into the tableau, and/or bank it. */
   hand: Record<string, { play?: Move; bank?: Move }>;
+  /**
+   * Per card: the moves that need choices (a wild's district, rent, actions, upgrades, moving a
+   * wild). Built step by step with `nextStep` (choice-flows.ts).
+   */
+  flows: Record<string, Move[]>;
   endTurn?: Move;
   /** Per hand card, when over the hand limit. */
   discard: Record<string, Move>;
-  /** Per bank or tableau card, when paying a debt one card at a time. */
-  pay: Record<string, Move>;
-  /** Accept the action awaiting this player. */
+  /** Bank and tableau cards that can go toward the awaited debt, in any combination (§3.4). */
+  payable: string[];
+  /** Accept the action awaiting this player, or Appeal it (§3.6). */
   accept?: Move;
+  appeal?: Move;
 }
 
-/**
- * Groups `legalMoves` into UI actions. Only #37's moves are kept: wilds, upgrades, rent,
- * actions, Appeals and multi-card payments arrive in #38, so those cards can only be banked.
- */
+/** Groups `legalMoves` into UI actions. */
 export function groupMoves(legal: readonly Move[]): MoveGroups {
-  const groups: MoveGroups = { hand: {}, discard: {}, pay: {} };
+  const groups: MoveGroups = { hand: {}, flows: {}, discard: {}, payable: [] };
+  const flow = (card: string, move: Move) => {
+    groups.flows[card] = [...(groups.flows[card] ?? []), move];
+  };
   for (const move of legal) {
     switch (move.type) {
       case "playProperty":
         if (move.district === undefined)
           groups.hand[move.card] = { ...groups.hand[move.card], play: move };
+        else flow(move.card, move);
+        break;
+      case "playRent":
+      case "playAction":
+      case "playUpgrade":
+      case "moveWild":
+        flow(move.card, move);
         break;
       case "bank":
         groups.hand[move.card] = { ...groups.hand[move.card], bank: move };
@@ -34,15 +47,24 @@ export function groupMoves(legal: readonly Move[]): MoveGroups {
       case "discard":
         groups.discard[move.card] = move;
         break;
-      case "pay": {
-        const [only] = move.cards;
-        if (move.cards.length === 1 && only !== undefined) groups.pay[only] = move;
+      case "pay":
+        for (const card of move.cards)
+          if (!groups.payable.includes(card)) groups.payable.push(card);
         break;
-      }
       case "respond":
         if (move.appeal === undefined) groups.accept = move;
+        else groups.appeal = move;
         break;
     }
   }
   return groups;
 }
+
+/** The button that starts a card's multi-step move. */
+export const FLOW_LABEL: Record<string, string> = {
+  playProperty: "Play as…",
+  playRent: "Charge rent",
+  playAction: "Play",
+  playUpgrade: "Place",
+  moveWild: "Move",
+};
