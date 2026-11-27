@@ -54,7 +54,7 @@ awaiting(state: GameState): { player: PlayerId; kind: "play" | "discard" | "resp
 timeoutMove(state: GameState): Move   // the fixed default move for whoever is awaited (SPEC §3.7)
 ```
 
-- `GameState` holds `phase` (`play`, `discard` or `gameOver`; the draw happens automatically when a turn starts, including the first turn inside `createGame`), `currentPlayer`, `startingPlayer`, `result`, `playsRemaining`, a `pending` stack (debts and Appeal chains waiting for a response), `players[]` (hand, bank, tableau, **prefs**), `deck`, `discard`, `rng` (seeded PRNG state), `turn` and `round`.
+- `GameState` holds `phase` (`play`, `respond`, `pay`, `discard` or `gameOver`; the draw happens automatically when a turn starts, including the first turn inside `createGame`), `currentPlayer`, `startingPlayer`, `result`, `playsRemaining`, a `pending` stack (debts and Appeal chains waiting for a response), `players[]` (hand, bank, tableau, **prefs**), `deck`, `discard`, `rng` (seeded PRNG state), `turn` and `round`.
 - `Move` is a discriminated union, for example `{type:"playProperty"}`, `{type:"bank"}`, `{type:"playAction"}`, `{type:"respond"}`, `{type:"pay"}`, `{type:"endTurn"}`, `{type:"discard"}`, `{type:"moveWild"}`, `{type:"setPref"}`. `setPref` is allowed at any time and is never counted as a play.
 - **Auto-resolution happens inside `applyMove`.** After every move, the engine repeatedly resolves the next pending step while either of these holds:
   - The awaited player has auto-pass on and no Appeal in hand. The engine accepts for them.

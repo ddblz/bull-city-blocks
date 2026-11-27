@@ -3,11 +3,10 @@ import { apply, current, game, next, place, rules } from "./test-content";
 import { legalMoves } from "./turn";
 import type { GameEvent, GameState, Move } from "./types";
 
-/** The current player holds exactly `hand`; everyone else's bank and tableau are empty. */
+/** The current player holds exactly `hand`; everyone else holds nothing (so no Appeals, §3.6). */
 function setup(n: number, hand: string[], s: GameState = game(n)) {
   const me = current(s);
-  for (const p of s.players) place(s, [...p.bank], s.deck);
-  place(s, [...me.hand], s.deck);
+  for (const p of s.players) place(s, [...p.hand, ...p.bank], s.deck);
   place(s, hand, me.hand);
   return { s, me };
 }

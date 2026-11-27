@@ -42,8 +42,23 @@ export type Move =
       target?: PlayerId;
       hike?: CardInstanceId;
     }
-  /** §4.5 basic actions; `target` for Assessment and Construction Delay. */
-  | { type: "playAction"; player: PlayerId; card: CardInstanceId; target?: PlayerId }
+  /**
+   * §4.5 actions. `target` for every action that targets someone; `take` is the target's property
+   * (Buyout, Swap Meet), `give` is yours (Swap Meet), `district` is the set taken (Hostile Takeover).
+   */
+  | {
+      type: "playAction";
+      player: PlayerId;
+      card: CardInstanceId;
+      target?: PlayerId;
+      take?: CardInstanceId;
+      give?: CardInstanceId;
+      district?: District["id"];
+    }
+  /** §3.6: accept the awaited action, or play an Appeal from your hand against it. */
+  | { type: "respond"; player: PlayerId; appeal?: CardInstanceId }
+  /** §3.6: change your auto-pass preference. Always legal, never a play, not listed by legalMoves. */
+  | { type: "setPref"; player: PlayerId; autoPass: boolean }
   /** §3.4: any mix of bank and tableau cards toward the awaited debt. */
   | { type: "pay"; player: PlayerId; cards: CardInstanceId[] };
 
@@ -65,14 +80,45 @@ export type GameEvent =
   | { type: "actionPlayed"; player: PlayerId; card: CardInstanceId; target?: PlayerId }
   | { type: "paid"; debtor: PlayerId; creditor: PlayerId; cards: CardInstanceId[] }
   | { type: "debtSettled"; debtor: PlayerId; creditor: PlayerId; forgiven: number }
-  | { type: "autoResolved"; player: PlayerId; kind: "pay" }
+  | { type: "autoResolved"; player: PlayerId; kind: "pay" | "respond" }
+  | { type: "responded"; player: PlayerId; appeal: boolean }
+  | {
+      type: "actionResolved";
+      attacker: PlayerId;
+      target: PlayerId;
+      card: CardInstanceId;
+      cancelled: boolean;
+    }
+  | { type: "prefSet"; player: PlayerId; autoPass: boolean }
   | { type: "gameOver"; result: PlayerId | "stall" };
 
-/** A debt waiting to be paid (§3.4). Appeal chains arrive in #8. */
-export type PendingStep = { type: "debt"; debtor: PlayerId; creditor: PlayerId; amount: number };
+/** What a targeted action does to one target if it stands (§4.5–4.6). */
+export type Effect =
+  | { kind: "debt"; amount: number }
+  | { kind: "delay" }
+  | { kind: "buyout"; take: CardInstanceId }
+  | { kind: "swap"; take: CardInstanceId; give: CardInstanceId }
+  | { kind: "takeover"; district: District["id"] };
+
+/**
+ * Work waiting on a player, oldest first (ARCHITECTURE §4.1–4.2): a debt to pay (§3.4), or a
+ * targeted action to respond to (§3.6). `appeals` counts Appeals played so far; `awaiting` is
+ * the target when it's even and the attacker when it's odd.
+ */
+export type PendingStep =
+  | { type: "debt"; debtor: PlayerId; creditor: PlayerId; amount: number }
+  | {
+      type: "response";
+      card: CardInstanceId;
+      attacker: PlayerId;
+      target: PlayerId;
+      awaiting: PlayerId;
+      appeals: number;
+      effect: Effect;
+    };
 
 /** ARCHITECTURE §4.1. Draw is automatic at the start of each turn, so it is never a resting phase. */
-export type Phase = "play" | "pay" | "discard" | "gameOver";
+export type Phase = "play" | "respond" | "pay" | "discard" | "gameOver";
 
 /** Everything is plain JSON, so a game can be saved, replayed or diffed (ARCHITECTURE §3). */
 export interface GameState {
