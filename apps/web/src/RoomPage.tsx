@@ -1,7 +1,11 @@
+import type { Content } from "@bull-city-blocks/engine";
+import { loadRuleset } from "@bull-city-blocks/engine";
 import type { BotName, ClientMessage } from "@bull-city-blocks/room";
 import { useEffect, useReducer, useRef, useState } from "react";
-import { connect, listRulesets, savedToken } from "./connection";
+import { differences, resolveRules } from "./config-form";
+import { connect, getContent, listRulesets, savedToken } from "./connection";
 import { canConfigure, initialState, reduce } from "./lobby-state";
+import { RulesEditor, RulesSummary } from "./RulesEditor";
 import { Table } from "./Table";
 
 /** A room: ask for a name (unless we already hold a seat token), then show the lobby. */
@@ -34,17 +38,24 @@ function NameForm({ onJoin }: { onJoin: (name: string) => void }) {
 
 function Lobby({ room, name }: { room: string; name: string }) {
   const [state, dispatch] = useReducer(reduce, initialState);
-  const [rulesets, setRulesets] = useState<{ id: string; description: string }[]>([]);
+  const [rulesets, setRulesets] = useState<Awaited<ReturnType<typeof listRulesets>>>([]);
+  const [content, setContent] = useState<Content | null>(null);
   const conn = useRef<ReturnType<typeof connect> | null>(null);
   useEffect(() => {
     conn.current = connect(room, name, dispatch);
     listRulesets().then(setRulesets, () => setRulesets([]));
+    getContent().then(setContent, () => setContent(null));
     return () => conn.current?.close();
   }, [room, name]);
   const send = (msg: ClientMessage) => conn.current?.send(msg);
   const { lobby } = state;
   const host = canConfigure(state);
   const link = `${location.origin}${location.pathname}#/room/${room}`;
+  // #39: what this room's rules change from base, for every player.
+  const baseRules = loadRuleset("base", rulesets);
+  const rules = lobby && resolveRules(rulesets, lobby.ruleset, lobby.overrides);
+  const changes =
+    content && baseRules.ok && rules?.ok ? differences(rules.value, baseRules.value, content) : [];
 
   return (
     <main className="page">
@@ -80,6 +91,7 @@ function Lobby({ room, name }: { room: string; name: string }) {
           <p>
             Rules: <strong>{lobby.ruleset}</strong> · clock {lobby.clock ? "on" : "off"}
           </p>
+          <RulesSummary lines={changes} open={!lobby.started} />
           {host && (
             <section className="controls">
               <label>
@@ -124,6 +136,15 @@ function Lobby({ room, name }: { room: string; name: string }) {
                 Start game
               </button>
             </section>
+          )}
+          {host && content && (
+            <RulesEditor
+              files={rulesets}
+              content={content}
+              ruleset={lobby.ruleset}
+              overrides={lobby.overrides}
+              onChange={(overrides) => send({ type: "configure", overrides })}
+            />
           )}
           {!host && !lobby.started && <p>Waiting for the host to start the game…</p>}
           {lobby.started && state.game && (

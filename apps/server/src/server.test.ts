@@ -170,10 +170,11 @@ describe("local game server (#35)", () => {
     await mover.next((m) => m.type === "state", from);
   });
 
-  it("lists the available rulesets for the lobby", async () => {
+  it("serves the ruleset files and the card content for the lobby's rules editor", async () => {
     const s = await start();
-    const res = await fetch(`http://localhost:${s.port}/rulesets`);
-    expect(await res.json()).toEqual([{ id: "base", description: base.description }]);
+    const get = async (path: string) => (await fetch(`http://localhost:${s.port}${path}`)).json();
+    expect(await get("/rulesets")).toEqual([base]);
+    expect(await get("/content")).toMatchObject({ id: "durham" });
   });
 
   it("a room with no activity past the expiry is removed", async () => {

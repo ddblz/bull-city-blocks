@@ -39,6 +39,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@bull-city-blocks/engine':
+        specifier: workspace:*
+        version: link:../../packages/engine
       '@bull-city-blocks/room':
         specifier: workspace:*
         version: link:../../packages/room

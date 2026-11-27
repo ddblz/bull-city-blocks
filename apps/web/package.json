@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@bull-city-blocks/engine": "workspace:*",
     "@bull-city-blocks/room": "workspace:*",
     "react": "19.3.1",
     "react-dom": "19.3.1"
