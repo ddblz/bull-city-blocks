@@ -34,6 +34,7 @@ describe("turn loop", () => {
       { type: "bank", player: p, card: cash },
       { type: "bank", player: p, card: action },
       { type: "bank", player: p, card: rent },
+      { type: "playAction", player: p, card: action }, // Walk-Off Win (§4.5, since #7)
       { type: "endTurn", player: p },
     ]);
     expect(legalMoves(s, next(s).id)).toEqual([]);

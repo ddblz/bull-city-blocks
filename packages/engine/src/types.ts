@@ -23,6 +23,8 @@ export interface PlayerState {
   bank: CardInstanceId[];
   tableau: PropertySet[];
   prefs: PlayerPrefs;
+  /** §4.5 Construction Delay: draw only 1 card next turn. A flag, so delays don't stack. */
+  delayed: boolean;
 }
 
 /** Moves a player can make (ARCHITECTURE §3). Actions, payments and wilds arrive in #6–#9. */
@@ -40,6 +42,8 @@ export type Move =
       target?: PlayerId;
       hike?: CardInstanceId;
     }
+  /** §4.5 basic actions; `target` for Assessment and Construction Delay. */
+  | { type: "playAction"; player: PlayerId; card: CardInstanceId; target?: PlayerId }
   /** §3.4: any mix of bank and tableau cards toward the awaited debt. */
   | { type: "pay"; player: PlayerId; cards: CardInstanceId[] };
 
@@ -58,6 +62,7 @@ export type GameEvent =
       amount: number;
       debtors: PlayerId[];
     }
+  | { type: "actionPlayed"; player: PlayerId; card: CardInstanceId; target?: PlayerId }
   | { type: "paid"; debtor: PlayerId; creditor: PlayerId; cards: CardInstanceId[] }
   | { type: "debtSettled"; debtor: PlayerId; creditor: PlayerId; forgiven: number }
   | { type: "autoResolved"; player: PlayerId; kind: "pay" }

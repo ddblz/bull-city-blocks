@@ -65,6 +65,7 @@ export function createGame(
     bank: [],
     tableau: [],
     prefs: { autoPass: rules.autoPassDefault },
+    delayed: false,
   }));
   const districts: Record<District["id"], District> = {};
   for (const d of effective.value.districts) districts[d.id] = d;

@@ -1,4 +1,5 @@
-import type { CardInstanceId, GameState, PlayerId, PlayerState } from "./types";
+import { shuffle } from "./rng";
+import type { CardInstanceId, GameEvent, GameState, PlayerId, PlayerState } from "./types";
 
 /** Shared state helpers. They mutate the draft that applyMove works on, never its input. */
 
@@ -36,4 +37,21 @@ export function removeOwned(p: PlayerState, card: CardInstanceId): void {
     if (j >= 0) set.cards.splice(j, 1);
   }
   p.tableau = p.tableau.filter((set) => set.cards.length > 0);
+}
+
+/** §3.3: draws up to `n`, reshuffling the discard pile when the draw pile runs out. */
+export function draw(s: GameState, p: PlayerState, n: number, events: GameEvent[]): void {
+  let drawn = 0;
+  for (; drawn < n; drawn++) {
+    if (s.deck.length === 0) {
+      if (s.discard.length === 0) break;
+      const shuffled = shuffle(s.rng, s.discard);
+      events.push({ type: "deckReshuffled", cards: s.discard.length });
+      s.deck = shuffled.value;
+      s.discard = [];
+      s.rng = shuffled.rng;
+    }
+    p.hand.push(s.deck.shift() as CardInstanceId);
+  }
+  events.push({ type: "cardsDrawn", player: p.id, count: drawn });
 }
