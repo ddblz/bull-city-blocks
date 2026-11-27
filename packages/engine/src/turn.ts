@@ -1,9 +1,9 @@
+import { actionMoves, DELAYED_DRAW, playAction } from "./actions";
 import { autoResolvePayments, checkPay, pay, payableCards } from "./payment";
 import { playRent, rentMoves } from "./rent";
 import type { Result } from "./result";
-import { shuffle } from "./rng";
 import type { CardInstanceId, GameEvent, GameState, Move, PlayerId, PlayerState } from "./types";
-import { addToTableau, playerOf } from "./util";
+import { addToTableau, draw, playerOf } from "./util";
 
 /**
  * The turn loop (SPEC §3.2–3.3, §3.5 completion, §3.8; ARCHITECTURE §4.1). applyMove copies
@@ -26,28 +26,13 @@ function draft(s: GameState): GameState {
   };
 }
 
-/** §3.3: draws up to `n`, reshuffling the discard pile when the draw pile runs out. */
-function draw(s: GameState, p: PlayerState, n: number, events: GameEvent[]): void {
-  let drawn = 0;
-  for (; drawn < n; drawn++) {
-    if (s.deck.length === 0) {
-      if (s.discard.length === 0) break;
-      const shuffled = shuffle(s.rng, s.discard);
-      events.push({ type: "deckReshuffled", cards: s.discard.length });
-      s.deck = shuffled.value;
-      s.discard = [];
-      s.rng = shuffled.rng;
-    }
-    p.hand.push(s.deck.shift() as CardInstanceId);
-  }
-  events.push({ type: "cardsDrawn", player: p.id, count: drawn });
-}
-
 /** §3.2 step 1: draw 2, or 5 from an empty hand, then start the Play phase. Mutates `s`. */
 export function startTurn(s: GameState, events: GameEvent[]): void {
   const p = playerOf(s, s.currentPlayer);
   events.push({ type: "turnStarted", player: p.id, turn: s.turn, round: s.round });
-  draw(s, p, p.hand.length === 0 ? s.rules.draw.emptyHand : s.rules.draw.perTurn, events);
+  const n = p.hand.length === 0 ? s.rules.draw.emptyHand : s.rules.draw.perTurn;
+  draw(s, p, p.delayed ? Math.min(n, DELAYED_DRAW) : n, events); // §4.5 Construction Delay
+  p.delayed = false;
   s.phase = "play";
   s.playsRemaining = s.rules.playsPerTurn;
 }
@@ -113,7 +98,7 @@ export function legalMoves(state: GameState, player: PlayerId): Move[] {
       if (kind === "cash" || kind === "action" || kind === "rent")
         moves.push({ type: "bank", player, card });
     }
-    moves.push(...rentMoves(state, player));
+    moves.push(...rentMoves(state, player), ...actionMoves(state, player));
   }
   moves.push({ type: "endTurn", player });
   return moves;
@@ -165,6 +150,9 @@ export function applyMove(
       break;
     case "playRent":
       playRent(s, move, events);
+      break;
+    case "playAction":
+      playAction(s, move, events);
       break;
     case "pay":
       pay(s, move.cards, events);
