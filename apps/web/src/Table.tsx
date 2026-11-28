@@ -1,14 +1,21 @@
 import type { ClientMessage, LobbyView } from "@bull-city-blocks/room";
-import { type ReactNode, useEffect, useState } from "react";
-import { CardFace } from "./CardFace";
+import { useEffect, useState } from "react";
+import { MoveButton } from "./Cards";
 import { Chooser, PaymentPanel, ResponsePanel } from "./Choices";
-import { cardLabel, districtName, instanceLabel, isComplete, totalValue } from "./card";
+import { cardLabel, districtName } from "./card";
 import { nextStep } from "./choice-flows";
+import { Districts } from "./Districts";
 import { type Context, describeEvent } from "./describe-event";
+import { Hand } from "./Hand";
 import type { ClientState } from "./lobby-state";
 import { FLOW_LABEL, groupMoves } from "./move-groups";
+import { Opponents } from "./Opponents";
 import { RecapPanel } from "./Recap";
-import type { HistoryEntry, Move, PropertySet, StateMessage, View } from "./types";
+import { buildRecap } from "./recap";
+import { TableBar } from "./TableBar";
+import { keepSelected, toggleSelected } from "./table-summary";
+import type { HistoryEntry, Move, StateMessage, View } from "./types";
+import "./table.css";
 
 interface Props {
   state: ClientState & { game: StateMessage; lobby: LobbyView };
@@ -18,6 +25,7 @@ interface Props {
 /** The game table (#37, #38, #41): the view, every move, the clock, the recap, the log and game over. */
 export function Table({ state, send }: Props) {
   const [open, setOpen] = useState<string | null>(null);
+  const [picked, setPicked] = useState<string | null>(null);
   const [recapOpen, setRecapOpen] = useState(true);
   // Each (re)connect brings a fresh recap, shown until it's closed.
   useEffect(() => setRecapOpen(state.recap.length > 0), [state.recap]);
@@ -28,8 +36,8 @@ export function Table({ state, send }: Props) {
   const play = (move: Move) => send({ type: "intent", move });
   const groups = groupMoves(game.legal);
   const me = view.players.find((p) => p.id === view.viewer);
-  const others = view.players.filter((p) => p.id !== view.viewer);
-  const top = view.discard.at(-1);
+  const selected = keepSelected(picked, me?.hand ?? []);
+  const awaited = game.awaiting ? (lobby.seats[game.awaiting.seat]?.player ?? null) : null;
   const ctx: Context = {
     viewer: view.viewer,
     playerName: nameOf,
@@ -87,16 +95,19 @@ export function Table({ state, send }: Props) {
     );
   }
 
+  const updates = state.recap.length
+    ? buildRecap(state.recap, ctx, view)
+        .groups.flatMap((g) => g.items)
+        .filter((x) => x.affected).length
+    : 0;
   return (
     <section className="table">
-      <p className="banner">
-        Turn {view.turn} · Round {view.round} ·{" "}
-        {waitingText(game, view, state.seat, nameOf, seatName)}{" "}
-        <Clock seconds={game.clockSeconds} game={game} />
-      </p>
-      <p className="status">
-        Deck {view.deckCount} · Discard {top ? instanceLabel(top, view) : "empty"}
-      </p>
+      <TableBar
+        game={game}
+        status={waitingText(game, view, state.seat, nameOf, seatName)}
+        updates={updates}
+        onUpdates={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
+      />
       {recapOpen && state.recap.length > 0 && (
         <RecapPanel
           entries={state.recap}
@@ -105,27 +116,11 @@ export function Table({ state, send }: Props) {
           onClose={() => setRecapOpen(false)}
         />
       )}
+      <Opponents view={view} nameOf={nameOf} awaited={awaited} />
 
       {me && (
         <div className="mine">
-          <h2>Your hand ({me.hand?.length ?? 0})</h2>
-          <ul className="cards faces">
-            {(me.hand ?? []).map((id) => {
-              const moves = groups.hand[id];
-              const discard = groups.discard[id];
-              return (
-                <li key={id}>
-                  <Face id={id} view={view} selected={open === id} />
-                  <div className="card-actions">
-                    {moves?.play && <MoveButton move={moves.play} label="Play" onPlay={play} />}
-                    {flowButton(id)}
-                    {moves?.bank && <MoveButton move={moves.bank} label="Bank" onPlay={play} />}
-                    {discard && <MoveButton move={discard} label="Discard" onPlay={play} />}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <Districts player={me} view={view} extra={flowButton} />
           {open && chooser && (
             <Chooser
               key={open}
@@ -155,6 +150,16 @@ export function Table({ state, send }: Props) {
               onPlay={play}
             />
           )}
+          <Hand
+            ids={me.hand ?? []}
+            view={view}
+            groups={groups}
+            selected={selected}
+            open={open}
+            onSelect={(id) => setPicked(toggleSelected(selected, id))}
+            onPlay={play}
+            flowButton={flowButton}
+          />
           <section className="controls">
             {groups.endTurn && (
               <MoveButton move={groups.endTurn} label="End turn" onPlay={play} primary />
@@ -170,19 +175,8 @@ export function Table({ state, send }: Props) {
               Auto-pass (accept actions automatically when you can't Appeal)
             </label>
           </section>
-          <Holdings player={me} view={view} extra={flowButton} title="Your" />
         </div>
       )}
-
-      {others.map((p) => (
-        <div key={p.id} className="opponent">
-          <h2>
-            {nameOf(p.id)} <span className="tag">{p.handCount} cards in hand</span>
-            {p.delayed && <span className="tag">delayed</span>}
-          </h2>
-          <Holdings player={p} view={view} title={`${nameOf(p.id)}'s`} />
-        </div>
-      ))}
 
       <Log
         entries={state.log}
@@ -191,98 +185,6 @@ export function Table({ state, send }: Props) {
       />
     </section>
   );
-}
-
-function MoveButton(props: {
-  move: Move;
-  label: string;
-  onPlay: (m: Move) => void;
-  primary?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      className={props.primary ? "primary" : undefined}
-      onClick={() => props.onPlay(props.move)}
-    >
-      {props.label}
-    </button>
-  );
-}
-
-/** A player's bank and tableau; `extra` adds buttons to a card (moving your own wilds). */
-function Holdings(props: {
-  player: View["players"][number];
-  view: View;
-  extra?: (card: string) => ReactNode;
-  title: string;
-}) {
-  const { player, view } = props;
-  const extraFor = (id: string) => props.extra?.(id);
-  return (
-    <>
-      <h3>
-        {props.title} bank (${totalValue(player.bank, view)})
-      </h3>
-      <ul className="cards faces">
-        {player.bank.map((id) => (
-          <li key={id}>
-            <Face id={id} view={view} compact />
-            <div className="card-actions">{extraFor(id)}</div>
-          </li>
-        ))}
-      </ul>
-      <h3>{props.title} tableau</h3>
-      <ul className="sets">
-        {player.tableau.map((set) => (
-          <li
-            key={set.cards[0] ?? set.district}
-            className={isComplete(set, view) ? "set complete" : "set"}
-          >
-            <strong>{districtName(set.district, view)}</strong> {setProgress(set, view)}
-            <ul className="cards faces">
-              {[...set.cards, set.landmark, set.icon].flatMap((id) =>
-                id
-                  ? [
-                      <li key={id}>
-                        <Face id={id} view={view} compact complete={isComplete(set, view)} />
-                        <div className="card-actions">{extraFor(id)}</div>
-                      </li>,
-                    ]
-                  : [],
-              )}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
-
-/** A card instance as a face, or its text label for one this player can't see. */
-function Face(props: {
-  id: string;
-  view: View;
-  compact?: boolean;
-  selected?: boolean;
-  complete?: boolean;
-}) {
-  const card = props.view.cards[props.id];
-  if (!card) return <span className="card">{instanceLabel(props.id, props.view)}</span>;
-  return (
-    <CardFace
-      card={card}
-      view={props.view}
-      compact={props.compact ?? false}
-      selected={props.selected ?? false}
-      complete={props.complete ?? false}
-    />
-  );
-}
-
-function setProgress(set: PropertySet, view: View) {
-  const size = view.districts[set.district]?.setSize ?? 0;
-  return isComplete(set, view) ? "✓ complete" : `${set.cards.length}/${size}`;
 }
 
 /** Who the game is waiting on, and why. */
@@ -312,24 +214,6 @@ function waitingText(
         : `${who}: responding`;
     }
   }
-}
-
-/** Counts down from the seconds the server sent with this state. */
-function Clock({ seconds, game }: { seconds: number | null; game: StateMessage }) {
-  const [left, setLeft] = useState(seconds);
-  useEffect(() => {
-    if (seconds === null || !game) {
-      setLeft(null);
-      return;
-    }
-    const end = Date.now() + seconds * 1000;
-    const tick = () => setLeft(Math.max(0, Math.round((end - Date.now()) / 1000)));
-    tick();
-    const timer = setInterval(tick, 1000);
-    return () => clearInterval(timer);
-  }, [seconds, game]);
-  if (left === null) return null;
-  return <span className="clock">⏱ {left}s</span>;
 }
 
 /** The latest events, newest first, in the recap's words. */

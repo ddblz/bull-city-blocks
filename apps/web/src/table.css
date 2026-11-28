@@ -1,0 +1,255 @@
+/* The game table (#58): header bar, opponent trays, districts and bank, and the overlapping hand. */
+.page:has(.table) {
+  max-width: 78rem;
+}
+.mine {
+  margin: var(--space-md) 0;
+}
+
+/* Header bar */
+.table-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  background: var(--surface-raised);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.pip {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.pip.used {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--outline);
+}
+.clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.clock svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.ring-track,
+.ring {
+  fill: none;
+  stroke-width: 3;
+}
+.ring-track {
+  stroke: var(--line);
+}
+.ring {
+  stroke: var(--primary);
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s linear;
+}
+.badge {
+  margin-left: 0.4rem;
+  padding: 0 0.45rem;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.status-line {
+  flex-basis: 100%;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Opponent trays */
+.trays {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+  padding: 0;
+  list-style: none;
+}
+.tray {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-1);
+}
+.tray.is-awaited {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary);
+}
+.tray__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.tray__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.8rem;
+  margin: 0.3rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chip.is-full {
+  border-color: var(--tertiary);
+  color: var(--tertiary);
+}
+.dot {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+}
+.tray details .cards {
+  margin-top: var(--space-sm);
+}
+
+/* Your districts and bank: side by side on wide screens */
+.holdings {
+  display: grid;
+  gap: var(--space-md);
+}
+@media (min-width: 1024px) {
+  .holdings {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+  }
+}
+.district-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.set-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-1);
+}
+.set-card.is-full {
+  box-shadow: 0 0 0 2px var(--tertiary);
+}
+.set-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 0.4rem 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.set-card .progress {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.set-card .cards.faces {
+  padding: var(--space-sm);
+}
+.set-card .status,
+.set-card .rent {
+  margin: 0.2rem 0.7rem;
+  font-size: 0.8rem;
+}
+.set-card .rent {
+  font-family: var(--font-mono);
+}
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 7.25rem;
+  aspect-ratio: 5 / 7;
+  padding: var(--space-sm);
+  border: 1.5px dashed var(--outline);
+  border-radius: var(--radius);
+  color: var(--on-surface-muted);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Your hand: cards overlap and open up on hover or focus; the selected card's moves sit below */
+.hand-fan {
+  display: grid;
+  justify-content: start;
+  margin: 0;
+  padding: 1rem 0 var(--space-sm);
+  list-style: none;
+}
+.hand-fan li {
+  position: relative;
+  width: 10.5rem;
+  transition: transform 0.15s ease;
+}
+.hand-fan li:hover,
+.hand-fan li:focus-within,
+.hand-fan li.is-selected {
+  z-index: 3;
+  transform: translateY(-0.5rem);
+}
+.hand-fan .card-select {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+}
+.hand-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 3.2rem;
+  padding: var(--space-xs) 0;
+  border-top: 1px solid var(--line);
+}
+.hand-actions .status {
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hand-fan li:hover,
+  .hand-fan li:focus-within,
+  .hand-fan li.is-selected {
+    transform: none;
+  }
+}
