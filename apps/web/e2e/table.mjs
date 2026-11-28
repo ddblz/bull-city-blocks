@@ -93,8 +93,8 @@ async function step(page) {
         return true;
       }
     }
-    if (await mine.getByRole("button", { name: "End turn" }).count())
-      await mine.getByRole("button", { name: "End turn" }).click();
+    if (await page.getByRole("button", { name: "End turn" }).count())
+      await page.getByRole("button", { name: "End turn" }).click();
     else return false;
   } else return false;
   return true;
