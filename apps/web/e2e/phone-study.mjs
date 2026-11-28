@@ -2,7 +2,7 @@
 //   node apps/web/e2e/phone-study.mjs [http://localhost:5173] [screenshot-dir]
 // Plays games with 2, 6 and 10 seats in portrait and landscape phones and prints, for each, how many
 // screens tall the table is, where its parts sit, and the taps and scrolls a turn takes.
-// ORIENTATION=portrait|landscape, SEATS=2,6,10 and TURNS=<n> narrow or shorten the run.
+// ORIENTATION=portrait|landscape, PHONE=<name, e.g. 740x360>, SEATS=2,6,10 and TURNS=<n> narrow or shorten the run.
 import { createRequire } from "node:module";
 
 const { chromium } = createRequire(import.meta.url)("playwright");
@@ -15,7 +15,8 @@ const PHONES = [
   { name: "740x360", width: 740, height: 360 },
 ].filter(
   (p) =>
-    !process.env.ORIENTATION || p.width > p.height === (process.env.ORIENTATION === "landscape"),
+    (!process.env.PHONE || p.name === process.env.PHONE) &&
+    (!process.env.ORIENTATION || p.width > p.height === (process.env.ORIENTATION === "landscape")),
 );
 const SEATS = (process.env.SEATS ?? "2,6,10").split(",").map(Number);
 const TURNS = Number(process.env.TURNS ?? 12);
