@@ -50,10 +50,3 @@ export function rentLine(set: PropertySet, view: View): string {
 /** Columns for the overlapping hand: every card but the last shrinks to fit, the last stays whole. */
 export const handColumns = (n: number) =>
   n <= 1 ? "10.5rem" : `repeat(${n - 1}, minmax(2.75rem, 10.5rem)) 10.5rem`;
-
-/** The selected hand card after tapping `id`: tapping it again deselects. */
-export const toggleSelected = (current: string | null, id: string) => (current === id ? null : id);
-
-/** The selection survives only while the card is still in the hand. */
-export const keepSelected = (current: string | null, hand: readonly string[]) =>
-  current !== null && hand.includes(current) ? current : null;

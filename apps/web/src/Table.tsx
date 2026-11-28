@@ -9,11 +9,12 @@ import { type Context, describeEvent } from "./describe-event";
 import { Hand } from "./Hand";
 import type { ClientState } from "./lobby-state";
 import { FLOW_LABEL, groupMoves } from "./move-groups";
+import { Nav, type Tab } from "./Nav";
 import { Opponents } from "./Opponents";
 import { RecapPanel } from "./Recap";
 import { buildRecap } from "./recap";
+import { type Picked, pick, selectedCard } from "./selection";
 import { TableBar } from "./TableBar";
-import { keepSelected, toggleSelected } from "./table-summary";
 import type { HistoryEntry, Move, StateMessage, View } from "./types";
 import "./table.css";
 
@@ -25,7 +26,8 @@ interface Props {
 /** The game table (#37, #38, #41): the view, every move, the clock, the recap, the log and game over. */
 export function Table({ state, send }: Props) {
   const [open, setOpen] = useState<string | null>(null);
-  const [picked, setPicked] = useState<string | null>(null);
+  const [picked, setPicked] = useState<Picked | null>(null);
+  const [tab, setTab] = useState<Tab>("table");
   const [recapOpen, setRecapOpen] = useState(true);
   // Each (re)connect brings a fresh recap, shown until it's closed.
   useEffect(() => setRecapOpen(state.recap.length > 0), [state.recap]);
@@ -36,7 +38,12 @@ export function Table({ state, send }: Props) {
   const play = (move: Move) => send({ type: "intent", move });
   const groups = groupMoves(game.legal);
   const me = view.players.find((p) => p.id === view.viewer);
-  const selected = keepSelected(picked, me?.hand ?? []);
+  const selected = selectedCard(picked, view.turn, me?.hand ?? []);
+  const myMove = game.awaiting?.seat === state.seat;
+  // Something needs you (your move, a payment, a response): bring the table back into view.
+  useEffect(() => {
+    if (myMove) setTab("table");
+  }, [myMove]);
   const awaited = game.awaiting ? (lobby.seats[game.awaiting.seat]?.player ?? null) : null;
   const ctx: Context = {
     viewer: view.viewer,
@@ -101,21 +108,28 @@ export function Table({ state, send }: Props) {
         .filter((x) => x.affected).length
     : 0;
   return (
-    <section className="table">
+    <section className="table" data-tab={tab}>
       <TableBar
         game={game}
         status={waitingText(game, view, state.seat, nameOf, seatName)}
         updates={updates}
         onUpdates={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
       />
-      {recapOpen && state.recap.length > 0 && (
-        <RecapPanel
-          entries={state.recap}
-          ctx={ctx}
-          view={view}
-          onClose={() => setRecapOpen(false)}
-        />
-      )}
+      <div className="recap-slot">
+        {state.recap.length > 0 && !recapOpen && (
+          <button type="button" className="recap-banner" onClick={() => setRecapOpen(true)}>
+            Since last move{updates > 0 && ` · ${updates} for you`}
+          </button>
+        )}
+        {recapOpen && state.recap.length > 0 && (
+          <RecapPanel
+            entries={state.recap}
+            ctx={ctx}
+            view={view}
+            onClose={() => setRecapOpen(false)}
+          />
+        )}
+      </div>
       <Opponents view={view} nameOf={nameOf} awaited={awaited} />
 
       {me && (
@@ -156,14 +170,16 @@ export function Table({ state, send }: Props) {
             groups={groups}
             selected={selected}
             open={open}
-            onSelect={(id) => setPicked(toggleSelected(selected, id))}
+            onSelect={(id) => setPicked(pick(selected, id, view.turn))}
             onPlay={play}
             flowButton={flowButton}
+            endTurn={
+              groups.endTurn && (
+                <MoveButton move={groups.endTurn} label="End turn" onPlay={play} primary />
+              )
+            }
           />
           <section className="controls">
-            {groups.endTurn && (
-              <MoveButton move={groups.endTurn} label="End turn" onPlay={play} primary />
-            )}
             <label>
               <input
                 type="checkbox"
@@ -183,6 +199,7 @@ export function Table({ state, send }: Props) {
         ctx={ctx}
         onRecap={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
       />
+      <Nav tab={tab} onTab={setTab} />
     </section>
   );
 }

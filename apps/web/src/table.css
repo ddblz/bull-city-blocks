@@ -253,3 +253,132 @@
     transform: none;
   }
 }
+
+/* Phone-only parts (#59): hidden until the phone layout below */
+.strip,
+.peek,
+.table-nav,
+.recap-banner {
+  display: none;
+}
+
+/* Phones: one column, the three views of the nav, and one bar for the selected card's moves */
+@media (max-width: 639px) {
+  :root {
+    --nav-h: 3.5rem;
+    --safe-b: env(safe-area-inset-bottom, 0px);
+  }
+  .page:has(.table) {
+    padding-right: max(var(--space-md), env(safe-area-inset-right, 0px));
+    padding-left: max(var(--space-md), env(safe-area-inset-left, 0px));
+  }
+  .table {
+    /* room for the action bar and the nav */
+    padding-bottom: calc(var(--nav-h) + 5rem + var(--safe-b));
+  }
+  .table-bar {
+    gap: var(--space-xs);
+  }
+  .table-bar > button {
+    display: none;
+  }
+  .recap-banner {
+    display: block;
+    width: 100%;
+    margin: var(--space-xs) 0;
+    border-color: var(--primary);
+    text-align: left;
+  }
+  .strip {
+    display: flex;
+    gap: var(--space-xs);
+    margin: var(--space-sm) 0;
+    padding: 0 0 var(--space-xs);
+    overflow-x: auto;
+    list-style: none;
+  }
+  .strip-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .strip-chip.is-awaited {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  .peek {
+    display: block;
+    margin: 0 0 var(--space-sm);
+    padding: 0;
+    list-style: none;
+  }
+  .trays {
+    grid-template-columns: 1fr;
+  }
+  .district-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .set-card .cards.faces {
+    flex-wrap: wrap;
+  }
+
+  /* The nav picks what shows */
+  .table[data-tab="table"] :is(.trays, .log),
+  .table[data-tab="log"] :is(.mine, .strip, .peek, .trays),
+  .table[data-tab="players"] :is(.mine, .strip, .peek, .log, .recap-slot) {
+    display: none;
+  }
+  .table-nav {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 7;
+    display: flex;
+    padding-bottom: var(--safe-b);
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .table-nav button {
+    flex: 1;
+    height: var(--nav-h);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .table-nav button[aria-current="page"] {
+    color: var(--primary);
+    font-weight: 700;
+    box-shadow: inset 0 -3px 0 var(--primary);
+  }
+
+  /* Hand: a scroller of overlapping cards, the selected one lifted */
+  .hand-fan {
+    display: flex;
+    overflow-x: auto;
+    padding-top: 1.2rem;
+  }
+  .hand-fan li {
+    flex: none;
+  }
+  .hand-fan li + li {
+    margin-left: -6.5rem;
+  }
+  .hand-actions {
+    position: fixed;
+    right: 0;
+    bottom: calc(var(--nav-h) + var(--safe-b));
+    left: 0;
+    z-index: 6;
+    padding: var(--space-xs) var(--space-md);
+    background: var(--surface);
+  }
+  .controls {
+    margin: var(--space-sm) 0;
+  }
+}
