@@ -24,6 +24,8 @@ async function startGame(browser, width, bots) {
     ...touch,
   });
   const page = await context.newPage();
+  // a control that is not there fails in seconds, not half a minute
+  page.setDefaultTimeout(5000);
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
