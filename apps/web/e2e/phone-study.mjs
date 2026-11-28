@@ -51,7 +51,8 @@ const measure = (page) =>
       if (!el) continue;
       const fixed = pinnedAncestor(el);
       const top = el.getBoundingClientRect().top + scrollY;
-      if (fixed && !counted.has(fixed)) {
+      // the side rail on a phone on its side is beside the table, not on top of it
+      if (fixed && !counted.has(fixed) && fixed.getBoundingClientRect().width > innerWidth / 2) {
         counted.add(fixed);
         pinned += fixed.getBoundingClientRect().height;
       }

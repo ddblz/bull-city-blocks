@@ -3,21 +3,23 @@
 // At 1280 and 820 px it checks a 2- and a 10-seat table (no horizontal scroll, tap targets of 44 px,
 // keyboard selection), then plays a full game against bots through the cards and buttons.
 // PHONE=1 runs the phone layout (#59) instead: 390 px, 6 and 10 seats, tapping only.
+// LANDSCAPE=1 does the same on a phone on its side (#79): 844×390.
 import { createRequire } from "node:module";
 
 const { chromium } = createRequire(import.meta.url)("playwright");
 const web = process.argv[2] ?? "http://localhost:5173";
 const shots = process.argv[3];
-const phone = process.env.PHONE === "1";
+const landscape = process.env.LANDSCAPE === "1";
+const phone = process.env.PHONE === "1" || landscape;
 const check = (ok, what) => {
   if (!ok) throw new Error(`FAILED: ${what}`);
   console.log(`ok - ${what}`);
 };
 
 async function startGame(browser, width, bots) {
-  const touch = width < 640 ? { hasTouch: true, isMobile: true } : {};
+  const touch = phone ? { hasTouch: true, isMobile: true } : {};
   const context = await browser.newContext({
-    viewport: { width, height: 900 },
+    viewport: { width, height: landscape ? 390 : 900 },
     reducedMotion: "reduce",
     ...touch,
   });
@@ -100,7 +102,7 @@ async function step(page) {
 
 const browser = await chromium.launch();
 try {
-  for (const width of phone ? [390] : [1280, 820]) {
+  for (const width of landscape ? [844] : phone ? [390] : [1280, 820]) {
     for (const bots of phone ? [5, 9] : [1, 9]) {
       const { page, errors } = await startGame(browser, width, bots);
       await page.waitForTimeout(500);
@@ -210,5 +212,8 @@ async function phoneChecks(page, bots) {
     `${n}: a tap selects`,
   );
   const bar = await page.locator(".hand-actions").boundingBox();
-  check(bar && bar.y + bar.height <= 900 && bar.height >= 44, `${n}: the action bar is on screen`);
+  check(
+    bar && bar.y + bar.height <= (landscape ? 390 : 900) && bar.height >= 44,
+    `${n}: the action bar is on screen`,
+  );
 }
