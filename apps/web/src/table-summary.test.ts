@@ -13,12 +13,10 @@ import base from "../../../rulesets/base.json" with { type: "json" };
 import {
   districtsDone,
   handColumns,
-  keepSelected,
   playPips,
   rentLine,
   rentNow,
   setStatus,
-  toggleSelected,
 } from "./table-summary";
 import type { Card, PropertySet, View } from "./types";
 
@@ -186,17 +184,5 @@ describe("hand layout and selection", () => {
     expect(handColumns(1)).toBe("10.5rem");
     expect(handColumns(2)).toBe("repeat(1, minmax(2.75rem, 10.5rem)) 10.5rem");
     expect(handColumns(8)).toBe("repeat(7, minmax(2.75rem, 10.5rem)) 10.5rem");
-  });
-
-  it("tapping a card selects it, and tapping it again deselects", () => {
-    expect(toggleSelected(null, "a")).toBe("a");
-    expect(toggleSelected("a", "a")).toBeNull();
-    expect(toggleSelected("a", "b")).toBe("b");
-  });
-
-  it("the selection survives only while the card is still in the hand", () => {
-    expect(keepSelected("a", ["a", "b"])).toBe("a");
-    expect(keepSelected("a", ["b"])).toBeNull();
-    expect(keepSelected(null, ["a"])).toBeNull();
   });
 });

@@ -16,6 +16,8 @@ export function Hand(props: {
   onPlay: (m: Move) => void;
   /** The "Play as…", "Charge rent" … button for a card, if it has choices to make. */
   flowButton: (id: string) => ReactNode;
+  /** End turn sits with the card's moves, so on a phone one bar holds every action. */
+  endTurn?: ReactNode;
 }) {
   const { groups, selected } = props;
   const moves = selected ? groups.hand[selected] : undefined;
@@ -47,6 +49,7 @@ export function Hand(props: {
         {selected !== null && !moves && !discard && !flow && (
           <p className="status">No moves for this card right now.</p>
         )}
+        {props.endTurn}
       </section>
     </section>
   );
