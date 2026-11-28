@@ -1,47 +1,132 @@
-:root {
-  --bg: #fbfaf7;
-  --fg: #1f2328;
-  --muted: #5d6470;
-  --accent: #0d5c63;
-  --error: #b42318;
-  --card: #fff;
-  --line: #d9d6cf;
-  color-scheme: light dark;
-  font-family: system-ui, sans-serif;
+/* The look of the existing screens (#56): colours, type, shape and focus come from tokens.css.
+   Layout is unchanged; later M5 issues rework it. */
+html {
+  font-family: var(--font-body);
+  font-size: 100%;
+  line-height: 1.5;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #15181c;
-    --fg: #e8e6e1;
-    --muted: #a3a9b3;
-    --accent: #6cc4cc;
-    --error: #ff8a80;
-    --card: #1e2227;
-    --line: #333a42;
+/* biome-ignore-start lint/complexity/noImportantStyles: reduced motion has to win over any component's animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+/* biome-ignore-end lint/complexity/noImportantStyles: reduced motion */
+/* Collapsible headings are tap targets too */
+summary {
+  padding: 0.7rem 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.25;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+code,
+.clock,
+.tag,
+textarea,
+input[type="number"] {
+  font-family: var(--font-mono);
+}
+a {
+  color: var(--primary);
 }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--surface);
+  color: var(--on-surface);
+  font-size: 1rem;
 }
 .page {
   max-width: 40rem;
   margin: 0 auto;
   padding: 1rem;
 }
+/* Buttons: secondary (the default) has a terracotta outline; .primary is filled. At least 44 px tall. */
 button {
   font: inherit;
-  padding: 0.4rem 0.8rem;
+  font-weight: 700;
+  min-height: var(--tap);
+  min-width: var(--tap);
+  padding: 0.4rem 0.9rem;
   margin: 0.2rem;
-  border: 1px solid var(--line);
-  border-radius: 0.4rem;
-  background: var(--card);
-  color: var(--fg);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  color: var(--on-surface);
+  cursor: pointer;
+}
+:where(button:hover:not(:disabled)) {
+  background: var(--surface-sunken);
 }
 button.primary {
-  background: var(--accent);
-  color: var(--bg);
+  min-height: 48px;
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+:where(button.primary:hover:not(:disabled)) {
+  background: var(--primary);
+  filter: brightness(1.08);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--outline);
+}
+
+/* Form controls */
+input,
+select,
+textarea {
+  font: inherit;
+  color: var(--on-surface);
+  background: var(--surface-raised);
+  border: 1.5px solid var(--outline);
+  border-radius: var(--radius);
+  min-height: var(--tap);
+  padding: 0.25rem 0.6rem;
+  box-sizing: border-box;
+}
+input[type="checkbox"] {
+  min-height: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0;
+  accent-color: var(--primary);
+  vertical-align: middle;
+}
+/* A checkbox's label is the tap target, so it is at least 44 px tall */
+:where(label:has(input[type="checkbox"])) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: var(--tap);
 }
 .seats {
   list-style: none;
@@ -54,7 +139,7 @@ button.primary {
 .tag {
   margin-left: 0.5rem;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--on-surface-muted);
 }
 .share code {
   word-break: break-all;
@@ -67,7 +152,7 @@ button.primary {
   color: var(--error);
 }
 .status {
-  color: var(--muted);
+  color: var(--on-surface-muted);
 }
 .page:has(.table) {
   max-width: 60rem;
@@ -77,7 +162,7 @@ button.primary {
 }
 .clock {
   margin-left: 0.5rem;
-  color: var(--accent);
+  color: var(--primary);
 }
 .cards,
 .sets,
@@ -94,8 +179,8 @@ button.primary {
   padding: 0.3rem 0.5rem;
   margin: 0.2rem 0;
   border: 1px solid var(--line);
-  border-radius: 0.4rem;
-  background: var(--card);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
 }
 .card button {
   margin: 0 0 0 auto;
@@ -110,7 +195,7 @@ button.primary {
   border-left: 3px solid var(--line);
 }
 .set.complete {
-  border-left-color: var(--accent);
+  border-left-color: var(--tertiary);
 }
 .mine,
 .opponent {
@@ -119,13 +204,13 @@ button.primary {
   border-top: 1px solid var(--line);
 }
 .log li {
-  color: var(--muted);
+  color: var(--on-surface-muted);
   font-size: 0.9rem;
 }
 .chooser {
   margin: 0.6rem 0;
   padding: 0.5rem 0.8rem;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--primary);
   border-radius: 0.5rem;
 }
 .recap {
@@ -133,7 +218,7 @@ button.primary {
   padding: 0.5rem 0.8rem;
   border: 1px solid var(--line);
   border-radius: 0.5rem;
-  background: var(--card);
+  background: var(--surface-raised);
 }
 .recap h3 {
   margin: 0.6rem 0 0.2rem;
@@ -145,7 +230,7 @@ button.primary {
 }
 .recap .affected {
   font-weight: 600;
-  color: var(--accent);
+  color: var(--primary);
 }
 .editor fieldset {
   margin: 0.6rem 0;
@@ -168,7 +253,7 @@ button.primary {
   flex: 1 1 12rem;
 }
 .editor .changed > span {
-  color: var(--accent);
+  color: var(--primary);
   font-weight: 600;
 }
 .editor input[type="number"] {

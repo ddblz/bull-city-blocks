@@ -1,0 +1,107 @@
+/*
+ * Design tokens (#56), from docs/design/stitch/bull_city_blocks/DESIGN.md.
+ * Light values are the defaults; the dark values follow `prefers-color-scheme`.
+ * Every text-on-background pair listed in contrast.test.ts reaches 4.5:1 in both modes.
+ *
+ * DESIGN.md has two terracotta reds: #A6331B (its token list) and #C84B31 (its prose). The darker
+ * one is `--primary`: it reads as text on the page and under white button text (6.8:1). The
+ * brighter one is `--primary-container`, which only carries `--on-primary-container` text (4.7:1).
+ */
+:root {
+  /* Surfaces and text */
+  --surface: #fcf9f3;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f0eee8;
+  --on-surface: #1c1c18;
+  --on-surface-muted: #58413c;
+  --outline: #8c716b;
+  --line: #e6dfd5;
+
+  /* Bull City terracotta */
+  --primary: #a6331b;
+  --on-primary: #ffffff;
+  --primary-container: #c84b31;
+  --on-primary-container: #fffbff;
+
+  /* Golden tobacco leaf */
+  --secondary: #805600;
+  --on-secondary: #ffffff;
+  --secondary-container: #feb63c;
+  --on-secondary-container: #6e4900;
+
+  /* Forest Hills moss */
+  --tertiary: #00694c;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #1e8462;
+  --on-tertiary-container: #f6fff8;
+
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  /* Elevation: 0 flat table, 1 resting, 2 hand, 3 lifted, 4 dialogs */
+  --shadow-0: none;
+  --shadow-1: 0 2px 4px rgba(30, 27, 24, 0.06);
+  --shadow-2: 0 4px 8px rgba(30, 27, 24, 0.1);
+  --shadow-3: 0 14px 24px rgba(30, 27, 24, 0.16), 0 2px 6px rgba(30, 27, 24, 0.08);
+  --shadow-4: 0 24px 48px rgba(18, 15, 12, 0.28);
+
+  /* Shape and spacing */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --tap: 44px;
+
+  /* Type: loaded from Google Fonts in index.html, with system fallbacks so it reads without them */
+  --font-display: "Epilogue", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1e1b18;
+    --surface-raised: #272320;
+    --surface-sunken: #2d2926;
+    --on-surface: #ece7df;
+    --on-surface-muted: #c4bbb0;
+    --outline: #a08c86;
+    --line: #3a3531;
+
+    --primary: #ffb4a4;
+    --on-primary: #3e0500;
+    --primary-container: #891e07;
+    --on-primary-container: #ffdad3;
+
+    --secondary: #ffba46;
+    --on-secondary: #281800;
+    --secondary-container: #614000;
+    --on-secondary-container: #ffddb0;
+
+    --tertiary: #7bd8b1;
+    --on-tertiary: #002115;
+    --tertiary-container: #00513a;
+    --on-tertiary-container: #97f5cc;
+
+    --error: #ffb4ab;
+    --on-error: #690005;
+    --error-container: #93000a;
+    --on-error-container: #ffdad6;
+
+    --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-2: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-3: 0 14px 24px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+    --shadow-4: 0 24px 48px rgba(0, 0, 0, 0.6);
+  }
+}
