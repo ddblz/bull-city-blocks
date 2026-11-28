@@ -455,3 +455,48 @@ dialog.sheet .recap {
     animation: none;
   }
 }
+
+/* The Durham map (#62) */
+dialog.sheet:has(.map-panel) {
+  width: min(40rem, calc(100% - 2rem));
+}
+@media (max-width: 639px) {
+  dialog.sheet:has(.map-panel) {
+    width: 100%;
+  }
+}
+.map-panel h2 {
+  margin-top: 0;
+}
+.durham-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.tile-bg {
+  fill: var(--surface-sunken);
+  stroke: var(--d);
+  stroke-width: 3;
+}
+.tile-name {
+  fill: var(--on-surface);
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+.tile-line {
+  fill: var(--on-surface-muted);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}
+.tile.is-filled .tile-bg {
+  fill: var(--d);
+}
+.tile.is-filled .tile-name,
+.tile.is-filled .tile-line {
+  fill: var(--on-d);
+}
+.map-list {
+  margin: var(--space-sm) 0;
+  padding-left: 1.2rem;
+}

@@ -8,6 +8,7 @@ import { Districts } from "./Districts";
 import { type Context, describeEvent } from "./describe-event";
 import { Hand } from "./Hand";
 import type { ClientState } from "./lobby-state";
+import { MapPanel } from "./MapPanel";
 import { FLOW_LABEL, groupMoves } from "./move-groups";
 import { Nav, type Tab } from "./Nav";
 import { Opponents } from "./Opponents";
@@ -28,6 +29,7 @@ export function Table({ state, send }: Props) {
   const [open, setOpen] = useState<string | null>(null);
   const [picked, setPicked] = useState<Picked | null>(null);
   const [tab, setTab] = useState<Tab>("table");
+  const [mapOpen, setMapOpen] = useState(false);
   const [recapOpen, setRecapOpen] = useState(true);
   // Each (re)connect brings a fresh recap, shown until it's closed.
   useEffect(() => setRecapOpen(state.recap.length > 0), [state.recap]);
@@ -113,6 +115,7 @@ export function Table({ state, send }: Props) {
         game={game}
         status={waitingText(game, view, state.seat, nameOf, seatName)}
         updates={updates}
+        onMap={() => setMapOpen(true)}
         onUpdates={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
       />
       <div className="recap-slot">
@@ -199,7 +202,8 @@ export function Table({ state, send }: Props) {
         ctx={ctx}
         onRecap={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
       />
-      <Nav tab={tab} onTab={setTab} />
+      <Nav tab={tab} onTab={setTab} onMap={() => setMapOpen(true)} />
+      {mapOpen && <MapPanel view={view} nameOf={nameOf} onClose={() => setMapOpen(false)} />}
     </section>
   );
 }
