@@ -16,7 +16,11 @@ const check = (ok, what) => {
 
 async function startGame(browser, width, bots) {
   const touch = width < 640 ? { hasTouch: true, isMobile: true } : {};
-  const context = await browser.newContext({ viewport: { width, height: 900 }, ...touch });
+  const context = await browser.newContext({
+    viewport: { width, height: 900 },
+    reducedMotion: "reduce",
+    ...touch,
+  });
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));
@@ -53,7 +57,8 @@ const overflows = (page) =>
 /** One step of a human turn, through the cards and buttons. Returns false when there is nothing to do yet. */
 async function step(page) {
   const nav = page.getByRole("button", { name: "Table" });
-  if (await nav.isVisible()) await nav.click();
+  // A dialog (payment, response) makes the rest of the page inert, nav included
+  if (!(await page.locator("dialog[open]").count()) && (await nav.isVisible())) await nav.click();
   const mine = page.locator(".mine");
   const pay = mine.locator(".chooser", { hasText: "You owe" });
   const choose = mine.locator(".chooser").filter({ hasNotText: /You owe|Appeals so far/ });

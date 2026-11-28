@@ -385,6 +385,7 @@
 
 /* Panels as dialogs and bottom sheets (#61) */
 dialog.sheet {
+  box-sizing: border-box;
   width: min(34rem, calc(100% - 2rem));
   max-height: 85dvh;
   padding: var(--space-md);
