@@ -1,6 +1,6 @@
 // Manual check for the table layout (#58, not run in CI). Start `pnpm play` and `pnpm dev:web`, then:
 //   node apps/web/e2e/table.mjs [http://localhost:5173] [screenshot-dir]
-// At 1280 and 820 px it checks a 3- and a 10-seat table (no horizontal scroll, tap targets of 44 px,
+// At 1280 and 820 px it checks a 2- and a 10-seat table (no horizontal scroll, tap targets of 44 px,
 // keyboard selection), then plays a full game against bots through the cards and buttons.
 import { createRequire } from "node:module";
 
@@ -89,7 +89,7 @@ async function step(page) {
 const browser = await chromium.launch();
 try {
   for (const width of [1280, 820]) {
-    for (const bots of [2, 9]) {
+    for (const bots of [1, 9]) {
       const { page, errors } = await startGame(browser, width, bots);
       await page.waitForTimeout(500);
       check(!(await overflows(page)), `${bots + 1} seats at ${width}px: no horizontal scroll`);
