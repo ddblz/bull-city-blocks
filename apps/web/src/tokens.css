@@ -35,6 +35,11 @@
   --tertiary-container: #1e8462;
   --on-tertiary-container: #f6fff8;
 
+  /* Card faces keep these in both themes: charcoal bands for Icons and any-district cards, and a gold frame */
+  --card-ink: #1e1b18;
+  --on-card-ink: #fffbff;
+  --landmark-gold: #b8860b;
+
   --error: #ba1a1a;
   --on-error: #ffffff;
   --error-container: #ffdad6;
