@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Face } from "./Cards";
 import { districtName, totalValue } from "./card";
 import { districtColor } from "./district-colors";
+import { MiniSet } from "./Stacks";
 import { districtsDone, setStatus } from "./table-summary";
 import type { View } from "./types";
 
@@ -34,6 +35,11 @@ export function Opponents(props: Shared) {
               <span>
                 {p.handCount} in hand · ${totalValue(p.bank, view)} · {districtsDone(p, view)}/
                 {view.rules.districtsToWin} sets
+              </span>
+              <span className="mini-sets">
+                {p.tableau.map((set) => (
+                  <MiniSet key={set.cards[0] ?? set.district} set={set} view={view} />
+                ))}
               </span>
             </button>
           </li>

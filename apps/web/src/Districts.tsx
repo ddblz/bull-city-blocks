@@ -1,7 +1,10 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { Face } from "./Cards";
 import { districtName, totalValue } from "./card";
+import { Dialog } from "./Dialog";
 import { districtColor, districtText } from "./district-colors";
+import { usePhone } from "./layout-mode";
+import { BankStack, SetStack } from "./Stacks";
 import { rentLine, setStatus } from "./table-summary";
 import type { PropertySet, View } from "./types";
 
@@ -53,36 +56,59 @@ function SetCard(props: { set: PropertySet; view: View; extra: (id: string) => R
 /** Your districts (a grid of sets, with upgrade slots and rent) and your bank. `extra` adds a card's buttons. */
 export function Districts(props: { player: Player; view: View; extra: (id: string) => ReactNode }) {
   const { player, view } = props;
+  const phone = usePhone();
+  // On a phone (#79) sets and the bank are stacks; a tap opens one in a sheet ("bank", or a set's first card).
+  const [open, setOpen] = useState<string | null>(null);
+  const openSet = player.tableau.find((s) => s.cards[0] === open);
+  const set = (s: PropertySet) => (
+    <SetCard key={s.cards[0] ?? s.district} set={s} view={view} extra={props.extra} />
+  );
+  const bank = (
+    <ul className="cards faces">
+      {player.bank.map((id) => (
+        <li key={id}>
+          <Face id={id} view={view} compact />
+          <div className="card-actions">{props.extra(id)}</div>
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <div className="holdings">
       <section aria-labelledby="districts-h">
         <h3 id="districts-h">Your districts</h3>
         {player.tableau.length === 0 ? (
           <p className="status">Play a property to start a district.</p>
-        ) : (
-          <ul className="district-grid">
-            {player.tableau.map((set) => (
-              <SetCard
-                key={set.cards[0] ?? set.district}
-                set={set}
+        ) : phone ? (
+          <ul className="stacks">
+            {player.tableau.map((s) => (
+              <SetStack
+                key={s.cards[0] ?? s.district}
+                set={s}
                 view={view}
-                extra={props.extra}
+                onOpen={() => setOpen(s.cards[0] ?? null)}
               />
             ))}
           </ul>
+        ) : (
+          <ul className="district-grid">{player.tableau.map(set)}</ul>
         )}
       </section>
       <section aria-labelledby="bank-h">
         <h3 id="bank-h">Your bank (${totalValue(player.bank, view)})</h3>
-        <ul className="cards faces">
-          {player.bank.map((id) => (
-            <li key={id}>
-              <Face id={id} view={view} compact />
-              <div className="card-actions">{props.extra(id)}</div>
-            </li>
-          ))}
-        </ul>
+        {phone ? <BankStack bank={player.bank} view={view} onOpen={() => setOpen("bank")} /> : bank}
       </section>
+      {phone && (openSet || open === "bank") && (
+        <Dialog
+          label={openSet ? districtName(openSet.district, view) : "Your bank"}
+          onClose={() => setOpen(null)}
+        >
+          {openSet ? <ul className="district-grid">{set(openSet)}</ul> : bank}
+          <button type="button" onClick={() => setOpen(null)}>
+            Close
+          </button>
+        </Dialog>
+      )}
     </div>
   );
 }

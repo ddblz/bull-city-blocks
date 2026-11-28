@@ -52,18 +52,25 @@ export function TableBar(props: {
   return (
     <header className="table-bar">
       <span className="chip">
-        Turn {view.turn} · Round {view.round}
+        Turn {view.turn}
+        <span className="wide"> · Round {view.round}</span>
       </span>
       {pips && (
         <span className="chip pips">
           {[...Array(pips.total).keys()].map((n) => (
             <span key={n} className={n < pips.used ? "pip used" : "pip"} aria-hidden="true" />
           ))}{" "}
-          {pips.left} of {pips.total} plays left
+          <span className="wide">
+            {pips.left} of {pips.total} plays left
+          </span>
+          <span className="short">{pips.left} left</span>
         </span>
       )}
       <span className="chip">Deck {view.deckCount}</span>
-      <span className="chip">Discard {top ? instanceLabel(top, view) : "empty"}</span>
+      <span className="chip">
+        <span className="wide">Discard {top ? instanceLabel(top, view) : "empty"}</span>
+        <span className="short">Discard {view.discard.length}</span>
+      </span>
       <Clock game={props.game} />
       <button type="button" className="map-btn" onClick={props.onMap}>
         Neighborhoods

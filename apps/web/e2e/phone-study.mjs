@@ -36,16 +36,23 @@ const measure = (page) =>
     const h = innerHeight;
     const out = { screens: +(document.documentElement.scrollHeight / h).toFixed(1), parts: {} };
     let pinned = 0;
+    const counted = new Set();
+    const pinnedAncestor = (el) => {
+      for (let e = el; e; e = e.parentElement)
+        if (["fixed", "sticky"].includes(getComputedStyle(e).position)) return e;
+      return null;
+    };
     for (const [name, sel] of Object.entries(parts)) {
       const el = [...document.querySelectorAll(sel)].find(
         (e) => e.offsetParent !== null || getComputedStyle(e).position === "fixed",
       );
       if (!el) continue;
-      const fixed =
-        ["fixed", "sticky"].includes(getComputedStyle(el).position) ||
-        getComputedStyle(el.parentElement).position === "fixed";
+      const fixed = pinnedAncestor(el);
       const top = el.getBoundingClientRect().top + scrollY;
-      if (fixed) pinned += el.getBoundingClientRect().height;
+      if (fixed && !counted.has(fixed)) {
+        counted.add(fixed);
+        pinned += fixed.getBoundingClientRect().height;
+      }
       out.parts[name] = fixed ? "pinned" : `screen ${Math.floor(top / h) + 1}`;
     }
     out.pinnedPx = Math.round(pinned);
@@ -78,6 +85,11 @@ async function start(browser, phone, bots) {
 async function playTurn(page, count) {
   const tap = async (locator, options = {}) => {
     const box = await locator.boundingBox();
+    const pinned = await locator.evaluate((el) => {
+      for (let e = el; e; e = e.parentElement)
+        if (["fixed", "sticky"].includes(getComputedStyle(e).position)) return true;
+      return false;
+    });
     const view = await page.evaluate(() => {
       const top = document.querySelector(".table-bar")?.getBoundingClientRect().bottom ?? 0;
       const bottom = Math.min(
@@ -88,7 +100,7 @@ async function playTurn(page, count) {
       );
       return { top, bottom };
     });
-    if (box && (box.y < view.top || box.y + box.height > view.bottom)) count.scrolls++;
+    if (!pinned && box && (box.y < view.top || box.y + box.height > view.bottom)) count.scrolls++;
     count.taps++;
     await locator.click({ timeout: 4000, ...options });
   };

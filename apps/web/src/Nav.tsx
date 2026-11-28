@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type Tab = "table" | "log" | "players";
 
 const TABS: { id: Tab; label: string }[] = [
@@ -7,7 +9,12 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 /** The bottom bar on a phone (#59): three views of the one table. Hidden on wider screens. */
-export function Nav(props: { tab: Tab; onTab: (tab: Tab) => void; onMap: () => void }) {
+export function Nav(props: {
+  tab: Tab;
+  onTab: (tab: Tab) => void;
+  onMap: () => void;
+  endTurn?: ReactNode;
+}) {
   return (
     <nav className="table-nav" aria-label="Table views">
       {TABS.map((t) => (
@@ -23,6 +30,7 @@ export function Nav(props: { tab: Tab; onTab: (tab: Tab) => void; onMap: () => v
       <button type="button" aria-label="Neighborhoods" onClick={props.onMap}>
         Map
       </button>
+      {props.endTurn}
     </nav>
   );
 }

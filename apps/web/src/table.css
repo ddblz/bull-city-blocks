@@ -254,33 +254,79 @@
   }
 }
 
-/* Phone-only parts (#59): hidden until the phone layout below */
+/* Phone-only parts (#59, #79): hidden until the phone layout below */
 .strip,
 .peek,
 .table-nav,
-.recap-banner {
+.recap-banner,
+.short {
   display: none;
 }
+.fan {
+  display: inline-flex;
+}
+.fan-card {
+  width: 0.7rem;
+  height: 1.1rem;
+  margin-left: -0.4rem;
+  border: 1px solid var(--surface-raised);
+  border-radius: 2px;
+}
+.fan-card:first-child {
+  margin-left: 0;
+}
 
-/* Phones: one column, the three views of the nav, and one bar for the selected card's moves */
-@media (max-width: 639px) {
+/*
+ * Phones, and phones on their side (#79; the rule is in layout-mode.ts): one column, a slim header,
+ * the hand pinned along the bottom with the selected card's moves above it, and a dock with the
+ * views of the table and End turn. Sets and the bank are stacks, opponents are mini tableaux.
+ */
+@media (max-width: 639px), (max-height: 500px) and (max-width: 950px) and (orientation: landscape) {
   :root {
-    --nav-h: 3.5rem;
+    --nav-h: 3.25rem;
+    --hand-h: 4.6rem;
     --safe-b: env(safe-area-inset-bottom, 0px);
   }
   .page:has(.table) {
+    padding-top: 0;
     padding-right: max(var(--space-md), env(safe-area-inset-right, 0px));
     padding-left: max(var(--space-md), env(safe-area-inset-left, 0px));
   }
+  /* The room header and the rules line wait in the Log view while a game is on */
+  .page:has(.table) .room-head,
+  .page:has(.table) details.rules {
+    display: none;
+  }
+  .page:has(.table) details.rules:has(+ .table[data-tab="log"]) {
+    display: block;
+  }
   .table {
-    /* room for the action bar and the nav */
-    padding-bottom: calc(var(--nav-h) + 5rem + var(--safe-b));
+    /* room for the hand, its moves and the dock */
+    padding-bottom: calc(var(--nav-h) + var(--hand-h) + 4rem + var(--safe-b));
+  }
+  .wide {
+    display: none;
+  }
+  .short {
+    display: inline;
   }
   .table-bar {
-    gap: var(--space-xs);
+    gap: 0.25rem;
+    padding: 0.3rem 0;
+  }
+  .table-bar .chip {
+    padding: 0.05rem 0.5rem;
+    font-size: 0.72rem;
+  }
+  .table-bar .clock svg {
+    width: 1.8rem;
+    height: 1.8rem;
   }
   .table-bar > button {
     display: none;
+  }
+  .status-line {
+    font-size: 0.8rem;
   }
   .recap-banner {
     display: block;
@@ -289,12 +335,14 @@
     border-color: var(--primary);
     text-align: left;
   }
+
+  /* Opponents: mini tableaux, two across (four on their side) */
   .strip {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-xs);
-    margin: var(--space-sm) 0;
-    padding: 0 0 var(--space-xs);
-    overflow-x: auto;
+    margin: var(--space-xs) 0;
+    padding: 0;
     list-style: none;
   }
   .strip-chip {
@@ -302,13 +350,31 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.1rem;
+    width: 100%;
+    margin: 0;
     border-radius: var(--radius-lg);
-    font-size: 0.8rem;
-    white-space: nowrap;
+    font-size: 0.75rem;
+    text-align: left;
   }
   .strip-chip.is-awaited {
     border-color: var(--primary);
     box-shadow: 0 0 0 2px var(--primary);
+  }
+  .mini-sets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.1rem 0.5rem;
+  }
+  .mini-set {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+  .mini-set.is-full {
+    color: var(--tertiary);
+    font-weight: 700;
   }
   .peek {
     display: block;
@@ -318,6 +384,55 @@
   }
   .trays {
     grid-template-columns: 1fr;
+  }
+
+  /* Your sets and bank: stacks that open in a sheet */
+  .holdings {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .holdings h3 {
+    margin: 0.4rem 0 0.2rem;
+    font-size: 0.95rem;
+  }
+  .stacks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+    width: 100%;
+    margin: 0;
+    border-radius: var(--radius-lg);
+    text-align: left;
+  }
+  .stack .fan-card {
+    width: 1.5rem;
+    height: 2.2rem;
+    margin-left: -0.9rem;
+  }
+  .stack .fan-card:first-child {
+    margin-left: 0;
+  }
+  .stack.is-full {
+    border-color: var(--tertiary);
+  }
+  .stack-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .stack-meta {
+    color: var(--on-surface-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 400;
   }
   .district-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -332,6 +447,8 @@
   .table[data-tab="players"] :is(.mine, .strip, .peek, .log, .recap-slot) {
     display: none;
   }
+
+  /* The dock: the views, and End turn */
   .table-nav {
     position: fixed;
     right: 0;
@@ -345,41 +462,122 @@
   }
   .table-nav button {
     flex: 1;
+    min-width: 0;
     height: var(--nav-h);
+    margin: 0;
+    padding: 0 0.2rem;
     border: 0;
     border-radius: 0;
     background: transparent;
     box-shadow: none;
+    font-size: 0.85rem;
   }
   .table-nav button[aria-current="page"] {
     color: var(--primary);
     font-weight: 700;
     box-shadow: inset 0 -3px 0 var(--primary);
   }
+  .table-nav button.primary {
+    flex: 1.3;
+    background: var(--primary);
+    color: var(--on-primary);
+  }
 
-  /* Hand: a scroller of overlapping cards, the selected one lifted */
-  .hand-fan {
-    display: flex;
-    overflow-x: auto;
-    padding-top: 1.2rem;
-  }
-  .hand-fan li {
-    flex: none;
-  }
-  .hand-fan li + li {
-    margin-left: -6.5rem;
-  }
-  .hand-actions {
+  /* The hand: pinned, cards overlapped so only their tops show; the moves sit above it */
+  .hand {
     position: fixed;
     right: 0;
     bottom: calc(var(--nav-h) + var(--safe-b));
     left: 0;
     z-index: 6;
-    padding: var(--space-xs) var(--space-md);
+    display: flex;
+    flex-direction: column-reverse;
     background: var(--surface);
+    border-top: 1px solid var(--line);
+  }
+  .hand h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .hand-fan {
+    display: flex;
+    height: var(--hand-h);
+    padding: 0.35rem var(--space-md) 0;
+    overflow: hidden clip;
+    overflow-x: auto;
+  }
+  .hand-fan li {
+    flex: none;
+    width: 7.25rem;
+  }
+  .hand-fan li + li {
+    margin-left: -3.7rem;
+  }
+  .hand-fan li:hover,
+  .hand-fan li:focus-within,
+  .hand-fan li.is-selected {
+    transform: none;
+  }
+  .hand-fan .card-face {
+    width: 7.25rem;
+  }
+  .hand-fan li.is-selected .card-face {
+    box-shadow: 0 0 0 3px var(--primary);
+  }
+  .hand-actions {
+    position: static;
+    min-height: 3rem;
+    padding: 0 var(--space-md);
+    border-top: 0;
+  }
+  .hand-actions .picked {
+    flex: 1 1 100%;
+    font-size: 0.8rem;
   }
   .controls {
     margin: var(--space-sm) 0;
+  }
+}
+
+/* On its side: the dock becomes a rail down the right edge, so the screen's short height is kept */
+@media (max-height: 500px) and (max-width: 950px) and (orientation: landscape) {
+  :root {
+    --rail: 5rem;
+    --hand-h: 4.2rem;
+  }
+  .page:has(.table) {
+    padding-right: calc(var(--rail) + var(--space-sm));
+  }
+  .table {
+    padding-bottom: calc(var(--hand-h) + 3.5rem);
+  }
+  .table-nav {
+    top: 0;
+    left: auto;
+    width: var(--rail);
+    flex-direction: column;
+    padding-bottom: 0;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+  .table-nav button {
+    height: auto;
+    min-height: 2.75rem;
+  }
+  .hand {
+    right: var(--rail);
+    bottom: 0;
+  }
+  .strip,
+  .stacks {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .status-line {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 }
 
@@ -440,7 +638,7 @@ dialog.sheet .recap {
     transform: translateY(100%);
   }
 }
-@media (max-width: 639px) {
+@media (max-width: 639px), (max-height: 500px) and (max-width: 950px) and (orientation: landscape) {
   dialog.sheet {
     width: 100%;
     max-width: none;
@@ -460,7 +658,7 @@ dialog.sheet .recap {
 dialog.sheet:has(.map-panel) {
   width: min(40rem, calc(100% - 2rem));
 }
-@media (max-width: 639px) {
+@media (max-width: 639px), (max-height: 500px) and (max-width: 950px) and (orientation: landscape) {
   dialog.sheet:has(.map-panel) {
     width: 100%;
   }

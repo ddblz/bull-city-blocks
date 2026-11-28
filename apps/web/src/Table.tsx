@@ -7,6 +7,7 @@ import { nextStep } from "./choice-flows";
 import { Districts } from "./Districts";
 import { type Context, describeEvent } from "./describe-event";
 import { Hand } from "./Hand";
+import { usePhone } from "./layout-mode";
 import type { ClientState } from "./lobby-state";
 import { MapPanel } from "./MapPanel";
 import { FLOW_LABEL, groupMoves } from "./move-groups";
@@ -30,6 +31,7 @@ export function Table({ state, send }: Props) {
   const [picked, setPicked] = useState<Picked | null>(null);
   const [tab, setTab] = useState<Tab>("table");
   const [mapOpen, setMapOpen] = useState(false);
+  const phone = usePhone();
   const [recapOpen, setRecapOpen] = useState(true);
   // Each (re)connect brings a fresh recap, shown until it's closed.
   useEffect(() => setRecapOpen(state.recap.length > 0), [state.recap]);
@@ -39,6 +41,9 @@ export function Table({ state, send }: Props) {
   const seatName = (seat: number) => lobby.seats[seat]?.name ?? `Seat ${seat + 1}`;
   const play = (move: Move) => send({ type: "intent", move });
   const groups = groupMoves(game.legal);
+  const endTurn = groups.endTurn && (
+    <MoveButton move={groups.endTurn} label="End turn" onPlay={play} primary />
+  );
   const me = view.players.find((p) => p.id === view.viewer);
   const selected = selectedCard(picked, view.turn, me?.hand ?? []);
   const myMove = game.awaiting?.seat === state.seat;
@@ -176,11 +181,7 @@ export function Table({ state, send }: Props) {
             onSelect={(id) => setPicked(pick(selected, id, view.turn))}
             onPlay={play}
             flowButton={flowButton}
-            endTurn={
-              groups.endTurn && (
-                <MoveButton move={groups.endTurn} label="End turn" onPlay={play} primary />
-              )
-            }
+            endTurn={phone ? undefined : endTurn}
           />
           <section className="controls">
             <label>
@@ -202,7 +203,12 @@ export function Table({ state, send }: Props) {
         ctx={ctx}
         onRecap={state.recap.length > 0 && !recapOpen ? () => setRecapOpen(true) : undefined}
       />
-      <Nav tab={tab} onTab={setTab} onMap={() => setMapOpen(true)} />
+      <Nav
+        tab={tab}
+        onTab={setTab}
+        onMap={() => setMapOpen(true)}
+        endTurn={phone ? endTurn : undefined}
+      />
       {mapOpen && <MapPanel view={view} nameOf={nameOf} onClose={() => setMapOpen(false)} />}
     </section>
   );

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Face, MoveButton } from "./Cards";
+import { instanceLabel } from "./card";
 import type { MoveGroups } from "./move-groups";
 import { handColumns } from "./table-summary";
 import type { Move, View } from "./types";
@@ -42,6 +43,9 @@ export function Hand(props: {
       </ul>
       <section className="hand-actions" aria-label="Moves for the selected card">
         {selected === null && <p className="status">Select a card to play, bank or discard it.</p>}
+        {selected !== null && (
+          <strong className="picked">{instanceLabel(selected, props.view)}</strong>
+        )}
         {moves?.play && <MoveButton move={moves.play} label="Play" onPlay={props.onPlay} />}
         {flow}
         {moves?.bank && <MoveButton move={moves.bank} label="Bank" onPlay={props.onPlay} />}
