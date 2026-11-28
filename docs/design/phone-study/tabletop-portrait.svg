@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" width="390" height="844" font-family="system-ui, sans-serif" font-size="11">
+  <title>Tabletop layout, portrait (wireframe)</title>
+  <rect width="390" height="844" fill="#faf5ee"/>
+  <!-- thin pinned header -->
+  <rect x="0" y="0" width="390" height="44" fill="#fff" stroke="#d8cfc4"/>
+  <text x="12" y="27" font-weight="700">Turn 7 · ●●○ plays · 0:42</text>
+  <text x="290" y="27">Map · Updates 2</text>
+  <!-- opponents: 2-column grid of mini tableaux -->
+  <text x="12" y="64" fill="#58413c">OPPONENTS (public: sets, cash, hand size)</text>
+  <g stroke="#8c716b" fill="#fff">
+    <rect x="8" y="72" width="180" height="92" rx="8"/><rect x="202" y="72" width="180" height="92" rx="8"/>
+    <rect x="8" y="172" width="180" height="92" rx="8"/><rect x="202" y="172" width="180" height="92" rx="8"/>
+  </g>
+  <g font-weight="700"><text x="18" y="90">Ben</text><text x="212" y="90">Cy</text><text x="18" y="190">Dee</text><text x="212" y="190">Eli</text></g>
+  <!-- each opponent: overlapped set stacks, cash pile, hand backs -->
+  <g>
+    <rect x="18" y="98" width="26" height="36" rx="3" fill="#7E22CE"/><rect x="30" y="98" width="26" height="36" rx="3" fill="#7E22CE" stroke="#fff"/><rect x="42" y="98" width="26" height="36" rx="3" fill="#7E22CE" stroke="#fff"/>
+    <rect x="76" y="98" width="26" height="36" rx="3" fill="#15803D"/><rect x="88" y="98" width="26" height="36" rx="3" fill="#15803D" stroke="#fff"/>
+    <rect x="124" y="106" width="26" height="28" rx="3" fill="#c8a24a"/><text x="124" y="148">$7</text>
+    <text x="18" y="156" fill="#58413c">3/3 · 2/3</text><text x="150" y="156" fill="#58413c">5 in hand</text>
+  </g>
+  <text x="212" y="112" fill="#58413c">stacks the same way</text><text x="18" y="212" fill="#58413c">stacks the same way</text><text x="212" y="212" fill="#58413c">stacks the same way</text>
+  <!-- middle: piles + banner -->
+  <rect x="8" y="276" width="374" height="64" rx="8" fill="#f1e8dc" stroke="#d8cfc4"/>
+  <rect x="24" y="284" width="36" height="48" rx="4" fill="#a6331b"/><text x="24" y="346" font-size="10">Draw 84</text>
+  <rect x="84" y="284" width="36" height="48" rx="4" fill="#fff" stroke="#8c716b"/><text x="84" y="346" font-size="10">Discard</text>
+  <rect x="150" y="288" width="224" height="40" rx="8" fill="#fff" stroke="#a6331b"/><text x="162" y="312" font-weight="700">Since last move · 2 for you ›</text>
+  <!-- my tableau: stacks -->
+  <text x="12" y="366" fill="#58413c">YOUR DISTRICTS (overlapped; tap a stack to fan it)</text>
+  <rect x="8" y="372" width="374" height="140" rx="8" fill="#fff" stroke="#8c716b"/>
+  <g>
+    <rect x="20" y="384" width="54" height="76" rx="4" fill="#D97706"/><rect x="40" y="384" width="54" height="76" rx="4" fill="#D97706" stroke="#fff"/>
+    <text x="20" y="476">Old West 2/3</text><text x="20" y="490" fill="#58413c">Rent $2</text>
+    <rect x="140" y="384" width="54" height="76" rx="4" fill="#BE123C"/><rect x="160" y="384" width="54" height="76" rx="4" fill="#BE123C" stroke="#fff"/><rect x="180" y="384" width="54" height="76" rx="4" fill="#BE123C" stroke="#fff"/>
+    <text x="140" y="476">Trinity Pk FULL</text><text x="140" y="490" fill="#58413c">Rent $4 +Landmark</text>
+    <rect x="280" y="392" width="50" height="68" rx="4" fill="#c8a24a"/><rect x="296" y="392" width="50" height="68" rx="4" fill="#c8a24a" stroke="#fff"/>
+    <text x="280" y="476">Bank $9</text><text x="280" y="490" fill="#58413c">3 cards</text>
+  </g>
+  <!-- hand fan + action bar -->
+  <text x="12" y="536" fill="#58413c">YOUR HAND (hidden from everyone else)</text>
+  <g stroke="#8c716b">
+    <rect x="12" y="548" width="92" height="128" rx="6" fill="#3B82F6"/><rect x="58" y="548" width="92" height="128" rx="6" fill="#1E3A8A"/><rect x="104" y="548" width="92" height="128" rx="6" fill="#0D9488"/>
+    <rect x="150" y="536" width="92" height="140" rx="6" fill="#EA580C"/><rect x="196" y="548" width="92" height="128" rx="6" fill="#B45309"/><rect x="242" y="548" width="92" height="128" rx="6" fill="#0891B2"/><rect x="288" y="548" width="92" height="128" rx="6" fill="#5E61F1"/>
+  </g>
+  <text x="156" y="560" fill="#fff" font-weight="700">selected</text>
+  <rect x="0" y="716" width="390" height="56" fill="#fff" stroke="#d8cfc4"/>
+  <g font-weight="700"><rect x="12" y="724" width="70" height="40" rx="8" fill="#fff" stroke="#a6331b"/><text x="30" y="749">Play</text>
+  <rect x="92" y="724" width="70" height="40" rx="8" fill="#fff" stroke="#a6331b"/><text x="108" y="749">Bank</text>
+  <rect x="270" y="724" width="108" height="40" rx="8" fill="#a6331b"/><text x="288" y="749" fill="#fff">End turn</text></g>
+  <rect x="0" y="772" width="390" height="72" fill="#fff" stroke="#d8cfc4"/>
+  <text x="30" y="812" font-weight="700">Table</text><text x="130" y="812">Log</text><text x="210" y="812">Players</text><text x="310" y="812">Map</text>
+  <text x="8" y="836" font-size="9" fill="#58413c">Everything above fits in one 844 px screen; the opponents and my stacks use overlap, nothing from a hand is shown.</text>
+</svg>
