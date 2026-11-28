@@ -117,6 +117,18 @@ try {
       if (shots)
         await page.screenshot({ path: `${shots}/table-${bots + 1}p-${width}.png`, fullPage: true });
       if (phone) await phoneChecks(page, bots);
+      await page
+        .getByRole("button", { name: "Neighborhoods" })
+        .filter({ visible: true })
+        .first()
+        .click();
+      check(
+        (await page.locator(".durham-map .tile").count()) === 14,
+        `${bots + 1} seats: the map has 14 tiles`,
+      );
+      check(!(await overflows(page)), `${bots + 1} seats: the map has no horizontal scroll`);
+      await page.keyboard.press("Escape");
+      check(!(await page.locator("dialog[open]").count()), `${bots + 1} seats: Esc closes the map`);
       check(
         errors.length === 0,
         `${bots + 1} seats at ${width}px: no console errors ${errors.join(" | ")}`,

@@ -44,6 +44,7 @@ export function TableBar(props: {
   status: string;
   updates: number;
   onUpdates?: (() => void) | undefined;
+  onMap: () => void;
 }) {
   const { view } = props.game;
   const pips = playPips(view);
@@ -64,6 +65,9 @@ export function TableBar(props: {
       <span className="chip">Deck {view.deckCount}</span>
       <span className="chip">Discard {top ? instanceLabel(top, view) : "empty"}</span>
       <Clock game={props.game} />
+      <button type="button" className="map-btn" onClick={props.onMap}>
+        Neighborhoods
+      </button>
       {props.onUpdates && (
         <button type="button" onClick={props.onUpdates}>
           Updates{props.updates > 0 && <span className="badge">{props.updates}</span>}

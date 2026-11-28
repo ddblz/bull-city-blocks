@@ -7,7 +7,7 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 /** The bottom bar on a phone (#59): three views of the one table. Hidden on wider screens. */
-export function Nav(props: { tab: Tab; onTab: (tab: Tab) => void }) {
+export function Nav(props: { tab: Tab; onTab: (tab: Tab) => void; onMap: () => void }) {
   return (
     <nav className="table-nav" aria-label="Table views">
       {TABS.map((t) => (
@@ -20,6 +20,9 @@ export function Nav(props: { tab: Tab; onTab: (tab: Tab) => void }) {
           {t.label}
         </button>
       ))}
+      <button type="button" aria-label="Neighborhoods" onClick={props.onMap}>
+        Map
+      </button>
     </nav>
   );
 }
