@@ -283,8 +283,8 @@
  */
 @media (max-width: 639px), (max-height: 500px) and (max-width: 950px) and (orientation: landscape) {
   :root {
-    --nav-h: 3.25rem;
-    --hand-h: 4.6rem;
+    --nav-h: 3rem;
+    --hand-h: 4rem;
     --safe-b: env(safe-area-inset-bottom, 0px);
   }
   .page:has(.table) {
@@ -529,7 +529,7 @@
   }
   .hand-actions {
     position: static;
-    min-height: 3rem;
+    min-height: 2.6rem;
     padding: 0 var(--space-md);
     border-top: 0;
   }

@@ -2,7 +2,7 @@
 //   node apps/web/e2e/phone-study.mjs [http://localhost:5173] [screenshot-dir]
 // Plays games with 2, 6 and 10 seats in portrait and landscape phones and prints, for each, how many
 // screens tall the table is, where its parts sit, and the taps and scrolls a turn takes.
-// ORIENTATION=portrait|landscape, PHONE=<name, e.g. 740x360>, SEATS=2,6,10 and TURNS=<n> narrow or shorten the run.
+// GAME_MS caps a game's time; ORIENTATION=portrait|landscape, PHONE=<name, e.g. 740x360>, SEATS=2,6,10 and TURNS=<n> narrow or shorten the run.
 import { createRequire } from "node:module";
 
 const { chromium } = createRequire(import.meta.url)("playwright");
@@ -20,6 +20,8 @@ const PHONES = [
 );
 const SEATS = (process.env.SEATS ?? "2,6,10").split(",").map(Number);
 const TURNS = Number(process.env.TURNS ?? 12);
+/** A game that has not reached TURNS by then is measured as it stands. */
+const GAME_MS = Number(process.env.GAME_MS ?? 240000);
 
 /** Where the parts of the table sit: the document's height in screens, and the screen each part starts on. */
 const PARTS = {
@@ -177,7 +179,8 @@ try {
       const seen = {};
       let first = null;
       let mid = null;
-      for (let i = 0; i < 4000 && count.turns < TURNS; i++) {
+      const began = Date.now();
+      for (let i = 0; i < 4000 && count.turns < TURNS && Date.now() - began < GAME_MS; i++) {
         if (await answerDialog(page, seen).catch(() => true)) continue;
         if (await mine()) {
           if (!first) first = await measure(page);
