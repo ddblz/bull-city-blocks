@@ -1,0 +1,216 @@
+/* Card faces (#57). Colours come from tokens.css; district bands set their own colours inline. */
+.card-face {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 10.5rem;
+  aspect-ratio: 5 / 7;
+  overflow: hidden;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  color: var(--on-surface);
+  box-shadow: var(--shadow-2);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.card-face--compact {
+  width: 7.25rem;
+  box-shadow: var(--shadow-1);
+}
+
+/* The band across the top: 28% of the card, holding the district (or kind) name */
+.card-face__band {
+  display: flex;
+  flex: 0 0 28%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-sm);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+.card-face__half {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: 0 0.15rem;
+  overflow-wrap: break-word;
+}
+.card-face__band:has(.card-face__half) {
+  padding: 0;
+}
+
+/* The value badge, bottom right (the band keeps the whole top edge for district names) */
+.card-face__value {
+  position: absolute;
+  right: 0.3rem;
+  bottom: 0.3rem;
+  min-width: 1.7rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 9999px;
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+  box-shadow: 0 0 0 1.5px var(--surface-raised);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.card-face__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  /* the bottom padding keeps text clear of the value badge */
+  padding: 0.35rem var(--space-sm) 1.9rem;
+  text-align: center;
+}
+.card-face__icon {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--primary);
+}
+.card-face--compact .card-face__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.card-face__name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.card-face--compact .card-face__name {
+  font-size: 0.8rem;
+}
+.card-face__line {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--on-surface-muted);
+}
+
+/* Kinds */
+.card-face--landmark {
+  border-color: var(--landmark-gold);
+  border-width: 2.5px;
+}
+.card-face--landmark .card-face__band {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+.card-face--icon {
+  border-color: var(--landmark-gold);
+  border-width: 2.5px;
+}
+.card-face--icon .card-face__band {
+  background: var(--card-ink);
+  color: var(--on-card-ink);
+}
+.card-face--cash {
+  background: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 6px,
+    rgba(255, 255, 255, 0.07) 6px 7px
+  );
+}
+.card-face--cash .card-face__band {
+  background: transparent;
+  color: var(--on-tertiary-container);
+}
+.card-face--cash .card-face__icon {
+  color: var(--on-tertiary-container);
+}
+.card-face--cash .card-face__name {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+.card-face--cash.card-face--compact .card-face__name {
+  font-size: 1.4rem;
+}
+.card-face--cash .card-face__value {
+  display: none;
+}
+.card-face--action .card-face__band {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+.card-face__ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 1.6rem solid var(--secondary-container);
+  border-left: 1.6rem solid transparent;
+}
+
+/* Wilds and rent cards for any district use the charcoal band (after the kinds above: more specific) */
+.card-face--wild .card-face__band:not(:has(.card-face__half)),
+.card-face--rent .card-face__band:not(:has(.card-face__half)) {
+  background: var(--card-ink);
+  color: var(--on-card-ink);
+}
+
+/* A compact card is too narrow for two names side by side, so they stack */
+.card-face--compact .card-face__band:has(.card-face__half) {
+  flex-direction: column;
+}
+
+/* States */
+.card-face.is-complete {
+  box-shadow:
+    0 0 0 2px var(--tertiary),
+    var(--shadow-1);
+}
+.card-face.is-selected {
+  box-shadow:
+    0 0 0 3px var(--primary),
+    var(--shadow-3);
+  transform: translateY(-6px) rotate(2deg) scale(1.04);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-face.is-selected {
+    transform: none;
+  }
+}
+
+/* Where the cards sit */
+.cards.faces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.cards.faces > li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  margin: 0;
+}
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 10.5rem;
+}
+.card-actions button {
+  margin: 0.1rem;
+  padding: 0.2rem 0.6rem;
+}

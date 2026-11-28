@@ -1,5 +1,6 @@
 import type { ClientMessage, LobbyView } from "@bull-city-blocks/room";
 import { type ReactNode, useEffect, useState } from "react";
+import { CardFace } from "./CardFace";
 import { Chooser, PaymentPanel, ResponsePanel } from "./Choices";
 import { cardLabel, districtName, instanceLabel, isComplete, totalValue } from "./card";
 import { nextStep } from "./choice-flows";
@@ -108,17 +109,19 @@ export function Table({ state, send }: Props) {
       {me && (
         <div className="mine">
           <h2>Your hand ({me.hand?.length ?? 0})</h2>
-          <ul className="cards">
+          <ul className="cards faces">
             {(me.hand ?? []).map((id) => {
               const moves = groups.hand[id];
               const discard = groups.discard[id];
               return (
-                <li key={id} className="card">
-                  {instanceLabel(id, view)}
-                  {moves?.play && <MoveButton move={moves.play} label="Play" onPlay={play} />}
-                  {flowButton(id)}
-                  {moves?.bank && <MoveButton move={moves.bank} label="Bank" onPlay={play} />}
-                  {discard && <MoveButton move={discard} label="Discard" onPlay={play} />}
+                <li key={id}>
+                  <Face id={id} view={view} selected={open === id} />
+                  <div className="card-actions">
+                    {moves?.play && <MoveButton move={moves.play} label="Play" onPlay={play} />}
+                    {flowButton(id)}
+                    {moves?.bank && <MoveButton move={moves.bank} label="Bank" onPlay={play} />}
+                    {discard && <MoveButton move={discard} label="Discard" onPlay={play} />}
+                  </div>
                 </li>
               );
             })}
@@ -221,11 +224,11 @@ function Holdings(props: {
       <h3>
         {props.title} bank (${totalValue(player.bank, view)})
       </h3>
-      <ul className="cards">
+      <ul className="cards faces">
         {player.bank.map((id) => (
-          <li key={id} className="card">
-            {instanceLabel(id, view)}
-            {extraFor(id)}
+          <li key={id}>
+            <Face id={id} view={view} compact />
+            <div className="card-actions">{extraFor(id)}</div>
           </li>
         ))}
       </ul>
@@ -237,13 +240,13 @@ function Holdings(props: {
             className={isComplete(set, view) ? "set complete" : "set"}
           >
             <strong>{districtName(set.district, view)}</strong> {setProgress(set, view)}
-            <ul className="cards">
+            <ul className="cards faces">
               {[...set.cards, set.landmark, set.icon].flatMap((id) =>
                 id
                   ? [
-                      <li key={id} className="card">
-                        {instanceLabel(id, view)}
-                        {extraFor(id)}
+                      <li key={id}>
+                        <Face id={id} view={view} compact complete={isComplete(set, view)} />
+                        <div className="card-actions">{extraFor(id)}</div>
                       </li>,
                     ]
                   : [],
@@ -253,6 +256,27 @@ function Holdings(props: {
         ))}
       </ul>
     </>
+  );
+}
+
+/** A card instance as a face, or its text label for one this player can't see. */
+function Face(props: {
+  id: string;
+  view: View;
+  compact?: boolean;
+  selected?: boolean;
+  complete?: boolean;
+}) {
+  const card = props.view.cards[props.id];
+  if (!card) return <span className="card">{instanceLabel(props.id, props.view)}</span>;
+  return (
+    <CardFace
+      card={card}
+      view={props.view}
+      compact={props.compact ?? false}
+      selected={props.selected ?? false}
+      complete={props.complete ?? false}
+    />
   );
 }
 

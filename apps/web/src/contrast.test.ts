@@ -54,6 +54,7 @@ const PAIRS: [text: string, background: string][] = [
   ["--tertiary", "--surface-sunken"],
   ["--on-tertiary", "--tertiary"],
   ["--on-tertiary-container", "--tertiary-container"],
+  ["--on-card-ink", "--card-ink"],
   ["--error", "--surface"],
   ["--error", "--surface-raised"],
   ["--on-error", "--error"],
