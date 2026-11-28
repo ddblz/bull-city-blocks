@@ -77,9 +77,9 @@ export function Table({ state, send }: Props) {
   if (over) {
     const winner = over.winner === "stall" ? null : seatName(over.winner);
     return (
-      <section className="table">
+      <section className="table game-over">
         <h2>Game over</h2>
-        <p className="banner">
+        <p className="banner winner-banner">
           {winner ? `${winner} wins!` : "Stalled: nobody won before the round limit."}
         </p>
         <p>

@@ -161,9 +161,10 @@ async function keyboardChecks(page) {
 async function playOut(page, width, errors) {
   let idle = 0;
   for (let i = 0; i < 6000 && !(await page.getByText("Game over").count()); i++) {
-    idle = (await step(page)) ? 0 : idle + 1;
+    idle = (await step(page).catch(() => false)) ? 0 : idle + 1;
     await page.waitForTimeout(idle ? 120 : 50);
   }
+  if (shots) await page.screenshot({ path: `${shots}/game-over-${width}.png`, fullPage: true });
   check(await page.getByText("Game over").count(), `a full game finishes at ${width}px`);
   check(!(await overflows(page)), `game over at ${width}px: no horizontal scroll`);
   check(errors.length === 0, `full game at ${width}px: no console errors ${errors.join(" | ")}`);
