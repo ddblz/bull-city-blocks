@@ -101,8 +101,8 @@ export function RulesEditor(props: {
   return (
     <section className="editor">
       {SECTIONS.map((section) => (
-        <fieldset key={section}>
-          <legend>{section}</legend>
+        <details key={section} className="section" open>
+          <summary>{section}</summary>
           {fields
             .filter((f) => f.section === section)
             .map((f) => (
@@ -110,9 +110,9 @@ export function RulesEditor(props: {
                 <span>{fieldLabel(f.path)}</span> {input(f)}
               </div>
             ))}
-        </fieldset>
+        </details>
       ))}
-      <details>
+      <details className="section">
         <summary>Deck: card copies and values</summary>
         <table>
           <tbody>
@@ -127,7 +127,7 @@ export function RulesEditor(props: {
           </tbody>
         </table>
       </details>
-      <details>
+      <details className="section">
         <summary>District rent ladders</summary>
         {rows.districts.map((d) => (
           <div key={d.id} className="row">
@@ -156,7 +156,7 @@ export function RulesEditor(props: {
       >
         Reset to {props.ruleset}
       </button>
-      <details>
+      <details className="section">
         <summary>Export as variant</summary>
         <label>
           Id{" "}
