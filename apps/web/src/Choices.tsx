@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Face } from "./Cards";
 import { cardLabel, districtName, instanceLabel } from "./card";
 import { appealChain, type Field, nextStep, type Picked, PROMPT, payment } from "./choice-flows";
+import { Dialog } from "./Dialog";
 import type { Move, View } from "./types";
 
 type Play = (move: Move) => void;
@@ -33,27 +35,29 @@ export function Chooser(props: {
     } else setPicked(next);
   };
   return (
-    <section className="chooser">
-      <p className="banner">{instanceLabel(props.card, view)}</p>
-      {step.kind === "choose" && (
-        <>
-          <p>{PROMPT[step.field]}</p>
-          {step.options.map((value) => (
-            <button key={value ?? "none"} type="button" onClick={() => choose(step.field, value)}>
-              {label(step.field, value)}
-            </button>
-          ))}
-        </>
-      )}
-      {Object.keys(picked).length > 0 && (
-        <button type="button" onClick={() => setPicked({})}>
-          Start over
+    <Dialog label="Choose" onClose={props.onClose}>
+      <section className="chooser">
+        <p className="banner">{instanceLabel(props.card, view)}</p>
+        {step.kind === "choose" && (
+          <>
+            <p>{PROMPT[step.field]}</p>
+            {step.options.map((value) => (
+              <button key={value ?? "none"} type="button" onClick={() => choose(step.field, value)}>
+                {label(step.field, value)}
+              </button>
+            ))}
+          </>
+        )}
+        {Object.keys(picked).length > 0 && (
+          <button type="button" onClick={() => setPicked({})}>
+            Start over
+          </button>
+        )}
+        <button type="button" onClick={props.onClose}>
+          Cancel
         </button>
-      )}
-      <button type="button" onClick={props.onClose}>
-        Cancel
-      </button>
-    </section>
+      </section>
+    </Dialog>
   );
 }
 
@@ -71,35 +75,38 @@ export function PaymentPanel(props: {
   const toggle = (card: string) =>
     setSelected((s) => (s.includes(card) ? s.filter((c) => c !== card) : [...s, card]));
   return (
-    <section className="chooser">
-      <p className="banner">
-        You owe ${pay.debt}
-        {step?.type === "debt" && ` to ${props.nameOf(step.creditor)}`}. Selected ${pay.total}
-        {pay.short ? ` (short by $${pay.debt - pay.total})` : " (covers it; no change is given)"}
-      </p>
-      <ul className="cards">
-        {props.payable.map((card) => (
-          <li key={card} className="card">
-            <label>
-              <input
-                type="checkbox"
-                checked={selected.includes(card)}
-                onChange={() => toggle(card)}
-              />{" "}
-              {instanceLabel(card, view)}
-            </label>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        className="primary"
-        disabled={pay.move === null}
-        onClick={() => pay.move && props.onPlay(pay.move)}
-      >
-        Pay ${pay.total}
-      </button>
-    </section>
+    <Dialog label="Pay what you owe">
+      <section className="chooser">
+        <p className="banner">
+          You owe ${pay.debt}
+          {step?.type === "debt" && ` to ${props.nameOf(step.creditor)}`}. Selected ${pay.total}
+          {pay.short ? ` (short by $${pay.debt - pay.total})` : " (covers it; no change is given)"}
+        </p>
+        <ul className="pay-cards">
+          {props.payable.map((card) => (
+            <li key={card}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selected.includes(card)}
+                  onChange={() => toggle(card)}
+                  aria-label={instanceLabel(card, view)}
+                />
+                <Face id={card} view={view} compact selected={selected.includes(card)} />
+              </label>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          className="primary"
+          disabled={pay.move === null}
+          onClick={() => pay.move && props.onPlay(pay.move)}
+        >
+          Pay ${pay.total}
+        </button>
+      </section>
+    </Dialog>
   );
 }
 
@@ -116,23 +123,26 @@ export function ResponsePanel(props: {
   if (!chain) return null;
   const card = view.cards[chain.card];
   return (
-    <section className="chooser">
-      <p className="banner">
-        {nameOf(chain.attacker)} played {card ? cardLabel(card, view) : "an action"} on{" "}
-        {nameOf(chain.target)}.
-      </p>
-      <p>
-        Appeals so far: {chain.appeals}. If you accept, the action{" "}
-        {chain.cancelsIfAccepted ? "is cancelled" : "goes ahead"}.
-      </p>
-      <button type="button" className="primary" onClick={() => props.onPlay(props.accept)}>
-        Accept
-      </button>
-      {props.appeal && (
-        <button type="button" onClick={() => props.appeal && props.onPlay(props.appeal)}>
-          Appeal
+    <Dialog label="Respond to an action">
+      <section className="chooser">
+        <Face id={chain.card} view={view} compact />
+        <p className="banner">
+          {nameOf(chain.attacker)} played {card ? cardLabel(card, view) : "an action"} on{" "}
+          {nameOf(chain.target)}.
+        </p>
+        <p>
+          Appeals so far: {chain.appeals}. If you accept, the action{" "}
+          {chain.cancelsIfAccepted ? "is cancelled" : "goes ahead"}.
+        </p>
+        <button type="button" className="primary" onClick={() => props.onPlay(props.accept)}>
+          Accept
         </button>
-      )}
-    </section>
+        {props.appeal && (
+          <button type="button" onClick={() => props.appeal && props.onPlay(props.appeal)}>
+            Appeal
+          </button>
+        )}
+      </section>
+    </Dialog>
   );
 }

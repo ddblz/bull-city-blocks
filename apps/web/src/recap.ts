@@ -1,5 +1,6 @@
 import { isComplete } from "./card";
 import { type Context, cardName, describeEvent, type GameEvent } from "./describe-event";
+import { type Category, categorize } from "./recap-category";
 import type { HistoryEntry, View } from "./types";
 
 export interface RecapItem {
@@ -7,6 +8,8 @@ export interface RecapItem {
   text: string;
   /** The event touched the viewer: something taken, a payment, rent, a delay or an Appeal. */
   affected: boolean;
+  /** What it did to the viewer, when it fits one of the tag categories (#61). */
+  category: Category | null;
 }
 export interface RecapGroup {
   turn: number;
@@ -73,6 +76,7 @@ export function buildRecap(entries: readonly HistoryEntry[], ctx: Context, view:
       seq: entry.seq,
       text: describeEvent(event, ctx),
       affected: flags.get(entry.seq) ?? false,
+      category: flags.get(entry.seq) ? categorize(event, viewer) : null,
     });
   }
   return { summary: summarize(entries, groups, ctx, view), groups };
